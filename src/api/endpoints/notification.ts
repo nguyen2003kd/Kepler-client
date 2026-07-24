@@ -1,22 +1,17 @@
 /* eslint-disable */
 import {
-  useInfiniteQuery,
   useMutation,
   useQuery
 } from '@tanstack/react-query';
 import type {
   DataTag,
   DefinedInitialDataOptions,
-  DefinedUseInfiniteQueryResult,
   DefinedUseQueryResult,
-  InfiniteData,
   MutationFunction,
   QueryClient,
   QueryFunction,
   QueryKey,
   UndefinedInitialDataOptions,
-  UseInfiniteQueryOptions,
-  UseInfiniteQueryResult,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -54,12 +49,6 @@ export const getApiV10NotificationsStream = (
 
 
 
-export const getGetApiV10NotificationsStreamInfiniteQueryKey = () => {
-    return [
-    'infinite', `/api/v1.0/notifications/stream`
-    ] as const;
-    }
-
 export const getGetApiV10NotificationsStreamQueryKey = () => {
     return [
     `/api/v1.0/notifications/stream`
@@ -67,73 +56,6 @@ export const getGetApiV10NotificationsStreamQueryKey = () => {
     }
 
     
-export const getGetApiV10NotificationsStreamInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getApiV10NotificationsStream>>>, TError = unknown>( options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
-) => {
-
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetApiV10NotificationsStreamInfiniteQueryKey();
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV10NotificationsStream>>> = ({ signal }) => getApiV10NotificationsStream(signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetApiV10NotificationsStreamInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV10NotificationsStream>>>
-export type GetApiV10NotificationsStreamInfiniteQueryError = unknown
-
-
-export function useGetApiV10NotificationsStreamInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiV10NotificationsStream>>>, TError = unknown>(
-  options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getApiV10NotificationsStream>>,
-          TError,
-          Awaited<ReturnType<typeof getApiV10NotificationsStream>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiV10NotificationsStreamInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiV10NotificationsStream>>>, TError = unknown>(
-  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>> & Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getApiV10NotificationsStream>>,
-          TError,
-          Awaited<ReturnType<typeof getApiV10NotificationsStream>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiV10NotificationsStreamInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiV10NotificationsStream>>>, TError = unknown>(
-  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary Subscribe to notification stream (SSE)
- */
-
-export function useGetApiV10NotificationsStreamInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiV10NotificationsStream>>>, TError = unknown>(
-  options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-
-  const queryOptions = getGetApiV10NotificationsStreamInfiniteQueryOptions(options)
-
-  const query = useInfiniteQuery(queryOptions, queryClient) as  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-
 export const getGetApiV10NotificationsStreamQueryOptions = <TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
 ) => {
 
@@ -220,12 +142,6 @@ export const getApiV10Notifications = (
 
 
 
-export const getGetApiV10NotificationsInfiniteQueryKey = (params?: GetApiV10NotificationsParams,) => {
-    return [
-    'infinite', `/api/v1.0/notifications`, ...(params ? [params]: [])
-    ] as const;
-    }
-
 export const getGetApiV10NotificationsQueryKey = (params?: GetApiV10NotificationsParams,) => {
     return [
     `/api/v1.0/notifications`, ...(params ? [params]: [])
@@ -233,78 +149,6 @@ export const getGetApiV10NotificationsQueryKey = (params?: GetApiV10Notification
     }
 
     
-export const getGetApiV10NotificationsInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof getApiV10Notifications>>, GetApiV10NotificationsParams['page']>, TError = unknown>(params?: GetApiV10NotificationsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10Notifications>>, TError, TData, QueryKey, GetApiV10NotificationsParams['page']>>, }
-) => {
-
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetApiV10NotificationsInfiniteQueryKey(params);
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV10Notifications>>, QueryKey, GetApiV10NotificationsParams['page']> = ({ signal, pageParam }) => getApiV10Notifications({...params, 'page': pageParam || params?.['page']}, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, getNextPageParam: (lastPage: Awaited<ReturnType<typeof getApiV10Notifications>>, _allPages: Awaited<ReturnType<typeof getApiV10Notifications>>[], lastPageParam: GetApiV10NotificationsParams['page']) => {
-     const currentPage = (lastPageParam ?? params?.page ?? 1) as number;
-     const responseData = (lastPage as any)?.responseData;
-     const hasMore = Array.isArray(responseData) ? responseData.length > 0 : false;
-     return hasMore ? (currentPage + 1) as GetApiV10NotificationsParams['page'] : undefined;
-   }, initialPageParam: (params?.page ?? 1) as GetApiV10NotificationsParams['page'], ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10Notifications>>, TError, TData, QueryKey, GetApiV10NotificationsParams['page']> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetApiV10NotificationsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV10Notifications>>>
-export type GetApiV10NotificationsInfiniteQueryError = unknown
-
-
-export function useGetApiV10NotificationsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiV10Notifications>>, GetApiV10NotificationsParams['page']>, TError = unknown>(
- params: undefined |  GetApiV10NotificationsParams, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10Notifications>>, TError, TData, QueryKey, GetApiV10NotificationsParams['page']>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getApiV10Notifications>>,
-          TError,
-          Awaited<ReturnType<typeof getApiV10Notifications>>, QueryKey
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiV10NotificationsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiV10Notifications>>, GetApiV10NotificationsParams['page']>, TError = unknown>(
- params?: GetApiV10NotificationsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10Notifications>>, TError, TData, QueryKey, GetApiV10NotificationsParams['page']>> & Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getApiV10Notifications>>,
-          TError,
-          Awaited<ReturnType<typeof getApiV10Notifications>>, QueryKey
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiV10NotificationsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiV10Notifications>>, GetApiV10NotificationsParams['page']>, TError = unknown>(
- params?: GetApiV10NotificationsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10Notifications>>, TError, TData, QueryKey, GetApiV10NotificationsParams['page']>>, }
- , queryClient?: QueryClient
-  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary Get notifications of current user
- */
-
-export function useGetApiV10NotificationsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof getApiV10Notifications>>, GetApiV10NotificationsParams['page']>, TError = unknown>(
- params?: GetApiV10NotificationsParams, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getApiV10Notifications>>, TError, TData, QueryKey, GetApiV10NotificationsParams['page']>>, }
- , queryClient?: QueryClient 
- ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-
-  const queryOptions = getGetApiV10NotificationsInfiniteQueryOptions(params,options)
-
-  const query = useInfiniteQuery(queryOptions, queryClient) as  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-
 export const getGetApiV10NotificationsQueryOptions = <TData = Awaited<ReturnType<typeof getApiV10Notifications>>, TError = unknown>(params?: GetApiV10NotificationsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10Notifications>>, TError, TData>>, }
 ) => {
 

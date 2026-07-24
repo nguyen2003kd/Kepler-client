@@ -11,9 +11,6 @@ import type { AppAbility } from '@configs/acl';
  * if (ability.can('view_summary', 'dashboard')) {
  *   // Show dashboard summary
  * }
- * if (ability.can('update', 'news')) {
- *   // Show edit button
- * }
  */
 export const useAbility = (): AppAbility => {
   return useContext(AbilityContext);
@@ -25,7 +22,6 @@ export const useAbility = (): AppAbility => {
  * @param subject - Resource name (e.g., 'dashboard', 'news', 'category')
  * @example
  * const canUpdate = useCan('update', 'news');
- * const canViewSummary = useCan('view_summary', 'dashboard');
  */
 export const useCan = (action: string, subject: string): boolean => {
   const ability = useAbility();
@@ -43,11 +39,9 @@ export const useCannot = (action: string, subject: string): boolean => {
 };
 
 /**
- * Hook kiểm tra user có ít nhất 1 permission trong danh sách
- * Dùng với PERMISSIONS constant từ permissions-matrix
+ * Hook kiểm tra user có ít nhất 1 permission trong danh sach
  * @example
- * import { PERMISSIONS } from '@configs/permissions-matrix';
- * const canAccessNews = useCanAny([PERMISSIONS.news.view_detail, PERMISSIONS.news.update]);
+ * const canAccessNews = useCanAny(['news:view_detail', 'news:update']);
  */
 export const useCanAny = (permissions: string[]): boolean => {
   const ability = useAbility();
@@ -55,7 +49,7 @@ export const useCanAny = (permissions: string[]): boolean => {
   // SuperAdmin check
   if (ability.can('manage', 'all')) return true;
 
-  return permissions.some(permission => {
+  return permissions.some((permission) => {
     const colonIndex = permission.indexOf(':');
     if (colonIndex === -1) return false;
     const action = permission.substring(colonIndex + 1);

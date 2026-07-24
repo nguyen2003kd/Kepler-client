@@ -10,7 +10,7 @@ services:
     pull_policy: always
     networks:
       meu-solutions-product-alpha-net:
-        ipv4_address: 192.167.12.23
+        ipv4_address: 192.167.12.21
 networks:
   meu-solutions-product-alpha-net:
     external: true

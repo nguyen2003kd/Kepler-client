@@ -1,7 +1,7 @@
 'use client'
 import type { ReactNode, ComponentProps } from 'react'
 import { Toaster as Sonner, toast as sonner } from 'sonner'
-import { extractErrorMessage } from '@utils/error'
+import { extractErrorMessage } from '@/utils/error'
 // import i18n, { Language } from '@utils/i18n'
 
 type ToasterProps = ComponentProps<typeof Sonner>

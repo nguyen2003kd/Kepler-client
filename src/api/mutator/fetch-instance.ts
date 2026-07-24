@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig,InternalAxiosRequestConfig } from 'axios'
 import baseConfig from '../../configs/base'
-import { toast } from '@/components/ui/toaster'
-import { clearAuthPresenceCookie } from '@/lib/auth-cookie'
+
 const fetchAxiosInstance = axios.create({
     baseURL: baseConfig.backendDomain,
     withCredentials: true,
@@ -20,10 +19,8 @@ fetchAxiosInstance.interceptors.response.use(
       
       // Clear auth data and redirect to login
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('auth-token');
-        clearAuthPresenceCookie();
-        window.location.href = '/admin/login'
-        toast.warning({ title: 'Phiên đăng nhập đã hết hạn', content: 'Vui lòng đăng nhập lại để tiếp tục.' })
+        localStorage.removeItem('auth-client');
+        window.location.href = '/login'
       }
     }
 

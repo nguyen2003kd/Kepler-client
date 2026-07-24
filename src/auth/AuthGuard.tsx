@@ -3,12 +3,10 @@
 
 // ** React Imports
 import { ReactNode, ReactElement, useEffect } from 'react';
-import { toast } from '@/components/ui/toaster'
 
 // ** Stores & Hooks
-import useAuthStore from '@stores/auth';
+import useAuthStore from '@/stores/auth-store';
 import { useRouter, usePathname } from 'next/navigation';
-import { clearAuthPresenceCookie, setAuthPresenceCookie } from '@/lib/auth-cookie';
 
 interface AuthGuardProps {
   children: ReactNode;
@@ -17,42 +15,35 @@ interface AuthGuardProps {
 
 const AuthGuard = ({ children, fallback }: AuthGuardProps) => {
   const auth = useAuthStore();
-  const setStore = useAuthStore((state) => state.setStore);
   const resetStore = useAuthStore((state) => state.resetStore);
   const hasHydrated = useAuthStore((state) => state._hasHydrated);
+
   const router = useRouter();
   const pathname = usePathname();
 
-
-
   useEffect(() => {
-    if (pathname === '/' || pathname === '/admin') {
-      return;
-    }
-    
+    console.log('AuthGuard useEffect - checking auth', auth.username, hasHydrated);
     if (!hasHydrated) return;
 
     const token =
       typeof window !== 'undefined'
-        ? localStorage.getItem('auth-token')
+        ? localStorage.getItem('auth-client')
         : null;
 
-    if (!auth.username || !token) {
+    if (!auth.email || !token) {
+      // clear auth
       resetStore();
-      localStorage.removeItem('auth-token');
-      clearAuthPresenceCookie();
+      localStorage.removeItem('auth-client');
+
       if (pathname !== '/login') {
         router.replace(
           `/login?returnUrl=${encodeURIComponent(pathname)}`
         );
       }
-      return;
     }
+  }, [auth.email, pathname, router, resetStore, hasHydrated]);
 
-    setAuthPresenceCookie();
-  }, [auth.username, pathname, router, resetStore, hasHydrated]);
-
-  if (!hasHydrated || !auth.username) {
+  if (!hasHydrated || !auth.email) {
     return fallback;
   }
 

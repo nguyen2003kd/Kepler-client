@@ -3,13 +3,8 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useAbility } from '@/hooks/use-ability';
 import { ReactNode, useEffect, useMemo, useState, ReactElement } from 'react';
-import useAuthStore from '@stores/auth';
-import {
-  ROUTE_ACCESS,
-  findMatchedRoute,
-  hasRouteAccess,
-  canViewRoute,
-} from '@configs/permissions-matrix';
+import useAuthStore from '@stores/auth-store';
+import { ROUTE_ACCESS, hasRouteAccess } from '@configs/permissions-matrix';
 
 interface RouteGuardProps {
   children: ReactNode;
@@ -20,57 +15,73 @@ export function RouteGuard({ children, fallback }: RouteGuardProps) {
   const pathname = usePathname();
   const router = useRouter();
   const ability = useAbility();
-  const permissions = useAuthStore(state => state.permissions);
-  const hasHydrated = useAuthStore(state => state._hasHydrated);
+  const permissionsFromStore = useAuthStore((state) => state.permissions);
+  const userPermissions = useMemo(
+    () => permissionsFromStore || [],
+    [permissionsFromStore]
+  );
   const [isChecking, setIsChecking] = useState(true);
 
-  // Memoize permissions de tranh recalculate moi render
-  const permissionsMemo = useMemo(() => permissions ?? [], [permissions]);
-
-  // Reset khi pathname thay đổi (sau redirect)
-  useEffect(() => { setIsChecking(true) }, [pathname])
-
   useEffect(() => {
-    if (!hasHydrated) return;
+    const checkPermission = () => {
+      // SuperAdmin: full access
+      if (ability.can('manage', 'all')) {
+        setIsChecking(false);
+        return;
+      }
 
-    // SuperAdmin: full access
-    if (ability.can('manage', 'all')) {
-      setIsChecking(false);
-      return;
-    }
+      // Find matching route (check exact match or parent route)
+      let matchedRoute: string | null = null;
 
-    // Tim route dai nhat match voi pathname (order-independent)
-    const matchedRoute = findMatchedRoute(pathname);
+      // Check exact match first
+      if (ROUTE_ACCESS[pathname]) {
+        matchedRoute = pathname;
+      } else {
+        // Check if current path starts with any registered route prefix
+        const sortedRoutes = Object.keys(ROUTE_ACCESS).sort(
+          (a, b) => b.length - a.length
+        );
+        for (const route of sortedRoutes) {
+          if (pathname.startsWith(route + '/')) {
+            matchedRoute = route;
+            break;
+          }
+        }
+      }
 
-    // Khong co route protected -> cho phep
-    if (!matchedRoute) {
-      setIsChecking(false);
-      return;
-    }
+      // If no route matched, allow access (unprotected route)
+      if (!matchedRoute) {
+        setIsChecking(false);
+        return;
+      }
 
-    const routeRule = ROUTE_ACCESS[matchedRoute];
-    const isExactMatch = pathname === matchedRoute;
+      const routeRule = ROUTE_ACCESS[matchedRoute];
 
-    // Kiem tra quyen:
-    // - Exact match: chi dung main resources (hasRouteAccess)
-    // - Child route: dung main + extraViewer (canViewRoute)
-    const hasPermission = isExactMatch
-      ? hasRouteAccess(permissionsMemo, routeRule)
-      : canViewRoute(permissionsMemo, routeRule, pathname);
+      // Check if user has at least one required permission for this route
+      const hasPermission = hasRouteAccess(userPermissions, routeRule);
 
-    if (!hasPermission) {
-      // Tim route dau tien user co quyen (dashboard uu tien)
-      const allowedRoute = Object.entries(ROUTE_ACCESS)
-        .sort(([a], [b]) => (a === '/dashboard' ? -1 : b === '/dashboard' ? 1 : 0))
-        .find(([path, rule]) => path !== pathname && hasRouteAccess(permissionsMemo, rule));
+      if (!hasPermission) {
+        // Find first accessible route, or redirect to /403
+        const allowedRoute = Object.entries(ROUTE_ACCESS).find(([, rule]) =>
+          hasRouteAccess(userPermissions, rule)
+        );
 
-      router.push(allowedRoute?.[0] ?? '/403');
-    } else {
-      setIsChecking(false);
-    }
-  }, [pathname, ability, router, permissionsMemo, hasHydrated]);
+        if (allowedRoute) {
+          router.push(allowedRoute[0]);
+        } else {
+          router.push('/403');
+        }
+      } else {
+        setIsChecking(false);
+      }
+    };
 
-  if (isChecking || !hasHydrated) return fallback;
+    checkPermission();
+  }, [pathname, ability, router, userPermissions]);
+
+  if (isChecking) {
+    return fallback;
+  }
 
   return <>{children}</>;
 }

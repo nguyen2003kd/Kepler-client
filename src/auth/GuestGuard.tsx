@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // ** React Imports
-import useAuthStore from "@stores/auth";
+import useAuthStore from "@/stores/auth-store";
 import { useRouter } from "next/navigation";
 import { ReactElement, ReactNode, useEffect } from "react";
 interface GuestGuardProps {
@@ -17,12 +17,13 @@ const GuestGuard = (props: GuestGuardProps) => {
   const hasHydrated = useAuthStore((state) => state._hasHydrated);
   useEffect(() => {
     if (!hasHydrated) return;
-    const token = localStorage.getItem("auth-token");
+    // const token = localStorage.getItem("auth-client");
+    // if (auth.email || token)
     if (auth.email) {
-      router.push("/dashboard");
+      router.replace("/user");
     }
   }, [router, auth.email, hasHydrated]);
-  if ( auth.username) {
+  if (!hasHydrated || auth.email) {
     return fallback;
   }
   return <>{children}</>;

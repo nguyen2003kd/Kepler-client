@@ -24,13 +24,15 @@
       "@api/*": ["./src/api/*"],
       "@lib/*": ["./src/lib/*"],
       "@public/*": ["./public/*"],
+      "@store/*": ["./src/store/*"],
       "@stores/*": ["./src/stores/*"],
       "@links/*": ["./src/links/*"],
-      "@app/*": ["./src/app/*"],
+      "@app/*": ["./src/app/(main)/*"],
       "@constants/*": ["./src/constants/*"],
+      "@types/*": ["./src/types/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@auth/*": ["./src/auth/*"],
       "@configs/*": ["./src/configs/*"],
-      "@utils/*": ["./src/utils/*"]
-      
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

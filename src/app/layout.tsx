@@ -1,50 +1,55 @@
+import Footer from "@/components/common/footer";
+import Header from "@/components/common/header";
+import baseConfig from "@/configs/base";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Noto_Serif, Inter } from "next/font/google";
+import Script from "next/script";
+
 import "./globals.css";
-import { QueryProvider } from "@/components/providers/query-provider";
-import baseConfig from "@configs/base";
-import Thumnail from "@/assets/images/case-smeg-thumb.png"
-import Facion from "@/assets/images/logo-facion.ico"
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+
+const notoSerif = Noto_Serif({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const inter = Inter({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   icons: {
-    icon: `${Facion.src}`,
-    shortcut: `${Facion.src}`,
+    icon: [
+      { url: "/images/icon.png", type: "image/png" },
+    ],
+    shortcut: "/images/icon.png",
+    apple: "/images/icon.png",
   },
 
   title: {
     default:
-      'Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng TP. Hồ Chí Minh',
-    template:
-      '%s | Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng TP.HCM',
+      "Kepler Property - Nền tảng BĐS chuyên nghiệp hàng đầu Việt Nam",
+    template: "%s | Kepler Property",
   },
 
   description:
-    'Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng TP. Hồ Chí Minh là đơn vị sự nghiệp công lập trực thuộc Sở Khoa học và Công nghệ, thực hiện kiểm định, hiệu chuẩn, thử nghiệm, tư vấn và chứng nhận tiêu chuẩn, đo lường, chất lượng phục vụ quản lý nhà nước và doanh nghiệp.',
+    "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất.",
 
   keywords: [
-    'tiêu chuẩn đo lường chất lượng',
-    'kiểm định',
-    'hiệu chuẩn',
-    'thử nghiệm',
-    'chuẩn đo lường',
-    'kiểm định thiết bị y tế',
-    'đo lường',
-    'chất lượng sản phẩm',
-    'quy chuẩn kỹ thuật',
-    'dịch vụ khoa học công nghệ',
-    'Sở Khoa học và Công nghệ TP.HCM',
-    'kiểm định an toàn thiết bị y tế',
+    "Kepler Property",
+    "bất động sản",
+    "mua bán nhà đất",
+    "cho thuê nhà đất",
+    "căn hộ",
+    "biệt thự",
+    "đất nền",
+    "nhà phố",
+    "dự án BĐS",
+    "Vinhomes",
+    "bất động sản TP.HCM",
   ],
 
   robots: {
@@ -58,47 +63,79 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title:
-      'Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng TP. Hồ Chí Minh',
+    title: "Kepler Property - Nền tảng BĐS chuyên nghiệp hàng đầu Việt Nam",
     description:
-      'Đơn vị sự nghiệp công lập trực thuộc Sở Khoa học và Công nghệ TP.HCM, cung cấp dịch vụ kiểm định, hiệu chuẩn, thử nghiệm, chứng nhận và tư vấn về tiêu chuẩn, đo lường, chất lượng.',
+      "Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất.",
     url: baseConfig.frontendDomain,
-    siteName:
-      'Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng TP.HCM',
+    siteName: "Kepler Property",
     images: [
       {
-        url: `${baseConfig.frontendDomain}/${Thumnail.src}`,
+        url: `${baseConfig.frontendDomain}/images/seo.png`,
         width: 1200,
         height: 630,
-        alt:
-          'Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng TP. Hồ Chí Minh',
+        alt: "Kepler Property",
       },
     ],
-    locale: 'vi_VN',
-    type: 'website',
+    locale: "vi_VN",
+    type: "website",
   },
 
   twitter: {
-    card: 'summary_large_image',
-    title:
-      'Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng TP.HCM',
+    card: "summary_large_image",
+    title: "Kepler Property - Nền tảng BĐS chuyên nghiệp hàng đầu Việt Nam",
     description:
-      'Kiểm định – Hiệu chuẩn – Thử nghiệm – Tư vấn tiêu chuẩn đo lường chất lượng tại TP. Hồ Chí Minh.',
-    images: [`${baseConfig.frontendDomain}/${Thumnail.src}`],
+      "Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất.",
+    images: [`${baseConfig.frontendDomain}/images/seo.png`],
   },
-}
-
-export default function RootLayout({
+};
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${notoSerif.variable} ${inter.variable} font-sans antialiased`}
       >
-        <QueryProvider>{children}</QueryProvider>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-S1WZBLT72V"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-S1WZBLT72V');
+          `}
+        </Script>
+
+        <Header />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
+
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Kepler Property',
+              url: 'https://kepler-vietprodev.vercel.app',
+              logo: 'https://kepler-vietprodev.vercel.app/images/logo.png',
+              sameAs: ['https://www.facebook.com/keplerland'],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+84901234567',
+                contactType: 'customer service',
+                availableLanguage: ['Vietnamese'],
+              },
+            }),
+          }}
+        />
       </body>
     </html>
   );

@@ -1,5 +1,7 @@
-/* eslint-disable */
-import useAuthStore, { authStoreName } from '@/stores/auth';
+/* eslint-disable no-console */
+'use client';
+
+import useAuthStore, { authStoreName } from '@stores/auth-store';
 
 /**
  * Plain utility to clear auth localStorage and reset the auth zustand store.
@@ -11,8 +13,6 @@ export function clearAuth() {
       try {
         localStorage.removeItem(authStoreName);
       } catch (err: unknown) {
-        // ignore localStorage errors
-        // eslint-disable-next-line no-console
         console.warn('Could not remove auth localStorage key', err);
       }
     }
@@ -24,7 +24,6 @@ export function clearAuth() {
         store.resetStore();
       }
     } catch (err: unknown) {
-      // eslint-disable-next-line no-console
       console.warn('Could not reset auth store', err);
     }
   }
@@ -32,7 +31,6 @@ export function clearAuth() {
 
 /**
  * Hook wrapper for components — returns the same plain function.
- * Use this inside React components if preferred: const { clearAuth } = useClearAuth();
  */
 export function useClearAuth() {
   return { clearAuth };

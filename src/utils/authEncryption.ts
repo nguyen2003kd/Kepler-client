@@ -1,8 +1,9 @@
 import CryptoJS from 'crypto-js'
 
-const BASE_KEY = process.env.NEXT_PUBLIC_AUTH_ENCRYPTION_KEY
+const BASE_KEY: string = process.env.PUBLIC_AUTH_ENCRYPTION_KEY || ''
+
 export const generateEncryptionKey = (): string => {
-  const BASE: string = BASE_KEY as string
+  const BASE = BASE_KEY || 'secure_fallback_key'
   if (typeof window === 'undefined') {
     return CryptoJS.SHA256(BASE).toString()
   }
@@ -98,7 +99,7 @@ export const decrypt = (encryptedText: string): string => {
 
     const maxAge = 30 * 24 * 60 * 60 * 1000
     if (Date.now() - timestamp > maxAge) {
-      localStorage.removeItem('auth-token')
+      localStorage.removeItem('auth-client')
       localStorage.removeItem('_auth_creation')
       return ''
     }
@@ -108,7 +109,7 @@ export const decrypt = (encryptedText: string): string => {
     const decryptedText = decrypted.toString(CryptoJS.enc.Utf8)
 
     if (!decryptedText) {
-      localStorage.removeItem('auth-token')
+      localStorage.removeItem('auth-client')
       localStorage.removeItem('_auth_creation')
       return ''
     }
@@ -119,14 +120,14 @@ export const decrypt = (encryptedText: string): string => {
         throw new Error('Invalid auth data structure')
       }
     } catch {
-      localStorage.removeItem('auth-token')
+      localStorage.removeItem('auth-client')
       localStorage.removeItem('_auth_creation')
       return ''
     }
 
     return decryptedText
   } catch {
-    localStorage.removeItem('auth-token')
+    localStorage.removeItem('auth-client')
     localStorage.removeItem('_auth_creation')
     return ''
   }

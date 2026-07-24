@@ -56,7 +56,6 @@ export interface UserRole {
   assigned_by?: string;
   is_primary: boolean;
   updated_at?: string;
-  // Populated fields
   user?: {
     id: string;
     email: string;
@@ -87,7 +86,6 @@ export interface RolePermission {
   role_id: string;
   permission_id: string;
   created_at: string;
-  // Populated fields
   role?: Role;
   permission?: Permission;
 }
@@ -110,28 +108,17 @@ export interface ApiResponse<T> {
   responseData: T;
 }
 
-export interface PaginatedResponse<T> {
-  items: T[];
-  total: number;
-  page: number;
-  pageSize: number;
-  totalPages: number;
-}
-
-export interface ErrorResponse {
-  responseCode: number;
-  responseMessage: {
-    vi: string;
-    en: string;
-  };
-  error?: string;
-}
-
 // =============================================================================
 // CASL ABILITY TYPES
 // =============================================================================
 
-export type Actions = 'manage' | 'create' | 'read' | 'update' | 'delete' | 'list';
+export type Actions =
+  | 'manage'
+  | 'create'
+  | 'read'
+  | 'update'
+  | 'delete'
+  | 'list';
 
 export type Subjects = string;
 
@@ -141,31 +128,32 @@ export interface ACLObj {
 }
 
 // =============================================================================
-// QUERY PARAMS TYPES
+// PERMISSION FORMAT HELPERS
 // =============================================================================
 
-export interface QueryParams {
-  page?: number;
-  pageSize?: number;
-  sortField?: string;
-  sortOrder?: 'ASC' | 'DESC';
-  filters?: string;
+/**
+ * Standard permission format: "resource:action"
+ * Examples: "user:create", "post:delete", "comment:update"
+ */
+export type PermissionString = `${string}:${string}`;
+
+export function formatPermissionString(
+  resource: string,
+  action: string
+): PermissionString {
+  return `${resource}:${action}`;
+}
+
+export function parsePermissionString(
+  permissionString: PermissionString
+): { resource: string; action: string } | null {
+  const [resource, action] = permissionString.split(':');
+  if (!resource || !action) return null;
+  return { resource, action };
 }
 
 // =============================================================================
-// FILTER OPERATORS
-// =============================================================================
-
-export type FilterOperator = '@=' | '@!=' | '@>' | '@>=' | '@<' | '@<=';
-
-export interface FilterBuilder {
-  field: string;
-  operator: FilterOperator;
-  value: string | number | boolean;
-}
-
-// =============================================================================
-// HELPER FUNCTIONS FOR TYPE GUARDS
+// TYPE GUARDS
 // =============================================================================
 
 export function isPermission(obj: unknown): obj is Permission {
@@ -199,51 +187,80 @@ export function isUserRole(obj: unknown): obj is UserRole {
 }
 
 // =============================================================================
-// PERMISSION FORMAT HELPERS
+// MODULE PERMISSION TYPES (for UI permission matrix)
 // =============================================================================
 
 /**
- * Standard permission format: "resource:action"
- * Examples: "user:create", "post:delete", "comment:update"
+ * Một permission cụ thể của module với action name động
+ * Ví dụ: { view_detail: true, update: false, delete: true, create_post_info: false }
  */
-export type PermissionString = `${string}:${string}`;
+export type ModulePermissions = Record<string, boolean>;
 
-export function formatPermissionString(resource: string, action: string): PermissionString {
-  return `${resource}:${action}`;
+export interface ModulePermission {
+  id: string;
+  name: string;
+  description: string;
+  /**
+   * Dynamic permissions: key = action name từ API, value = có/không
+   * Ví dụ news: { view_detail: true, update: false, delete: false, create_post_info: true }
+   */
+  permissions: ModulePermissions;
+  /**
+   * Danh sach tất cả actions có thể có của module này (lấy từ backend)
+   */
+  availableActions: string[];
 }
 
-export function parsePermissionString(permissionString: PermissionString): {
-  resource: string;
-  action: string;
-} | null {
-  const [resource, action] = permissionString.split(':');
-  if (!resource || !action) return null;
-  return { resource, action };
+export interface UserPermission {
+  userId: string;
+  username: string;
+  email: string;
+  role: string;
+  roleId?: string;
+  modules: ModulePermission[];
+  customPermissions?: boolean;
 }
 
-// =============================================================================
-// CONSTANTS
-// =============================================================================
+export interface PermissionTemplate {
+  id: string;
+  name: string;
+  description: string;
+  modules: string[];
+}
 
-export const COMMON_RESOURCES = [
-  'user',
-  'role',
-  'permission',
-  'post',
-  'category',
-  'comment',
-  'page',
-  'file',
-  'analytics'
-] as const;
+export interface RoleWithPermissions {
+  id: string;
+  name: string;
+  description: string;
+  permissions: ModulePermission[];
+  createdAt?: string;
+  updatedAt?: string;
+  isSystem?: boolean;
+}
 
-export const COMMON_ACTIONS: Actions[] = [
-  'create',
-  'read',
-  'update',
-  'delete',
-  'list',
-  'manage'
-] as const;
+// Types for API response from /api/v1.0/userRole
+export interface UserRoleUser {
+  id: string;
+  email: string;
+  first_name: string | null;
+  last_name: string | null;
+}
 
-export type CommonResource = typeof COMMON_RESOURCES[number];
+export interface UserRoleRole {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface UserRoleItem {
+  id: string;
+  user_id: string;
+  role_id: string;
+  assigned_at: string;
+  assigned_by: string | null;
+  is_primary: boolean | null;
+  updated_at: string | null;
+  user: UserRoleUser;
+  role: UserRoleRole;
+  assigned_by_user: unknown | null;
+}

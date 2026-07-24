@@ -4,6 +4,9 @@
  * Aligned with backend API:
  *   - GET/POST/PUT/DELETE /api/v1.0/workSchedule
  *   - GET /api/v1.0/workSchedule/{id}
+ *   - GET /api/v1.0/workSchedule/{id}/participants
+ *   - POST /api/v1.0/scheduleParticipant/bulk
+ *   - DELETE /api/v1.0/scheduleParticipant/{schedule_id}/{user_id}
  */
 
 export type WorkPeriod = 'morning' | 'afternoon'
@@ -40,6 +43,25 @@ export interface WorkScheduleMutate {
 }
 
 // ------------------------------------------------------------------
+// Schedule Participant types
+// ------------------------------------------------------------------
+
+export interface ScheduleParticipant {
+  schedule_id?: string
+  user_id?: string
+}
+
+export interface ScheduleParticipantBulkMutate {
+  schedule_id: string
+  user_ids: string[]
+}
+
+export interface ScheduleParticipantBulkResponse {
+  created: ScheduleParticipant[]
+  skippedUserIds: string[]
+}
+
+// ------------------------------------------------------------------
 // FE UI types
 // ------------------------------------------------------------------
 
@@ -63,9 +85,6 @@ export interface WorkEvent {
 // Mapping helpers
 // ------------------------------------------------------------------
 
-/**
- * Convert backend WorkSchedule to FE WorkEvent
- */
 export function mapWorkScheduleToWorkEvent(ws: WorkSchedule): WorkEvent {
   let dateStr = formatDate(new Date())
   let hours = 8
@@ -80,12 +99,16 @@ export function mapWorkScheduleToWorkEvent(ws: WorkSchedule): WorkEvent {
   const startTime = formatTimeFromISO(ws.schedule_time)
   const endTime = ws.end_time ? formatTimeFromISO(ws.end_time) : addHoursToTime(startTime, 2)
 
+  // Nếu host là UUID (data cũ) thì ẩn đi, không hiển thị cho user
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+  const hostDisplay = ws.host && !uuidRegex.test(ws.host.trim()) ? ws.host.trim() : ''
+
   return {
     id: ws.id ?? '',
     title: ws.title ?? '',
     description: ws.description ?? '',
     tasks: ws.tasks ?? '',
-    host: ws.host ?? '',
+    host: hostDisplay,
     participants: ws.participants ?? '',
     startTime,
     endTime,
@@ -97,9 +120,6 @@ export function mapWorkScheduleToWorkEvent(ws: WorkSchedule): WorkEvent {
   }
 }
 
-/**
- * Convert FE WorkEvent to backend WorkScheduleMutate payload
- */
 export function mapWorkEventToWorkScheduleMutate(
   event: WorkEvent,
   status = 'pending'

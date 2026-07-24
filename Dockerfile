@@ -62,6 +62,7 @@ COPY package*.json ./
 
 # Copy built application
 COPY --from=builder /usr/src/app/.next ./.next
+COPY --from=builder /usr/src/app/public ./public
 
 # Copy other necessary files
 COPY next.config.mjs ./

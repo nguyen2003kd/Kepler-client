@@ -1,7 +1,7 @@
 const baseConfig = {
-    backendDomain: process.env.NEXT_PUBLIC_BACKEND_DOMAIN,
-    frontendDomain: process.env.NEXT_PUBLIC_FRONTEND_DOMAIN,
-    imgEndpointDomain: process.env.NEXT_PUBLIC_BACKEND_DOMAIN
-}
+  backendDomain: 'http://localhost:3003',
+  frontendDomain: 'https://kepler-vietprodev.vercel.app',
+  imgEndpointDomain: 'http://localhost:3003',
+};
 
 export default baseConfig;

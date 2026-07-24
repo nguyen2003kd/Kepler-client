@@ -21,13 +21,15 @@ const orvalConfig = async () => {
         override: {
           query: {
             useQuery: true,
-            useInfinite: false 
+            useInfinite: false // ❌ tắt global infinite
           },
           mutator: {
             path: 'src/api/mutator/custom-instance.ts',
             name: 'mainInstance'
           },
           header: () => '/* eslint-disable */\r\n',
+
+          // ✅ chỉ bật infinite cho API cần page
           operations: {
             getPosts: {
               query: {
@@ -35,6 +37,8 @@ const orvalConfig = async () => {
                 useInfiniteQueryParam: 'page'
               }
             },
+
+            // giữ nguyên cái cũ của bạn
             postSystemBackup: {
               mutator: {
                 path: 'src/api/mutator/fetch-instance.ts',

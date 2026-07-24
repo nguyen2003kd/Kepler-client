@@ -1,5 +1,0 @@
-export { RecruitmentCreate } from "./recruitment-create"
-export { RecruitmentEdit } from "./recruitment-edit"
-export { CandidateDetail } from "./candidate-detail"
-export { CandidateEdit } from "./candidate-edit"
-export { ExpandableRow } from "./recruitment-columns"
