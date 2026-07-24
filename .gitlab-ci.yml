@@ -20,7 +20,7 @@ build:
         exit 0
       fi
   script:
-    - cp /mnt/data/case-smeq/.env $CI_PROJECT_DIR/.env
+    - cp /mnt/data/kepler-property/.env $CI_PROJECT_DIR/.env
     - pnpm install --no-frozen-lockfile
     - pnpm build
   artifacts:
@@ -31,7 +31,7 @@ build:
   only:
     - release/staging
   tags:
-    - runner-smeq
+    - runner-kepler-property
 
 # Release Staging
 deploy:
@@ -40,13 +40,13 @@ deploy:
     - build
   script:
     - pnpm install --prod --no-frozen-lockfile
-    - pm2 delete case-smeq || true
+    - pm2 delete kepler-property || true
     - pm2 start $PM2_CONFIG
     - sleep 10
-    - pm2 status case-smeq | grep -q "online" || (echo "Server did not start successfully"; exit 1)
+    - pm2 status kepler-property | grep -q "online" || (echo "Server did not start successfully"; exit 1)
   only:
     - release/staging
   environment:
     name: staging
   tags:
-    - runner-smeq
+    - runner-kepler-property

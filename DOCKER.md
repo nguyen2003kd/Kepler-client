@@ -1,4 +1,4 @@
-# Docker Setup for case-smeq
+# Docker Setup for kepler-property
 
 This project includes Docker configuration for development, staging, and production environments.
 
@@ -103,4 +103,4 @@ All containers include health checks that verify the application is responding o
 
 ## Network
 
-All services are connected to the `case-smeq-network` bridge network.
+All services are connected to the `kepler-property-network` bridge network.

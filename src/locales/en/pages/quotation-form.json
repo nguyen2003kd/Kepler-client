@@ -47,7 +47,7 @@
   "executionLocationTitle": "Execution Location Information",
   "executionLocationSubtitle": "Place for testing / calibration",
   "sameAsCertificate": "Same as certificate",
-  "atSmeq": "At SMEQ",
+  "atKeplerProperty": "At Kepler Property",
   "resultReturnTitle": "Result Return Information",
   "resultReturnSubtitle": "How to receive results and payment",
   "requestedService": "Requested Service",

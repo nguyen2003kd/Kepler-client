@@ -17,17 +17,17 @@ interface SeoProps {
  */
 export function constructMetadata({
   title,
-  description = "Trung tâm Dịch vụ Phân tích thí nghiệm và Tiêu chuẩn Đo lường Chất lượng Thành Phố Hồ Chí Minh",
-  image = "/images/case-smeg-thumb.png",
+  description = "Kepler Property cung cấp thông tin mua bán, cho thuê và dự án bất động sản, đồng thời hỗ trợ khách hàng trong quá trình tìm kiếm, tư vấn và thực hiện giao dịch.",
+  image = "/images/seo.png",
   url = "",
   type = 'website',
   keywords = [],
   noIndex = false,
 }: SeoProps): Metadata {
-  const baseUrl = baseConfig.frontendDomain || 'https://smeq-dev.meucorp.com';
+  const baseUrl = baseConfig.frontendDomain || 'https://kepler-client.vercel.app';
   const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
   const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
-  const siteName = "Case-SMQ";
+  const siteName = "Kepler Property";
 
   return {
     title: {
@@ -36,23 +36,22 @@ export function constructMetadata({
     },
     description,
     keywords: keywords.length > 0 ? keywords : [
-      "tiêu chuẩn đo lường chất lượng",
-      "kiểm định",
-      "hiệu chuẩn",
-      "thử nghiệm",
-      "chuẩn đo lường",
-      "kiểm định thiết bị y tế",
-      "đo lường",
-      "chất lượng sản phẩm",
-      "quy chuẩn kỹ thuật",
-      "dịch vụ khoa học công nghệ",
-      "Sở Khoa học và Công nghệ TP.HCM",
-      "kiểm định an toàn thiết bị y tế",
+      "Kepler Property",
+      "bất động sản",
+      "mua bán nhà đất",
+      "cho thuê bất động sản",
+      "căn hộ",
+      "nhà phố",
+      "đất nền",
+      "biệt thự",
+      "dự án bất động sản",
+      "tư vấn đầu tư",
+      "tư vấn pháp lý",
     ],
     authors: [{ name: siteName }],
     creator: siteName,
     publisher: siteName,
-    
+
     robots: {
       index: !noIndex,
       follow: !noIndex,
@@ -62,7 +61,7 @@ export function constructMetadata({
         follow: !noIndex,
       },
     },
-    
+
     openGraph: {
       type: type === 'product' ? 'website' : type,
       title,
@@ -77,31 +76,28 @@ export function constructMetadata({
       }],
       locale: 'vi_VN',
     },
-    
+
     twitter: {
       card: 'summary_large_image',
       title,
       description,
       images: [fullImageUrl],
-      creator: 'Case-SMQ',
+      creator: '@kepler_property',
     },
-    
+
     alternates: {
       canonical: fullUrl,
     },
-    
+
     metadataBase: new URL(baseUrl),
-    
+
     icons: {
       icon: [
-        { url: "/images/favicon.ico", type: "image/x-icon" },
-        // { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-        // { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-        // { url: "/images/favicon-64x64.png", sizes: "64x64", type: "image/png" },
+        { url: "/images/icon.png", type: "image/png" },
       ],
-      shortcut: "/images/favicon.ico",
+      shortcut: "/images/icon.png",
     },
-    
+
     // Additional meta for Vietnamese market
     other: {
       'zalo-platform-site-verification': process.env.ZALO_VERIFICATION || '',
@@ -128,9 +124,9 @@ interface StructuredDataInput {
 }
 
 export function generateStructuredData(type: 'Product' | 'Article' | 'Organization', data: StructuredDataInput) {
-  const baseUrl = baseConfig.frontendDomain || 'https://your-domain.com';
-  const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Your App Name';
-  
+  const baseUrl = baseConfig.frontendDomain || 'https://kepler-client.vercel.app';
+  const siteName = 'Kepler Property';
+
   const schemas = {
     Product: {
       '@context': 'https://schema.org',
@@ -153,7 +149,7 @@ export function generateStructuredData(type: 'Product' | 'Article' | 'Organizati
         },
       },
     },
-    
+
     Article: {
       '@context': 'https://schema.org',
       '@type': 'Article',
@@ -169,7 +165,7 @@ export function generateStructuredData(type: 'Product' | 'Article' | 'Organizati
         name: siteName,
         logo: {
           '@type': 'ImageObject',
-          url: `${baseUrl}/images/logo-no-bg.png`,
+          url: `${baseUrl}/images/logo.png`,
         },
       },
       datePublished: data.publishedAt,
@@ -179,23 +175,21 @@ export function generateStructuredData(type: 'Product' | 'Article' | 'Organizati
         '@id': `${baseUrl}${data.url}`,
       },
     },
-    
+
     Organization: {
       '@context': 'https://schema.org',
-      '@type': 'Organization',
+      '@type': 'RealEstateAgent',
       name: siteName,
       url: baseUrl,
       logo: `${baseUrl}/images/logo.png`,
       sameAs: [
-        // Add your social media URLs
-        'https://facebook.com/yourpage',
-        'https://instagram.com/yourpage',
+        'https://www.facebook.com/keplerland',
       ],
       contactPoint: {
         '@type': 'ContactPoint',
-        telephone: '+84-xxx-xxx-xxx',
+        telephone: '+84901234567',
         contactType: 'customer service',
-        availableLanguage: ['Vietnamese', 'English'],
+        availableLanguage: ['Vietnamese'],
       },
     },
   };
@@ -211,17 +205,17 @@ export function validateSocialImage(imageUrl: string): {
   warnings: string[];
 } {
   const warnings: string[] = [];
-  
+
   // Check if image is absolute URL
   if (!imageUrl.startsWith('http')) {
     warnings.push('Image should be an absolute URL for social sharing');
   }
-  
+
   // Zalo/Facebook recommendations
   if (!imageUrl.includes('1200x630') && !imageUrl.includes('og-image')) {
     warnings.push('Image should be 1200x630px for optimal social sharing');
   }
-  
+
   return {
     isValid: warnings.length === 0,
     warnings,
@@ -233,8 +227,8 @@ export function validateSocialImage(imageUrl: string): {
  */
 // Example usage: generateBreadcrumbStructuredData([{ name: 'Home', url: '/' }, { name: 'Category', url: '/category' }, { name: 'Product', url: '/category/product' }])
 export function generateBreadcrumbStructuredData(breadcrumbs: Array<{ name: string; url: string }>) {
-  const baseUrl = baseConfig.frontendDomain || 'https://your-domain.com';
-  
+  const baseUrl = baseConfig.frontendDomain || 'https://kepler-client.vercel.app';
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

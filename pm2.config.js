@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: "case-smeq",
+            name: "kepler-property",
             script: "node_modules/next/dist/bin/next",
             args: "start",
             autorestart: true,
@@ -15,8 +15,8 @@ module.exports = {
                 HOST: "0.0.0.0",
             },
             env_file: ".env",
-            out_file: "./logs/case-smeq.out.log",
-            error_file: "./logs/case-smeq.err.log",
+            out_file: "./logs/kepler-property.out.log",
+            error_file: "./logs/kepler-property.err.log",
             merge_logs: true
         }
     ]
