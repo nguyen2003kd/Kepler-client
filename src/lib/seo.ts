@@ -17,17 +17,17 @@ interface SeoProps {
  */
 export function constructMetadata({
   title,
-  description = "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất.",
-  image = "/images/seo.png",
+  description = "Trung tâm Dịch vụ Phân tích thí nghiệm và Tiêu chuẩn Đo lường Chất lượng Thành Phố Hồ Chí Minh",
+  image = "/images/case-smeg-thumb.png",
   url = "",
   type = 'website',
   keywords = [],
   noIndex = false,
 }: SeoProps): Metadata {
-  const baseUrl = baseConfig.frontendDomain || 'https://kepler-vietprodev.vercel.app';
+  const baseUrl = baseConfig.frontendDomain || 'https://smeq-dev.meucorp.com';
   const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
   const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
-  const siteName = "Kepler Property";
+  const siteName = "Case-SMQ";
 
   return {
     title: {
@@ -36,17 +36,18 @@ export function constructMetadata({
     },
     description,
     keywords: keywords.length > 0 ? keywords : [
-      "Kepler Property",
-      "bất động sản",
-      "mua bán nhà đất",
-      "cho thuê nhà đất",
-      "căn hộ",
-      "biệt thự",
-      "đất nền",
-      "nhà phố",
-      "dự án BĐS",
-      "Vinhomes",
-      "bất động sản TP.HCM",
+      "tiêu chuẩn đo lường chất lượng",
+      "kiểm định",
+      "hiệu chuẩn",
+      "thử nghiệm",
+      "chuẩn đo lường",
+      "kiểm định thiết bị y tế",
+      "đo lường",
+      "chất lượng sản phẩm",
+      "quy chuẩn kỹ thuật",
+      "dịch vụ khoa học công nghệ",
+      "Sở Khoa học và Công nghệ TP.HCM",
+      "kiểm định an toàn thiết bị y tế",
     ],
     authors: [{ name: siteName }],
     creator: siteName,
@@ -82,7 +83,7 @@ export function constructMetadata({
       title,
       description,
       images: [fullImageUrl],
-      creator: 'Kepler Property',
+      creator: 'Case-SMQ',
     },
     
     alternates: {
@@ -93,10 +94,12 @@ export function constructMetadata({
     
     icons: {
       icon: [
-        { url: "/images/icon.png", type: "image/png" },
+        { url: "/images/favicon.ico", type: "image/x-icon" },
+        // { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        // { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+        // { url: "/images/favicon-64x64.png", sizes: "64x64", type: "image/png" },
       ],
-      shortcut: "/images/icon.png",
-      apple: "/images/icon.png",
+      shortcut: "/images/favicon.ico",
     },
     
     // Additional meta for Vietnamese market
@@ -166,7 +169,7 @@ export function generateStructuredData(type: 'Product' | 'Article' | 'Organizati
         name: siteName,
         logo: {
           '@type': 'ImageObject',
-          url: `${baseUrl}/images/logo.png`,
+          url: `${baseUrl}/images/logo-no-bg.png`,
         },
       },
       datePublished: data.publishedAt,
@@ -180,17 +183,19 @@ export function generateStructuredData(type: 'Product' | 'Article' | 'Organizati
     Organization: {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'Kepler Property',
+      name: siteName,
       url: baseUrl,
       logo: `${baseUrl}/images/logo.png`,
       sameAs: [
-        'https://www.facebook.com/keplerland',
+        // Add your social media URLs
+        'https://facebook.com/yourpage',
+        'https://instagram.com/yourpage',
       ],
       contactPoint: {
         '@type': 'ContactPoint',
-        telephone: '+84901234567',
+        telephone: '+84-xxx-xxx-xxx',
         contactType: 'customer service',
-        availableLanguage: ['Vietnamese'],
+        availableLanguage: ['Vietnamese', 'English'],
       },
     },
   };

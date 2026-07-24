@@ -158,7 +158,7 @@ const menuItemHoverBoxVariant = cva(
   {
     variants: {
       variant: {
-        main: "bg-white border border-gray-200 shadow-lg rounded-xl",
+        main: "bg-white border border-gray-200 shadow-lg rounded-lg",
         secondary: "bg-muted",
       },
     },
@@ -171,7 +171,7 @@ const menuItemHoverBoxVariant = cva(
 const menuItemChildVariant = cva(
   cn(
     buttonVariants({ variant: "ghost" }),
-    "justify-start text-sm font-normal py-2.5 px-3 rounded-xl transition-colors duration-150 uppercase"
+    "justify-start text-sm font-normal py-2.5 px-3 rounded-md transition-colors duration-150 uppercase"
   ),
   {
     variants: {

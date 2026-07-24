@@ -96,7 +96,7 @@ const OrgTreeNode = memo(function OrgTreeNode({
           </h3>
 
           <div className="mb-3 flex justify-center">
-            <span className="line-clamp-1 rounded-xl bg-blue-50 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-blue-700">
+            <span className="line-clamp-1 rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-blue-700">
               {node.position}
             </span>
           </div>

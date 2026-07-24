@@ -102,7 +102,7 @@ export function UserNav({ user }: UserNavProps) {
         forceMount
         sideOffset={8}
       >
-        <DropdownMenuLabel className="font-normal p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl mb-2">
+        <DropdownMenuLabel className="font-normal p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg mb-2">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 ring-2 ring-white shadow-sm">
               <AvatarImage src={user?.avatar} alt={userName} />
@@ -122,7 +122,7 @@ export function UserNav({ user }: UserNavProps) {
         <div className="space-y-1">
           <DropdownMenuItem
             onClick={() => router.push("/user")}
-            className="cursor-pointer rounded-xl px-3 py-2.5 hover:bg-blue-50 hover:text-blue-700 transition-colors group"
+            className="cursor-pointer rounded-md px-3 py-2.5 hover:bg-blue-50 hover:text-blue-700 transition-colors group"
           >
             <User className="mr-3 h-4 w-4 text-gray-500 group-hover:text-blue-600 transition-colors" />
             <span className="font-medium">{t("profile")}</span>
@@ -130,7 +130,7 @@ export function UserNav({ user }: UserNavProps) {
 
           <DropdownMenuItem
             onClick={() => router.push("/user/settings")}
-            className="cursor-pointer rounded-xl px-3 py-2.5 hover:bg-blue-50 hover:text-blue-700 transition-colors group"
+            className="cursor-pointer rounded-md px-3 py-2.5 hover:bg-blue-50 hover:text-blue-700 transition-colors group"
           >
             <Settings className="mr-3 h-4 w-4 text-gray-500 group-hover:text-blue-600 transition-colors" />
             <span className="font-medium">{t("settings")}</span>
@@ -138,7 +138,7 @@ export function UserNav({ user }: UserNavProps) {
           <Can I="view" a="work-schedule">
             <DropdownMenuItem
               onClick={() => router.push("/work-schedule")}
-              className="cursor-pointer rounded-xl px-3 py-2.5 hover:bg-blue-50 hover:text-blue-700 transition-colors group"
+              className="cursor-pointer rounded-md px-3 py-2.5 hover:bg-blue-50 hover:text-blue-700 transition-colors group"
             >
               <Calendar className="mr-3 h-4 w-4 text-gray-500 group-hover:text-blue-600 transition-colors" />
               <span className="font-medium">Lịch công tác</span>
@@ -151,7 +151,7 @@ export function UserNav({ user }: UserNavProps) {
         <DropdownMenuItem
           onClick={handleLogout}
           disabled={isLoading}
-          className="cursor-pointer rounded-xl px-3 py-2.5 hover:bg-red-50 hover:text-red-700 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
+          className="cursor-pointer rounded-md px-3 py-2.5 hover:bg-red-50 hover:text-red-700 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <Loader2 className="mr-3 h-4 w-4 animate-spin text-gray-500" />

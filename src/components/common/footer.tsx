@@ -1,166 +1,307 @@
 "use client";
 
-import { KEPLER_CONFIG } from "@/constants/kepler-data";
-import { Phone, Facebook } from "lucide-react";
+import { useGetApiV10Footer } from "@/api/endpoints/footer";
+import { useGetApiV10AnalyticsActiveUsers } from "@/api/endpoints/analytics";
+import { useGetApiV10Logo } from "@/api/endpoints/logo";
+import { Footer as FooterType } from "@/api/models/footer";
+import type { FooterLinksItem } from "@/api/models/footerLinksItem";
+import { Logo } from "@/api/models/logo";
+import { getResponsiveImage } from "@/lib/responsive-image";
+import links from "@/lib/links";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  Twitter,
+  Youtube,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
-export default function Footer() {
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
+interface LogoWithFile extends Logo {
+  file?: {
+    path?: string;
+    compress_info?: Record<string, string>;
+    name?: string;
+  };
+}
+
+const Footer = () => {
+  const { data } = useGetApiV10Footer({
+    filters: "is_active==true",
+  });
+
+  const { data: analyticsData } = useGetApiV10AnalyticsActiveUsers(
+    { allTime: true },
+    { query: { refetchInterval: 60_000 } }
+  );
+
+  const { data: logoData, isError: isLogoError } = useGetApiV10Logo({
+    filters: "is_active==true",
+  });
+
+  const footerData = (data?.responseData?.rows?.[0] as FooterType) || null;
+  const logoInfo = logoData?.responseData?.rows?.[0] as LogoWithFile;
+  const logoUrl = isLogoError
+    ? "/images/service-1.png"
+    : logoInfo?.file?.compress_info
+      ? getResponsiveImage(logoInfo.file.compress_info)
+      : logoInfo?.file?.path
+        ? `${links.storageEndpoint}${logoInfo.file.path}`
+        : "/images/service-1.png";
+
+  const addresses =
+    footerData?.address && footerData.address.length > 0
+      ? footerData.address
+      : [
+          {
+            title: "Trụ sở chính",
+            location:
+              "Số 2 Nguyễn Văn Thủ, Phường Tân Định, Thành phố Hồ Chí Minh",
+          },
+        ];
+
+  const socialLinks =
+    (footerData?.social_links as Record<string, string> | null | undefined) ||
+    {};
+
+  const formatViews = (views: string | number | null | undefined): string => {
+    if (!views) return "0";
+    return views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
 
   return (
-    <>
-      {/* Newsletter band - Red background like Henry Butcher accent */}
-      <section className="bg-primary text-white py-10 md:py-16">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
-            <div className="lg:max-w-[500px]">
-              <h2 className="text-[clamp(20px,3vw,32px)] font-serif font-bold mb-2 md:mb-3">
-                Nhận tin đăng mới nhất từ Kepler Property
-              </h2>
-              <p className="text-white/80 text-sm md:text-[15px]">
-                Đăng ký email để nhận thông tin BĐS mới nhất.
-              </p>
-            </div>
-            <form
-              className="flex flex-col sm:flex-row w-full lg:w-auto lg:min-w-[420px] overflow-hidden bg-white rounded-xl shadow-lg"
-              onSubmit={(e) => {
-                e.preventDefault();
-                setEmailSubmitted(true);
-              }}
-            >
-              <input
-                type="email"
-                required
-                placeholder="Nhập email của bạn"
-                className="flex-1 min-h-[48px] px-4 text-gray-800 outline-none text-sm rounded-t-xl sm:rounded-tr-none sm:rounded-bl-xl placeholder:text-gray-400"
-              />
-              <button
-                type="submit"
-                className="min-h-[48px] px-6 bg-gray-900 text-white text-sm font-semibold uppercase tracking-widest hover:bg-gray-800 transition-colors rounded-b-xl sm:rounded-bl-none sm:rounded-tr-xl"
-              >
-                {emailSubmitted ? "Đã đăng ký" : "Subscribe"}
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
+    <footer className="w-full bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] text-white font-sans relative overflow-hidden border-t border-white/20">
+      {/* Subtle  */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+      </div>
 
-      {/* Footer - White background with dark text */}
-      <footer className="bg-white text-gray-800 border-t border-gray-200">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="py-10 md:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-6 gap-y-8 md:gap-10">
-            {/* Brand + About */}
-            <div className="sm:col-span-2 lg:col-span-2 pb-4 sm:pb-0 border-b sm:border-b-0 border-gray-100">
-              <Link href="/" className="inline-flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
-                <Image
-                  src="/images/logo.png"
-                  alt="Kepler Property"
-                  width={140}
-                  height={40}
-                  className="h-[40px] md:h-[50px] w-auto"
-                />
-                <span className="text-lg md:text-xl font-bold text-gray-800">
-                  Kepler<span className="text-primary"> Property</span>
-                </span>
-              </Link>
-              <p className="text-gray-500 text-[13px] md:text-[14px] leading-relaxed max-w-[400px] mb-4 md:mb-8">
-                Nền tảng BĐS chuyên nghiệp hàng đầu Việt Nam.
-                Cập nhật tin đăng mua bán, cho thuê nhà đất nhanh chóng và chính xác.
-              </p>
-              <div className="flex items-center gap-3 md:gap-4">
-                <a
-                  href={KEPLER_CONFIG.facebookUrl}
-                  target="_blank"
-                  rel="noopener"
-                  className="w-9 md:w-10 h-9 md:h-10 border border-gray-200 flex items-center justify-center text-gray-500 hover:text-primary hover:border-primary transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={18} />
-                </a>
-                <a
-                  href={`tel:${KEPLER_CONFIG.hotlineTel}`}
-                  className="w-9 md:w-10 h-9 md:h-10 border border-gray-200 flex items-center justify-center text-gray-500 hover:text-primary hover:border-primary transition-colors"
-                  aria-label="Hotline"
-                >
-                  <Phone size={18} />
-                </a>
+      <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-8 lg:py-10 relative z-10">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-10">
+          {/* Logo and Company Info - Takes 4 columns */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="w-[150px] h-[60px] relative">
+              <Image
+                src={logoUrl}
+                alt={logoInfo?.name || "Logo"}
+                fill
+                className="object-contain drop-shadow-md"
+              />
+            </div>
+            <div>
+              <h6 className="text-sm font-bold mb-2 leading-relaxed text-white">
+                {footerData?.description ||
+                  "TRUNG TÂM DỊCH VỤ PHÂN TÍCH THÍ NGHIỆM VÀ TIÊU CHUẨN ĐO LƯỜNG CHẤT LƯỢNG THÀNH PHỐ HỒ CHÍ MINH"}
+              </h6>
+              {footerData?.sub_description && (
+                <p className="text-sm text-white/80 leading-relaxed">
+                  {footerData.sub_description}
+                </p>
+              )}
+
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-2.5">
+              <a
+                href={`tel:${footerData?.phone || "18001105"}`}
+                className="flex items-start gap-3 group cursor-pointer"
+              >
+                <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-all">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-white/60 mb-0.5">Điện thoại</p>
+                  <p className="text-sm font-medium group-hover:text-white transition-colors">
+                    {footerData?.phone || "1800 1105"}
+                  </p>
+                </div>
+              </a>
+              <a
+                href={`mailto:${footerData?.email || "casehcm@case.vn"}`}
+                className="flex items-start gap-3 group cursor-pointer"
+              >
+                <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-all">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-white/60 mb-0.5">Email</p>
+                  <p className="text-sm font-medium break-all group-hover:text-white transition-colors">
+                    {footerData?.email || "casehcm@case.vn"}
+                  </p>
+                </div>
+              </a>
+            </div>
+
+            {/* Social Links */}
+            {Object.keys(socialLinks).length > 0 && (
+              <div>
+                <p className="text-xs text-white/60 mb-3 uppercase tracking-wider font-medium">
+                  Kết nối với chúng tôi
+                </p>
+                <div className="grid grid-cols-4 gap-2.5 max-w-[180px]">
+                  {socialLinks?.facebook && (
+                    <Link
+                      href={socialLinks.facebook as string}
+                      aria-label="Facebook"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 bg-white/10 hover:bg-blue-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    >
+                      <Facebook className="w-4 h-4" />
+                    </Link>
+                  )}
+                  {socialLinks?.instagram && (
+                    <Link
+                      href={socialLinks.instagram as string}
+                      aria-label="Instagram"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 bg-white/10 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    >
+                      <Instagram className="w-4 h-4" />
+                    </Link>
+                  )}
+                  {socialLinks?.twitter && (
+                    <Link
+                      href={socialLinks.twitter as string}
+                      aria-label="Twitter"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 bg-white/10 hover:bg-sky-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    >
+                      <Twitter className="w-4 h-4" />
+                    </Link>
+                  )}
+                  {socialLinks?.linkedin && (
+                    <Link
+                      href={socialLinks.linkedin as string}
+                      aria-label="LinkedIn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 bg-white/10 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                    </Link>
+                  )}
+                  {socialLinks?.youtube && (
+                    <Link
+                      href={socialLinks.youtube as string}
+                      aria-label="Youtube"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 bg-white/10 hover:bg-red-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    >
+                      <Youtube className="w-4 h-4" />
+                    </Link>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Addresses  */}
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1 h-5 bg-white/80 rounded-full"></div>
+              <h4 className="text-base font-bold">Địa chỉ</h4>
+            </div>
+            <div
+              className={`grid grid-cols-1 gap-5 ${
+                addresses.length >= 4
+                  ? "md:grid-cols-2"
+                  : addresses.length === 3
+                    ? "md:grid-cols-3"
+                    : "md:grid-cols-1"
+              }`}
+            >
+              {addresses.map((addr, index) => (
+                <div key={index} className="text-sm group">
+                  <p className="font-semibold mb-1.5 text-white group-hover:text-white/95 transition-colors">
+                    {addr.title}
+                  </p>
+                  <p className="text-white/75 leading-relaxed group-hover:text-white/90 transition-colors">
+                    {addr.location}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links  */}
+          <div className="lg:col-span-3">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-1 h-5 bg-white/80 rounded-full"></div>
+              <h4 className="text-base font-bold">Liên kết</h4>
+            </div>
+            <nav className="grid grid-cols-1 gap-x-4 gap-y-2.5 text-sm mb-6 max-w-xs">
+              {(footerData?.links as FooterLinksItem[] | null | undefined)?.map(
+                (link, idx) => (
+                  <a
+                    key={idx}
+                    href={(link.link as string) || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-white/85 hover:text-white hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-white/60 rounded-full group-hover:bg-white group-hover:scale-125 transition-all"></span>
+                    {link.title as string}
+                  </a>
+                )
+              )}
+              {(!footerData?.links || (footerData.links as FooterLinksItem[]).length === 0) && (
+                <>
+                  <a
+                    href="https://dost.hochiminhcity.gov.vn/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-white/85 hover:text-white hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-white/60 rounded-full group-hover:bg-white group-hover:scale-125 transition-all"></span>
+                    Sở Khoa học và Công nghệ Thành phố Hồ Chí Minh
+                  </a>
+                  <a
+                    href="https://chicuctdc.gov.vn/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-white/85 hover:text-white hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-white/60 rounded-full group-hover:bg-white group-hover:scale-125 transition-all"></span>
+                    Chi Cục Tiêu chuẩn Đo lường Chất lượng Thành phố Hồ Chí Minh
+                  </a>
+                </>
+              )}
+            </nav>
+
+            {/* Statistics */}
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 space-y-3">
+              <div className="text-center pb-2.5 border-b border-white/10">
+                <div className="text-xs text-white/60 mb-1.5 uppercase tracking-wider">
+                  Đang truy cập
+                </div>
+                <div className="text-3xl font-bold text-white">
+                  {analyticsData?.responseData?.activeUsers ?? footerData?.online_visitors ?? 888}
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-white/60 mb-1.5 uppercase tracking-wider">
+                  Tổng lượt xem
+                </div>
+                <div className="text-3xl font-bold text-white">
+                  {formatViews(analyticsData?.responseData?.totalPageViews ?? footerData?.total_views ?? "8888888")}
+                </div>
               </div>
             </div>
-
-            {/* Contact Us */}
-            <div>
-              <h3 className="mb-4 md:mb-6 text-gray-900 text-[12px] md:text-[13px] uppercase tracking-[0.15em] font-semibold">
-                Liên hệ
-              </h3>
-              <ul className="space-y-2 md:space-y-4">
-                <li>
-                  <a href={`tel:${KEPLER_CONFIG.hotlineTel}`} className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">
-                    {KEPLER_CONFIG.hotlineDisplay}
-                  </a>
-                </li>
-                <li className="text-gray-500 text-[13px] md:text-[14px]">{KEPLER_CONFIG.address}</li>
-              </ul>
-            </div>
-
-            {/* Properties */}
-            <div>
-              <h3 className="mb-4 md:mb-6 text-gray-900 text-[12px] md:text-[13px] uppercase tracking-[0.15em] font-semibold">
-                Mua bán
-              </h3>
-              <ul className="space-y-2 md:space-y-4">
-                <li><Link href="/apartments-for-sale" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Căn hộ bán</Link></li>
-                <li><Link href="/apartments-for-sale" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Nhà phố bán</Link></li>
-                <li><Link href="/apartments-for-sale" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Đất nền</Link></li>
-                <li><Link href="/apartments-for-sale" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Biệt thự</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="mb-4 md:mb-6 text-gray-900 text-[12px] md:text-[13px] uppercase tracking-[0.15em] font-semibold">
-                Cho thuê
-              </h3>
-              <ul className="space-y-2 md:space-y-4">
-                <li><Link href="/apartments-for-rent" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Căn hộ cho thuê</Link></li>
-                <li><Link href="/apartments-for-rent" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Nhà cho thuê</Link></li>
-                <li><Link href="/apartments-for-rent" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Văn phòng</Link></li>
-                <li><Link href="/apartments-for-rent" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Shophouse</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="mb-4 md:mb-6 text-gray-900 text-[12px] md:text-[13px] uppercase tracking-[0.15em] font-semibold">
-                Tin tức
-              </h3>
-              <ul className="space-y-2 md:space-y-4">
-                <li><Link href="/news" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Tin thị trường</Link></li>
-                <li><Link href="/news" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Tin dự án</Link></li>
-                <li><Link href="/news" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Tư vấn</Link></li>
-                <li><Link href="/contact" className="text-gray-500 text-[13px] md:text-[14px] hover:text-primary transition-colors">Liên hệ</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="border-t border-gray-200 py-4 md:py-6 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
-            <span className="text-gray-400 text-xs">© 2026 Kepler Property. All Rights Reserved.</span>
-            <div className="flex items-center gap-4 md:gap-6">
-              <Link href="/contact" className="text-gray-400 text-xs hover:text-primary transition-colors">Privacy Policy</Link>
-              <Link href="/contact" className="text-gray-400 text-xs hover:text-primary transition-colors">Terms & Conditions</Link>
-            </div>
           </div>
         </div>
-      </footer>
-
-      {/* Floating hotline */}
-      <a
-        href={`tel:${KEPLER_CONFIG.hotlineTel}`}
-        className="fixed z-50 right-6 bottom-6 w-14 h-14 bg-primary text-white grid place-items-center shadow-xl hover:scale-110 transition-transform rounded-xl"
-        aria-label="Gọi hotline Kepler Property"
-      >
-        <Phone size={22} />
-      </a>
-    </>
+      </div>
+    </footer>
   );
-}
+};
+
+export default Footer;

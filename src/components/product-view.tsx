@@ -47,7 +47,7 @@ export default function ProductView({ id }: { id: string }) {
   if (error) {
     return (
       <div className="max-w-4xl mx-auto p-8">
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
           <h2 className="text-red-800 font-semibold">Error loading product</h2>
           <p className="text-red-600">{(error as Error).message}</p>
         </div>
@@ -65,7 +65,7 @@ export default function ProductView({ id }: { id: string }) {
 
   return (
     <div className="max-w-4xl mx-auto p-8">
-      <div className="bg-white shadow-lg rounded-xl p-6">
+      <div className="bg-white shadow-lg rounded-lg p-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
         
         <div className="flex items-baseline gap-2 mb-6">
@@ -78,10 +78,10 @@ export default function ProductView({ id }: { id: string }) {
         </div>
         
         <div className="mt-8 flex gap-4">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
             Add to Cart
           </button>
-          <button className="border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-semibold transition-colors">
+          <button className="border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-colors">
             Add to Wishlist
           </button>
         </div>

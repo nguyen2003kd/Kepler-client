@@ -56,6 +56,5 @@ export * from './toast'
 export * from './toaster'
 export * from './tooltip'
 export * from './fallbackspinner'
-export * from './select-dropdown'
 
 // End of barrel

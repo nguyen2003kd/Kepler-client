@@ -237,7 +237,7 @@ export function IconPicker({ value, onChange, className }: IconPickerProps) {
       </Button>
 
       {open && (
-        <div className='absolute left-0 top-full z-50 mt-1 w-[400px] rounded-xl border bg-popover text-popover-foreground shadow-md'>
+        <div className='absolute left-0 top-full z-50 mt-1 w-[400px] rounded-md border bg-popover text-popover-foreground shadow-md'>
           <div className='border-b p-3'>
             <Input
               autoFocus
@@ -262,7 +262,7 @@ export function IconPicker({ value, onChange, className }: IconPickerProps) {
                       type='button'
                       onClick={() => handleSelect(icon.kebabName)}
                       className={cn(
-                        'flex h-12 w-full items-center justify-center rounded-xl border border-gray-200 transition-colors hover:bg-gray-100',
+                        'flex h-12 w-full items-center justify-center rounded-md border border-gray-200 transition-colors hover:bg-gray-100',
                         value === icon.kebabName && 'border-primary bg-primary/10'
                       )}
                       title={icon.kebabName}

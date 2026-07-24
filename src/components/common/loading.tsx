@@ -64,7 +64,7 @@ export function PageLoading() {
 // Card skeleton - sử dụng Skeleton component
 export function CardSkeleton() {
   return (
-    <div className="border rounded-xl p-4 space-y-4">
+    <div className="border rounded-lg p-4 space-y-4">
       <Skeleton className="h-48 w-full" />
       <Skeleton className="h-4 w-3/4" />
       <Skeleton className="h-4 w-1/2" />
@@ -130,7 +130,7 @@ export function ListCardSkeleton({ count = 3 }: { count?: number }) {
 // Sidebar skeleton
 export function SidebarNewsSkeleton() {
   return (
-    <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
+    <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
       <div className="bg-[#1e40af] px-4 py-3 rounded-t-lg flex items-center justify-between">
         <Skeleton className="h-5 w-32 bg-blue-300/30" />
         <Skeleton className="h-5 w-5 rounded bg-blue-300/30" />
@@ -187,8 +187,8 @@ export function CategorySkeleton({ count = 6 }: { count?: number }) {
     <>
       {Array.from({ length: count }).map((_, index) => (
         <div key={index} className="pl-2 md:pl-4 basis-auto flex-shrink-0">
-          <div className="w-[110px] h-[100px] sm:w-[130px] sm:h-[115px] md:w-[150px] md:h-[130px] rounded-xl md:rounded-xl border-2 border-gray-200 bg-white p-2.5 md:p-3.5 flex flex-col items-center justify-center">
-            <Skeleton className="w-9 h-9 md:w-11 md:h-11 rounded-xl md:rounded-xl mb-2 md:mb-2.5" />
+          <div className="w-[110px] h-[100px] sm:w-[130px] sm:h-[115px] md:w-[150px] md:h-[130px] rounded-lg md:rounded-xl border-2 border-gray-200 bg-white p-2.5 md:p-3.5 flex flex-col items-center justify-center">
+            <Skeleton className="w-9 h-9 md:w-11 md:h-11 rounded-lg md:rounded-xl mb-2 md:mb-2.5" />
             <Skeleton className="h-3 w-16 mb-1" />
             <Skeleton className="h-3 w-12" />
           </div>
@@ -207,7 +207,7 @@ export function TableSkeleton({
   columns?: number;
 }) {
   return (
-    <div className="border rounded-xl overflow-hidden">
+    <div className="border rounded-lg overflow-hidden">
       <div className="bg-gray-50 p-4 border-b">
         <div
           className="grid gap-4"

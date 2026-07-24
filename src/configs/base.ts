@@ -1,6 +1,6 @@
 const baseConfig = {
   backendDomain: 'http://localhost:3003',
-  frontendDomain: 'https://kepler-vietprodev.vercel.app',
+  frontendDomain: 'http://localhost:3001',
   imgEndpointDomain: 'http://localhost:3003',
 };
 

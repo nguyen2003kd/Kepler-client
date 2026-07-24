@@ -99,7 +99,7 @@ export const FallbackSpinner: React.FC<FallbackSpinnerProps> = ({
   }
 
   return (
-    <div className={cn('inline-flex items-center justify-center p-3 bg-white/80 dark:bg-gray-900/60 rounded-xl', className)} role="status" aria-live="polite">
+    <div className={cn('inline-flex items-center justify-center p-3 bg-white/80 dark:bg-gray-900/60 rounded-lg', className)} role="status" aria-live="polite">
       {spinner}
     </div>
   )

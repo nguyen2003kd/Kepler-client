@@ -33,7 +33,7 @@ export default function ContentFilters({
   onCategoryChange,
 }: ContentFiltersProps) {
   return (
-    <div className="rounded-xl p-4 mb-6">
+    <div className="rounded-lg p-4 mb-6">
       {/* Category Tabs */}
       {categories.length > 0 && (
         <Tabs
