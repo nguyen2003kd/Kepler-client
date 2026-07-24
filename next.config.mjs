@@ -37,14 +37,14 @@ const nextConfig = {
       },
     ],
   },
-   async rewrites() {
-    return [
-      {
-        source: "/admin/:path*",
-        destination: "https://kepler-admin.vercel.app/admin/:path*",
-      },
-    ];
-  },
+  //  async rewrites() {
+  //   return [
+  //     {
+  //       source: "/admin/:path*",
+  //       destination: "https://kepler-admin.vercel.app/admin/:path*",
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;
