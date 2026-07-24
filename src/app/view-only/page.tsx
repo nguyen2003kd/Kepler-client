@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useMemo, useState } from 'react';
 import { Loader2, Maximize, Network, ZoomIn, ZoomOut } from 'lucide-react';
@@ -67,7 +67,7 @@ export default function OrganizationalChartViewOnlyPage() {
       {/* Floating Header */}
       <div className="absolute left-6 top-6 z-20 max-w-md rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-lg backdrop-blur-sm sm:max-w-lg">
         <h1 className="flex items-center text-xl font-bold tracking-tight text-slate-900">
-          <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white shadow-md shadow-blue-200">
+          <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-red-600 text-white shadow-md shadow-red-200">
             <Network className="h-5 w-5" />
           </div>
           {t("orgChartTitle")}
@@ -81,7 +81,7 @@ export default function OrganizationalChartViewOnlyPage() {
       <div className="absolute bottom-6 right-6 z-20 flex flex-col gap-2 rounded-xl border border-slate-200 bg-white/90 p-2 shadow-lg backdrop-blur-sm">
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100 hover:text-blue-600 active:bg-blue-50"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100 hover:text-red-600 active:bg-red-50"
           title={t("zoomIn")}
           onClick={() => setZoom((prev) => Math.min(2, Number((prev + 0.1).toFixed(2))))}
         >
@@ -89,7 +89,7 @@ export default function OrganizationalChartViewOnlyPage() {
         </button>
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100 hover:text-blue-600 active:bg-blue-50"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100 hover:text-red-600 active:bg-red-50"
           title={t("zoomOut")}
           onClick={() => setZoom((prev) => Math.max(0.4, Number((prev - 0.1).toFixed(2))))}
         >
@@ -98,7 +98,7 @@ export default function OrganizationalChartViewOnlyPage() {
         <div className="my-1 h-px w-full bg-slate-200" />
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100 hover:text-blue-600 active:bg-blue-50"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100 hover:text-red-600 active:bg-red-50"
           title={t("reset")}
           onClick={resetZoom}
         >
@@ -126,7 +126,7 @@ export default function OrganizationalChartViewOnlyPage() {
         >
           {orgQuery.isLoading ? (
             <div className="flex h-64 items-center justify-center rounded-2xl bg-white/50 px-8 py-4 backdrop-blur-sm">
-              <Loader2 className="mr-3 h-5 w-5 animate-spin text-blue-600" />
+              <Loader2 className="mr-3 h-5 w-5 animate-spin text-red-600" />
               <span className="font-medium text-slate-600">{t("loadingData")}</span>
             </div>
           ) : orgQuery.isError ? (

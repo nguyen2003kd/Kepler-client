@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,7 @@ export default function BusinessSupportSection() {
     <section className="relative py-12 bg-white overflow-hidden">
       {/* Decorative background effects */}
       <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-100/30 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-blue-100/40 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-red-100/40 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-screen-xl mx-auto px-6 lg:px-12">
         <div className="mx-4 md:mx-8 lg:mx-10">
@@ -50,12 +50,12 @@ export default function BusinessSupportSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 bg-clip-text text-transparent uppercase">
+              <span className="bg-gradient-to-r from-red-300 via-red-300 to-red-300 bg-clip-text text-transparent uppercase">
                 {t("businessSupport")}
               </span>
             </motion.h2>
             <motion.div
-              className="w-90 h-1 rounded-full bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 mx-auto"
+              className="w-90 h-1 rounded-full bg-gradient-to-r from-red-300 via-red-300 to-red-300 mx-auto"
               initial={{ width: 0 }}
               whileInView={{ width: 300 }}
               viewport={{ once: true }}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { usePostApiV10Contact } from "@/api/endpoints/contact";
 import { Contact } from "@/api/models/contact";
@@ -166,13 +166,13 @@ export default function ContactRegistrationSection() {
         <Card className="shadow-xl overflow-hidden border-0 rounded-xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             <div className="p-8 lg:p-12 bg-white">
-              <div className="mb-8 border-b border-blue-100 pb-6">
+              <div className="mb-8 border-b border-red-100 pb-6">
                 <div className="flex gap-3 mb-2">
-                  <div className="px-3.5 py-2.5 bg-blue-100 rounded-lg flex items-center">
-                    <Mail className="w-7 h-7 text-blue-600" />
+                  <div className="px-3.5 py-2.5 bg-red-100 rounded-lg flex items-center">
+                    <Mail className="w-7 h-7 text-red-600" />
                   </div>
                   <div>
-                    <h2 className="text-3xl font-bold text-blue-600 mb-1">
+                    <h2 className="text-3xl font-bold text-red-600 mb-1">
                       {t("title")}
                     </h2>
                     <p className="text-sm text-gray-600">{t("subtitle")}</p>
@@ -197,7 +197,7 @@ export default function ContactRegistrationSection() {
                     placeholder={t("namePlaceholder")}
                     value={formData.name}
                     onChange={handleChange}
-                    className="h-12 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400"
+                    className="h-12 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all hover:border-gray-400"
                   />
                 </div>
 
@@ -217,7 +217,7 @@ export default function ContactRegistrationSection() {
                     placeholder={t("emailPlaceholder")}
                     value={formData.email}
                     onChange={handleChange}
-                    className="h-12 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400"
+                    className="h-12 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all hover:border-gray-400"
                   />
                 </div>
 
@@ -237,7 +237,7 @@ export default function ContactRegistrationSection() {
                     placeholder={t("phonePlaceholder")}
                     value={formData.phone_number}
                     onChange={handleChange}
-                    className="h-12 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400"
+                    className="h-12 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all hover:border-gray-400"
                   />
                 </div>
 
@@ -257,7 +257,7 @@ export default function ContactRegistrationSection() {
                     value={formData.content}
                     onChange={handleChange}
                     rows={4}
-                    className="resize-none border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:border-gray-400"
+                    className="resize-none border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all hover:border-gray-400"
                   />
                 </div>
 
@@ -265,7 +265,7 @@ export default function ContactRegistrationSection() {
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 rounded-lg h-12 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    className="bg-red-600 hover:bg-red-700 text-white px-8 rounded-lg h-12 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
                     {isPending ? t("sending") : t("submit")}
                   </Button>
@@ -276,13 +276,13 @@ export default function ContactRegistrationSection() {
             {/* Address List */}
             <div className="bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] p-8 lg:p-10 relative overflow-hidden">
               {/* Decorative Elements */}
-              <div className="absolute top-0 right-0 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl"></div>
+              <div className="absolute top-0 right-0 w-72 h-72 bg-red-400/10 rounded-full blur-3xl"></div>
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
 
               <div className="relative z-10">
                 <div className="mb-6">
                   <div className="flex gap-3">
-                    <div className="px-3.5 py-2.5 bg-blue-500/20 rounded-lg flex items-center">
+                    <div className="px-3.5 py-2.5 bg-red-500/20 rounded-lg flex items-center">
                       <MapPin className="w-7 h-7 text-white" />
                     </div>
                     <div>
@@ -301,7 +301,7 @@ export default function ContactRegistrationSection() {
                   {addresses[0] && (
                     <div className="group bg-white/5 backdrop-blur-sm hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg p-4 transition-all duration-300">
                       <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-blue-400" />
+                        <MapPin className="w-4 h-4 text-red-400" />
                         {addresses[0].name}
                       </h4>
                       <div className="space-y-1.5 pl-3 text-xs">
@@ -326,7 +326,7 @@ export default function ContactRegistrationSection() {
                             <span className="text-gray-400">{t("hotline")}: </span>
                             <a
                               href={`tel:${addresses[0].hotline.replace(/[^\d]/g, "")}`}
-                              className="text-blue-200 hover:text-white transition-colors font-medium hover:underline"
+                              className="text-red-200 hover:text-white transition-colors font-medium hover:underline"
                             >
                               {addresses[0].hotline}
                             </a>
@@ -355,7 +355,7 @@ export default function ContactRegistrationSection() {
                         className="group bg-white/5 backdrop-blur-sm hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg p-4 transition-all duration-300"
                       >
                         <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-blue-400" />
+                          <MapPin className="w-4 h-4 text-red-400" />
                           {addr.name}
                         </h4>
                         <div className="space-y-1.5 pl-3 text-xs">
@@ -380,7 +380,7 @@ export default function ContactRegistrationSection() {
                               <span className="text-gray-400">{t("hotline")}: </span>
                               <a
                                 href={`tel:${addr.hotline.replace(/[^\d]/g, "")}`}
-                                className="text-blue-200 hover:text-white transition-colors font-medium hover:underline"
+                                className="text-red-200 hover:text-white transition-colors font-medium hover:underline"
                               >
                                 {addr.hotline}
                               </a>
@@ -406,7 +406,7 @@ export default function ContactRegistrationSection() {
                   {addresses[5] && (
                     <div className="group bg-white/5 backdrop-blur-sm hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg p-4 transition-all duration-300">
                       <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-blue-400" />
+                        <MapPin className="w-4 h-4 text-red-400" />
                         {addresses[5].name}
                       </h4>
                       <div className="space-y-1.5 pl-3 text-xs">
@@ -431,7 +431,7 @@ export default function ContactRegistrationSection() {
                             <span className="text-gray-400">{t("hotline")}: </span>
                             <a
                               href={`tel:${addresses[5].hotline.replace(/[^\d]/g, "")}`}
-                              className="text-blue-200 hover:text-white transition-colors font-medium hover:underline"
+                              className="text-red-200 hover:text-white transition-colors font-medium hover:underline"
                             >
                               {addresses[5].hotline}
                             </a>

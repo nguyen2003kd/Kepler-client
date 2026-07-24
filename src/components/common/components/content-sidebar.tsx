@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+﻿import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
@@ -52,9 +52,9 @@ export default function ContentSidebar({
                   <div key={item.id || index}>
                     <Link
                       href={href}
-                      className="block py-4 hover:text-blue-300 transition-colors group"
+                      className="block py-4 hover:text-red-300 transition-colors group"
                     >
-                      <p className="text-sm font-medium group-hover:text-blue-300 leading-relaxed">
+                      <p className="text-sm font-medium group-hover:text-red-300 leading-relaxed">
                         {displayTitle}
                       </p>
                     </Link>
@@ -76,9 +76,9 @@ export default function ContentSidebar({
                 <div key={item.id || index}>
                   <Link
                     href={href}
-                    className="block py-4 hover:text-blue-300 transition-colors group"
+                    className="block py-4 hover:text-red-300 transition-colors group"
                   >
-                    <p className="text-sm font-medium group-hover:text-blue-300 leading-relaxed">
+                    <p className="text-sm font-medium group-hover:text-red-300 leading-relaxed">
                       {displayTitle}
                     </p>
                   </Link>

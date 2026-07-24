@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect } from "react";
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
@@ -249,7 +249,7 @@ export default function VideoList() {
                       <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors cursor-pointer">
                         <div className="w-14 h-14 rounded-full bg-white/0 group-hover:bg-white flex items-center justify-center shadow-lg scale-0 group-hover:scale-100 transition-all duration-300">
                           <Play
-                            className="w-6 h-6 text-blue-600 ml-1"
+                            className="w-6 h-6 text-red-600 ml-1"
                             fill="currentColor"
                           />
                         </div>

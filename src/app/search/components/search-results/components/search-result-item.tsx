@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { getThumbnailSrc } from "@/lib/responsive-image";
 import { format } from "date-fns";
@@ -43,7 +43,7 @@ export default function SearchResultItem({ result, t }: SearchResultItemProps) {
         {/* Content */}
         <div className="flex-1 py-6 pr-6">
           {/* Title */}
-          <h2 className="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
+          <h2 className="text-2xl font-bold text-gray-900 mb-3 hover:text-red-600 transition-colors">
             {result.title}
           </h2>
 

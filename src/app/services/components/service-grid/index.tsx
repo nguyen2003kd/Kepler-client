@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10Category } from "@/api/endpoints/category";
 import { useGetApiV10Post } from "@/api/endpoints/post";
@@ -137,7 +137,7 @@ export default function ServiceGrid() {
           {/* <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
             Dịch Vụ & Giải Pháp
           </h1>
-          <p className="text-blue-100 text-lg max-w-3xl mx-auto">
+          <p className="text-red-100 text-lg max-w-3xl mx-auto">
             Cập nhật những thông tin mới nhất về tiêu chuẩn chất lượng, hoạt
             động nổi bật và các sự kiện nổi bật của CASE-SMEQ.
           </p> */}

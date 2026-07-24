@@ -1,4 +1,4 @@
-import { CategorySkeleton } from "@/components/common";
+﻿import { CategorySkeleton } from "@/components/common";
 import { DynamicIcon } from "@/components/shared/lucide-icon-picker";
 import {
   Carousel,
@@ -69,26 +69,26 @@ export default function CategoryTab({
               }}
               className={`group flex flex-col items-center justify-center p-2.5 md:p-3.5 rounded-lg md:rounded-xl border-2 transition-all duration-300 w-[110px] h-[100px] sm:w-[130px] sm:h-[115px] md:w-[150px] md:h-[130px] ${
                 !selectedCategory
-                  ? "bg-gradient-to-br from-blue-100 to-blue-200 border-blue-500 shadow-xl  "
-                  : "bg-white border-gray-200 hover:border-blue-300 hover:shadow-md"
+                  ? "bg-gradient-to-br from-red-100 to-red-200 border-red-500 shadow-xl  "
+                  : "bg-white border-gray-200 hover:border-red-300 hover:shadow-md"
               }`}
             >
               <div
                 className={`w-9 h-9 md:w-11 md:h-11 rounded-lg md:rounded-xl flex items-center justify-center mb-2 md:mb-2.5 ${
                   !selectedCategory
-                    ? "bg-blue-600"
-                    : "bg-blue-100 group-hover:bg-blue-200"
+                    ? "bg-red-600"
+                    : "bg-red-100 group-hover:bg-red-200"
                 }`}
               >
                 <LayoutGrid
                   className={`w-4.5 h-4.5 md:w-5.5 md:h-5.5 ${
-                    !selectedCategory ? "text-white" : "text-blue-600"
+                    !selectedCategory ? "text-white" : "text-red-600"
                   }`}
                 />
               </div>
               <span
                 className={`text-[11px] md:text-[13px] font-semibold text-center ${
-                  !selectedCategory ? "text-blue-600" : "text-gray-700"
+                  !selectedCategory ? "text-red-600" : "text-gray-700"
                 }`}
               >
                 {t("allCategories")}
@@ -115,16 +115,16 @@ export default function CategoryTab({
                     }}
                     className={`group flex flex-col items-center justify-center p-2.5 md:p-3.5 rounded-lg md:rounded-xl border-2 transition-all duration-300 w-[110px] h-[100px] sm:w-[130px] sm:h-[115px] md:w-[150px] md:h-[130px] ${
                       selectedCategory === category.id
-                        ? "bg-gradient-to-br from-blue-100 to-blue-200 border-blue-500 shadow-xl"
-                        : "bg-white border-gray-200 hover:border-blue-300 hover:shadow-md"
+                        ? "bg-gradient-to-br from-red-100 to-red-200 border-red-500 shadow-xl"
+                        : "bg-white border-gray-200 hover:border-red-300 hover:shadow-md"
                     }`}
                     title={category.name}
                   >
                     <div
                       className={`w-9 h-9 md:w-11 md:h-11 rounded-lg md:rounded-xl flex items-center justify-center mb-2 md:mb-2.5 ${
                         selectedCategory === category.id
-                          ? "bg-blue-600"
-                          : "bg-blue-100 group-hover:bg-blue-200"
+                          ? "bg-red-600"
+                          : "bg-red-100 group-hover:bg-red-200"
                       }`}
                     >
                       {category.icon_url ? (
@@ -133,7 +133,7 @@ export default function CategoryTab({
                           className={`w-4.5 h-4.5 md:w-5.5 md:h-5.5 ${
                             selectedCategory === category.id
                               ? "text-white"
-                              : "text-blue-600"
+                              : "text-red-600"
                           }`}
                         />
                       ) : (
@@ -144,7 +144,7 @@ export default function CategoryTab({
                               className={`w-4.5 h-4.5 md:w-5.5 md:h-5.5 ${
                                 selectedCategory === category.id
                                   ? "text-white"
-                                  : "text-blue-600"
+                                  : "text-red-600"
                               }`}
                             />
                           );
@@ -154,7 +154,7 @@ export default function CategoryTab({
                     <span
                       className={`text-[11px] md:text-[13px] font-semibold text-center leading-tight ${
                         selectedCategory === category.id
-                          ? "text-blue-600"
+                          ? "text-red-600"
                           : "text-gray-700"
                       }`}
                     >

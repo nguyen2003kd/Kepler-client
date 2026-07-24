@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+﻿import React, { memo } from 'react';
 import { OrgNode } from '@/types/organization';
 import { resolveAvatarSrc } from '@/lib/organization';
 
@@ -76,15 +76,15 @@ const OrgTreeNode = memo(function OrgTreeNode({
       )}
 
       {/* Node card */}
-      <div className="group relative z-10 w-72 rounded-xl border border-slate-200 bg-white p-0 text-center shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.15)] hover:ring-2 hover:ring-blue-100">
-        <div className="h-1.5 w-full rounded-t-xl bg-gradient-to-r from-blue-500 to-indigo-600" />
+      <div className="group relative z-10 w-72 rounded-xl border border-slate-200 bg-white p-0 text-center shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.15)] hover:ring-2 hover:ring-red-100">
+        <div className="h-1.5 w-full rounded-t-xl bg-gradient-to-r from-red-500 to-indigo-600" />
 
         <div className="px-5 pb-5 pt-6">
           <div className="mb-4 flex justify-center">
             <div className="relative">
               <Avatar fullName={node.full_name} avatarUrl={node.avatar_url} size="lg" />
               {hasChildren && (
-                <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-blue-600 text-[10px] font-bold text-white shadow-sm">
+                <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-red-600 text-[10px] font-bold text-white shadow-sm">
                   {node.children.length}
                 </div>
               )}
@@ -96,7 +96,7 @@ const OrgTreeNode = memo(function OrgTreeNode({
           </h3>
 
           <div className="mb-3 flex justify-center">
-            <span className="line-clamp-1 rounded-md bg-blue-50 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-blue-700">
+            <span className="line-clamp-1 rounded-md bg-red-50 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-red-700">
               {node.position}
             </span>
           </div>

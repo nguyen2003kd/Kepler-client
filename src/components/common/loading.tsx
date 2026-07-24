@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+﻿import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
 interface LoadingSpinnerProps {
@@ -19,7 +19,7 @@ export function LoadingSpinner({
   return (
     <div
       className={cn(
-        "animate-spin rounded-full border-2 border-gray-300 border-t-blue-600",
+        "animate-spin rounded-full border-2 border-gray-300 border-t-red-600",
         sizeClasses[size],
         className
       )}
@@ -132,8 +132,8 @@ export function SidebarNewsSkeleton() {
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
       <div className="bg-[#1e40af] px-4 py-3 rounded-t-lg flex items-center justify-between">
-        <Skeleton className="h-5 w-32 bg-blue-300/30" />
-        <Skeleton className="h-5 w-5 rounded bg-blue-300/30" />
+        <Skeleton className="h-5 w-32 bg-red-300/30" />
+        <Skeleton className="h-5 w-5 rounded bg-red-300/30" />
       </div>
       <div>
         {Array.from({ length: 5 }).map((_, index) => (

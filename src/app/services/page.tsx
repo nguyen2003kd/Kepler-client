@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Loading } from "@/components/common/loading";
 import { Suspense } from "react";
@@ -114,7 +114,7 @@ const services = [
 ];
 
 const colorClasses = {
-  blue: "bg-blue-100 text-blue-600",
+  blue: "bg-red-100 text-red-600",
   green: "bg-green-100 text-green-600",
   purple: "bg-purple-100 text-purple-600",
   orange: "bg-orange-100 text-orange-600",
@@ -124,7 +124,7 @@ const colorClasses = {
 
 OLD PAGE STRUCTURE:
 <div className="bg-white">
-  <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">...</section>
+  <section className="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">...</section>
   <section className="py-16">...</section>
   <section className="py-16 bg-gray-50">...</section>
   <section className="py-16">...</section>

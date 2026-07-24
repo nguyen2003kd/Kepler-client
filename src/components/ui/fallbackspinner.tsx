@@ -3,9 +3,9 @@ import { cn } from '@/lib/utils'
 
 const CaseSmqProSpinner: React.FC<{ size?: number }> = ({ size = 700 }) => {
   const colors = {
-    text: '#342E86',
-    swooshStart: '#1ABCF0',
-    swooshEnd: '#005f87'
+    text: '#DC2626',
+    swooshStart: '#DC2626',
+    swooshEnd: '#B91C1C'
   }
 
   const aspectRatio = 400 / 220

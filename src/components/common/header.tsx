@@ -570,7 +570,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         {/* Top Header - ẩn khi cuộn xuống nhé*/}
         <div
           className={cn(
-            "bg-[#283B80] text-white overflow-hidden",
+            "bg-[#DC2626] text-white overflow-hidden",
             isScrolled
               ? "h-0 transition-all duration-500 ease-in-out"
               : "h-12 transition-all duration-300 ease-in-out",
@@ -581,7 +581,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
               {/* Left side  */}
               <a
                 href="tel:18001105"
-                className="flex md:hidden items-center gap-1.5 text-[13px] hover:text-blue-200 transition-colors"
+                className="flex md:hidden items-center gap-1.5 text-[13px] hover:text-red-200 transition-colors"
               >
                 <Headphones className="w-3.5 h-3.5" />
                 <span className="font-semibold tracking-wide">
@@ -591,7 +591,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
               <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs lg:text-sm">
                 <Link
                   href="/contact"
-                  className="hover:text-blue-200 transition-colors flex items-center gap-1.5 lg:gap-2"
+                  className="hover:text-red-200 transition-colors flex items-center gap-1.5 lg:gap-2"
                 >
                   <Phone className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   <span>{t("contact")}</span>
@@ -599,7 +599,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 <div className="h-3 w-px bg-white/30"></div>
                 <Link
                   href="/careers"
-                  className="hover:text-blue-200 transition-colors flex items-center gap-1.5 lg:gap-2"
+                  className="hover:text-red-200 transition-colors flex items-center gap-1.5 lg:gap-2"
                 >
                   <Briefcase className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   <span>{t("careers")}</span>
@@ -607,7 +607,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 <div className="h-3 w-px bg-white/30"></div>
                 <Link
                   href="/work-schedule"
-                  className="hover:text-blue-200 transition-colors flex items-center gap-1.5 lg:gap-2"
+                  className="hover:text-red-200 transition-colors flex items-center gap-1.5 lg:gap-2"
                 >
                   <Calendar className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   <span>{t("workSchedule")}</span>
@@ -615,7 +615,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 <div className="h-3 w-px bg-white/30"></div>
                 <a
                   href="tel:18001105"
-                  className="flex items-center gap-1.5 lg:gap-2 hover:text-blue-200 transition-colors"
+                  className="flex items-center gap-1.5 lg:gap-2 hover:text-red-200 transition-colors"
                 >
                   <Headphones className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   <span className="font-semibold">{t("hotline")}: 1800 1105</span>
@@ -636,7 +636,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                     />
                     <button
                       type="submit"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all shadow-sm"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all shadow-sm"
                     >
                       <Search className="w-3.5 h-3.5 text-white" />
                     </button>
@@ -770,10 +770,10 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 {showLeftArrow && (
                   <button
                     onClick={() => scrollMenu("left")}
-                    className="absolute left-0 z-30 p-2 bg-gradient-to-r from-white via-white to-transparent hover:from-blue-50 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                    className="absolute left-0 z-30 p-2 bg-gradient-to-r from-white via-white to-transparent hover:from-red-50 transition-all duration-200 opacity-0 group-hover:opacity-100"
                     aria-label="Scroll left"
                   >
-                    <ChevronDown className="w-5 h-5 text-blue-600 rotate-90" />
+                    <ChevronDown className="w-5 h-5 text-red-600 rotate-90" />
                   </button>
                 )}
 
@@ -782,7 +782,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   className={cn(
                     "flex items-center justify-start gap-0.5 transition-all duration-500 ease-out overflow-x-auto scrollbar-hide py-2 px-4",
                     "select-none scroll-smooth",
-                    "hover:shadow-inner hover:bg-gradient-to-r hover:from-blue-50/30 hover:via-transparent hover:to-blue-50/30",
+                    "hover:shadow-inner hover:bg-gradient-to-r hover:from-red-50/30 hover:via-transparent hover:to-red-50/30",
                     isDragging ? "cursor-grabbing" : "cursor-grab",
                   )}
                   style={{
@@ -804,10 +804,10 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 {showRightArrow && (
                   <button
                     onClick={() => scrollMenu("right")}
-                    className="absolute right-0 z-30 p-2 bg-gradient-to-l from-white via-white to-transparent hover:from-blue-50 transition-all duration-200 opacity-0 group-hover:opacity-100"
+                    className="absolute right-0 z-30 p-2 bg-gradient-to-l from-white via-white to-transparent hover:from-red-50 transition-all duration-200 opacity-0 group-hover:opacity-100"
                     aria-label="Scroll right"
                   >
-                    <ChevronDown className="w-5 h-5 text-blue-600 -rotate-90" />
+                    <ChevronDown className="w-5 h-5 text-red-600 -rotate-90" />
                   </button>
                 )}
               </div>
@@ -865,12 +865,12 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 <Link
                   key={item.link}
                   href={item.link}
-                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md text-base font-medium"
+                  className="block px-3 py-2 text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md text-base font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
                   {item.badge && (
-                    <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-600">
+                    <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-600">
                       {item.badge}
                     </span>
                   )}
@@ -897,7 +897,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                     </div>
                     <Link
                       href="/quotation"
-                      className="flex items-center justify-center gap-2 px-3 py-2.5 text-white bg-blue-600 rounded-lg font-semibold shadow-md hover:bg-blue-700 transition-colors"
+                      className="flex items-center justify-center gap-2 px-3 py-2.5 text-white bg-red-600 rounded-lg font-semibold shadow-md hover:bg-red-700 transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <FileText className="w-4 h-4" />
@@ -918,14 +918,14 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   <>
                     <Link
                       href="/login"
-                      className="block px-3 py-2 text-center text-blue-600 border border-blue-600 rounded-md font-medium"
+                      className="block px-3 py-2 text-center text-red-600 border border-red-600 rounded-md font-medium"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {t("login")}
                     </Link>
                     <Link
                       href="/register"
-                      className="block px-3 py-2 text-center text-white bg-blue-600 rounded-md font-medium"
+                      className="block px-3 py-2 text-center text-white bg-red-600 rounded-md font-medium"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {t("register")}

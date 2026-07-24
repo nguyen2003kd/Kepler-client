@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10Category } from "@/api/endpoints/category";
 import { useGetApiV10Post } from "@/api/endpoints/post";
@@ -199,7 +199,7 @@ export default function NewsSection() {
   }, [latestNewsData]);
 
   return (
-    <section className="bg-gradient-to-tl from-cyan-50 via-white to-gray-50/30 py-16 pt-20">
+    <section className="bg-gradient-to-tl from-red-50 via-white to-gray-50/30 py-16 pt-20">
       <div className="max-w-screen-xl mx-auto h-auto px-6 lg:px-12">
         <div className="mx-4 md:mx-8 lg:mx-10">
           <motion.h2
@@ -209,12 +209,12 @@ export default function NewsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-300 via-red-300 to-red-300 bg-clip-text text-transparent">
               {t("news")}
             </span>
           </motion.h2>
           <motion.div
-            className="w-28 h-1 rounded-full bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 mx-auto"
+            className="w-28 h-1 rounded-full bg-gradient-to-r from-red-300 via-red-300 to-red-300 mx-auto"
             initial={{ width: 0 }}
             whileInView={{ width: 112 }}
             viewport={{ once: true }}
@@ -242,7 +242,7 @@ export default function NewsSection() {
                         <TabsTrigger
                           key={tab.value}
                           value={tab.value}
-                          className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-blue-600 rounded-none px-0 pb-4 text-gray-600 data-[state=active]:text-gray-900 font-medium"
+                          className="bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-red-600 rounded-none px-0 pb-4 text-gray-600 data-[state=active]:text-gray-900 font-medium"
                         >
                           {tab.label}
                         </TabsTrigger>

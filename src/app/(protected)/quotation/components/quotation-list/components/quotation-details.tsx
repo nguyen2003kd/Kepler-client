@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Badge } from "@/components/ui/badge";
 import {
@@ -107,8 +107,8 @@ export default function QuotationDetails({
             <div className="flex-1 space-y-3 overflow-y-auto">
               {/* Customer Information */}
               <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-                <div className="flex items-center gap-2 bg-blue-50 px-4 py-2.5 border-b border-gray-200">
-                  <div className="bg-blue-600 p-1.5 rounded">
+                <div className="flex items-center gap-2 bg-red-50 px-4 py-2.5 border-b border-gray-200">
+                  <div className="bg-red-600 p-1.5 rounded">
                     <User className="w-4 h-4 text-white" />
                   </div>
                   <h3 className="font-bold text-gray-900 uppercase text-xs tracking-wide">
@@ -183,13 +183,13 @@ export default function QuotationDetails({
                       </p>
                     </div>
                   </div>
-                  <div className="bg-blue-50 p-3 rounded-lg">
+                  <div className="bg-red-50 p-3 rounded-lg">
                     <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">
                       {t("receiveMethod")}
                     </p>
                     <div className="flex items-center gap-1.5">
-                      <Truck className="w-3.5 h-3.5 text-blue-600" />
-                      <p className="text-xs font-semibold text-blue-600">
+                      <Truck className="w-3.5 h-3.5 text-red-600" />
+                      <p className="text-xs font-semibold text-red-600">
                         {quotation.receive_method?.name || t("notAvailable")}
                       </p>
                     </div>
@@ -218,7 +218,7 @@ export default function QuotationDetails({
                         {t("attachedFiles")} ({quotation.files.length})
                       </h3>
                     </div>
-                    <button className="text-xs text-blue-600 hover:text-blue-800 font-medium">
+                    <button className="text-xs text-red-600 hover:text-red-800 font-medium">
                       {t("downloadAll")}
                     </button>
                   </div>
@@ -229,7 +229,7 @@ export default function QuotationDetails({
                           key={index}
                           className="flex items-center gap-2 p-2.5 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                         >
-                          <div className="bg-blue-600 p-1.5 rounded">
+                          <div className="bg-red-600 p-1.5 rounded">
                             <FileText className="w-4 h-4 text-white" />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -242,7 +242,7 @@ export default function QuotationDetails({
                           </div>
                           <button
                             onClick={() => handleFileView(file.path)}
-                            className="text-gray-400 hover:text-blue-600 transition-colors"
+                            className="text-gray-400 hover:text-red-600 transition-colors"
                           >
                             <Download className="w-4 h-4" />
                           </button>

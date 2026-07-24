@@ -1,4 +1,4 @@
-import { constructMetadata } from "@/lib/seo";
+﻿import { constructMetadata } from "@/lib/seo";
 import HeroBanner from "./_views/banner-section";
 import BusinessSupportSection from "./_views/business-support-section";
 import DocumentsSection from "./_views/documents-section";
@@ -22,25 +22,25 @@ export default function Home() {
       <DocumentsSection />
       <BusinessSupportSection />
 
-      {/* <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      {/* <section className="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Chào mừng đến với SMEQ
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100">
+            <p className="text-xl md:text-2xl mb-8 text-red-100">
               Nền tảng hỗ trợ doanh nghiệp vừa và nhỏ
             </p>
             <div className="flex gap-4 justify-center">
               <a
                 href="/register"
-                className="px-8 py-3 bg-white text-blue-600 rounded-md font-medium hover:bg-gray-100 transition-colors"
+                className="px-8 py-3 bg-white text-red-600 rounded-md font-medium hover:bg-gray-100 transition-colors"
               >
                 Đăng ký ngay
               </a>
               <a
                 href="/about"
-                className="px-8 py-3 border-2 border-white text-white rounded-md font-medium hover:bg-white hover:text-blue-600 transition-colors"
+                className="px-8 py-3 border-2 border-white text-white rounded-md font-medium hover:bg-white hover:text-red-600 transition-colors"
               >
                 Tìm hiểu thêm
               </a>
@@ -57,9 +57,9 @@ export default function Home() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
                 <svg
-                  className="w-6 h-6 text-blue-600"
+                  className="w-6 h-6 text-red-600"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -142,7 +142,7 @@ export default function Home() {
           </p>
           <a
             href="/register"
-            className="inline-block px-8 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
+            className="inline-block px-8 py-3 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition-colors"
           >
             Đăng ký miễn phí
           </a>

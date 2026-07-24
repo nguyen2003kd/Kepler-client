@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   useGetApiV10Post,
@@ -217,7 +217,7 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
             <div className="lg:col-span-3">
               <article className="bg-white rounded-lg shadow-sm p-8">
                 <div className="mb-4">
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-700 hover:bg-blue-200">
+                  <Badge variant="secondary" className="bg-red-100 text-red-700 hover:bg-red-200">
                     {t("onlineRegistrationBadge")}
                   </Badge>
                 </div>
@@ -251,25 +251,25 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
                 {/* Share Buttons */}
                 <div className="flex items-center gap-3 mb-6 pb-6 border-b">
                   <span className="text-gray-600 text-sm font-medium">{t("share")}</span>
-                  <Button variant="outline" size="icon" className="hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300 transition-colors" onClick={() => handleShare("facebook")}>
+                  <Button variant="outline" size="icon" className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors" onClick={() => handleShare("facebook")}>
                     <Facebook className="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="icon" className="hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300 transition-colors" onClick={() => handleShare("linkedin")}>
+                  <Button variant="outline" size="icon" className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors" onClick={() => handleShare("linkedin")}>
                     <Linkedin className="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="icon" className="hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300 transition-colors" onClick={() => handleShare("twitter")}>
+                  <Button variant="outline" size="icon" className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors" onClick={() => handleShare("twitter")}>
                     <Twitter className="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="icon" className="hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300 transition-colors" onClick={() => handleShare("copy")}>
+                  <Button variant="outline" size="icon" className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors" onClick={() => handleShare("copy")}>
                     <LinkIcon className="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="icon" className="hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300 transition-colors" onClick={() => window.print()}>
+                  <Button variant="outline" size="icon" className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors" onClick={() => window.print()}>
                     <Printer className="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="icon" className="hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300 transition-colors" onClick={() => handleShare("email")}>
+                  <Button variant="outline" size="icon" className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors" onClick={() => handleShare("email")}>
                     <Mail className="w-4 h-4" />
                   </Button>
-                  <Button variant="outline" size="icon" className="hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300 transition-colors" onClick={() => setQrOpen(true)}>
+                  <Button variant="outline" size="icon" className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors" onClick={() => setQrOpen(true)}>
                     <QrCode className="w-4 h-4" />
                   </Button>
                 </div>
@@ -324,7 +324,7 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
 
                 {/* Summary */}
                 {currentPost.summary && (
-                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8">
+                  <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
                     <div className="tiptap prose max-w-none text-justify text-gray-700 italic leading-relaxed">
                       {isClient ? parse(currentPost.summary) : null}
                     </div>
@@ -379,11 +379,11 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
                 <Separator className="my-6" />
 
                 {/* <div className="flex justify-between items-center">
-                  <Button variant="outline" className="text-gray-700 hover:text-blue-600 hover:border-blue-300">
+                  <Button variant="outline" className="text-gray-700 hover:text-red-600 hover:border-red-300">
                     <ChevronLeft className="w-4 h-4 mr-2" />
                     Bài trước
                   </Button>
-                  <Button variant="outline" className="text-gray-700 hover:text-blue-600 hover:border-blue-300">
+                  <Button variant="outline" className="text-gray-700 hover:text-red-600 hover:border-red-300">
                     Bài sau
                     <ChevronRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -404,7 +404,7 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
                       backgroundColor="white"
                       textColor="#1e293b"
                       descriptionColor="#64748b"
-                      linkColor="#3b82f6"
+                      linkColor="#DC2626"
                     />
                   ))}
                 </div>
@@ -424,7 +424,7 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
                       <a
                         key={news.id}
                         href={news.link}
-                        className={`flex gap-4 group hover:bg-blue-50 px-4 py-3 transition-colors ${
+                        className={`flex gap-4 group hover:bg-red-50 px-4 py-3 transition-colors ${
                           index !== latestNews.slice(0, 10).length - 1 ? "border-b border-gray-100" : ""
                         }`}
                       >
@@ -432,7 +432,7 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
                           {String(index + 1).padStart(2, "0")}
                         </div>
                         <div className="flex-1 space-y-1.5">
-                          <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
+                          <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-red-600 transition-colors leading-snug">
                             {news.title}
                           </h4>
                         </div>
@@ -440,7 +440,7 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
                     ))}
                   </div>
                   <div className="px-4 py-2.5 bg-gray-50 text-center border-t border-gray-100">
-                    <a href="/news" className="text-blue-600 font-semibold text-xs hover:text-blue-700 inline-flex items-center gap-1">
+                    <a href="/news" className="text-red-600 font-semibold text-xs hover:text-red-700 inline-flex items-center gap-1">
                       {t("viewAll")}
                       <ArrowRight className="w-3.5 h-3.5" />
                     </a>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import { SidebarSkeleton } from "@/components/common/loading";
@@ -78,7 +78,7 @@ export default function RelatedSidebar({
               <a
                 key={news.id}
                 href={postUrl}
-                className={`flex gap-4 group hover:bg-blue-50 px-4 py-3 transition-colors ${
+                className={`flex gap-4 group hover:bg-red-50 px-4 py-3 transition-colors ${
                   index !== relatedNews.length - 1
                     ? "border-b border-gray-100"
                     : ""
@@ -92,7 +92,7 @@ export default function RelatedSidebar({
                 {/* Content */}
                 <div className="flex-1 space-y-1.5">
                   {/* Title */}
-                  <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
+                  <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-red-600 transition-colors leading-snug">
                     {news.title}
                   </h4>
 

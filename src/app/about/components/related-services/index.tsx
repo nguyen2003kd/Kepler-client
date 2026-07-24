@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import ServiceCard from "@/components/common/components/service-card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -65,12 +65,12 @@ export default function RelatedServices() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-300 via-red-300 to-red-300 bg-clip-text text-transparent">
               {t("relatedServices")}
             </span>
           </motion.h2>
           <motion.div
-            className="w-28 h-1 mb-4 rounded-full bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 mx-auto"
+            className="w-28 h-1 mb-4 rounded-full bg-gradient-to-r from-red-300 via-red-300 to-red-300 mx-auto"
             initial={{ width: 0 }}
             whileInView={{ width: 112 }}
             viewport={{ once: true }}

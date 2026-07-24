@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -181,7 +181,7 @@ export default function LoginPage() {
                             placeholder={t("emailPlaceholder", {
                               defaultValue: "tn10@gmail.com",
                             })}
-                            className="h-12 rounded-lg border-gray-300 bg-white focus:border-blue-500 focus:ring-blue-500 text-base"
+                            className="h-12 rounded-lg border-gray-300 bg-white focus:border-red-500 focus:ring-red-500 text-base"
                             {...field}
                           />
                         </FormControl>
@@ -208,7 +208,7 @@ export default function LoginPage() {
                               placeholder={t("passwordPlaceholder", {
                                 defaultValue: "Nhập nội dung",
                               })}
-                              className="h-12 rounded-lg bg-white pr-12 text-base border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                              className="h-12 rounded-lg bg-white pr-12 text-base border-gray-300 focus:border-red-500 focus:ring-red-500"
                               {...field}
                             />
                             <button

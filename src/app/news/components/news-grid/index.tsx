@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10Category } from "@/api/endpoints/category";
 import { useGetApiV10Post } from "@/api/endpoints/post";
@@ -130,7 +130,7 @@ export default function NewsGrid() {
           {/* <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
             Cập nhật thông tin mới nhất
           </h1>
-          <p className="text-blue-100 text-lg max-w-3xl mx-auto">
+          <p className="text-red-100 text-lg max-w-3xl mx-auto">
             Theo dõi các hoạt động, sự kiện nổi bật và các bài viết chuyên ngành
             từ CASE-SMEQ.
           </p> */}

@@ -1,4 +1,4 @@
-import { Category } from "@/api/models/category";
+﻿import { Category } from "@/api/models/category";
 import DatePicker from "@/components/common/components/date-picker";
 import { Card, CardContent } from "@/components/ui/card";
 import { LayoutGrid } from "lucide-react";
@@ -32,8 +32,8 @@ export default function ServiceFilters({
       <CardContent className="px-4 md:px-6 pt-4 md:pt-6 pb-2 md:pb-3">
         <div className="flex items-center justify-between gap-3 md:gap-6 mb-4 md:mb-6">
           <div className="flex items-center gap-2 md:gap-3 min-w-0">
-            <div className="bg-blue-100 p-2 rounded-full flex-shrink-0">
-              <LayoutGrid className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+            <div className="bg-red-100 p-2 rounded-full flex-shrink-0">
+              <LayoutGrid className="w-5 h-5 md:w-6 md:h-6 text-red-600" />
             </div>
             <h2 className="text-base md:text-xl font-bold text-gray-800 truncate">
               {t("categoryTitle")}

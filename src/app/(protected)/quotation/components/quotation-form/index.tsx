@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { usePostApiV10Quotation } from "@/api/endpoints/quotation";
 import { Button } from "@/components/ui/button";
@@ -105,10 +105,10 @@ export default function QuotationForm({ onSuccess }: QuotationFormProps) {
       <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 relative">
+          <div className="bg-gradient-to-br from-red-900 via-red-800 to-red-900 relative">
             <div className="p-6 relative">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-blue-600/20 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-700/20 rounded-full blur-3xl"></div>
+              <div className="absolute top-0 right-0 w-48 h-48 bg-red-600/20 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-red-700/20 rounded-full blur-3xl"></div>
 
               <div className="relative z-10">
                 <div className="flex items-center gap-6">
@@ -120,7 +120,7 @@ export default function QuotationForm({ onSuccess }: QuotationFormProps) {
                     <h1 className="text-2xl font-bold text-white mb-2">
                       {t("formTitle")}
                     </h1>
-                    <p className="text-blue-100 text-sm leading-relaxed">
+                    <p className="text-red-100 text-sm leading-relaxed">
                       {t("formSubtitle")}
                     </p>
                   </div>
@@ -188,7 +188,7 @@ export default function QuotationForm({ onSuccess }: QuotationFormProps) {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="h-12 px-10 text-base font-semibold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30 transition-all"
+                    className="h-12 px-10 text-base font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 transition-all"
                   >
                     {isSubmitting ? (
                       <>

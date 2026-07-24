@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -721,17 +721,17 @@ export default function CareersPage() {
                 <form onSubmit={handleAppSubmit} noValidate className="space-y-8">
                   {/* File Upload Zone */}
                   <div
-                    className="border border-dashed border-blue-400 bg-[#f8fafc] rounded-xl p-8 text-center transition-colors hover:bg-blue-50/50"
+                    className="border border-dashed border-red-400 bg-[#f8fafc] rounded-xl p-8 text-center transition-colors hover:bg-red-50/50"
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
                   >
-                    <div className="mx-auto w-12 h-12 bg-[#e0f2fe] text-blue-500 rounded-full flex items-center justify-center mb-4">
+                    <div className="mx-auto w-12 h-12 bg-[#e0f2fe] text-red-500 rounded-full flex items-center justify-center mb-4">
                       <UploadCloud className="h-6 w-6" />
                     </div>
                     <p className="font-bold text-[15px] mb-1">{t("dragDrop")}</p>
                     <p className="text-[13px] text-muted-foreground mb-4">
                       {t("orChoose")}{" "}
-                      <label className="text-blue-500 cursor-pointer hover:underline">
+                      <label className="text-red-500 cursor-pointer hover:underline">
                         {t("chooseFromComputer")}
                         <input
                           type="file"
@@ -759,7 +759,7 @@ export default function CareersPage() {
                           className="flex items-center justify-between p-2.5 border rounded-lg bg-background shadow-sm text-sm"
                         >
                           <div className="flex items-center gap-2 truncate">
-                            <FileText className="h-4 w-4 text-blue-500 shrink-0" />
+                            <FileText className="h-4 w-4 text-red-500 shrink-0" />
                             <span className="truncate text-foreground/80 font-medium">
                               {file.name}
                             </span>

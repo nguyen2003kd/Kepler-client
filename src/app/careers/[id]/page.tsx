@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef, useCallback } from "react";
 import Link from "next/link";
@@ -294,7 +294,7 @@ export default function JobDetailPage({ params }: PageProps) {
 
   const handleFileDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    e.currentTarget.classList.remove("border-blue-400");
+    e.currentTarget.classList.remove("border-red-400");
     if (!e.dataTransfer.files.length) return;
     enqueueFiles(e.dataTransfer.files);
   };
@@ -424,9 +424,9 @@ export default function JobDetailPage({ params }: PageProps) {
           ) : isError ? (
             <AlertCircle className="h-4 w-4 text-red-500" />
           ) : isUploadingThis ? (
-            <div className="h-4 w-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <div className="h-4 w-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
           ) : (
-            <FileText className="h-4 w-4 text-blue-400" />
+            <FileText className="h-4 w-4 text-red-400" />
           )}
         </div>
 
@@ -438,14 +438,14 @@ export default function JobDetailPage({ params }: PageProps) {
               <span className="text-red-500 ml-1">— {item.errorMessage}</span>
             )}
             {isUploadingThis && (
-              <span className="ml-1 text-blue-600">{item.progress}%</span>
+              <span className="ml-1 text-red-600">{item.progress}%</span>
             )}
             {isDone && <span className="ml-1 text-green-600">{t("detail.uploaded")}</span>}
           </p>
           {isUploadingThis && (
-            <div className="mt-1.5 h-1.5 w-full bg-blue-100 rounded-full overflow-hidden">
+            <div className="mt-1.5 h-1.5 w-full bg-red-100 rounded-full overflow-hidden">
               <div
-                className="h-full bg-blue-500 rounded-full transition-all duration-300"
+                className="h-full bg-red-500 rounded-full transition-all duration-300"
                 style={{ width: `${item.progress}%` }}
               />
             </div>
@@ -504,9 +504,9 @@ export default function JobDetailPage({ params }: PageProps) {
           <div className="w-full lg:w-8/12 flex flex-col gap-6">
 
             {/* Banner */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white p-8 sm:p-10 shadow-lg group">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1e3a8a] to-[#DC2626] text-white p-8 sm:p-10 shadow-lg group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20 group-hover:bg-white/20 transition-all duration-700" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-400/20 rounded-full blur-2xl -ml-10 -mb-10 group-hover:bg-blue-400/30 transition-all duration-700" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-400/20 rounded-full blur-2xl -ml-10 -mb-10 group-hover:bg-red-400/30 transition-all duration-700" />
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
               <div className="relative z-10">
                 <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-3">{job.title}</h1>
@@ -517,7 +517,7 @@ export default function JobDetailPage({ params }: PageProps) {
             <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-border/50">
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-4">
                 <div className="flex items-start gap-3">
-                  <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#2563eb]">
+                  <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#DC2626]">
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
@@ -526,7 +526,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#2563eb]">
+                  <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#DC2626]">
                     <Calendar className="h-5 w-5" />
                   </div>
                   <div>
@@ -537,7 +537,7 @@ export default function JobDetailPage({ params }: PageProps) {
 
                 {job.experience && (
                   <div className="flex items-start gap-3">
-                    <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#2563eb]">
+                    <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#DC2626]">
                       <Clock className="h-5 w-5" />
                     </div>
                     <div>
@@ -548,7 +548,7 @@ export default function JobDetailPage({ params }: PageProps) {
                 )}
                 {job.employment_type && (
                   <div className="flex items-start gap-3">
-                    <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#2563eb]">
+                    <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#DC2626]">
                       <Briefcase className="h-5 w-5" />
                     </div>
                     <div>
@@ -571,7 +571,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#2563eb]">
+                  <div className="bg-[#eff6ff] p-2.5 rounded-xl text-[#DC2626]">
                     <Briefcase className="h-5 w-5" />
                   </div>
                   <div>
@@ -595,7 +595,7 @@ export default function JobDetailPage({ params }: PageProps) {
               {job.description && (
                 <div className="mb-8">
                   <div className="flex items-center gap-3 mb-5">
-                    <div className="w-1.5 h-6 bg-[#2563eb] rounded-full" />
+                    <div className="w-1.5 h-6 bg-[#DC2626] rounded-full" />
                     <h2 className="text-xl font-bold uppercase text-[#1e3a8a]">{t("detail.jobDescription")}</h2>
                   </div>
                   <div className="text-[15px] text-foreground/80 whitespace-pre-line leading-relaxed">
@@ -607,7 +607,7 @@ export default function JobDetailPage({ params }: PageProps) {
             {job.requirements && (
               <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-border/50">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-1.5 h-6 bg-[#2563eb] rounded-full" />
+                <div className="w-1.5 h-6 bg-[#DC2626] rounded-full" />
                 <h2 className="text-xl font-bold uppercase text-[#1e3a8a]">{t("detail.candidateRequirements")}</h2>
               </div>
               <div className="text-[15px] text-foreground/80 whitespace-pre-line leading-relaxed">
@@ -620,7 +620,7 @@ export default function JobDetailPage({ params }: PageProps) {
             {job.benefits && (
               <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-border/50">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-1.5 h-6 bg-[#2563eb] rounded-full" />
+                  <div className="w-1.5 h-6 bg-[#DC2626] rounded-full" />
                   <h2 className="text-xl font-bold uppercase text-[#1e3a8a]">{t("detail.benefitsLabel")}</h2>
                 </div>
                 <div className="text-[15px] text-foreground/80 whitespace-pre-line leading-relaxed">
@@ -633,7 +633,7 @@ export default function JobDetailPage({ params }: PageProps) {
             {job.required_documents && (
               <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-border/50">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-1.5 h-6 bg-[#2563eb] rounded-full" />
+                  <div className="w-1.5 h-6 bg-[#DC2626] rounded-full" />
                   <h2 className="text-xl font-bold uppercase text-[#1e3a8a]">{t("detail.requiredDocuments")}</h2>
                 </div>
                 <ul className="space-y-2.5">
@@ -644,7 +644,7 @@ export default function JobDetailPage({ params }: PageProps) {
                       if (!trimmed) return null;
                       return (
                         <li key={idx} className="flex items-start gap-3">
-                          <FileCheck className="h-4 w-4 text-[#2563eb] mt-0.5 flex-shrink-0" />
+                          <FileCheck className="h-4 w-4 text-[#DC2626] mt-0.5 flex-shrink-0" />
                           <span className="text-[15px] text-foreground/80 leading-relaxed">{trimmed}</span>
                         </li>
                       );
@@ -661,7 +661,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   onClick={() => setIsFileModalOpen(true)}
                   className="flex items-center gap-3 w-full p-4 rounded-xl bg-[#eff6ff] hover:bg-[#dbeafe] transition-colors border border-[#93c5fd]"
                 >
-                  <div className="bg-[#3b82f6] p-3 rounded-xl">
+                  <div className="bg-[#DC2626] p-3 rounded-xl">
                     <FileText className="h-5 w-5 text-white" />
                   </div>
                   <div className="text-left flex-1">
@@ -690,7 +690,7 @@ export default function JobDetailPage({ params }: PageProps) {
                       href={`/careers/${similarJob.id}`}
                       className="block py-4 border-b border-border/50 hover:bg-[#eff6ff]/30 transition-all group px-2 rounded-lg"
                     >
-                      <h3 className="font-medium text-[#2563eb] text-[15px] group-hover:text-blue-800 transition-colors mb-1">
+                      <h3 className="font-medium text-[#DC2626] text-[15px] group-hover:text-red-800 transition-colors mb-1">
                         {similarJob.title}
                       </h3>
                       <div className="grid grid-cols-2 gap-2 text-xs font-medium mt-2">
@@ -740,8 +740,8 @@ export default function JobDetailPage({ params }: PageProps) {
             {uploadItems.length < MAX_FILES && (
               <div
                 className="border border-dashed border-[#93c5fd] bg-[#eff6ff]/30 rounded-xl p-10 flex flex-col items-center justify-center w-full cursor-pointer hover:bg-[#eff6ff]/50 transition-colors"
-                onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add("border-blue-400"); }}
-                onDragLeave={(e) => e.currentTarget.classList.remove("border-blue-400")}
+                onDragOver={(e) => { e.preventDefault(); e.currentTarget.classList.add("border-red-400"); }}
+                onDragLeave={(e) => e.currentTarget.classList.remove("border-red-400")}
                 onDrop={handleFileDrop}
                 onClick={() => fileInputRef.current?.click()}
               >
@@ -753,12 +753,12 @@ export default function JobDetailPage({ params }: PageProps) {
                   className="hidden"
                   onChange={handleFileInput}
                 />
-                <div className="bg-[#dbeafe] p-3 rounded-full text-[#3b82f6] mb-3">
+                <div className="bg-[#dbeafe] p-3 rounded-full text-[#DC2626] mb-3">
                   <UploadCloud className="h-6 w-6" />
                 </div>
                 <p className="font-semibold text-sm mb-1 text-foreground">{t("dragDrop")}</p>
                 <p className="text-xs text-muted-foreground mb-4">
-                  {t("orChoose")} <span className="text-[#3b82f6] hover:underline cursor-pointer">{t("chooseFromComputer")}</span>
+                  {t("orChoose")} <span className="text-[#DC2626] hover:underline cursor-pointer">{t("chooseFromComputer")}</span>
                 </p>
                 <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
                   {t("detail.uploadHint", { count: MAX_FILES })}
@@ -774,7 +774,7 @@ export default function JobDetailPage({ params }: PageProps) {
 
             {/* Upload progress summary */}
             {isUploading && (
-              <p className="mt-2 text-xs text-blue-600 text-right">
+              <p className="mt-2 text-xs text-red-600 text-right">
                 {t("detail.uploadingCount", { count: uploadItems.filter((i) => i.status === "uploading").length })}
               </p>
             )}
@@ -792,7 +792,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   placeholder={t("enterName")}
                   value={form.full_name}
                   onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))}
-                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#3b82f6] transition-colors"
+                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#DC2626] transition-colors"
                 />
               </div>
               <div>
@@ -802,7 +802,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   placeholder={t("enterAddress")}
                   value={form.address}
                   onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
-                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#3b82f6] transition-colors"
+                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#DC2626] transition-colors"
                 />
               </div>
               <div>
@@ -814,7 +814,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   placeholder={t("enterPhone")}
                   value={form.phone}
                   onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#3b82f6] transition-colors"
+                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#DC2626] transition-colors"
                 />
               </div>
               <div>
@@ -826,7 +826,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   placeholder={t("enterEmail")}
                   value={form.email}
                   onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#3b82f6] transition-colors"
+                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#DC2626] transition-colors"
                 />
               </div>
               <div>
@@ -838,7 +838,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   placeholder={t("enterForeignLanguage")}
                   value={form.language_proficiency}
                   onChange={(e) => setForm((f) => ({ ...f, language_proficiency: e.target.value }))}
-                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#3b82f6] transition-colors"
+                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#DC2626] transition-colors"
                 />
               </div>
               <div>
@@ -850,7 +850,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   placeholder={t("enterItSkill")}
                   value={form.it_proficiency}
                   onChange={(e) => setForm((f) => ({ ...f, it_proficiency: e.target.value }))}
-                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#3b82f6] transition-colors"
+                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#DC2626] transition-colors"
                 />
               </div>
               <div>
@@ -860,7 +860,7 @@ export default function JobDetailPage({ params }: PageProps) {
                 <select
                   value={form.education_level}
                   onChange={(e) => setForm((f) => ({ ...f, education_level: e.target.value }))}
-                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#3b82f6] transition-colors text-muted-foreground focus:text-foreground"
+                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#DC2626] transition-colors text-muted-foreground focus:text-foreground"
                 >
                   <option value="" disabled>{t("selectDegree")}</option>
                   <option value="Trung cấp">{t("degreeAssociate")}</option>
@@ -879,7 +879,7 @@ export default function JobDetailPage({ params }: PageProps) {
                   placeholder={t("enterMajor")}
                   value={form.major}
                   onChange={(e) => setForm((f) => ({ ...f, major: e.target.value }))}
-                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#3b82f6] transition-colors"
+                  className="w-full text-sm rounded-md border border-input bg-background px-3 py-2.5 outline-none focus:border-[#DC2626] transition-colors"
                 />
               </div>
               <div className="md:col-span-2">
@@ -919,7 +919,7 @@ export default function JobDetailPage({ params }: PageProps) {
               <Button
                 type="submit"
                 disabled={!isFormValid || isSubmitting || isExpired}
-                className="w-full bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] hover:opacity-90 text-white rounded-md py-6 text-sm font-medium disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-[#1e3a8a] to-[#DC2626] hover:opacity-90 text-white rounded-md py-6 text-sm font-medium disabled:opacity-50"
               >
                 {isExpired ? t("expired") : isSubmitting ? t("submitting") : t("submit")}
               </Button>
@@ -945,7 +945,7 @@ export default function JobDetailPage({ params }: PageProps) {
             className="relative w-full max-w-4xl max-h-[85vh] bg-white shadow-2xl rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between p-6 border-b border-border bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6]">
+            <div className="flex items-center justify-between p-6 border-b border-border bg-gradient-to-r from-[#1e3a8a] to-[#DC2626]">
               <div className="flex items-center gap-3">
                 <div className="bg-white/20 p-2 rounded-xl">
                   <FileText className="h-6 w-6 text-white" />
@@ -962,7 +962,7 @@ export default function JobDetailPage({ params }: PageProps) {
             <div className="p-6 overflow-y-auto max-h-[calc(85vh-80px)]">
               {isFileLoading ? (
                 <div className="flex items-center justify-center py-12">
-                  <div className="h-8 w-8 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin" />
+                  <div className="h-8 w-8 border-4 border-[#DC2626] border-t-transparent rounded-full animate-spin" />
                   <span className="ml-3 text-muted-foreground">{t("detail.loadingDocument")}</span>
                 </div>
               ) : fileInfo ? (
@@ -978,7 +978,7 @@ export default function JobDetailPage({ params }: PageProps) {
                         href={`${baseConfig.backendDomain}${fileInfo.path}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-[#eff6ff] text-[#2563eb] rounded-lg hover:bg-[#dbeafe] transition-colors font-medium"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-[#eff6ff] text-[#DC2626] rounded-lg hover:bg-[#dbeafe] transition-colors font-medium"
                       >
                         <FileText className="h-4 w-4" />
                         {t("detail.viewDocument")}

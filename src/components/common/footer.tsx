@@ -151,7 +151,7 @@ const Footer = () => {
                       aria-label="Facebook"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-9 h-9 bg-white/10 hover:bg-blue-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                      className="w-9 h-9 bg-white/10 hover:bg-red-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
                     >
                       <Facebook className="w-4 h-4" />
                     </Link>
@@ -184,7 +184,7 @@ const Footer = () => {
                       aria-label="LinkedIn"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-9 h-9 bg-white/10 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                      className="w-9 h-9 bg-white/10 hover:bg-red-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
                     >
                       <Linkedin className="w-4 h-4" />
                     </Link>

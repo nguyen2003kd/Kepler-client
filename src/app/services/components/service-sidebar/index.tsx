@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Post } from "@/api/models/post";
 import { SidebarSkeleton } from "@/components/common";
@@ -45,7 +45,7 @@ export default function ServiceSidebar({
                   ? "/"
                   : "/services/"
               }${service.slug || ""}`}
-              className={`flex gap-4 group hover:bg-blue-50 px-4 py-3 transition-colors ${
+              className={`flex gap-4 group hover:bg-red-50 px-4 py-3 transition-colors ${
                 index !== relatedServices.slice(0, 5).length - 1
                   ? "border-b border-gray-100"
                   : ""
@@ -59,7 +59,7 @@ export default function ServiceSidebar({
               {/* Content */}
               <div className="flex-1 space-y-1.5">
                 {/* Title */}
-                <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
+                <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-red-600 transition-colors leading-snug">
                   {service.title}
                 </h4>
 
@@ -83,7 +83,7 @@ export default function ServiceSidebar({
         <div className="px-4 py-2.5 bg-gray-50 text-center border-t border-gray-100">
           <a
             href="/services"
-            className="text-blue-600 font-semibold text-xs hover:text-blue-700 inline-flex items-center gap-1"
+            className="text-red-600 font-semibold text-xs hover:text-red-700 inline-flex items-center gap-1"
           >
             {t("viewAll")}
             <ArrowRight className="w-3.5 h-3.5" />
@@ -107,11 +107,11 @@ export default function ServiceSidebar({
         <div className="space-y-3 relative z-10">
           <div>
             <h3 className="text-white font-bold text-base mb-1">{t("needSupport")}</h3>
-            <p className="text-blue-50 text-xs">{t("contactForQuote")}</p>
+            <p className="text-red-50 text-xs">{t("contactForQuote")}</p>
           </div>
           <Button
             onClick={onQuoteClick}
-            className="w-full bg-white text-blue-600 hover:bg-blue-50 font-semibold shadow-md hover:shadow-lg"
+            className="w-full bg-white text-red-600 hover:bg-red-50 font-semibold shadow-md hover:shadow-lg"
             size="default"
           >
             {t("requestQuote")}

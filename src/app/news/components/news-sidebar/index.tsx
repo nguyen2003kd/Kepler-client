@@ -1,4 +1,4 @@
-import { SidebarSkeleton } from "@/components/common";
+﻿import { SidebarSkeleton } from "@/components/common";
 import { Card } from "@/components/ui/card";
 import { PostExtended } from "@/types/post";
 import { ArrowRight, Newspaper } from "lucide-react";
@@ -41,7 +41,7 @@ export default function NewsSidebar({
             <a
               key={news.id}
               href={postUrl}
-              className={`flex gap-4 group hover:bg-blue-50 px-4 py-3 transition-colors ${
+              className={`flex gap-4 group hover:bg-red-50 px-4 py-3 transition-colors ${
                 index !== relatedNews.slice(0, 5).length - 1
                   ? "border-b border-gray-100"
                   : ""
@@ -55,7 +55,7 @@ export default function NewsSidebar({
               {/* Content */}
               <div className="flex-1 space-y-1.5">
                 {/* Title */}
-                <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
+                <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-red-600 transition-colors leading-snug">
                   {news.title}
                 </h4>
 
@@ -77,7 +77,7 @@ export default function NewsSidebar({
       <div className="px-4 py-2.5 bg-gray-50 text-center border-t border-gray-100">
         <a
           href="/news"
-          className="text-blue-600 font-semibold text-xs hover:text-blue-700 inline-flex items-center gap-1"
+          className="text-red-600 font-semibold text-xs hover:text-red-700 inline-flex items-center gap-1"
         >
           {t("viewAll")}
           <ArrowRight className="w-3.5 h-3.5" />

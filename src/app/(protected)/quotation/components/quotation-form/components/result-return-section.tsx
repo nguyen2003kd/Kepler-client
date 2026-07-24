@@ -1,4 +1,4 @@
-import { useGetApiV10Calibration } from "@/api/endpoints/calibration";
+﻿import { useGetApiV10Calibration } from "@/api/endpoints/calibration";
 import { useGetApiV10Service } from "@/api/endpoints/service";
 import { useGetApiV10ReceiveMethod } from "@/api/endpoints/receive-method";
 import { Button } from "@/components/ui/button";
@@ -88,7 +88,7 @@ export default function ResultReturnSection({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-4">
-        <div className="flex-shrink-0 w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+        <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center">
           <Package className="w-5 h-5" />
         </div>
         <div className="flex-1">
@@ -131,7 +131,7 @@ export default function ResultReturnSection({
                     <SelectItem
                       key={option.value}
                       value={option.value}
-                      className="hover:bg-blue-50 focus:bg-blue-50"
+                      className="hover:bg-red-50 focus:bg-red-50"
                     >
                       {option.label}
                     </SelectItem>
@@ -170,7 +170,7 @@ export default function ResultReturnSection({
                     <SelectItem
                       key={option.value}
                       value={option.value}
-                      className="hover:bg-blue-50 focus:bg-blue-50"
+                      className="hover:bg-red-50 focus:bg-red-50"
                     >
                       {option.label}
                     </SelectItem>

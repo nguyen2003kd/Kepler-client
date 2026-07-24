@@ -1,4 +1,4 @@
-import {
+﻿import {
   Pagination,
   PaginationContent,
   PaginationEllipsis,
@@ -80,7 +80,7 @@ PaginationProps) {
               className={
                 currentPage === 1
                   ? "pointer-events-none opacity-50 text-gray-700"
-                  : "text-gray-700 hover:text-blue-600"
+                  : "text-gray-700 hover:text-red-600"
               }
             />
           </PaginationItem>
@@ -100,7 +100,7 @@ PaginationProps) {
                   className={
                     currentPage === page
                       ? ""
-                      : "text-gray-700 hover:text-blue-600"
+                      : "text-gray-700 hover:text-red-600"
                   }
                 >
                   {page}
@@ -123,7 +123,7 @@ PaginationProps) {
               className={
                 currentPage === totalPages
                   ? "pointer-events-none opacity-50 text-gray-700"
-                  : "text-gray-700 hover:text-blue-600"
+                  : "text-gray-700 hover:text-red-600"
               }
             />
           </PaginationItem>

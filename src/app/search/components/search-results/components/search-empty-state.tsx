@@ -1,4 +1,4 @@
-import { Home, Newspaper, Search, Tag } from "lucide-react";
+﻿import { Home, Newspaper, Search, Tag } from "lucide-react";
 
 type TFunc = (key: string, options?: Record<string, unknown>) => string;
 
@@ -15,13 +15,13 @@ export default function SearchEmptyState({ query, t }: SearchEmptyStateProps) {
         <div className="relative mb-8 flex justify-center">
           <div className="w-28 h-28 relative">
             {/* Animated Rings */}
-            <div className="absolute inset-0 rounded-full border-[3px] border-blue-200 opacity-20" />
-            <div className="absolute inset-2 rounded-full border-[3px] border-blue-100 opacity-40" />
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50 to-indigo-100" />
+            <div className="absolute inset-0 rounded-full border-[3px] border-red-200 opacity-20" />
+            <div className="absolute inset-2 rounded-full border-[3px] border-red-100 opacity-40" />
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-red-50 to-indigo-100" />
 
             {/* Search Icon */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <Search className="w-16 h-16 text-blue-500" />
+              <Search className="w-16 h-16 text-red-500" />
             </div>
           </div>
         </div>
@@ -34,9 +34,9 @@ export default function SearchEmptyState({ query, t }: SearchEmptyStateProps) {
           <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
             {t("noResultsDesc")}
           </p>
-          <div className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-full">
-            <Tag className="w-4 h-4 text-blue-500 mr-2" />
-            <span className="text-blue-700 font-semibold text-base">
+          <div className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-red-50 to-indigo-50 border border-red-100 rounded-full">
+            <Tag className="w-4 h-4 text-red-500 mr-2" />
+            <span className="text-red-700 font-semibold text-base">
               &ldquo;{query}&rdquo;
             </span>
           </div>
@@ -44,7 +44,7 @@ export default function SearchEmptyState({ query, t }: SearchEmptyStateProps) {
           <div className="pt-5 flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="/"
-              className="group px-6 py-3 text-blue-600 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl hover:from-blue-100 hover:to-indigo-100 hover:border-blue-300 transition-all duration-300 font-semibold"
+              className="group px-6 py-3 text-red-600 bg-gradient-to-r from-red-50 to-indigo-50 border-2 border-red-200 rounded-xl hover:from-red-100 hover:to-indigo-100 hover:border-red-300 transition-all duration-300 font-semibold"
             >
               <span className="flex items-center justify-center gap-2">
                 <Home className="w-5 h-5" />
@@ -53,7 +53,7 @@ export default function SearchEmptyState({ query, t }: SearchEmptyStateProps) {
             </a>
             <a
               href="/news"
-              className="group px-6 py-3 text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-all duration-300 font-semibold"
+              className="group px-6 py-3 text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:border-red-400 hover:text-red-700 hover:bg-red-50 transition-all duration-300 font-semibold"
             >
               <span className="flex items-center justify-center gap-2">
                 <Newspaper className="w-5 h-5" />

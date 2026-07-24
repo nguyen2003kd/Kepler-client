@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useEffect } from 'react'
 import { Loader2, Maximize, Network, ZoomIn, ZoomOut } from 'lucide-react'
@@ -42,7 +42,7 @@ export default function OrganizationalChartPage() {
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h1 className="flex items-center text-2xl md:text-3xl font-black tracking-tight text-gray-900 dark:text-gray-100">
-            <Network className="mr-3 h-7 w-7 md:h-8 md:w-8 text-blue-600 dark:text-blue-500" />
+            <Network className="mr-3 h-7 w-7 md:h-8 md:w-8 text-red-600 dark:text-red-500" />
             Sơ đồ Tổ chức
           </h1>
           <p className="mt-2 text-sm md:text-base text-gray-500 dark:text-gray-400">
@@ -109,7 +109,7 @@ export default function OrganizationalChartPage() {
               .toUpperCase()
 
             return (
-              <div className="relative w-full overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800">
+              <div className="relative w-full overflow-hidden bg-gradient-to-br from-red-600 to-red-800">
                 {viewingNode.avatar_url && !dialogImgError && (
                   <img
                     src={resolveAvatarSrc(viewingNode.avatar_url)}

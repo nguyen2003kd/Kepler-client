@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import QuotationPopupForm from "@/components/quotation-popup/quotation-popup-form";
 import { Button } from "@/components/ui/button";
@@ -35,10 +35,10 @@ export default function QuotationPopupDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-full h-full max-w-full max-h-full sm:w-full sm:h-auto sm:max-w-5xl sm:max-h-[95vh] p-0 border-0 [&>button]:hidden sm:rounded-lg rounded-none flex flex-col">
-        <DialogHeader className="flex-shrink-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 relative">
+        <DialogHeader className="flex-shrink-0 bg-gradient-to-br from-red-900 via-red-800 to-red-900 relative">
           <div className="p-5 relative">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-blue-600/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-700/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-0 right-0 w-48 h-48 bg-red-600/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-red-700/20 rounded-full blur-3xl"></div>
 
             <div className="relative z-10">
               <div className="flex items-center gap-6">
@@ -50,7 +50,7 @@ export default function QuotationPopupDialog({
                   <DialogTitle className="text-2xl font-bold text-white mb-2">
                     {t("formTitle")}
                   </DialogTitle>
-                  <p className="text-blue-100 text-sm leading-relaxed">
+                  <p className="text-red-100 text-sm leading-relaxed">
                     {t("formSubtitle")}
                   </p>
                 </div>

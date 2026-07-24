@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 // import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import ContactRegistrationSection from "./components/contact-registration";
@@ -34,7 +34,7 @@ import ContactRegistrationSection from "./components/contact-registration";
 // ];
 
 // const colorClasses = {
-//   blue: "bg-blue-100 text-blue-600",
+//   blue: "bg-red-100 text-red-600",
 //   green: "bg-green-100 text-green-600",
 //   purple: "bg-purple-100 text-purple-600",
 //   orange: "bg-orange-100 text-orange-600",
@@ -95,13 +95,13 @@ export default function ContactPage() {
       <ContactRegistrationSection />
 
       {/* Hero Section */}
-      {/* <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      {/* <section className="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Liên hệ với chúng tôi
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-red-100 max-w-3xl mx-auto">
               Chúng tôi luôn sẵn sàng hỗ trợ bạn
             </p>
           </div>
@@ -170,7 +170,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                       placeholder="Nguyễn Văn A"
                     />
                   </div>
@@ -189,7 +189,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                       placeholder="email@example.com"
                     />
                   </div>
@@ -209,7 +209,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                       placeholder="0123456789"
                     />
                   </div>
@@ -227,7 +227,7 @@ export default function ContactPage() {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                       placeholder="Công ty ABC"
                     />
                   </div>
@@ -246,7 +246,7 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="">Chọn chủ đề</option>
                     <option value="tu-van">Tư vấn dịch vụ</option>
@@ -270,7 +270,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
                     placeholder="Nhập nội dung tin nhắn của bạn..."
                   />
                 </div>
@@ -278,7 +278,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="w-full px-6 py-3 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Đang gửi..." : "Gửi tin nhắn"}
                 </button>
@@ -300,7 +300,7 @@ export default function ContactPage() {
               </div> */}
 
       {/* FAQ */}
-      {/* <div className="bg-blue-50 p-6 rounded-lg">
+      {/* <div className="bg-red-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">
                   Câu hỏi thường gặp
                 </h3>

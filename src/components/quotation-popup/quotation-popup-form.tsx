@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { usePostApiV10QuotationPublic } from "@/api/endpoints/quotation";
 // import CertificateInfoSection from "@/app/(protected)/quotation/components/quotation-form/components/certificate-info-section";
@@ -131,7 +131,7 @@ export default function QuotationPopupForm({
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 h-11 font-semibold shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30 transition-all"
+            className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 h-11 font-semibold shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 transition-all"
           >
             {isSubmitting ? (
               <>

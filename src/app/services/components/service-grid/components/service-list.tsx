@@ -1,4 +1,4 @@
-import { GridCardSkeleton, ListCardSkeleton } from "@/components/common";
+﻿import { GridCardSkeleton, ListCardSkeleton } from "@/components/common";
 import CommonPagination from "@/components/common/pagination";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -46,11 +46,11 @@ export default function ServiceList({
   return (
     <div className="space-y-6">
       {/* Category Title & View Toggle */}
-      <Card className="bg-gradient-to-r from-white to-blue-50 border-blue-100">
+      <Card className="bg-gradient-to-r from-white to-red-50 border-red-100">
         <CardContent className="p-3 px-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Archive className="w-6 h-6 text-blue-600" />
+              <Archive className="w-6 h-6 text-red-600" />
               <h2 className="text-xl font-bold text-gray-700">
                 {currentCategoryName}
               </h2>
@@ -64,8 +64,8 @@ export default function ServiceList({
                 size="icon"
                 className={
                   viewMode === "grid"
-                    ? "bg-blue-600 hover:bg-blue-700 shadow-sm"
-                    : "hover:bg-gray-200 hover:text-blue-600 transition-all duration-200"
+                    ? "bg-red-600 hover:bg-red-700 shadow-sm"
+                    : "hover:bg-gray-200 hover:text-red-600 transition-all duration-200"
                 }
                 title={t("viewGrid")}
               >
@@ -77,8 +77,8 @@ export default function ServiceList({
                 size="icon"
                 className={
                   viewMode === "list"
-                    ? "bg-blue-600 hover:bg-blue-700 shadow-sm"
-                    : "hover:bg-gray-200 hover:text-blue-600 transition-all duration-200"
+                    ? "bg-red-600 hover:bg-red-700 shadow-sm"
+                    : "hover:bg-gray-200 hover:text-red-600 transition-all duration-200"
                 }
                 title={t("viewList")}
               >

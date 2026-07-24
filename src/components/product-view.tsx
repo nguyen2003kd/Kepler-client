@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -69,7 +69,7 @@ export default function ProductView({ id }: { id: string }) {
         <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
         
         <div className="flex items-baseline gap-2 mb-6">
-          <span className="text-4xl font-bold text-blue-600">${product.price}</span>
+          <span className="text-4xl font-bold text-red-600">${product.price}</span>
         </div>
         
         <div className="prose max-w-none">
@@ -78,7 +78,7 @@ export default function ProductView({ id }: { id: string }) {
         </div>
         
         <div className="mt-8 flex gap-4">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+          <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
             Add to Cart
           </button>
           <button className="border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-colors">

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
@@ -301,7 +301,7 @@ export function OrgChartNode({
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }}
                 onClick={(e) => { e.stopPropagation(); onViewNode(node); }}
-                className="flex h-8 w-8 items-center justify-center rounded-xl bg-white text-slate-500 shadow-md transition-all hover:scale-110 hover:bg-blue-600 hover:text-white active:scale-95 dark:bg-gray-800"
+                className="flex h-8 w-8 items-center justify-center rounded-xl bg-white text-slate-500 shadow-md transition-all hover:scale-110 hover:bg-red-600 hover:text-white active:scale-95 dark:bg-gray-800"
                 title="Xem chi tiết"
               >
                 <Eye className="h-3.5 w-3.5" />
@@ -313,7 +313,7 @@ export function OrgChartNode({
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }}
                 onClick={(e) => { e.stopPropagation(); setStyleToolbarOpen((v) => !v); }}
-                className="flex h-8 w-8 items-center justify-center rounded-xl bg-white text-slate-500 shadow-md transition-all hover:scale-110 hover:bg-blue-600 hover:text-white active:scale-95 dark:bg-gray-800"
+                className="flex h-8 w-8 items-center justify-center rounded-xl bg-white text-slate-500 shadow-md transition-all hover:scale-110 hover:bg-red-600 hover:text-white active:scale-95 dark:bg-gray-800"
                 title="Tuỳ chỉnh"
               >
                 <Palette className="h-3.5 w-3.5 " />
@@ -418,7 +418,7 @@ export function OrgChartNode({
               {canEditPersonnel && onDuplicateNode && (
                 <button
                   onClick={(e) => { e.stopPropagation(); onDuplicateNode(node); }}
-                  className="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-all hover:scale-110 hover:bg-blue-600 hover:text-white active:scale-95 dark:bg-blue-900/30 dark:text-blue-400"
+                  className="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-xl bg-red-50 text-red-600 transition-all hover:scale-110 hover:bg-red-600 hover:text-white active:scale-95 dark:bg-red-900/30 dark:text-red-400"
                   title="Sao chép"
                 >
                   <Copy className="h-4 w-4" />

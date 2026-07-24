@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Archive, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -29,12 +29,12 @@ export default function EmptyState({
   const displayMsgWithFilter = messageWithFilter || t("noResultsWithFilterDefault");
   const displayMsgWithoutFilter = messageWithoutFilter || t("noResultsWithoutFilterDefault");
   return (
-    <Card className="border-blue-100">
+    <Card className="border-red-100">
       <CardContent className="py-16 px-6">
         <div className="flex flex-col items-center justify-center text-center max-w-md mx-auto space-y-4">
           {/* Icon */}
-          <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center">
-            <Archive className="w-10 h-10 text-blue-300" />
+          <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center">
+            <Archive className="w-10 h-10 text-red-300" />
           </div>
 
           {/* Message */}
@@ -52,7 +52,7 @@ export default function EmptyState({
                 <Button
                   onClick={onClearDateFilter}
                   variant="outline"
-                  className="gap-2 border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-800 transition-all duration-200 shadow-sm hover:shadow-md"
+                  className="gap-2 border-red-200 text-red-700 hover:bg-red-50 hover:border-red-300 hover:text-red-800 transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <X className="w-4 h-4" />
                   {t("clearDateFilter")}
@@ -62,7 +62,7 @@ export default function EmptyState({
                 <Button
                   onClick={onClearCategoryFilter}
                   variant="outline"
-                  className="gap-2 border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-800 transition-all duration-200 shadow-sm hover:shadow-md"
+                  className="gap-2 border-red-200 text-red-700 hover:bg-red-50 hover:border-red-300 hover:text-red-800 transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <X className="w-4 h-4" />
                   {t("clearCategoryFilter")}

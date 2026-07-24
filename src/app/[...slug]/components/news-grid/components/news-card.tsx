@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -28,7 +28,7 @@ export default function NewsCard({
 
   if (viewMode === "list") {
     return (
-      <Card className="group overflow-hidden hover:shadow-2xl border-gray-100 hover:border-blue-200 transition-all duration-300 flex hover:-translate-y-0.5">
+      <Card className="group overflow-hidden hover:shadow-2xl border-gray-100 hover:border-red-200 transition-all duration-300 flex hover:-translate-y-0.5">
         {/* Image */}
         <div className="relative w-64 h-52 flex-shrink-0 overflow-hidden bg-gray-100">
           <Image
@@ -49,13 +49,13 @@ export default function NewsCard({
             {/* Category Badge */}
             <Badge
               variant="outline"
-              className="text-blue-600 border-transparent mb-2 px-0 text-sm"
+              className="text-red-600 border-transparent mb-2 px-0 text-sm"
             >
               {categoryName}
             </Badge>
 
             {/* Title */}
-            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-red-600 transition-colors">
               {post.title}
             </h3>
 
@@ -78,7 +78,7 @@ export default function NewsCard({
               {/* Link */}
               <a
                 href={postUrl}
-                className="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors group/link"
+                className="inline-flex items-center text-red-600 font-semibold text-sm hover:text-red-700 transition-colors group/link"
               >
                 Xem chi tiết
                 <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
@@ -92,7 +92,7 @@ export default function NewsCard({
 
   // Grid view
   return (
-    <Card className="group overflow-hidden hover:shadow-2xl border-gray-100 hover:border-blue-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+    <Card className="group overflow-hidden hover:shadow-2xl border-gray-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
       {/* Image */}
       <div className="relative h-36 sm:h-40 overflow-hidden bg-gray-100">
         <Image
@@ -110,7 +110,7 @@ export default function NewsCard({
       {/* Content */}
       <CardContent className="pt-4 md:pt-5 pb-2 flex flex-col flex-grow">
         {/* Title */}
-        <h3 className="text-base md:text-lg font-bold text-gray-800 mb-2 md:mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-base md:text-lg font-bold text-gray-800 mb-2 md:mb-3 line-clamp-2 group-hover:text-red-600 transition-colors">
           {post.title}
         </h3>
 
@@ -133,7 +133,7 @@ export default function NewsCard({
           {/* Link */}
           <a
             href={postUrl}
-            className="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors group/link"
+            className="inline-flex items-center text-red-600 font-semibold text-sm hover:text-red-700 transition-colors group/link"
           >
             Xem chi tiết
             <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />

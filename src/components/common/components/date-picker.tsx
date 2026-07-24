@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -23,11 +23,11 @@ export default function DatePicker({ date, onDateChange }: DatePickerProps) {
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className="h-11 px-4 justify-start text-left font-medium border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all shadow-sm hover:shadow-md rounded-xl bg-white"
+            className="h-11 px-4 justify-start text-left font-medium border-2 border-gray-200 hover:border-red-400 hover:bg-red-50 transition-all shadow-sm hover:shadow-md rounded-xl bg-white"
           >
             <div className="flex items-center gap-3 flex-1">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50 transition-colors">
-                <CalendarIcon className="h-4 w-4 text-blue-600" />
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-50 transition-colors">
+                <CalendarIcon className="h-4 w-4 text-red-600" />
               </div>
               {date ? (
                 <span className="text-sm font-semibold text-gray-800">

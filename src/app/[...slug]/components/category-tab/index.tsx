@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { DynamicIcon } from "@/components/shared/lucide-icon-picker";
 import { Category } from "@/api/models/category";
@@ -71,7 +71,7 @@ export default function CategoryTab({
       <CardContent className="px-4 pt-4 pb-3">
         <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200">
           <div className="p-2 rounded-full flex-shrink-0">
-            <LayoutGrid className="w-5 h-5 text-blue-600" />
+            <LayoutGrid className="w-5 h-5 text-red-600" />
           </div>
           <h2 className="text-base font-bold text-gray-800">{t("categoryLabel")}</h2>
         </div>
@@ -82,17 +82,17 @@ export default function CategoryTab({
             onClick={() => handleCategoryChange(null)}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
               !selectedCategory
-                ? "bg-blue-50 text-blue-700 font-semibold"
+                ? "bg-red-50 text-red-700 font-semibold"
                 : "text-gray-700 hover:bg-gray-50"
             }`}
           >
             <LayoutGrid
               className={`w-5 h-5 ${
-                !selectedCategory ? "text-blue-600" : "text-gray-400"
+                !selectedCategory ? "text-red-600" : "text-gray-400"
               }`}
             />
             <span className="flex-1 text-left text-sm">{t("allCategories")}</span>
-            {!selectedCategory && <Check className="w-5 h-5 text-blue-600" />}
+            {!selectedCategory && <Check className="w-5 h-5 text-red-600" />}
           </button>
 
           {/* Subcategories */}
@@ -106,7 +106,7 @@ export default function CategoryTab({
                 onClick={() => handleCategoryChange(cat.id || null)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                   selectedCategory === cat.id
-                    ? "bg-blue-50 text-blue-700 font-semibold"
+                    ? "bg-red-50 text-red-700 font-semibold"
                     : "text-gray-700 hover:bg-gray-50"
                 }`}
               >
@@ -115,7 +115,7 @@ export default function CategoryTab({
                     name={cat.icon_url!}
                     className={`w-5 h-5 ${
                       selectedCategory === cat.id
-                        ? "text-blue-600"
+                        ? "text-red-600"
                         : "text-gray-400"
                     }`}
                   />
@@ -123,14 +123,14 @@ export default function CategoryTab({
                   <Icon
                     className={`w-5 h-5 ${
                       selectedCategory === cat.id
-                        ? "text-blue-600"
+                        ? "text-red-600"
                         : "text-gray-400"
                     }`}
                   />
                 )}
                 <span className="flex-1 text-left text-sm">{cat.name}</span>
                 {selectedCategory === cat.id && (
-                  <Check className="w-5 h-5 text-blue-600" />
+                  <Check className="w-5 h-5 text-red-600" />
                 )}
               </button>
             );
@@ -143,15 +143,15 @@ export default function CategoryTab({
               onClick={() => router.push("/certification")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                 activeCertification
-                  ? "bg-blue-50 text-blue-700 font-semibold"
+                  ? "bg-red-50 text-red-700 font-semibold"
                   : "text-gray-700 hover:bg-gray-50"
               }`}
             >
               <div className="w-5 h-5  rounded-full flex items-center justify-center flex-shrink-0">
-                <Shield className={`w-5 h-5 ${activeCertification ? "text-blue-600" : "text-gray-700"}`} />
+                <Shield className={`w-5 h-5 ${activeCertification ? "text-red-600" : "text-gray-700"}`} />
               </div>
               <span className="flex-1 text-left text-sm">Chứng nhận, công nhận, chỉ định</span>
-              {activeCertification && <Check className="w-5 h-5 text-blue-600" />}
+              {activeCertification && <Check className="w-5 h-5 text-red-600" />}
             </button>
           )
           */}

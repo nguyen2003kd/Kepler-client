@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Category } from "@/api/models/category";
 import { PostExtended } from "@/types/post";
@@ -37,7 +37,7 @@ export default function DynamicCategoryPage({
             {displayCategory.name}
           </h1>
           {displayCategory.description && (
-            <p className="text-blue-100 text-lg max-w-3xl mx-auto">
+            <p className="text-red-100 text-lg max-w-3xl mx-auto">
               {displayCategory.description}
             </p>
           )}

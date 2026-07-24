@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+﻿import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -49,7 +49,7 @@ export default function NewsCard({
         <div className="flex items-center gap-3 mb-3">
           <Badge
             variant="secondary"
-            className="bg-blue-100 text-blue-700 hover:bg-blue-100"
+            className="bg-red-100 text-red-700 hover:bg-red-100"
           >
             Tin tức
           </Badge>
@@ -71,7 +71,7 @@ export default function NewsCard({
         <Button
           asChild
           variant="ghost"
-          className="text-blue-600 hover:text-blue-700 hover:bg-transparent p-0 h-auto font-normal text-sm"
+          className="text-red-600 hover:text-red-700 hover:bg-transparent p-0 h-auto font-normal text-sm"
         >
           <Link href={link} className="inline-flex items-center gap-2">
             Xem thêm

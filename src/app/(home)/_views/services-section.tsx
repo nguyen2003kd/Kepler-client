@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import ServiceCard from "@/components/common/components/service-card";
@@ -97,7 +97,7 @@ export default function ServicesSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A2152]/90 via-[#0A2152]/80 to-[#0A2152]/90 z-0" />
 
       {/* Decorative effect */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-cyan-400/10 via-transparent to-transparent z-0 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-red-400/10 via-transparent to-transparent z-0 pointer-events-none" />
 
       <style jsx global>
         {paginationStyle}
@@ -128,12 +128,12 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 bg-clip-text text-transparent ">
+              <span className="bg-gradient-to-r from-red-300 via-red-300 to-red-300 bg-clip-text text-transparent ">
                 {t("services")}
               </span>
             </motion.h2>
             <motion.div
-              className="w-28 h-1 rounded-full bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300"
+              className="w-28 h-1 rounded-full bg-gradient-to-r from-red-300 via-red-300 to-red-300"
               initial={{ width: 0 }}
               whileInView={{ width: 112 }}
               viewport={{ once: true }}

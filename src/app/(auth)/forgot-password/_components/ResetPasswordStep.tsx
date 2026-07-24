@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { usePostApiV10AuthForgotPasswordConfirmReset } from "@/api/endpoints/authentication";
 import { Button } from "@/components/ui/button";
@@ -163,7 +163,7 @@ export default function ResetPasswordStep({
         </div>
 
         {/* Password Requirements */}
-        <div className="px-3.5 py-2.5 bg-gradient-to-r from-blue-50/60 to-indigo-50/40 border border-blue-100/70 rounded-xl">
+        <div className="px-3.5 py-2.5 bg-gradient-to-r from-red-50/60 to-indigo-50/40 border border-red-100/70 rounded-xl">
           <p className="text-xs font-semibold text-gray-700 mb-1">
             {t("passwordRequirements")}
           </p>

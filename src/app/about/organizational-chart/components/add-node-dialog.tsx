@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 // import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -344,7 +344,7 @@ export function AddNodeDialog({
                           step={10}
                           value={Number(field.value) || 180}
                           onChange={(e) => field.onChange(Number(e.target.value))}
-                          className="flex-1 h-2 cursor-pointer accent-blue-600"
+                          className="flex-1 h-2 cursor-pointer accent-red-600"
                         />
                         <span className="w-14 text-right text-sm font-medium text-gray-700 tabular-nums">
                           {Number(field.value) || 180} px
@@ -371,7 +371,7 @@ export function AddNodeDialog({
                           step={10}
                           value={Number(field.value) || 90}
                           onChange={(e) => field.onChange(Number(e.target.value))}
-                          className="flex-1 h-2 cursor-pointer accent-blue-600"
+                          className="flex-1 h-2 cursor-pointer accent-red-600"
                         />
                         <span className="w-14 text-right text-sm font-medium text-gray-700 tabular-nums">
                           {Number(field.value) || 90} px
@@ -388,7 +388,7 @@ export function AddNodeDialog({
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
                 Hủy bỏ
               </Button>
-              <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white">
                 {isEditing ? 'Lưu thay đổi' : 'Thêm nhân sự'}
               </Button>
             </DialogFooter>

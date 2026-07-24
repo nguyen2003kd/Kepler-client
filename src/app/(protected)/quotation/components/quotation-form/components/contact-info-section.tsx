@@ -1,4 +1,4 @@
-import {
+﻿import {
   FormField,
   FormItem,
   FormLabel,
@@ -34,7 +34,7 @@ export default function ContactInfoSection({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-4">
-        <div className="flex-shrink-0 w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+        <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center">
           <User className="w-5 h-5" />
         </div>
         <div className="flex-1">
@@ -60,13 +60,13 @@ export default function ContactInfoSection({
                 <User
                   className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${
                     focusedField === "name" || field.value
-                      ? "text-blue-600"
+                      ? "text-red-600"
                       : "text-gray-400"
                   }`}
                 />
                 <Input
                   placeholder={t("customerNamePlaceholder")}
-                  className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-0 focus-visible:border-blue-600"
+                  className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-0 focus-visible:border-red-600"
                   {...field}
                   onFocus={() => setFocusedField("name")}
                   onBlur={() => setFocusedField(null)}
@@ -90,13 +90,13 @@ export default function ContactInfoSection({
                 <Building2
                   className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${
                     focusedField === "organization_name" || field.value
-                      ? "text-blue-600"
+                      ? "text-red-600"
                       : "text-gray-400"
                   }`}
                 />
                 <Input
                   placeholder={t("organizationNamePlaceholder")}
-                  className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-0 focus-visible:border-blue-600"
+                  className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-0 focus-visible:border-red-600"
                   {...field}
                   onFocus={() => setFocusedField("organization_name")}
                   onBlur={() => setFocusedField(null)}
@@ -122,14 +122,14 @@ export default function ContactInfoSection({
                 <Mail
                   className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${
                     focusedField === "email" || field.value
-                      ? "text-blue-600"
+                      ? "text-red-600"
                       : "text-gray-400"
                   }`}
                 />
                 <Input
                   type="email"
                   placeholder={t("emailPlaceholder")}
-                  className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-0 focus-visible:border-blue-600"
+                  className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-0 focus-visible:border-red-600"
                   {...field}
                   onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
@@ -153,13 +153,13 @@ export default function ContactInfoSection({
                 <Phone
                   className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${
                     focusedField === "phone_number" || field.value
-                      ? "text-blue-600"
+                      ? "text-red-600"
                       : "text-gray-400"
                   }`}
                 />
                 <Input
                   placeholder={t("phonePlaceholder")}
-                  className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-0 focus-visible:border-blue-600"
+                  className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-0 focus-visible:border-red-600"
                   {...field}
                   onFocus={() => setFocusedField("phone_number")}
                   onBlur={() => setFocusedField(null)}
@@ -184,13 +184,13 @@ export default function ContactInfoSection({
               <MapPin
                 className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${
                   focusedField === "address" || field.value
-                    ? "text-blue-600"
+                    ? "text-red-600"
                     : "text-gray-400"
                 }`}
               />
               <Input
                 placeholder={t("addressPlaceholder")}
-                className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-0 focus-visible:border-blue-600"
+                className="pl-10 h-12 bg-white border-gray-300 text-gray-700 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-0 focus-visible:border-red-600"
                 {...field}
                 onFocus={() => setFocusedField("address")}
                 onBlur={() => setFocusedField(null)}

@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge";
+﻿import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -28,7 +28,7 @@ export default function DocumentCard({
   return (
     <Card
       className={cn(
-        "bg-gradient-to-br from-blue-50 via-white to-cyan-50 border border-gray-900/15 overflow-hidden hover:shadow-lg transition-shadow rounded-lg flex flex-col",
+        "bg-gradient-to-br from-red-50 via-white to-red-50 border border-gray-900/15 overflow-hidden hover:shadow-lg transition-shadow rounded-lg flex flex-col",
         className
       )}
     >
@@ -36,7 +36,7 @@ export default function DocumentCard({
         <div className="flex items-center gap-3 mb-2">
           <Badge
             variant="secondary"
-            className="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 text-blue-700 border border-blue-200/50 hover:bg-blue-500/20 text-xs font-semibold"
+            className="bg-gradient-to-r from-red-500/10 to-indigo-500/10 text-red-700 border border-red-200/50 hover:bg-red-500/20 text-xs font-semibold"
           >
             {category}
           </Badge>
@@ -50,7 +50,7 @@ export default function DocumentCard({
       <CardContent className="pb-4 px-5 flex flex-col flex-1">
         <h3
           className={cn(
-            "text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors",
+            "text-xl font-bold text-slate-900 mb-3 group-hover:text-red-700 transition-colors",
             fullHeight ? "leading-relaxed" : "line-clamp-2 leading-snug",
           )}
         >
@@ -64,7 +64,7 @@ export default function DocumentCard({
         <Button
           asChild
           variant="ghost"
-          className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 p-0 h-auto font-semibold text-sm mt-auto self-start group/btn"
+          className="text-red-600 hover:text-red-700 hover:bg-red-50 p-0 h-auto font-semibold text-sm mt-auto self-start group/btn"
         >
           <Link href={link} className="inline-flex items-center gap-2">
             Xem thêm

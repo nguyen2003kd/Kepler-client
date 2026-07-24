@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Loading } from "@/components/common/loading";
 import { Suspense } from "react";
@@ -110,13 +110,13 @@ export default function NewsPage() {
 //   return (
 //     <div className="bg-white">
 //       {/* Hero Section */}
-//       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+//       <section className="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
 //         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 //           <div className="text-center">
 //             <h1 className="text-4xl md:text-5xl font-bold mb-6">
 //               Tin tức & Bài viết
 //             </h1>
-//             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+//             <p className="text-xl md:text-2xl text-red-100 max-w-3xl mx-auto">
 //               Cập nhật thông tin mới nhất về doanh nghiệp vừa và nhỏ
 //             </p>
 //           </div>
@@ -132,7 +132,7 @@ export default function NewsPage() {
 //                 key={index}
 //                 className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
 //                   index === 0
-//                     ? "bg-blue-600 text-white"
+//                     ? "bg-red-600 text-white"
 //                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
 //                 }`}
 //               >
@@ -148,13 +148,13 @@ export default function NewsPage() {
 //         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 //           <div className="bg-white rounded-lg shadow-md overflow-hidden md:flex">
 //             <div className="md:w-1/2 relative h-64 md:h-auto">
-//               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
+//               <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-800 flex items-center justify-center">
 //                 <span className="text-white text-6xl font-bold">SMEQ</span>
 //               </div>
 //             </div>
 
 //             <div className="md:w-1/2 p-8">
-//               <span className="inline-block px-3 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full mb-4">
+//               <span className="inline-block px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full mb-4">
 //                 {featuredNews.category}
 //               </span>
 
@@ -179,7 +179,7 @@ export default function NewsPage() {
 
 //               <a
 //                 href={`/news/${featuredNews.id}`}
-//                 className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+//                 className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
 //               >
 //                 Đọc thêm
 //                 <ArrowRight className="w-4 h-4" />
@@ -202,7 +202,7 @@ export default function NewsPage() {
 //                 key={news.id}
 //                 className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
 //               >
-//                 <div className="relative h-48 bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
+//                 <div className="relative h-48 bg-gradient-to-r from-red-400 to-red-600 flex items-center justify-center">
 //                   <span className="text-white text-4xl font-bold">SMEQ</span>
 //                 </div>
 
@@ -230,7 +230,7 @@ export default function NewsPage() {
 
 //                   <a
 //                     href={`/news/${news.id}`}
-//                     className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm"
+//                     className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium text-sm"
 //                   >
 //                     Đọc thêm
 //                     <ArrowRight className="w-4 h-4" />
@@ -245,7 +245,7 @@ export default function NewsPage() {
 //             <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
 //               Trang trước
 //             </button>
-//             <button className="px-4 py-2 bg-blue-600 text-white rounded-md">
+//             <button className="px-4 py-2 bg-red-600 text-white rounded-md">
 //               1
 //             </button>
 //             <button className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
@@ -262,12 +262,12 @@ export default function NewsPage() {
 //       </section>
 
 //       {/* Newsletter CTA */}
-//       <section className="bg-blue-600 py-16">
+//       <section className="bg-red-600 py-16">
 //         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 //           <h2 className="text-3xl font-bold text-white mb-4">
 //             Đăng ký nhận tin tức mới nhất
 //           </h2>
-//           <p className="text-xl text-blue-100 mb-8">
+//           <p className="text-xl text-red-100 mb-8">
 //             Nhận bản tin hàng tuần về doanh nghiệp vừa và nhỏ
 //           </p>
 //           <div className="max-w-md mx-auto flex gap-2">
@@ -276,7 +276,7 @@ export default function NewsPage() {
 //               placeholder="Email của bạn"
 //               className="flex-1 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-white"
 //             />
-//             <button className="px-6 py-3 bg-white text-blue-600 rounded-md font-medium hover:bg-gray-100 transition-colors">
+//             <button className="px-6 py-3 bg-white text-red-600 rounded-md font-medium hover:bg-gray-100 transition-colors">
 //               Đăng ký
 //             </button>
 //           </div>

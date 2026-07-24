@@ -7,32 +7,32 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  /* Theme Colors - Blue Theme to match CASE-SMQ website */
+  /* Theme Colors - RED THEME #DC2626 */
   --background: 210 40% 98%;
   --foreground: 213 84% 20%;
   --card: 0 0% 100%;
   --card-foreground: 213 84% 20%;
   --popover: 0 0% 100%;
   --popover-foreground: 213 84% 20%;
-  --primary: 213 94% 32%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 199 89% 48%;
-  --secondary-foreground: 210 40% 2%;
+  --primary: 0 72% 51%;
+  --primary-foreground: 0 0% 99%;
+  --secondary: 0 72% 51%;
+  --secondary-foreground: 0 0% 99%;
   --muted: 210 40% 96%;
   --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 199 89% 48%;
-  --accent-foreground: 210 40% 2%;
+  --accent: 0 72% 51%;
+  --accent-foreground: 0 0% 99%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
   --success: 142.1 76.2% 36.3%;
   --success-foreground: 210 40% 98%;
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 213 94% 32%;
+  --ring: 0 72% 51%;
   --radius: 0.5rem;
-  --header-primary: 213 94% 32%;
-  --chart-1: 199 89% 48%;
-  --chart-2: 213 94% 32%;
+  --header-primary: 0 72% 51%;
+  --chart-1: 0 72% 51%;
+  --chart-2: 0 72% 40%;
   --chart-3: 197 37% 24%;
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;

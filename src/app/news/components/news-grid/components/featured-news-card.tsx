@@ -1,4 +1,4 @@
-import { getResponsiveImage } from "@/lib/responsive-image";
+﻿import { getResponsiveImage } from "@/lib/responsive-image";
 import type { PostExtended as PostWithImage } from "@/types/post";
 import parse from "html-react-parser";
 import { ArrowRight, Calendar, Newspaper } from "lucide-react";
@@ -30,7 +30,7 @@ export default function FeaturedNewsCard({ post }: FeaturedNewsCardProps) {
       />
 
       {/* Gradient Overlay - Blue */}
-     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 via-blue-700/15 to-transparent"></div>
+     <div className="absolute inset-0 bg-gradient-to-t from-red-900/50 via-red-700/15 to-transparent"></div>
 
       {/* Content Overlay */}
       <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
@@ -38,7 +38,7 @@ export default function FeaturedNewsCard({ post }: FeaturedNewsCardProps) {
         <div>
           {/* Badge */}
           <div className="mb-3">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white text-xs font-bold rounded-full shadow-xl backdrop-blur-sm border border-white/20 group-hover:scale-105 transition-transform">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-red-500 text-white text-xs font-bold rounded-full shadow-xl backdrop-blur-sm border border-white/20 group-hover:scale-105 transition-transform">
               <Newspaper className="w-4 h-4" />
               MỚI NHẤT
             </span>

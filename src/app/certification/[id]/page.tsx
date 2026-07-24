@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
 // import baseConfig from "@/configs/base";
@@ -64,7 +64,7 @@ export default function CertificationDetailPage({
   if (isLoading || !ready) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-red-600" />
       </div>
     );
   }
@@ -75,7 +75,7 @@ export default function CertificationDetailPage({
         <p className="text-lg">Không tìm thấy chứng nhận.</p>
         <Link
           href="/certification"
-          className="mt-4 text-blue-600 hover:underline"
+          className="mt-4 text-red-600 hover:underline"
         >
           Quay lại danh sách
         </Link>
@@ -153,7 +153,7 @@ export default function CertificationDetailPage({
           {/* Text content */}
           <div className="p-8 md:p-12">
             {/* Title / Describe */}
-            {/* <span className="inline-block text-[10px] font-bold tracking-wider uppercase text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full mb-4">
+            {/* <span className="inline-block text-[10px] font-bold tracking-wider uppercase text-red-600 bg-red-50 px-2.5 py-1 rounded-full mb-4">
               Thông tin chứng nhận
             </span> */}
             <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-6 leading-tight">

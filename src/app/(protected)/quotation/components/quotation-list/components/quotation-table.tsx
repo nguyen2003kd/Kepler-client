@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -127,7 +127,7 @@ export default function QuotationTable({
         </div>
         <Button
           onClick={onCreateNew}
-          className="h-11 bg-blue-600 hover:bg-blue-700"
+          className="h-11 bg-red-600 hover:bg-red-700"
         >
           <FileText className="mr-2 h-4 w-4" />
           {t("createNew")}
@@ -139,8 +139,8 @@ export default function QuotationTable({
         <Card>
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
-              <div className="bg-blue-100 p-3 rounded-lg">
-                <ListChecks className="w-6 h-6 text-blue-600" />
+              <div className="bg-red-100 p-3 rounded-lg">
+                <ListChecks className="w-6 h-6 text-red-600" />
               </div>
               <div>
                 <p className="text-sm text-gray-500">{t("totalRequests")}</p>
@@ -214,7 +214,7 @@ export default function QuotationTable({
         {/* Loading State */}
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-20 px-4">
-            <Loader2 className="w-16 h-16 text-blue-500 animate-spin mb-4" />
+            <Loader2 className="w-16 h-16 text-red-500 animate-spin mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
               {t("loadingTitle")}
             </h3>
@@ -234,7 +234,7 @@ export default function QuotationTable({
             </p>
             <Button
               onClick={onRefetch}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-red-600 hover:bg-red-700"
             >
               <RefreshCw className="mr-2 h-4 w-4" />
               {t("retry")}
@@ -244,8 +244,8 @@ export default function QuotationTable({
           /* Empty State */
           data.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 px-4">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-full mb-6">
-                <FileText className="w-20 h-20 text-blue-500" />
+              <div className="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-full mb-6">
+                <FileText className="w-20 h-20 text-red-500" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">
                 {t("emptyTitle")}
@@ -256,8 +256,8 @@ export default function QuotationTable({
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 px-4">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-full mb-6">
-                <Search className="w-20 h-20 text-blue-500" />
+              <div className="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-full mb-6">
+                <Search className="w-20 h-20 text-red-500" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">
                 {t("noResultsTitle")}
@@ -270,7 +270,7 @@ export default function QuotationTable({
                 {searchQuery && (
                   <Badge
                     variant="secondary"
-                    className="bg-blue-50 text-blue-700 hover:bg-blue-50 px-4 py-2 text-sm font-normal"
+                    className="bg-red-50 text-red-700 hover:bg-red-50 px-4 py-2 text-sm font-normal"
                   >
                     <span className="text-gray-600">{t("filterKeyword")}</span>
                     <span className="ml-2 font-semibold">
@@ -281,7 +281,7 @@ export default function QuotationTable({
                 {statusFilter !== "all" && (
                   <Badge
                     variant="secondary"
-                    className="bg-blue-50 text-blue-700 hover:bg-blue-50 px-4 py-2 text-sm font-normal"
+                    className="bg-red-50 text-red-700 hover:bg-red-50 px-4 py-2 text-sm font-normal"
                   >
                     <span className="text-gray-600">{t("filterStatus")}</span>
                     <span className="ml-2 font-semibold">{statusFilter}</span>
@@ -357,9 +357,9 @@ export default function QuotationTable({
                         variant="ghost"
                         size="sm"
                         onClick={() => onViewDetails(item)}
-                        className="hover:bg-blue-50"
+                        className="hover:bg-red-50"
                       >
-                        <Eye className="h-4 w-4 text-gray-400 group-hover:text-blue-600 hover:text-blue-600" />
+                        <Eye className="h-4 w-4 text-gray-400 group-hover:text-red-600 hover:text-red-600" />
                       </Button>
                     </TableCell>
                   </TableRow>

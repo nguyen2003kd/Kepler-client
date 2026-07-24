@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
@@ -24,7 +24,7 @@ export default function QuotationPopupTrigger({
   return (
     <Button
       onClick={onClick}
-      className="fixed bottom-20 right-3 h-[52px] w-[52px] rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all hover:scale-105 z-50 border-2 border-blue-400 hover:border-blue-300 p-0"
+      className="fixed bottom-20 right-3 h-[52px] w-[52px] rounded-full bg-red-600 hover:bg-red-700 shadow-lg hover:shadow-xl transition-all hover:scale-105 z-50 border-2 border-red-400 hover:border-red-300 p-0"
       aria-label={t("requestQuote")}
     >
       <MessageSquare className="h-5 w-5" />

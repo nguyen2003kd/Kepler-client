@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import {
@@ -119,8 +119,8 @@ export function WorkScheduleCalendar({
                   'group relative flex aspect-square cursor-pointer flex-col items-center justify-center rounded-xl text-sm font-medium transition-colors',
                   !isCurrentMonth && 'text-slate-300 dark:text-zinc-700',
                   isCurrentMonth && !isSelected && !isDayToday && 'text-slate-700 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-800',
-                  isDayToday && !isSelected && 'bg-blue-50/50 text-blue-600 hover:bg-blue-50 dark:bg-blue-500/10 dark:text-blue-400 dark:hover:bg-blue-500/20',
-                  isSelected && 'bg-blue-600 text-white shadow-md shadow-blue-500/25 dark:bg-blue-600 dark:shadow-blue-900/20'
+                  isDayToday && !isSelected && 'bg-red-50/50 text-red-600 hover:bg-red-50 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20',
+                  isSelected && 'bg-red-600 text-white shadow-md shadow-red-500/25 dark:bg-red-600 dark:shadow-red-900/20'
                 )}
               >
                 <span className={cn('z-10', isDayToday && !isSelected && 'font-bold')}>{format(day, 'd')}</span>
@@ -140,7 +140,7 @@ export function WorkScheduleCalendar({
                       <div
                         className={cn(
                           'h-1 w-1 md:h-1.5 md:w-1.5 rounded-full',
-                          isSelected ? 'bg-white/90' : 'bg-blue-500 dark:bg-blue-400'
+                          isSelected ? 'bg-white/90' : 'bg-red-500 dark:bg-red-400'
                         )}
                       />
                     )}
@@ -158,7 +158,7 @@ export function WorkScheduleCalendar({
             <span>Lịch Sáng</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-blue-500 dark:bg-blue-400"></div>
+            <div className="h-2 w-2 rounded-full bg-red-500 dark:bg-red-400"></div>
             <span>Lịch Chiều</span>
           </div>
         </div>

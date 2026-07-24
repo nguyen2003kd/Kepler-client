@@ -1,4 +1,4 @@
-import {
+﻿import {
   FormControl,
   FormField,
   FormItem,
@@ -21,7 +21,7 @@ export default function InvoiceInfoSection({ form }: InvoiceInfoSectionProps) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <div className="flex-shrink-0 w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+        <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center">
           <Receipt className="w-5 h-5" />
         </div>
         <div className="flex-1">

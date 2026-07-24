@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
 import { useGetApiV10Category } from "@/api/endpoints/category";
@@ -89,7 +89,7 @@ export default function CertificationPage() {
   if (isLoading || !ready) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-red-600" />
       </div>
     );
   }
@@ -103,13 +103,13 @@ export default function CertificationPage() {
         className="relative bg-cover bg-center bg-no-repeat pt-20 pb-28 overflow-hidden"
         style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0C2449]/95 via-[#0C2449]/80 to-[#283B80]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0C2449]/95 via-[#0C2449]/80 to-[#DC2626]/40" />
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight drop-shadow-sm">
             {t("capability")}
           </h1>
           {/* {config?.describe && (
-            <p className="max-w-3xl mx-auto text-base md:text-lg text-blue-100 font-light opacity-90 leading-relaxed">
+            <p className="max-w-3xl mx-auto text-base md:text-lg text-red-100 font-light opacity-90 leading-relaxed">
               {config.describe}
             </p>
           )} */}
@@ -142,8 +142,8 @@ export default function CertificationPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-2">
                 {/* Left: Title */}
                 <div className="flex items-start gap-3">
-                  <div className="bg-blue-50 p-2.5 rounded-lg mt-0.5">
-                    <Newspaper className="w-7 h-7 text-blue-600" />
+                  <div className="bg-red-50 p-2.5 rounded-lg mt-0.5">
+                    <Newspaper className="w-7 h-7 text-red-600" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-gray-900">
@@ -173,7 +173,7 @@ export default function CertificationPage() {
                     className="group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5"
                   >
                     {/* Logo Container */}
-                    <div className="relative w-full aspect-square max-w-[180px] bg-white rounded-full border border-slate-200/80 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-blue-200 transition-all duration-300 mb-4">
+                    <div className="relative w-full aspect-square max-w-[180px] bg-white rounded-full border border-slate-200/80 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-red-200 transition-all duration-300 mb-4">
                       {item.img ? (
                         <div className="relative w-3/4 h-3/4">
                           <Image
@@ -204,7 +204,7 @@ export default function CertificationPage() {
 
                     {/* Content Details */}
                     <div className="max-w-[280px]">
-                      <h3 className="text-sm font-medium text-slate-700 leading-relaxed group-hover:text-blue-600 transition-colors duration-200">
+                      <h3 className="text-sm font-medium text-slate-700 leading-relaxed group-hover:text-red-600 transition-colors duration-200">
                         {item["describe-img"]}
                       </h3>
                     </div>

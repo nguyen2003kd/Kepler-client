@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import DocumentCard from "@/app/(home)/_views/components/document-card";
@@ -97,7 +97,7 @@ export default function DocumentsSection() {
   }
 
   return (
-    <section className="bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-16">
+    <section className="bg-gradient-to-br from-red-50 via-white to-red-50 py-16">
       <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
         <div className="mx-4 md:mx-8 lg:mx-10">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -111,12 +111,12 @@ export default function DocumentsSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                   >
-                    <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 bg-clip-text text-transparent uppercase">
+                    <span className="bg-gradient-to-r from-red-300 via-red-300 to-red-300 bg-clip-text text-transparent uppercase">
                       {t("capabilities")}
                     </span>
                   </motion.h2>
                   <motion.div
-                    className="w-28 h-1 rounded-full bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300 "
+                    className="w-28 h-1 rounded-full bg-gradient-to-r from-red-300 via-red-300 to-red-300 "
                     initial={{ width: 0 }}
                     whileInView={{ width: 112 }}
                     viewport={{ once: true }}
@@ -137,7 +137,7 @@ export default function DocumentsSection() {
                   <ContentSidebar
                     title={t("newCapabilitiesInfo")}
                     items={latestDocuments}
-                    className="bg-gradient-to-br from-cyan-50 to-blue-100 border border-cyan-200 shadow-md"
+                    className="bg-gradient-to-br from-red-50 to-red-100 border border-cyan-200 shadow-md"
                     maxHeight="500px"
                   />
                 </div>
@@ -247,7 +247,7 @@ export default function DocumentsSection() {
               <ContentSidebar
                 title={t("newCapabilitiesInfo")}
                 items={latestDocuments}
-                className="bg-gradient-to-br from-cyan-50 to-blue-100 border border-cyan-200 shadow-md"
+                className="bg-gradient-to-br from-red-50 to-red-100 border border-cyan-200 shadow-md"
                 maxHeight="500px"
               />
             </div>

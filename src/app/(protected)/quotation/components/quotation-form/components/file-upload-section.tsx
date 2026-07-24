@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -82,7 +82,7 @@ export default function FileUpload({ files, setFiles }: FileUploadProps) {
 
   const getFileIcon = (type: string) => {
     if (type.startsWith("image/")) {
-      return <FileImage className="h-5 w-5 text-blue-500" />;
+      return <FileImage className="h-5 w-5 text-red-500" />;
     }
     return <FileText className="h-5 w-5 text-gray-500" />;
   };
@@ -90,7 +90,7 @@ export default function FileUpload({ files, setFiles }: FileUploadProps) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <div className="flex-shrink-0 w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+        <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center">
           <Paperclip className="w-5 h-5" />
         </div>
         <div className="flex-1">
@@ -107,7 +107,7 @@ export default function FileUpload({ files, setFiles }: FileUploadProps) {
           type="button"
           variant="outline"
           onClick={() => fileInputRef.current?.click()}
-          className="gap-2 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
+          className="gap-2 hover:bg-red-50 hover:text-red-700 hover:border-red-300"
         >
           <Upload className="h-4 w-4" />
           {t("selectFile")}
@@ -138,7 +138,7 @@ export default function FileUpload({ files, setFiles }: FileUploadProps) {
                     </p>
                     <Badge
                       variant="secondary"
-                      className="text-[10px] mt-1 bg-blue-50 text-blue-700 hover:bg-blue-50"
+                      className="text-[10px] mt-1 bg-red-50 text-red-700 hover:bg-red-50"
                     >
                       {formatFileSize(file.size)}
                     </Badge>

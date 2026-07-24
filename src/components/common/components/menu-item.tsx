@@ -136,8 +136,8 @@ const menuItemTriggerVariant = cva(
     variants: {
       variant: {
         main: cn(
-          "text-blue-800 !text-base !font-medium tracking-tight hover:text-blue-600 hover:bg-gray-100 hover:rounded-full uppercase",
-          "aria-selected:text-white aria-selected:!font-semibold aria-selected:bg-blue-600 aria-selected:rounded-full aria-selected:shadow-md"
+          "text-red-800 !text-base !font-medium tracking-tight hover:text-red-600 hover:bg-gray-100 hover:rounded-full uppercase",
+          "aria-selected:text-white aria-selected:!font-semibold aria-selected:bg-red-600 aria-selected:rounded-full aria-selected:shadow-md"
         ),
         secondary: cn(
           "text-primary border-t-2 border-t-transparent rounded-none",
@@ -176,7 +176,7 @@ const menuItemChildVariant = cva(
   {
     variants: {
       variant: {
-        main: "text-blue-600 hover:text-blue-700 hover:bg-blue-50",
+        main: "text-red-600 hover:text-red-700 hover:bg-red-50",
         secondary: "text-accent-foreground hover:text-primary/90",
       },
     },
