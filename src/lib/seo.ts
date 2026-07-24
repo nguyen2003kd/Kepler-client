@@ -18,7 +18,7 @@ interface SeoProps {
 export function constructMetadata({
   title,
   description = "Kepler Property cung cấp thông tin mua bán, cho thuê và dự án bất động sản, đồng thời hỗ trợ khách hàng trong quá trình tìm kiếm, tư vấn và thực hiện giao dịch.",
-  image = "/images/seo.png",
+  image = "/seo.png",
   url = "",
   type = 'website',
   keywords = [],
@@ -93,9 +93,9 @@ export function constructMetadata({
 
     icons: {
       icon: [
-        { url: "/images/icon.png", type: "image/png" },
+        { url: "/icon.png", type: "image/png" },
       ],
-      shortcut: "/images/icon.png",
+      shortcut: "/icon.png",
     },
 
     // Additional meta for Vietnamese market

@@ -148,7 +148,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
     ? getResponsiveImage(logoInfo.file.compress_info)
     : logoInfo?.file?.path
       ? `${links.storageEndpoint}${logoInfo.file.path}`
-      : "/images/service-1.png";
+      : "/logo.png";
 
   // Smooth scroll navigation
   const scrollMenu = (direction: "left" | "right") => {
@@ -755,7 +755,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   >
                     <Image
                       src={logoUrl}
-                      alt={logoInfo?.name || "Techport Logo"}
+                      alt={logoInfo?.name || "Kepler Property Logo"}
                       fill
                       className="object-contain object-left"
                       priority

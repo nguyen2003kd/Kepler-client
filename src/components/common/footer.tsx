@@ -45,12 +45,12 @@ const Footer = () => {
   const footerData = (data?.responseData?.rows?.[0] as FooterType) || null;
   const logoInfo = logoData?.responseData?.rows?.[0] as LogoWithFile;
   const logoUrl = isLogoError
-    ? "/images/service-1.png"
+    ? "/logo.png"
     : logoInfo?.file?.compress_info
       ? getResponsiveImage(logoInfo.file.compress_info)
       : logoInfo?.file?.path
         ? `${links.storageEndpoint}${logoInfo.file.path}`
-        : "/images/service-1.png";
+        : "/logo.png";
 
   const addresses =
     footerData?.address && footerData.address.length > 0
@@ -88,7 +88,7 @@ const Footer = () => {
             <div className="w-[150px] h-[60px] relative">
               <Image
                 src={logoUrl}
-                alt={logoInfo?.name || "Logo"}
+                alt={logoInfo?.name || "Kepler Property Logo"}
                 fill
                 className="object-contain drop-shadow-md"
               />
