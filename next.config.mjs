@@ -29,8 +29,21 @@ const nextConfig = {
         protocol: "https",
         hostname: "case-smq.vn",
         pathname: "/_next/image/**",
-      }
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        pathname: "/**",
+      },
     ],
+  },
+   async rewrites() {
+    return [
+      {
+        source: "/admin/:path*",
+        destination: "https://kepler-admin.vercel.app/admin/:path*",
+      },
+    ];
   },
 };
 
