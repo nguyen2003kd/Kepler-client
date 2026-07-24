@@ -17,7 +17,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "smeq-dev.meucorp.com",
+        hostname: "kepler-dev.meucorp.com",
         pathname: "/api/storage/uploads/**",
       },
       {
