@@ -18,9 +18,13 @@
   "hotline": "Hotline",
   "hi": "Hi",
   "user": "User",
-  "aboutOverview": "ABOUT OVERVIEW",
-  "functionsResponsibilities": "FUNCTIONS & RESPONSIBILITIES",
-  "organizationalChart": "ORGANIZATIONAL CHART",
-  "historyDevelopment": "HISTORY & DEVELOPMENT",
-  "branchesOffices": "BRANCHES & OFFICES"
+  "aboutOverview": "Overview",
+  "aboutVisionMission": "Vision & Mission",
+  "aboutCoreValues": "Core Values",
+  "aboutHistory": "Development History",
+  "aboutOrganizationalChart": "Organizational Structure",
+  "aboutExpertCouncil": "Expert Council",
+  "aboutBoardOfDirectors": "Board of Directors",
+  "aboutBranchesOffices": "Headquarters & Offices",
+  "aboutCertifications": "Certifications & Licenses"
 }
