@@ -10,7 +10,7 @@ test_job:
   tags:
     - runner-vpd-que
   only:
-    - release/product
+    - release/staging
 
 build_job:
   stage: build
