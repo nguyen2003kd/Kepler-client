@@ -1,7 +1,6 @@
 "use client";
 import { useGetApiV10Logo } from "@/api/endpoints/logo";
 import { useGetApiV10Category } from "@/api/endpoints/category";
-import { useDragScroll } from "@/hooks/use-drag-scroll";
 import "@/i18n";
 import { cn } from "@/lib/utils";
 import useAuthStore from "@/stores/auth-store";
@@ -31,7 +30,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useDragScroll } from "@/hooks/use-drag-scroll";
 import { useTranslation } from "react-i18next";
 interface HeaderProps {
   navItems?: NavItem[];
@@ -102,55 +102,16 @@ export default function Header({ navItems = [], className }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
-  const headerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { ref: navRef, isDragging } = useDragScroll<HTMLElement>();
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
-  const [isContentSettled, setIsContentSettled] = useState(false);
 
-  // Delay content centering after scroll
-  useEffect(() => {
-    if (isScrolled) {
-      const timer = setTimeout(() => setIsContentSettled(true), 300);
-      return () => clearTimeout(timer);
-    } else {
-      setIsContentSettled(false);
-    }
-  }, [isScrolled]);
-
-  // Check scroll position to show/hide arrows
-  const checkScrollPosition = () => {
-    if (navRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = navRef.current;
-      setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
-    }
-  };
-
-  // Handle mouse wheel scroll with smooth animation
-  const handleWheel = (e: WheelEvent) => {
-    if (navRef.current && !isDragging) {
-      e.preventDefault();
-      const scrollAmount = e.deltaY * 0.8; // Smooth multiplier
-      navRef.current.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
   const { data: logoData } = useGetApiV10Logo({
     filters: "is_active==true",
   });
 
-  const logoInfo = logoData?.responseData?.rows?.[0] as LogoWithFile;
-  const logoUrl = logoInfo?.file?.compress_info
-    ? getResponsiveImage(logoInfo.file.compress_info)
-    : logoInfo?.file?.path
-      ? `${links.storageEndpoint}${logoInfo.file.path}`
-      : "/logo.png";
-
-  // Smooth scroll navigation
+  // Scroll navigation functions
   const scrollMenu = (direction: "left" | "right") => {
     if (navRef.current) {
       const scrollAmount = 200;
@@ -160,6 +121,44 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       });
     }
   };
+
+  const checkScrollPosition = () => {
+    if (navRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = navRef.current;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  const handleWheel = (e: WheelEvent) => {
+    if (navRef.current && !isDragging) {
+      e.preventDefault();
+      const scrollAmount = e.deltaY * 0.8;
+      navRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (nav) {
+      checkScrollPosition();
+      nav.addEventListener("scroll", checkScrollPosition);
+      nav.addEventListener("wheel", handleWheel as EventListener, { passive: false });
+      window.addEventListener("resize", checkScrollPosition);
+      return () => {
+        nav.removeEventListener("scroll", checkScrollPosition);
+        nav.removeEventListener("wheel", handleWheel as EventListener);
+        window.removeEventListener("resize", checkScrollPosition);
+      };
+    }
+  }, [isDragging]);
+
+  const logoInfo = logoData?.responseData?.rows?.[0] as LogoWithFile;
+  const logoUrl = logoInfo?.file?.compress_info
+    ? getResponsiveImage(logoInfo.file.compress_info)
+    : logoInfo?.file?.path
+      ? `${links.storageEndpoint}${logoInfo.file.path}`
+      : "/logo.png";
 
   // Fetch categories from API with current language
   const { i18n } = useTranslation();
@@ -183,15 +182,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery("");
-      setIsMobileMenuOpen(false);
-    }
-  };
 
   const defaultNavItems: NavItem[] = [
     {
@@ -579,35 +569,32 @@ export default function Header({ navItems = [], className }: HeaderProps) {
     contactItem,
   ];
 
-  // Check scroll arrows visibility
+  // Close mobile menu on route change
   useEffect(() => {
-    const nav = navRef.current;
-    if (nav) {
-      checkScrollPosition();
-      nav.addEventListener("scroll", checkScrollPosition);
-      nav.addEventListener("wheel", handleWheel as EventListener, {
-        passive: false,
-      });
-      window.addEventListener("resize", checkScrollPosition);
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
-      return () => {
-        nav.removeEventListener("scroll", checkScrollPosition);
-        nav.removeEventListener("wheel", handleWheel as EventListener);
-        window.removeEventListener("resize", checkScrollPosition);
-      };
-    }
-  }, [navigation, isDragging,checkScrollPosition, handleWheel, navRef]);
+  const handleSearch = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (searchQuery.trim()) {
+        router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+        setSearchQuery("");
+        setIsMobileMenuOpen(false);
+      }
+    },
+    [router, searchQuery],
+  );
 
   return (
-    <div className="h-[84px] md:h-[120px] lg:h-[148px]">
+    <div className="h-[68px] md:h-[80px] lg:h-[84px]">
       <header
-        ref={headerRef}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
           className,
         )}
       >
-        {/* Top Header - ẩn khi cuộn xuống nhé*/}
+        {/* === TOP BAR (đỏ) — Hotline + Quick links + Search + Language + Auth === */}
         <div
           className={cn(
             "bg-[#DC2626] text-white overflow-hidden",
@@ -618,7 +605,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         >
           <div className="max-w-screen-2xl mx-auto px-3 sm:px-6 lg:px-24">
             <div className="flex items-center justify-between h-12">
-              {/* Left side  */}
+              {/* Left side */}
               <a
                 href="tel:18001105"
                 className="flex md:hidden items-center gap-1.5 text-[13px] hover:text-red-200 transition-colors"
@@ -672,7 +659,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                       placeholder={t("search")}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-64 pl-4 pr-10 py-1.5 text-sm bg-white/10  rounded-full text-white placeholder:text-white/60 focus:outline-none focus:bg-white/20 focus:border-white/40 transition-all"
+                      className="w-64 pl-4 pr-10 py-1.5 text-sm bg-white/10 rounded-full text-white placeholder:text-white/60 focus:outline-none focus:bg-white/20 focus:border-white/40 transition-all"
                     />
                     <button
                       type="submit"
@@ -689,7 +676,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 </div>
 
                 {/* Separator */}
-
                 <div className="hidden md:block h-4 w-px bg-white/30"></div>
 
                 {/* Auth Section */}
@@ -715,7 +701,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                         {t("quotation")}
                       </span>
                     </Link>
-                    {/* Avatar  */}
+                    {/* Avatar */}
                     <div className="scale-[0.85] md:scale-90">
                       <UserNav
                         user={{
@@ -759,13 +745,13 @@ export default function Header({ navItems = [], className }: HeaderProps) {
           </div>
         </div>
 
-        {/* Bottom Header  */}
+        {/* === MAIN BAR (trắng) — Logo + Nav + Mobile menu === */}
         <div
           className={cn(
             "bg-white border-b border-gray-200 overflow-hidden",
             isScrolled
-              ? "py-2.5 shadow-[0_4px_12px_0_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out delay-200"
-              : "py-3 md:py-4 lg:py-6 shadow-sm transition-all duration-200 ease-in-out",
+              ? "py-2 shadow-[0_4px_12px_0_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out"
+              : "py-2 md:py-3 lg:py-3 shadow-sm transition-all duration-200 ease-in-out",
           )}
         >
           <div className="max-w-screen-2xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24">
@@ -773,29 +759,22 @@ export default function Header({ navItems = [], className }: HeaderProps) {
               className={cn(
                 "relative flex flex-row justify-between transition-all duration-500 ease-in-out",
                 isScrolled
-                  ? isContentSettled
-                    ? "items-center translate-y-0"
-                    : "items-end translate-y-2"
-                  : "items-center translate-y-0",
+                  ? "items-center"
+                  : "items-center",
               )}
             >
               {/* Logo */}
               <div className="flex-shrink-0 z-10">
-                <Link
-                  href="/"
-                  className="flex items-center h-12 overflow-visible"
-                >
+                <Link href="/" className="flex items-center h-10 md:h-12 lg:h-12 overflow-visible">
                   <div
                     className={cn(
-                      "relative w-28 sm:w-32 md:w-40 lg:w-44 h-10 sm:h-12 md:h-13 lg:h-14 -my-1 origin-left transition-all ease-in-out",
-                      isScrolled
-                        ? "scale-90 duration-500 delay-300 drop-shadow-md"
-                        : "scale-100 duration-300 drop-shadow-none",
+                      "relative w-28 sm:w-32 md:w-36 lg:w-40 h-9 sm:h-10 md:h-11 lg:h-11 origin-left transition-all duration-300",
+                      isScrolled ? "scale-90 drop-shadow-md" : "scale-100 drop-shadow-none",
                     )}
                   >
                     <Image
                       src={logoUrl}
-                      alt={logoInfo?.name || "Kepler Property Logo"}
+                      alt={logoInfo?.name || "Logo"}
                       fill
                       className="object-contain object-left"
                       priority
@@ -804,31 +783,22 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 </Link>
               </div>
 
-              {/* Navigation Menu - Desktop */}
-              <div className="hidden lg:flex items-center flex-1 min-w-0 justify-start ml-12 relative group">
-                {/* Left Arrow */}
+              {/* Navigation Menu - Desktop with Scroll */}
+              <div className="hidden lg:flex items-center flex-1 min-w-0 justify-start ml-8 relative group">
                 {showLeftArrow && (
                   <button
                     onClick={() => scrollMenu("left")}
                     className="absolute left-0 z-30 p-2 bg-gradient-to-r from-white via-white to-transparent hover:from-red-50 transition-all duration-200 opacity-0 group-hover:opacity-100"
                     aria-label="Scroll left"
                   >
-                    <ChevronDown className="w-5 h-5 text-red-600 rotate-90" />
+                    <ChevronDown className="w-5 h-5 text-[#DC2626] rotate-90" />
                   </button>
                 )}
 
                 <nav
                   ref={navRef}
-                  className={cn(
-                    "flex items-center justify-start gap-0.5 transition-all duration-500 ease-out overflow-x-auto scrollbar-hide py-2 px-4",
-                    "select-none scroll-smooth",
-                    "hover:shadow-inner hover:bg-gradient-to-r hover:from-red-50/30 hover:via-transparent hover:to-red-50/30",
-                    isDragging ? "cursor-grabbing" : "cursor-grab",
-                  )}
-                  style={{
-                    scrollbarWidth: "none",
-                    msOverflowStyle: "none",
-                  }}
+                  className="hidden lg:flex items-center flex-1 min-w-0 justify-start overflow-x-auto scrollbar-hide py-2 px-4 select-none scroll-smooth"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
                   {finalNav.map((item) => (
                     <MenuItem
@@ -840,85 +810,98 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   ))}
                 </nav>
 
-                {/* Right Arrow */}
                 {showRightArrow && (
                   <button
                     onClick={() => scrollMenu("right")}
                     className="absolute right-0 z-30 p-2 bg-gradient-to-l from-white via-white to-transparent hover:from-red-50 transition-all duration-200 opacity-0 group-hover:opacity-100"
                     aria-label="Scroll right"
                   >
-                    <ChevronDown className="w-5 h-5 text-red-600 -rotate-90" />
+                    <ChevronDown className="w-5 h-5 text-[#DC2626] -rotate-90" />
                   </button>
                 )}
               </div>
 
               {/* Mobile & Tablet menu button */}
               <div className="lg:hidden flex items-center gap-2">
-                {/* Language Switcher - Only on mobile */}
                 <div className="md:hidden p-1 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors border border-gray-300 scale-90">
                   <LanguageSwitcher />
                 </div>
-
                 <button
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(true)}
+                  className="p-2 text-gray-600 hover:text-red-600 transition-colors"
+                  aria-label="Menu"
                 >
-                  {isMobileMenuOpen ? (
-                    <X className="w-6 h-6" />
-                  ) : (
-                    <Menu className="w-6 h-6" />
-                  )}
+                  <Menu className="w-6 h-6" />
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* === MOBILE DRAWER (slide-in from right) === */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 bg-white">
-            {/* Mobile Search */}
-            <form
-              onSubmit={handleSearch}
-              className="px-4 py-3 border-b border-gray-200"
-            >
-              <div className="flex items-center gap-2 rounded-lg border border-gray-300 overflow-hidden bg-white">
-                <input
-                  type="text"
-                  placeholder={t("searchPlaceholder")}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="flex-1 px-4 py-2.5 text-sm focus:outline-none"
-                />
+          <>
+            {/* Backdrop */}
+            <div
+              className="lg:hidden fixed inset-0 z-[55] bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            {/* Drawer */}
+            <div className="lg:hidden fixed top-0 right-0 bottom-0 z-[56] w-[85%] max-w-sm bg-white shadow-2xl animate-in slide-in-from-right duration-300 overflow-y-auto">
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+                <span className="text-lg font-semibold text-gray-900">Menu</span>
                 <button
-                  type="submit"
-                  className="px-3 py-2.5 hover:bg-gray-50 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
                 >
-                  <Search className="w-5 h-5 text-gray-500" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
-            </form>
 
-            {/* Mobile Navigation */}
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {finalNav.map((item) => (
-                <Link
-                  key={item.link}
-                  href={item.link}
-                  className="block px-3 py-2 text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md text-base font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                  {item.badge && (
-                    <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-600">
-                      {item.badge}
-                    </span>
-                  )}
-                </Link>
-              ))}
+              {/* Mobile Search */}
+              <form
+                onSubmit={handleSearch}
+                className="px-5 py-4 border-b border-gray-200"
+              >
+                <div className="flex items-center gap-2 rounded-lg border border-gray-300 overflow-hidden bg-white">
+                  <input
+                    type="text"
+                    placeholder={t("searchPlaceholder")}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="flex-1 px-4 py-2.5 text-sm focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="px-3 py-2.5 hover:bg-gray-50 transition-colors"
+                  >
+                    <Search className="w-5 h-5 text-gray-500" />
+                  </button>
+                </div>
+              </form>
 
-              {/* Mobile Auth Section with Skeleton Loading */}
-              <div className="border-t border-gray-200 pt-4 mt-4 space-y-2">
+              {/* Mobile Navigation */}
+              <div className="px-3 pt-2 pb-3 space-y-1">
+                {finalNav.map((item) => (
+                  <Link
+                    key={item.link}
+                    href={item.link}
+                    className="block px-3 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg text-base font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                    {item.badge && (
+                      <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-600">
+                        {item.badge}
+                      </span>
+                    )}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Mobile Auth Section */}
+              <div className="border-t border-gray-200 px-5 pt-4 pb-6 space-y-2">
                 {!isMounted ? (
                   <>
                     <Skeleton className="h-14 w-full rounded-md" />
@@ -927,13 +910,13 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   </>
                 ) : isAuthenticated ? (
                   <>
-                    <div className="px-3 py-2 bg-gray-50 rounded-md">
-                      <p className="text-sm font-medium text-gray-900">
+                    <div className="px-3 py-3 bg-gray-50 rounded-lg">
+                      <p className="text-sm font-semibold text-gray-900">
                         {`${first_name || ""} ${last_name || ""}`.trim() ||
                           email ||
                           t("user")}
                       </p>
-                      <p className="text-xs text-gray-500">{email}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{email}</p>
                     </div>
                     <Link
                       href="/quotation"
@@ -945,27 +928,24 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                     </Link>
                     <Link
                       href="/user"
-                      className="block px-3 py-2 text-center text-gray-700 border border-gray-300 rounded-md font-medium hover:bg-gray-50"
+                      className="block px-3 py-2 text-center text-gray-700 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {t("profile")}
                     </Link>
-
-                    
                   </>
-                  
                 ) : (
                   <>
                     <Link
                       href="/login"
-                      className="block px-3 py-2 text-center text-red-600 border border-red-600 rounded-md font-medium"
+                      className="block px-3 py-2.5 text-center text-red-600 border border-red-600 rounded-lg font-medium hover:bg-red-50 transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {t("login")}
                     </Link>
                     <Link
                       href="/register"
-                      className="block px-3 py-2 text-center text-white bg-red-600 rounded-md font-medium"
+                      className="block px-3 py-2.5 text-center text-white bg-red-600 rounded-lg font-medium hover:bg-red-700 transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {t("register")}
@@ -974,7 +954,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 )}
               </div>
             </div>
-          </div>
+          </>
         )}
       </header>
     </div>
