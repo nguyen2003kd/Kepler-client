@@ -59,7 +59,7 @@ export default function HeroBanner() {
   const autoplayDelay = React.useMemo(() => {
     const delay = banners[0]?.display_time
       ? parseInt(banners[0].display_time, 10)
-      : 5000;
+      : 1000;
     return delay > 0 ? delay : 1000;
   }, [banners]);
 
@@ -72,7 +72,7 @@ export default function HeroBanner() {
       id: banner.id || "",
       image: getThumbnailSrc(
         banner.file?.compress_info,
-        banner.file?.path,
+        banner.file?.path ?? banner.img_url,
         "/seo.png",
       ),
       alt: banner.name || "Banner",
