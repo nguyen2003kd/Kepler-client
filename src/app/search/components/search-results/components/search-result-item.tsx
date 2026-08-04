@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import { getThumbnailSrc } from "@/lib/responsive-image";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import Link from "next/link";
 import type { SearchResult } from "../../../libs/types";
 import parse from 'html-react-parser';

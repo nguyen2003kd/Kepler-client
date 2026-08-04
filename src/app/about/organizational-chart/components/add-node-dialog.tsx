@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -283,6 +283,11 @@ export function AddNodeDialog({
                           alt="Avatar preview"
                           width={64}
                           height={64}
+                          onError={(event) => {
+                            if (event.currentTarget.src !== `${window.location.origin}/seo.png`) {
+                              event.currentTarget.src = '/seo.png';
+                            }
+                          }}
                           className="h-16 w-16 rounded-full border object-cover"
                         />
                         <p className="text-xs text-gray-600 break-all">{field.value}</p>

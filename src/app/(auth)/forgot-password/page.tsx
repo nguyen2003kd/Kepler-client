@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "@/components/ui/toaster";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ResetPasswordStep from "./_components/ResetPasswordStep";
