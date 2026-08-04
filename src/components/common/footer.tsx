@@ -96,7 +96,7 @@ const Footer = () => {
             <div>
               <h6 className="text-sm font-bold mb-2 leading-relaxed text-foreground">
                 {footerData?.description ||
-                  "TRUNG TÂM DỊCH VỤ PHÂN TÍCH THÍ NGHIỆM VÀ TIÊU CHUẨN ĐO LƯỜNG CHẤT LƯỢNG THÀNH PHỐ HỒ CHÍ MINH"}
+                  "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất"}
               </h6>
               {footerData?.sub_description && (
                 <p className="text-sm text-muted-foreground leading-relaxed">
