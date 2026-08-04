@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useGetApiV10Category } from "@/api/endpoints/category";
 import { useGetApiV10Post } from "@/api/endpoints/post";
@@ -14,7 +14,7 @@ import { mockPosts } from "@/utils/mock-data";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";

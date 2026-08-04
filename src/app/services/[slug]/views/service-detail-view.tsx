@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   useGetApiV10Post,
@@ -42,7 +42,7 @@ import {
   Twitter,
   User,
 } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";

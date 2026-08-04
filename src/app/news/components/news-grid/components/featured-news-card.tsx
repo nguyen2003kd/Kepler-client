@@ -1,8 +1,8 @@
-﻿import { getResponsiveImage } from "@/lib/responsive-image";
+import { getResponsiveImage } from "@/lib/responsive-image";
 import type { PostExtended as PostWithImage } from "@/types/post";
 import parse from "html-react-parser";
 import { ArrowRight, Calendar, Newspaper } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import baseConfig from "@/configs/base";
 interface FeaturedNewsCardProps {
   post: PostWithImage;

@@ -6,7 +6,7 @@ import baseConfig from "@/configs/base";
 import { DynamicIcon } from "@/utils/dynamic-icon";
 import parse from "html-react-parser";
 import { Building2, MapPin, Phone } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import { useTranslation } from "react-i18next";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -422,7 +422,7 @@ export default function Introduction() {
     : parseBlocks((data?.responseData?.rows as PageConfig[]) ?? [], configKey);
 
   return (
-    <section className="bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] py-16">
+    <section className="bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] py-16">
       <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
         <div className="mx-4 md:mx-8 lg:mx-10 space-y-10">
           {blocks.map((block) => (

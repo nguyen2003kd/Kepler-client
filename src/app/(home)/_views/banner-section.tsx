@@ -4,12 +4,41 @@ import { useGetApiV10Banner } from "@/api/endpoints/banner";
 import { Banner } from "@/api/models/banner";
 import { File } from "@/api/models/file";
 import { getThumbnailSrc } from "@/lib/responsive-image";
-import Image from "next/image";
+// import { ArrowRight } from "lucide-react";
+import Image from "@/components/common/safe-image";
+// import Link from "next/link";
 import * as React from "react";
 
 interface BannerWithFile extends Banner {
   file?: File;
 }
+
+// const HERO_CONTENT = [
+//   {
+//     heading: "Kepler Property",
+//     subheading: "Nền tảng BĐS hàng đầu Việt Nam",
+//     description:
+//       "Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất.",
+//     link: "/apartments-for-sale",
+//     linkText: "Xem tin đăng",
+//   },
+//   {
+//     heading: "Dự án nổi bật",
+//     subheading: "Vinhomes Grand Park & hơn thế nữa",
+//     description:
+//       "Khám phá các dự án BĐS chất lượng cao với tiện ích đầy đủ, vị trí đắc địa.",
+//     link: "/projects",
+//     linkText: "Xem dự án",
+//   },
+//   {
+//     heading: "Tin tức BĐS",
+//     subheading: "Cập nhật thị trường mỗi ngày",
+//     description:
+//       "Theo dõi xu hướng thị trường, quy hoạch và tư vấn đầu tư BĐS mới nhất.",
+//     link: "/news",
+//     linkText: "Đọc tin tức",
+//   },
+// ];
 
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
@@ -31,7 +60,7 @@ export default function HeroBanner() {
     const delay = banners[0]?.display_time
       ? parseInt(banners[0].display_time, 10)
       : 5000;
-    return delay > 0 ? delay : 5000;
+    return delay > 0 ? delay : 1000;
   }, [banners]);
 
   const bannerSlides = React.useMemo(() => {
@@ -69,42 +98,49 @@ export default function HeroBanner() {
 
   return (
     <section
-      className="relative w-full h-[60vh] md:h-[75vh] lg:h-[85vh] max-h-[900px] min-h-[500px]"
+      className="relative h-[70vh] min-h-[400px] max-h-[500px] overflow-hidden bg-[#1a1a1a] md:h-[90vh] md:min-h-[500px] md:max-h-[800px]"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
       {/* Slides */}
-      <div className="relative w-full h-full overflow-hidden rounded-none">
-        {bannerSlides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-500 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              className="object-cover"
-              priority={index === 0}
-              sizes="100vw"
-            />
-          </div>
-        ))}
-      </div>
+      {bannerSlides.map((slide, index) => (
+        <div
+          key={`${slide.id}-${index}`}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentSlide ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Image
+            src={slide.image}
+            alt={slide.alt}
+            fill
+            className={
+              slide.image === "/seo.png"
+                ? "object-contain"
+                : "object-cover"
+            }
+            priority={index === 0}
+            sizes="100vw"
+          />
+        </div>
+      ))}
 
-      {/* Dots */}
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/45" />
+
+
+
+      {/* Slide indicators */}
       {totalSlides > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2 md:bottom-10 md:gap-3">
           {bannerSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
+              className={`transition-all duration-500 ${
                 index === currentSlide
-                  ? "bg-white w-6"
-                  : "bg-white/50 hover:bg-white/70"
+                  ? "h-[2px] w-8 bg-primary md:h-[3px] md:w-12"
+                  : "h-[2px] w-2 bg-white/40 hover:bg-white/60 md:h-[3px] md:w-3"
               }`}
               aria-label={`Slide ${index + 1}`}
             />

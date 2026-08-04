@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import parse from "html-react-parser";
 import { ArrowRight, Calendar, ImageOff } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import Link from "next/link";
 
 interface ServiceCardProps {
@@ -56,7 +56,7 @@ export default function ServiceCard({
             src={image}
             alt={imageAlt}
             fill
-            className="object-cover transition-transform hover:scale-105 duration-300"
+            className="object-contain transition-transform hover:scale-105 duration-300"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex flex-col items-center justify-center">

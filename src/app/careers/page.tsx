@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -391,7 +391,7 @@ export default function CareersPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header Section */}
-      <section className="relative px-4 py-20 text-center text-primary-foreground bg-gradient-to-b from-[#1e3a8a] via-primary/80 to-background">
+      <section className="relative px-4 py-20 text-center text-primary-foreground bg-gradient-to-b from-[#DC2626] via-primary/80 to-background">
         <div className="mx-auto max-w-full pt-10">
 
           <h1 className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
@@ -522,7 +522,7 @@ export default function CareersPage() {
 
       {/* CTA Section */}
       <section className="px-4 py-8 pb-24">
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] p-8 text-center sm:p-16 relative">
+        <div className="mx-auto max-w-4xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] p-8 text-center sm:p-16 relative">
           <div className="relative z-10 text-primary-foreground">
             <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl">
               {t("ctaTitle")}
@@ -995,7 +995,7 @@ export default function CareersPage() {
                     <Button
                       type="submit"
                       disabled={isUploadingCv || isSubmittingCandidate || (appForm.recruitment_id ? isDeadlineExpired(jobs.find((job) => job.id === appForm.recruitment_id)?.deadline || "") : false)}
-                      className="w-full h-12 text-base font-bold bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] transition-colors rounded-md shadow-sm"
+                      className="w-full h-12 text-base font-bold bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] transition-colors rounded-md shadow-sm"
                     >
                       {isUploadingCv || isSubmittingCandidate
                         ? t("submitting")

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 // import Link from "next/link";
 import "swiper/css";
 import "swiper/css/autoplay";

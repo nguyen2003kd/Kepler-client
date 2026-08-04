@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Star } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 
 interface VideoTestimonialCardProps {
   image: string;

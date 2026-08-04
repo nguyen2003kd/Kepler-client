@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
 // import baseConfig from "@/configs/base";
 import { ArrowLeft, Loader2 } from "lucide-react";
-// import Image from "next/image";
+// import Image from "@/components/common/safe-image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";

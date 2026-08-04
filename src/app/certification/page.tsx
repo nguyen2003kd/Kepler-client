@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
 import { useGetApiV10Category } from "@/api/endpoints/category";
@@ -9,7 +9,7 @@ interface CategoryWithChildren extends Category {
 }
 import baseConfig from "@/configs/base";
 import { Loader2, Newspaper } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";

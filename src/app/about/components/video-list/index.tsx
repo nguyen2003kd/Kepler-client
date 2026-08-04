@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef, useEffect } from "react";
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
@@ -233,6 +233,11 @@ export default function VideoList() {
                       <img
                         src={thumbnailSrc}
                         alt={video.title ?? `Video ${index + 1}`}
+                        onError={(event) => {
+                          if (event.currentTarget.src !== `${window.location.origin}/seo.png`) {
+                            event.currentTarget.src = '/seo.png';
+                          }
+                        }}
                         className="w-full h-full object-cover"
                       />
                     ) : (

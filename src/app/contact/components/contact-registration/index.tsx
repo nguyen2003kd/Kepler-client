@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { usePostApiV10Contact } from "@/api/endpoints/contact";
 import { Contact } from "@/api/models/contact";
@@ -274,7 +274,7 @@ export default function ContactRegistrationSection() {
             </div>
 
             {/* Address List */}
-            <div className="bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] p-8 lg:p-10 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] p-8 lg:p-10 relative overflow-hidden">
               {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-72 h-72 bg-red-400/10 rounded-full blur-3xl"></div>
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
