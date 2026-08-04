@@ -4,12 +4,12 @@ import type { ImageCompressInfo } from "@/types/post";
 export const getResponsiveImage = (
   compressInfo?: ImageCompressInfo
 ): string => {
-  if (!compressInfo) return "/seo.png";
+  if (!compressInfo) return "";
 
   if (typeof window === "undefined") {
     const path = compressInfo.desktop || "";
     if (path.startsWith("/")) return path;
-    return path ? `${links.storageEndpoint}${path}` : "/seo.png";
+    return path ? `${links.storageEndpoint}${path}` : "";
   }
 
   const width = window.innerWidth;
@@ -21,7 +21,7 @@ export const getResponsiveImage = (
       : compressInfo.desktop || "";
 
   if (selectedPath.startsWith("/")) return selectedPath;
-  return selectedPath ? `${links.storageEndpoint}${selectedPath}` : "/seo.png";
+  return selectedPath ? `${links.storageEndpoint}${selectedPath}` : "";
 };
 
 /**

@@ -7,7 +7,7 @@ import VideoList from "./components/video-list";
 
 export const metadata = constructMetadata({
   title: "Giới thiệu",
-  description: "Trung tâm Dịch vụ Phân tích thí nghiệm và Tiêu chuẩn Đo lường Chất lượng Thành Phố Hồ Chí Minh",
+  description: "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
   url: "/about",
 });
 
