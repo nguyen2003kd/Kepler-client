@@ -1,4 +1,4 @@
-﻿import React, { memo } from 'react';
+import React, { memo } from 'react';
 import { OrgNode } from '@/types/organization';
 import { resolveAvatarSrc } from '@/lib/organization';
 
@@ -31,6 +31,11 @@ const Avatar = memo(function Avatar({
           alt={fullName}
           width={80}
           height={80}
+          onError={(event) => {
+            if (event.currentTarget.src !== `${window.location.origin}/seo.png`) {
+              event.currentTarget.src = '/seo.png';
+            }
+          }}
           className="h-full w-full object-cover"
         />
       ) : (

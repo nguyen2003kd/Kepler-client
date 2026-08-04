@@ -12,7 +12,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { getThumbnailSrc } from "@/lib/responsive-image";
 import Autoplay from "embla-carousel-autoplay";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import * as React from "react";
 
 interface BannerWithFile extends BannerModel {

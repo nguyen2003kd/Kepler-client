@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +18,7 @@ import "@/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CryptoJS from "crypto-js";
 import { Eye, EyeOff } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

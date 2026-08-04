@@ -2,7 +2,7 @@
 
 import "@/i18n";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 

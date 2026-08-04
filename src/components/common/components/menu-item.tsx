@@ -7,7 +7,7 @@ import { cva } from "class-variance-authority";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, type MouseEvent } from "react";
 import { createPortal } from "react-dom";
 
 export function MenuItem(props: {
@@ -23,6 +23,7 @@ export function MenuItem(props: {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const triggerRef = useRef<HTMLAnchorElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0 });
 
   const useCategoryQuery =
@@ -58,7 +59,7 @@ export function MenuItem(props: {
   const updateDropdownPos = useCallback(() => {
     if (triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect();
-      setDropdownPos({ top: rect.bottom + 4, left: rect.left });
+      setDropdownPos({ top: rect.bottom, left: rect.left });
     }
   }, []);
 
@@ -73,11 +74,21 @@ export function MenuItem(props: {
     setIsOpen(true);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (event?: MouseEvent<HTMLElement>) => {
+    const nextTarget = event?.relatedTarget as Node | null;
+
+    if (
+      nextTarget &&
+      (triggerRef.current?.contains(nextTarget) ||
+        dropdownRef.current?.contains(nextTarget))
+    ) {
+      return;
+    }
+
     closeTimeoutRef.current = setTimeout(() => {
       setIsOpen(false);
       setActiveSubmenu(null);
-    }, 100);
+    }, 250);
   };
 
   useEffect(() => {
@@ -122,6 +133,7 @@ export function MenuItem(props: {
         level === 0 ? (
           createPortal(
             <div
+              ref={dropdownRef}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               className={cn(
@@ -159,7 +171,6 @@ export function MenuItem(props: {
                   key={subMenu.id}
                   className="relative"
                   onMouseEnter={() => setActiveSubmenu(subMenu.id)}
-                  onMouseLeave={() => setActiveSubmenu((prev) => (prev === subMenu.id ? null : prev))}
                 >
                   <Link
                     href={finalLink}
@@ -241,7 +252,6 @@ export function MenuItem(props: {
                     key={subMenu.id}
                     className="relative"
                     onMouseEnter={() => setActiveSubmenu(subMenu.id)}
-                    onMouseLeave={() => setActiveSubmenu((prev) => (prev === subMenu.id ? null : prev))}
                   >
                     <Link
                       href={finalLink}
