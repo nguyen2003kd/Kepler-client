@@ -15,8 +15,8 @@ import links from "@/lib/links";
 import type { Logo } from "@/api/models/logo";
 import { getResponsiveImage } from "@/lib/responsive-image";
 import {
-  Briefcase,
-  Calendar,
+  // Briefcase,
+  // Calendar,
   ChevronDown,
   FileText,
   Headphones,
@@ -27,7 +27,7 @@ import {
   UserPen,
   X,
 } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -158,7 +158,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
     ? getResponsiveImage(logoInfo.file.compress_info)
     : logoInfo?.file?.path
       ? `${links.storageEndpoint}${logoInfo.file.path}`
-      : "/logo.png";
+      : "/seo.png";
 
   // Fetch categories from API with current language
   const { i18n } = useTranslation();
@@ -623,7 +623,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   <Phone className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   <span>{t("contact")}</span>
                 </Link>
-                <div className="h-3 w-px bg-white/30"></div>
+                {/* <div className="h-3 w-px bg-white/30"></div>
                 <Link
                   href="/careers"
                   className="hover:text-red-200 transition-colors flex items-center gap-1.5 lg:gap-2"
@@ -638,7 +638,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 >
                   <Calendar className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   <span>{t("workSchedule")}</span>
-                </Link>
+                </Link> */}
                 <div className="h-3 w-px bg-white/30"></div>
                 <a
                   href="tel:18001105"

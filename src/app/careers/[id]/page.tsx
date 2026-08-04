@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useRef, useCallback } from "react";
 import Link from "next/link";
@@ -504,7 +504,7 @@ export default function JobDetailPage({ params }: PageProps) {
           <div className="w-full lg:w-8/12 flex flex-col gap-6">
 
             {/* Banner */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1e3a8a] to-[#DC2626] text-white p-8 sm:p-10 shadow-lg group">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#DC2626] to-[#7F1D1D] text-white p-8 sm:p-10 shadow-lg group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20 group-hover:bg-white/20 transition-all duration-700" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-red-400/20 rounded-full blur-2xl -ml-10 -mb-10 group-hover:bg-red-400/30 transition-all duration-700" />
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
@@ -596,7 +596,7 @@ export default function JobDetailPage({ params }: PageProps) {
                 <div className="mb-8">
                   <div className="flex items-center gap-3 mb-5">
                     <div className="w-1.5 h-6 bg-[#DC2626] rounded-full" />
-                    <h2 className="text-xl font-bold uppercase text-[#1e3a8a]">{t("detail.jobDescription")}</h2>
+                    <h2 className="text-xl font-bold uppercase text-[#DC2626]">{t("detail.jobDescription")}</h2>
                   </div>
                   <div className="text-[15px] text-foreground/80 whitespace-pre-line leading-relaxed">
                     {job.description}
@@ -608,7 +608,7 @@ export default function JobDetailPage({ params }: PageProps) {
               <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-border/50">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-1.5 h-6 bg-[#DC2626] rounded-full" />
-                <h2 className="text-xl font-bold uppercase text-[#1e3a8a]">{t("detail.candidateRequirements")}</h2>
+                <h2 className="text-xl font-bold uppercase text-[#DC2626]">{t("detail.candidateRequirements")}</h2>
               </div>
               <div className="text-[15px] text-foreground/80 whitespace-pre-line leading-relaxed">
                 {job.requirements}
@@ -621,7 +621,7 @@ export default function JobDetailPage({ params }: PageProps) {
               <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-border/50">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-1.5 h-6 bg-[#DC2626] rounded-full" />
-                  <h2 className="text-xl font-bold uppercase text-[#1e3a8a]">{t("detail.benefitsLabel")}</h2>
+                  <h2 className="text-xl font-bold uppercase text-[#DC2626]">{t("detail.benefitsLabel")}</h2>
                 </div>
                 <div className="text-[15px] text-foreground/80 whitespace-pre-line leading-relaxed">
                   {job.benefits}
@@ -634,7 +634,7 @@ export default function JobDetailPage({ params }: PageProps) {
               <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-border/50">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-1.5 h-6 bg-[#DC2626] rounded-full" />
-                  <h2 className="text-xl font-bold uppercase text-[#1e3a8a]">{t("detail.requiredDocuments")}</h2>
+                  <h2 className="text-xl font-bold uppercase text-[#DC2626]">{t("detail.requiredDocuments")}</h2>
                 </div>
                 <ul className="space-y-2.5">
                   {job.required_documents
@@ -665,7 +665,7 @@ export default function JobDetailPage({ params }: PageProps) {
                     <FileText className="h-5 w-5 text-white" />
                   </div>
                   <div className="text-left flex-1">
-                    <p className="font-semibold text-[#1e3a8a]">{t("detail.recruitmentNotice")}</p>
+                    <p className="font-semibold text-[#DC2626]">{t("detail.recruitmentNotice")}</p>
                     <p className="text-sm text-muted-foreground">{t("detail.viewRecruitmentNotice")}</p>
                   </div>
                   <ChevronRight className="h-5 w-5 text-muted-foreground" />
@@ -678,7 +678,7 @@ export default function JobDetailPage({ params }: PageProps) {
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-border/50 sticky top-6">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-1 h-6 bg-[#f59e0b] rounded-full" />
-                <h2 className="text-lg font-bold uppercase text-[#1e3a8a]">{t("detail.otherJobs")}</h2>
+                <h2 className="text-lg font-bold uppercase text-[#DC2626]">{t("detail.otherJobs")}</h2>
               </div>
               <div className="space-y-0">
                 {listLoading ? (
@@ -919,7 +919,7 @@ export default function JobDetailPage({ params }: PageProps) {
               <Button
                 type="submit"
                 disabled={!isFormValid || isSubmitting || isExpired}
-                className="w-full bg-gradient-to-r from-[#1e3a8a] to-[#DC2626] hover:opacity-90 text-white rounded-md py-6 text-sm font-medium disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-[#DC2626] to-[#7F1D1D] hover:opacity-90 text-white rounded-md py-6 text-sm font-medium disabled:opacity-50"
               >
                 {isExpired ? t("expired") : isSubmitting ? t("submitting") : t("submit")}
               </Button>
@@ -945,7 +945,7 @@ export default function JobDetailPage({ params }: PageProps) {
             className="relative w-full max-w-4xl max-h-[85vh] bg-white shadow-2xl rounded-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between p-6 border-b border-border bg-gradient-to-r from-[#1e3a8a] to-[#DC2626]">
+            <div className="flex items-center justify-between p-6 border-b border-border bg-gradient-to-r from-[#DC2626] to-[#7F1D1D]">
               <div className="flex items-center gap-3">
                 <div className="bg-white/20 p-2 rounded-xl">
                   <FileText className="h-6 w-6 text-white" />
@@ -969,7 +969,7 @@ export default function JobDetailPage({ params }: PageProps) {
                 <div className="space-y-4">
                   {fileInfo.name && (
                     <div className="text-center mb-6">
-                      <h2 className="text-2xl font-bold text-[#1e3a8a]">{fileInfo.name}</h2>
+                      <h2 className="text-2xl font-bold text-[#DC2626]">{fileInfo.name}</h2>
                     </div>
                   )}
                   {fileInfo.path && (

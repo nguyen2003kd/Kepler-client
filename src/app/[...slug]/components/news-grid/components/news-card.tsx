@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -7,7 +7,7 @@ import { getResponsiveImage } from "@/lib/responsive-image";
 import { PostExtended } from "@/types/post";
 import parse from "html-react-parser";
 import { ArrowRight, Calendar } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import baseConfig from "@/configs/base";
 interface NewsCardProps {
   post: PostExtended;

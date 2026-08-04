@@ -1,11 +1,11 @@
-﻿import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getThumbnailSrc } from "@/lib/responsive-image";
 import type { PostExtended as PostWithImage } from "@/types/post";
 import parse from "html-react-parser";
 import { ArrowRight, Calendar } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import { useTranslation } from "react-i18next";
 interface ServiceCardProps {
   post: PostWithImage;

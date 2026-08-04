@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
@@ -341,6 +341,11 @@ export function OrgChartNode({
                   src={avatarSrc}
                   alt={node.full_name}
                   crossOrigin="anonymous"
+                  onError={(event) => {
+                    if (event.currentTarget.src !== `${window.location.origin}/seo.png`) {
+                      event.currentTarget.src = '/seo.png';
+                    }
+                  }}
                   className="h-full w-full rounded-[10px] object-cover shadow-2xl "
                   style={{ width: avatarSize, height: avatarSize }}
                 />

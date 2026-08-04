@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   GridCardSkeleton,
@@ -9,7 +9,7 @@ import { getThumbnailSrc } from "@/lib/responsive-image";
 import { PostExtended } from "@/types/post";
 import parse from "html-react-parser";
 import { ArrowRight, Calendar } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/common/safe-image";
 import EmptyState from "../../empty-state";
 import NewsCard from "./news-card";
 import { useTranslation } from "react-i18next";

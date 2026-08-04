@@ -4,12 +4,12 @@ import type { ImageCompressInfo } from "@/types/post";
 export const getResponsiveImage = (
   compressInfo?: ImageCompressInfo
 ): string => {
-  if (!compressInfo) return "";
+  if (!compressInfo) return "/seo.png";
 
   if (typeof window === "undefined") {
     const path = compressInfo.desktop || "";
-    if (path.startsWith("/images/")) return path;
-    return path ? `${links.storageEndpoint}${path}` : "";
+    if (path.startsWith("/")) return path;
+    return path ? `${links.storageEndpoint}${path}` : "/seo.png";
   }
 
   const width = window.innerWidth;
@@ -20,8 +20,8 @@ export const getResponsiveImage = (
       ? compressInfo.tablet || compressInfo.desktop || ""
       : compressInfo.desktop || "";
 
-  if (selectedPath.startsWith("/images/")) return selectedPath;
-  return selectedPath ? `${links.storageEndpoint}${selectedPath}` : "";
+  if (selectedPath.startsWith("/")) return selectedPath;
+  return selectedPath ? `${links.storageEndpoint}${selectedPath}` : "/seo.png";
 };
 
 /**
@@ -33,14 +33,14 @@ export const getResponsiveImage = (
 export const getThumbnailSrc = (
   compressInfo: ImageCompressInfo | null | undefined,
   thumbnailPath?: string | null,
-  fallback = "/images/service-1.png"
+  fallback = "/seo.png"
 ): string => {
   if (compressInfo) {
     const url = getResponsiveImage(compressInfo);
     if (url) return url;
   }
   if (thumbnailPath) {
-    if (thumbnailPath.startsWith("/images/")) return thumbnailPath;
+    if (thumbnailPath.startsWith("/")) return thumbnailPath;
     return `${links.storageEndpoint}${thumbnailPath}`;
   }
   return fallback;

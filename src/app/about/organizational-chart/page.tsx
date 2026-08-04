@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState, useEffect } from 'react'
 import { Loader2, Maximize, Network, ZoomIn, ZoomOut } from 'lucide-react'
@@ -110,20 +110,24 @@ export default function OrganizationalChartPage() {
 
             return (
               <div className="relative w-full overflow-hidden bg-gradient-to-br from-red-600 to-red-800">
-                {viewingNode.avatar_url && !dialogImgError && (
+                {viewingNode.avatar_url && (
                   <img
-                    src={resolveAvatarSrc(viewingNode.avatar_url)}
+                    src={dialogImgError ? '/seo.png' : resolveAvatarSrc(viewingNode.avatar_url)}
                     alt={viewingNode.full_name}
                     loading="eager"
                     decoding="async"
                     crossOrigin="anonymous"
-                    onError={() => setDialogImgError(true)}
+                    onError={(event) => {
+                      if (event.currentTarget.src !== `${window.location.origin}/seo.png`) {
+                        setDialogImgError(true)
+                      }
+                    }}
                     className="h-auto w-full object-contain"
                   />
                 )}
                 <div
                   className={`flex flex-col items-center justify-center gap-3 px-8 py-16 ${
-                    !viewingNode.avatar_url || dialogImgError ? '' : 'hidden'
+                    !viewingNode.avatar_url ? '' : 'hidden'
                   }`}
                 >
                   <span className="text-8xl font-extrabold text-white tracking-wider">
