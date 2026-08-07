@@ -395,10 +395,6 @@ export default function ServiceDetailView({ slug, initialPost }: ServiceDetailVi
                       title={service.title || ""}
                       description={service.summary || ""}
                       link={`/services/${service.slug}`}
-                      backgroundColor="white"
-                      textColor="#1e293b"
-                      descriptionColor="#64748b"
-                      linkColor="#DC2626"
                     />
                   ))}
                 </div>

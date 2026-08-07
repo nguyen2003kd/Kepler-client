@@ -14,33 +14,6 @@ interface BannerWithFile extends Banner {
   file?: File;
 }
 
-const HERO_CONTENT = [
-  {
-    heading: "Kepler Property",
-    subheading: "Nền tảng BĐS hàng đầu Việt Nam",
-    description:
-      "Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất.",
-    link: "/apartments-for-sale",
-    linkText: "Xem tin đăng",
-  },
-  {
-    heading: "Dự án nổi bật",
-    subheading: "Vinhomes Grand Park & hơn thế nữa",
-    description:
-      "Khám phá các dự án BĐS chất lượng cao với tiện ích đầy đủ, vị trí đắc địa.",
-    link: "/projects",
-    linkText: "Xem dự án",
-  },
-  {
-    heading: "Tin tức BĐS",
-    subheading: "Cập nhật thị trường mỗi ngày",
-    description:
-      "Theo dõi xu hướng thị trường, quy hoạch và tư vấn đầu tư BĐS mới nhất.",
-    link: "/news",
-    linkText: "Đọc tin tức",
-  },
-];
-
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [isHovering, setIsHovering] = React.useState(false);

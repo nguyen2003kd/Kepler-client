@@ -102,10 +102,6 @@ export default function RelatedServices() {
               title={post.title || ""}
               description={post.summary || ""}
               link={`/services/${post.slug || ""}`}
-              backgroundColor="transparent"
-              textColor="#0C0800"
-              descriptionColor="#4B5563"
-              linkColor="#0C0800"
             />
           ))}
         </div>
