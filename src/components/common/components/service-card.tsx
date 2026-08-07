@@ -12,10 +12,6 @@ interface ServiceCardProps {
   date?: string;
   imageAlt?: string;
   className?: string;
-  backgroundColor?: string;
-  textColor?: string;
-  descriptionColor?: string;
-  linkColor?: string;
 }
 
 export default function ServiceCard({
@@ -26,10 +22,6 @@ export default function ServiceCard({
   date,
   imageAlt = title,
   className,
-  backgroundColor = "#346293",
-  textColor = "white",
-  descriptionColor = "rgb(209 213 219 / 0.9)",
-  linkColor = "white",
 }: ServiceCardProps) {
   const hasImage = image && image.trim() !== "";
 

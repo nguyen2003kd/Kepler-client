@@ -401,10 +401,6 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
                       title={post.title || ""}
                       description={post.summary || ""}
                       link={`/news/${post.slug}`}
-                      backgroundColor="white"
-                      textColor="#1e293b"
-                      descriptionColor="#64748b"
-                      linkColor="#DC2626"
                     />
                   ))}
                 </div>

@@ -88,10 +88,6 @@ export default function RelatedServices() {
                 title={service.title || ""}
                 description={service.summary || ""}
                 link={`/${service.slug || ""}`}
-                backgroundColor="#FFFFFF"
-                textColor="#000000"
-                descriptionColor="#4B5563"
-                linkColor="#000000"
               />
             ))}
           </div>
