@@ -11,7 +11,7 @@ export default function SafeImage({ src, alt, onError, ...props }: ImageProps) {
     typeof currentSrc === "string" && currentSrc.endsWith(FALLBACK_IMAGE);
   const className =
     isFallbackImage && typeof props.className === "string"
-      ? props.className.replace(/\bobject-cover\b/g, "object-contain")
+      ? props.className.replace(/\bobject-cover\b/g, "object-cover")
       : props.className;
 
   useEffect(() => {
