@@ -4,41 +4,42 @@ import { useGetApiV10Banner } from "@/api/endpoints/banner";
 import { Banner } from "@/api/models/banner";
 import { File } from "@/api/models/file";
 import { getThumbnailSrc } from "@/lib/responsive-image";
-// import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "@/components/common/safe-image";
-// import Link from "next/link";
+import Link from "next/link";
 import * as React from "react";
+import { motion } from "framer-motion";
 
 interface BannerWithFile extends Banner {
   file?: File;
 }
 
-// const HERO_CONTENT = [
-//   {
-//     heading: "Kepler Property",
-//     subheading: "Nền tảng BĐS hàng đầu Việt Nam",
-//     description:
-//       "Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất.",
-//     link: "/apartments-for-sale",
-//     linkText: "Xem tin đăng",
-//   },
-//   {
-//     heading: "Dự án nổi bật",
-//     subheading: "Vinhomes Grand Park & hơn thế nữa",
-//     description:
-//       "Khám phá các dự án BĐS chất lượng cao với tiện ích đầy đủ, vị trí đắc địa.",
-//     link: "/projects",
-//     linkText: "Xem dự án",
-//   },
-//   {
-//     heading: "Tin tức BĐS",
-//     subheading: "Cập nhật thị trường mỗi ngày",
-//     description:
-//       "Theo dõi xu hướng thị trường, quy hoạch và tư vấn đầu tư BĐS mới nhất.",
-//     link: "/news",
-//     linkText: "Đọc tin tức",
-//   },
-// ];
+const HERO_CONTENT = [
+  {
+    heading: "Kepler Property",
+    subheading: "Nền tảng BĐS hàng đầu Việt Nam",
+    description:
+      "Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất.",
+    link: "/apartments-for-sale",
+    linkText: "Xem tin đăng",
+  },
+  {
+    heading: "Dự án nổi bật",
+    subheading: "Vinhomes Grand Park & hơn thế nữa",
+    description:
+      "Khám phá các dự án BĐS chất lượng cao với tiện ích đầy đủ, vị trí đắc địa.",
+    link: "/projects",
+    linkText: "Xem dự án",
+  },
+  {
+    heading: "Tin tức BĐS",
+    subheading: "Cập nhật thị trường mỗi ngày",
+    description:
+      "Theo dõi xu hướng thị trường, quy hoạch và tư vấn đầu tư BĐS mới nhất.",
+    link: "/news",
+    linkText: "Đọc tin tức",
+  },
+];
 
 export default function HeroBanner() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
@@ -128,7 +129,43 @@ export default function HeroBanner() {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/45" />
 
+      {/* Hero content */}
+      <div className="absolute inset-0 z-20 flex items-center">
+        <div className="max-w-[1400px] w-full mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="max-w-3xl"
+          >
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Kiến tạo giá trị bền vững cho Bất động sản và Doanh nghiệp
+            </h1>
+            <p className="mt-4 md:mt-6 text-base md:text-lg text-white/80 leading-relaxed max-w-[60ch]">
+              Kepler Group là hệ sinh thái tư vấn và dịch vụ bất động sản chuyên
+              nghiệp, đồng hành cùng doanh nghiệp trong toàn bộ vòng đời tài sản - từ
+              nghiên cứu đầu tư, thẩm định giá, phát triển dự án, quản lý vận hành đến
+              tối ưu khai thác và gia tăng giá trị.
+            </p>
 
+            <div className="mt-8 md:mt-10 flex flex-wrap items-center gap-4">
+              <Link
+                href="/dich-vu"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 text-sm font-semibold rounded-full hover:bg-gray-100 transition-all group"
+              >
+                Khám phá dịch vụ
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                href="/dat-lich-tu-van"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-white/40 text-white text-sm font-semibold rounded-full hover:bg-white/10 hover:border-white/60 transition-all"
+              >
+                Liên hệ tư vấn
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </div>
 
       {/* Slide indicators */}
       {totalSlides > 1 && (
