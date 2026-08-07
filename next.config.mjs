@@ -6,29 +6,17 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: "localhost",
-        port: "3003",
-        pathname: "/api/storage/uploads/**",
-      },
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3001",
-        pathname: "/api/storage/uploads/**",
+        pathname: "/**",
       },
       {
         protocol: "https",
         hostname: "kepler-dev.meucorp.com",
-        pathname: "/api/storage/uploads/**",
+        pathname: "/**",
       },
       {
         protocol: "https",
         hostname: "case-smq.vn",
-        pathname: "/api/storage/uploads/**",
-      },
-      {
-        protocol: "https",
-        hostname: "case-smq.vn",
-        pathname: "/_next/image/**",
+        pathname: "/**",
       },
       {
         protocol: "https",

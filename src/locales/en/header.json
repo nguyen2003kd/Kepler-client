@@ -18,13 +18,15 @@
   "hotline": "Hotline",
   "hi": "Hi",
   "user": "User",
-  "aboutOverview": "Overview",
-  "aboutVisionMission": "Vision & Mission",
-  "aboutCoreValues": "Core Values",
+  "aboutOverview": "About Overview",
+  "aboutCompanyOverview": "Kepler Group Overview",
+  "aboutVisionMission": "Vision - Mission - Core Values",
   "aboutHistory": "Development History",
   "aboutOrganizationalChart": "Organizational Structure",
   "aboutExpertCouncil": "Expert Council",
   "aboutBoardOfDirectors": "Board of Directors",
+  "aboutCapabilities": "Capabilities & Achievements",
   "aboutBranchesOffices": "Headquarters & Offices",
-  "aboutCertifications": "Certifications & Licenses"
+  "aboutCertifications": "Certifications & Licenses",
+  "aboutCapabilityProfile": "Capability Profile"
 }

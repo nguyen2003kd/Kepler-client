@@ -18,13 +18,15 @@
   "hotline": "Hotline",
   "hi": "Hi",
   "user": "User",
-  "aboutOverview": "Tổng quan",
-  "aboutVisionMission": "Tầm nhìn & Sứ mệnh",
-  "aboutCoreValues": "Giá trị cốt lõi",
+  "aboutOverview": "Tổng quan Giới thiệu",
+  "aboutCompanyOverview": "Tổng quan Kepler Group",
+  "aboutVisionMission": "Tầm nhìn - Sứ mệnh - Giá trị cốt lõi",
   "aboutHistory": "Lịch sử phát triển",
   "aboutOrganizationalChart": "Cơ cấu tổ chức",
   "aboutExpertCouncil": "Hội đồng chuyên gia",
   "aboutBoardOfDirectors": "Ban điều hành",
+  "aboutCapabilities": "Năng lực và thành tựu",
   "aboutBranchesOffices": "Trụ sở & Văn phòng",
-  "aboutCertifications": "Chứng chỉ & Giấy phép"
+  "aboutCertifications": "Chứng chỉ & Giấy phép",
+  "aboutCapabilityProfile": "Hồ sơ năng lực"
 }
