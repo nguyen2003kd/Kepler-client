@@ -199,27 +199,24 @@ export default function NewsSection() {
   }, [latestNewsData]);
 
   return (
-    <section className="bg-gradient-to-tl from-red-50 via-white to-gray-50/30 py-16 pt-20">
+    <section className="bg-gray-50 py-16 pt-20">
       <div className="max-w-screen-xl mx-auto h-auto px-6 lg:px-12">
         <div className="mx-4 md:mx-8 lg:mx-10">
-          <motion.h2
-            className="text-4xl md:text-6xl font-extrabold text-center mb-4"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <span className="bg-gradient-to-r from-red-300 via-red-300 to-red-300 bg-clip-text text-transparent">
-              {t("news")}
-            </span>
-          </motion.h2>
           <motion.div
-            className="w-28 h-1 rounded-full bg-gradient-to-r from-red-300 via-red-300 to-red-300 mx-auto"
-            initial={{ width: 0 }}
-            whileInView={{ width: 112 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          ></motion.div>
+            className="mb-14"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="text-sm font-semibold tracking-wider text-red-600 uppercase">
+              Thị trường
+            </span>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mt-3">
+              Góc nhìn thị trường
+            </h2>
+            <div className="mt-4 h-1 w-20 rounded-full bg-red-500" />
+          </motion.div>
 
           <Tabs
             value={activeTab}

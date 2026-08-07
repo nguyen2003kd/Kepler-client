@@ -1,12 +1,3 @@
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import parse from "html-react-parser";
 import { ArrowRight, Calendar, ImageOff } from "lucide-react";
@@ -43,77 +34,60 @@ export default function ServiceCard({
   const hasImage = image && image.trim() !== "";
 
   return (
-    <Card
+    <Link
+      href={link}
       className={cn(
-        "border-none overflow-hidden hover:shadow-xl transition-shadow rounded-xl flex flex-col h-full",
+        "group flex flex-col w-full bg-white overflow-hidden rounded-2xl border border-gray-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
         className,
       )}
-      style={className?.includes("bg-") ? {} : { backgroundColor }}
     >
-      <div className="relative w-full overflow-hidden h-40">
+      <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
         {hasImage ? (
           <Image
             src={image}
             alt={imageAlt}
             fill
-            className="object-contain transition-transform hover:scale-105 duration-300"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex flex-col items-center justify-center">
+          <div className="w-full h-full bg-gray-100 flex flex-col items-center justify-center">
             <ImageOff
-              className="w-12 h-12 text-gray-400 mb-2"
+              className="w-10 h-10 text-gray-300 mb-2"
               strokeWidth={1.5}
             />
-            <p className="text-gray-400 font-medium text-sm">
+            <p className="text-gray-400 font-medium text-xs">
               Không có hình ảnh
             </p>
           </div>
         )}
       </div>
 
-      <CardHeader className="pb-2 pt-4 px-4">
-        <CardTitle
-          className="text-base font-bold leading-tight line-clamp-2"
-          style={{ color: textColor }}
-        >
-          {title}
-        </CardTitle>
-      </CardHeader>
-
-      <CardContent className="pb-3 px-4 flex-1">
-        <CardDescription
-          className="text-sm leading-relaxed line-clamp-2"
-          style={{ color: descriptionColor }}
-        >
-          {parse(description)}
-        </CardDescription>
-      </CardContent>
-
-      <CardFooter className="pb-4 px-4 flex items-center justify-between mt-auto border-t border-white/10 pt-3">
-        {date && (
-          <div
-            className="flex items-center gap-2 text-sm"
-            style={{ color: descriptionColor }}
-          >
-            <Calendar className="w-4 h-4" />
+      <div className="p-5 flex flex-col flex-1">
+        {date ? (
+          <div className="flex items-center gap-2 text-gray-400 text-xs mb-3">
+            <Calendar className="w-3.5 h-3.5" />
             <span>{date}</span>
           </div>
+        ) : (
+          <div className="h-4 mb-3" />
         )}
-        <Button
-          asChild
-          variant="ghost"
-          className="hover:bg-transparent p-0 h-auto font-normal text-sm ml-auto"
-        >
-          <Link
-            href={link}
-            className="inline-flex items-center gap-2"
-            style={{ color: linkColor }}
-          >
+
+        <h3 className="text-gray-900 text-lg font-semibold leading-snug mb-2 line-clamp-2">
+          {title}
+        </h3>
+        <div className="text-sm leading-relaxed text-gray-500 line-clamp-2">
+          {parse(description)}
+        </div>
+
+        <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
+          <span className="text-gray-400 text-xs">Dịch vụ</span>
+          <span className="inline-flex items-center gap-2 text-red-600 text-sm font-semibold group-hover:gap-3 transition-all">
             Xem chi tiết
             <ArrowRight className="w-4 h-4" />
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 }

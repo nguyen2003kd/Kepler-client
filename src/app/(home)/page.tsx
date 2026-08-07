@@ -1,153 +1,74 @@
 ﻿import { constructMetadata } from "@/lib/seo";
 import HeroBanner from "./_views/banner-section";
-import BusinessSupportSection from "./_views/business-support-section";
-import DocumentsSection from "./_views/documents-section";
-import NewsSection from "./_views/news-section";
+import IntroSection from "./_views/intro-section";
+import StatsSection from "./_views/stats-section";
+import EcosystemSection from "./_views/ecosystem-section";
 import ServicesSection from "./_views/services-section";
+import SolutionsSection from "./_views/solutions-section";
+import ProcessSection from "./_views/process-section";
+import NewsSection from "./_views/news-section";
+import ProjectsSection from "./_views/projects-section";
+import CaseStudySection from "./_views/case-study-section";
+import CustomersSection from "./_views/customers-section";
+import PartnersSection from "./_views/partners-section";
+import MarketSection from "./_views/market-section";
+import WhyChooseUsSection from "./_views/why-choose-us-section";
+import CtaSection from "./_views/cta-section";
 
 export const metadata = constructMetadata({
-  title: "Trang chủ",
-  description: "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
+  title: "Kepler Group | Tư vấn đầu tư, Thẩm định giá, Phát triển dự án & Quản lý tài sản",
+  description:
+    "Kepler Group cung cấp giải pháp toàn diện về tư vấn đầu tư, thẩm định giá, phát triển dự án, quản lý và khai thác tài sản, M&A, thiết kế xây dựng và chuyển đổi số trong lĩnh vực bất động sản.",
   url: "/",
 });
 
 export default function Home() {
   return (
     <div className="bg-white">
+      {/* 1. Banner / Hero */}
       <HeroBanner />
+
+      {/* 2. Section Giới thiệu */}
+      <IntroSection />
+
+      {/* 3. Section Con số nổi bật */}
+      <StatsSection />
+
+      {/* 4. Section Hệ sinh thái */}
+      <EcosystemSection />
+
+      {/* 5. Section Dịch vụ */}
+      {/* <ServicesSection /> */}
+
+      {/* 6. Section Giải pháp theo đối tượng */}
+      <SolutionsSection />
+
+      {/* 7. Section Quy trình làm việc */}
+      <ProcessSection />
+
+      {/* 8. Section Thị trường / Tin tức */}
+      {/* <NewsSection /> */}
+
+      {/* 9. Section Dự án tiêu biểu */}
+      {/* <ProjectsSection /> */}
       <ServicesSection />
+      {/* 10. Section Case Study */}
+      <CaseStudySection />
 
-      <NewsSection />
-      {/* <TestimonialSection /> */}
-      <DocumentsSection />
-      <BusinessSupportSection />
+      {/* 11. Section Khách hàng */}
+      <CustomersSection />
 
-      {/* <section className="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Chào mừng đến với SMEQ
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-red-100">
-              Nền tảng hỗ trợ doanh nghiệp vừa và nhỏ
-            </p>
-            <div className="flex gap-4 justify-center">
-              <a
-                href="/register"
-                className="px-8 py-3 bg-white text-red-600 rounded-md font-medium hover:bg-gray-100 transition-colors"
-              >
-                Đăng ký ngay
-              </a>
-              <a
-                href="/about"
-                className="px-8 py-3 border-2 border-white text-white rounded-md font-medium hover:bg-white hover:text-red-600 transition-colors"
-              >
-                Tìm hiểu thêm
-              </a>
-            </div>
-          </div>
-        </div>
-      </section> */}
+      {/* 12. Section Đối tác */}
+      <PartnersSection />
 
-      {/* Features Section */}
-      {/* <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Dịch vụ của chúng tôi
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-                <svg
-                  className="w-6 h-6 text-red-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Tư vấn pháp lý
-              </h3>
-              <p className="text-gray-600">
-                Hỗ trợ các vấn đề pháp lý cho doanh nghiệp vừa và nhỏ
-              </p>
-            </div>
+      {/* 13. Section Thị trường */}
+      {/* <MarketSection /> */}
+     <NewsSection />
+      {/* 14. Section Tại sao chọn Kepler */}
+      <WhyChooseUsSection />
 
-            <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                <svg
-                  className="w-6 h-6 text-green-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Hỗ trợ tài chính
-              </h3>
-              <p className="text-gray-600">
-                Kết nối nguồn vốn và tư vấn tài chính cho doanh nghiệp
-              </p>
-            </div>
-
-            <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                <svg
-                  className="w-6 h-6 text-purple-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Đào tạo kinh doanh
-              </h3>
-              <p className="text-gray-600">
-                Các khóa học và chương trình đào tạo nâng cao năng lực
-              </p>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* CTA Section */}
-      {/* <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Sẵn sàng bắt đầu?
-          </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Đăng ký ngay để nhận được hỗ trợ từ chúng tôi
-          </p>
-          <a
-            href="/register"
-            className="inline-block px-8 py-3 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition-colors"
-          >
-            Đăng ký miễn phí
-          </a>
-        </div>
-      </section> */}
+      {/* 10. Section CTA */}
+      <CtaSection />
     </div>
   );
 }
