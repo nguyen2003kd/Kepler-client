@@ -7,11 +7,9 @@ import ServicesSection from "./_views/services-section";
 import SolutionsSection from "./_views/solutions-section";
 import ProcessSection from "./_views/process-section";
 import NewsSection from "./_views/news-section";
-import ProjectsSection from "./_views/projects-section";
 import CaseStudySection from "./_views/case-study-section";
 import CustomersSection from "./_views/customers-section";
 import PartnersSection from "./_views/partners-section";
-import MarketSection from "./_views/market-section";
 import WhyChooseUsSection from "./_views/why-choose-us-section";
 import CtaSection from "./_views/cta-section";
 
