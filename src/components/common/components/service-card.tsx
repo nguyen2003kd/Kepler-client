@@ -29,7 +29,7 @@ export default function ServiceCard({
     <Link
       href={link}
       className={cn(
-        "group flex flex-col w-full bg-white overflow-hidden rounded-2xl border border-gray-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
+        "group flex flex-col w-full bg-white overflow-hidden rounded-2xl border border-gray-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
         className,
       )}
     >
@@ -68,7 +68,7 @@ export default function ServiceCard({
         <h3 className="text-gray-900 text-lg font-semibold leading-snug mb-2 line-clamp-2">
           {title}
         </h3>
-        <div className="text-sm leading-relaxed text-gray-500 line-clamp-2">
+        <div className="text-sm leading-relaxed text-gray-500 line-clamp-2 mb-3">
           {parse(description)}
         </div>
 
