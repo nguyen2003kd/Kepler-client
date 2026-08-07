@@ -23,17 +23,15 @@ export default function CustomersSection() {
     <section className="py-10 md:py-16 bg-gray-50">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <FadeIn direction="up" duration={0.5}>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-10">
-            <div>
-              <div className="w-10 md:w-16 h-[2px] md:h-1 bg-primary mb-3 md:mb-5" />
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Khách hàng</span>
-              <h2 className="text-[clamp(22px,3.5vw,42px)] font-serif font-bold text-[#1a1a1a] leading-tight mt-2">
-                Khách hàng đã đồng hành
-              </h2>
-              <p className="mt-2 md:mt-3 text-gray-500 text-sm md:text-[15px] max-w-[500px]">
-                Những đối tác tin tưởng và đồng hành cùng Kepler.
-              </p>
-            </div>
+          <div className="mb-6 md:mb-10">
+            <div className="w-10 md:w-16 h-[2px] md:h-1 bg-primary mb-3 md:mb-5" />
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Khách hàng</span>
+            <h2 className="text-[clamp(22px,3.5vw,42px)] font-serif font-bold text-[#1a1a1a] leading-tight mt-2">
+              Khách hàng đã đồng hành
+            </h2>
+            <p className="mt-2 md:mt-3 text-gray-500 text-sm md:text-[15px] max-w-[500px]">
+              Những đối tác tin tưởng và đồng hành cùng Kepler.
+            </p>
           </div>
         </FadeIn>
 
@@ -59,40 +57,28 @@ export default function CustomersSection() {
             className="!pb-12"
           >
             {CUSTOMERS.map((c) => (
-              <SwiperSlide key={c.name} className="!w-[280px]">
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
-                  <div className="relative aspect-[4/3] bg-gray-50 flex items-center justify-center p-6">
+              <SwiperSlide key={c.name} className="!w-[300px]">
+                <div className="group bg-white rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 min-h-[180px]">
+                  <div className="relative w-16 h-16 mb-4">
                     <Image
                       src={c.image}
                       alt={c.name}
                       fill
-                      className="object-contain"
-                      sizes="280px"
+                      className="object-contain transition-transform duration-500 group-hover:scale-110"
+                      sizes="64px"
                     />
                   </div>
-                  <div className="p-4 text-center">
-                    <span className="bg-primary text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide rounded-xl">
-                      {c.sector}
-                    </span>
-                    <h3 className="mt-3 text-[#1a1a1a] text-[17px] font-serif font-bold leading-tight">
-                      {c.name}
-                    </h3>
-                  </div>
+                  <h3 className="text-[#1a1a1a] text-sm font-serif font-bold leading-tight">
+                    {c.name}
+                  </h3>
+                  <span className="mt-1.5 text-primary text-[10px] font-semibold uppercase tracking-wider">
+                    {c.sector}
+                  </span>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </FadeIn>
-
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          {["Ngân hàng", "Doanh nghiệp", "Chủ đầu tư", "Quỹ đầu tư", "Đơn vị sản xuất", "Đơn vị thương mại"].map(
-            (tag) => (
-              <span key={tag} className="px-4 py-2 bg-white rounded-xl border border-gray-200 text-gray-600 text-sm font-medium">
-                {tag}
-              </span>
-            )
-          )}
-        </div>
       </div>
     </section>
   );

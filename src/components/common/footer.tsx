@@ -73,7 +73,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-white text-foreground font-sans relative overflow-hidden border-t border-border">
+    <footer className="w-full bg-white text-foreground font-serif relative overflow-hidden border-t border-border">
       {/* Subtle  */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary rounded-full blur-3xl"></div>

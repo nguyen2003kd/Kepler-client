@@ -110,13 +110,7 @@ export default function SolutionsSection() {
                 }`}
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all ${
-                      isActive
-                        ? "bg-red-600 text-white"
-                        : "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
-                    }`}
-                  >
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary text-white">
                     {Icon && <Icon className="w-6 h-6" />}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">

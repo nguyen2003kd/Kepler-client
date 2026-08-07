@@ -10,6 +10,7 @@ import { Toaster } from "@components/ui/toaster";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Noto_Serif, Inter } from "next/font/google";
 import Script from "next/script";
 
 // import AnalyticsTracker from "@/components/analytics-tracker";
@@ -24,6 +25,19 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+
+const notoSerif = Noto_Serif({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const inter = Inter({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -109,7 +123,7 @@ export default async function RootLayout({
   return (
     <html lang="vi">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} ${inter.variable} font-serif antialiased`}
       >
         {/* Google Analytics */}
         <Script
