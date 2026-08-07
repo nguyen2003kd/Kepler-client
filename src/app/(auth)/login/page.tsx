@@ -61,7 +61,7 @@ export default function LoginPage() {
     ? getResponsiveImage(logoInfo.file.compress_info)
     : logoInfo?.file?.path
       ? `${links.storageEndpoint}${logoInfo.file.path}`
-      : "/images/logo-no-bg.png";
+      : "/seo.png";
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
