@@ -529,6 +529,49 @@ export default function Header({ navItems = [], className }: HeaderProps) {
     ],
   };
 
+  const customersPartnersItem: HeaderMenuItem = {
+    id: "customers-partners",
+    name: t("customersPartners"),
+    type: "",
+    content_type: "",
+    link: "/khach-hang-doi-tac",
+    sequence: 6,
+    display: true,
+    parent_id: null,
+    children: [
+      {
+        id: "customers-partners-overview",
+        name: t("customersPartnersOverview"),
+        type: "",
+        content_type: "",
+        link: "/khach-hang-doi-tac",
+        sequence: 1,
+        display: true,
+        parent_id: "customers-partners",
+      },
+      {
+        id: "customers",
+        name: t("customers"),
+        type: "",
+        content_type: "",
+        link: "/khach-hang",
+        sequence: 2,
+        display: true,
+        parent_id: "customers-partners",
+      },
+      {
+        id: "partners",
+        name: t("partners"),
+        type: "",
+        content_type: "",
+        link: "/doi-tac",
+        sequence: 3,
+        display: true,
+        parent_id: "customers-partners",
+      },
+    ],
+  };
+
   const baseNavigation: HeaderMenuItem[] = categoriesData?.responseData?.length
     ? withCategoryQueryMode(
         categoriesData.responseData as unknown as HeaderMenuItem[],
@@ -587,6 +630,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
     ...(filteredNavigation[0] ? [filteredNavigation[0]] : []),
     aboutItem,
     ...filteredNavigation.slice(1),
+    customersPartnersItem,
     contactItem,
   ];
 
