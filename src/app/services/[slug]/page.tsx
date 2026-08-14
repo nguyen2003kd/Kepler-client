@@ -3,6 +3,7 @@ import type { PostExtended } from "@/types/post";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ServiceDetailView from "./views/service-detail-view";
+import StaticServiceDetail, { staticServices } from "./views/static-service-detail";
 
 interface ServiceDetailPageProps {
   params: { slug: string };
@@ -71,9 +72,15 @@ export async function generateMetadata({
 }
 
 export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
+  if (staticServices[params.slug]) {
+    return <StaticServiceDetail slug={params.slug} basePath="/services" />;
+  }
+
   const post = await getPost(params.slug);
 
-  if (!post) notFound();
+  if (!post) {
+    notFound();
+  }
 
   return <ServiceDetailView slug={params.slug} initialPost={post} />;
 }
