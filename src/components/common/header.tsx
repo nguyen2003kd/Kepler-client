@@ -626,10 +626,100 @@ export default function Header({ navItems = [], className }: HeaderProps) {
     (item) => item.link !== "/contact" && item.link !== "/about",
   );
 
+  const pinnedItems: HeaderMenuItem[] = [
+    {
+      id: "pinned-services",
+      name: "Dịch vụ",
+      type: "",
+      content_type: "",
+      link: "/services",
+      sequence: 3,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "svc-1", name: "Tư vấn đầu tư", type: "", content_type: "", link: "/services/tu-van-dau-tu", sequence: 1, display: true, parent_id: "pinned-services" },
+        { id: "svc-2", name: "Thẩm định giá", type: "", content_type: "", link: "/services/tham-dinh-gia", sequence: 2, display: true, parent_id: "pinned-services" },
+        { id: "svc-3", name: "Phát triển dự án", type: "", content_type: "", link: "/services/phat-trien-du-an", sequence: 3, display: true, parent_id: "pinned-services" },
+        { id: "svc-4", name: "Quản lý BĐS", type: "", content_type: "", link: "/services/quan-ly-bat-dong-san", sequence: 4, display: true, parent_id: "pinned-services" },
+        { id: "svc-5", name: "Asset Enhancement", type: "", content_type: "", link: "/services/asset-enhancement", sequence: 5, display: true, parent_id: "pinned-services" },
+        { id: "svc-6", name: "Tư vấn M&A", type: "", content_type: "", link: "/services/tu-van-ma", sequence: 6, display: true, parent_id: "pinned-services" },
+        { id: "svc-7", name: "Môi giới & Leasing", type: "", content_type: "", link: "/services/moi-gioi-leasing", sequence: 7, display: true, parent_id: "pinned-services" },
+        { id: "svc-8", name: "Thiết kế & Xây dựng", type: "", content_type: "", link: "/services/thiet-ke-xay-dung", sequence: 8, display: true, parent_id: "pinned-services" },
+        { id: "svc-9", name: "Giải pháp số", type: "", content_type: "", link: "/services/giai-phap-so", sequence: 9, display: true, parent_id: "pinned-services" },
+      ],
+    },
+    {
+      id: "pinned-ecosystem",
+      name: "Hệ sinh thái",
+      type: "",
+      content_type: "",
+      link: "/he-sinh-thai",
+      sequence: 4,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "eco-1", name: "Kepler Property", type: "", content_type: "", link: "/he-sinh-thai/kepler-property", sequence: 1, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-2", name: "KPC Appraisal", type: "", content_type: "", link: "/he-sinh-thai/kpc-appraisal", sequence: 2, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-3", name: "KMC Management", type: "", content_type: "", link: "/he-sinh-thai/kmc-management", sequence: 3, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-4", name: "KAC Advisory", type: "", content_type: "", link: "/he-sinh-thai/kac-advisory", sequence: 4, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-5", name: "K-Homes Design & Build", type: "", content_type: "", link: "/he-sinh-thai/k-homes", sequence: 5, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-6", name: "RealHub Platform", type: "", content_type: "", link: "/realhub", sequence: 6, display: true, parent_id: "pinned-ecosystem" },
+      ],
+    },
+    {
+      id: "pinned-realhub",
+      name: "RealHub",
+      type: "",
+      content_type: "",
+      link: "/realhub",
+      sequence: 5,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "rh-1", name: "Marketplace", type: "", content_type: "", link: "/realhub#modules", sequence: 1, display: true, parent_id: "pinned-realhub" },
+        { id: "rh-2", name: "CRM", type: "", content_type: "", link: "/realhub#modules", sequence: 2, display: true, parent_id: "pinned-realhub" },
+        { id: "rh-3", name: "Dashboard", type: "", content_type: "", link: "/realhub#modules", sequence: 3, display: true, parent_id: "pinned-realhub" },
+        { id: "rh-4", name: "Broker Network", type: "", content_type: "", link: "/realhub#modules", sequence: 4, display: true, parent_id: "pinned-realhub" },
+        { id: "rh-5", name: "AI Assistant", type: "", content_type: "", link: "/realhub#modules", sequence: 5, display: true, parent_id: "pinned-realhub" },
+        { id: "rh-6", name: "Valuation", type: "", content_type: "", link: "/realhub#modules", sequence: 6, display: true, parent_id: "pinned-realhub" },
+        { id: "rh-7", name: "Roadmap", type: "", content_type: "", link: "/realhub#roadmap", sequence: 7, display: true, parent_id: "pinned-realhub" },
+        { id: "rh-8", name: "Đăng ký quan tâm", type: "", content_type: "", link: "/realhub#register", sequence: 8, display: true, parent_id: "pinned-realhub" },
+      ],
+    },
+    {
+      id: "pinned-experts",
+      name: "Chuyên gia",
+      type: "",
+      content_type: "",
+      link: "/chuyen-gia",
+      sequence: 6,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "exp-1", name: "Luật", type: "", content_type: "", link: "/chuyen-gia?category=Luật", sequence: 1, display: true, parent_id: "pinned-experts" },
+        { id: "exp-2", name: "Thẩm định giá", type: "", content_type: "", link: "/chuyen-gia?category=Thẩm định giá", sequence: 2, display: true, parent_id: "pinned-experts" },
+        { id: "exp-3", name: "Kiến trúc", type: "", content_type: "", link: "/chuyen-gia?category=Kiến trúc", sequence: 3, display: true, parent_id: "pinned-experts" },
+        { id: "exp-4", name: "Tài chính", type: "", content_type: "", link: "/chuyen-gia?category=Tài chính", sequence: 4, display: true, parent_id: "pinned-experts" },
+        { id: "exp-5", name: "Xây dựng", type: "", content_type: "", link: "/chuyen-gia?category=Xây dựng", sequence: 5, display: true, parent_id: "pinned-experts" },
+        { id: "exp-6", name: "Kế toán", type: "", content_type: "", link: "/chuyen-gia?category=Kế toán", sequence: 6, display: true, parent_id: "pinned-experts" },
+        { id: "exp-7", name: "Bất động sản", type: "", content_type: "", link: "/chuyen-gia?category=Bất động sản", sequence: 7, display: true, parent_id: "pinned-experts" },
+        { id: "exp-8", name: "Quản lý vận hành", type: "", content_type: "", link: "/chuyen-gia?category=Quản lý vận hành", sequence: 8, display: true, parent_id: "pinned-experts" },
+      ],
+    },
+  ];
+
   const finalNav = [
     ...(filteredNavigation[0] ? [filteredNavigation[0]] : []),
     aboutItem,
-    ...filteredNavigation.slice(1),
+    ...pinnedItems,
+    ...filteredNavigation.slice(1).filter(
+      (item) =>
+        item.link !== "/services" &&
+        item.link !== "/dich-vu" &&
+        item.link !== "/he-sinh-thai" &&
+        item.link !== "/realhub" &&
+        item.link !== "/chuyen-gia",
+    ),
     customersPartnersItem,
     contactItem,
   ];

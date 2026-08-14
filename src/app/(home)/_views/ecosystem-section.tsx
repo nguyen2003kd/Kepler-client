@@ -10,37 +10,37 @@ const ECOSYSTEM = [
   {
     name: "Kepler Property",
     desc: "Tư vấn đầu tư, môi giới, phát triển dự án và kinh doanh bất động sản.",
-    color: "from-blue-500 to-blue-700",
+    color: "from-primary to-primary/80",
     image: "https://picsum.photos/seed/prj1/1200/800",
   },
   {
     name: "KPC Appraisal",
     desc: "Thẩm định giá bất động sản, doanh nghiệp, máy móc thiết bị và tài sản.",
-    color: "from-emerald-500 to-emerald-700",
+    color: "from-primary to-primary/80",
     image: "https://picsum.photos/seed/prj2/1200/800",
   },
   {
     name: "KMC Management",
     desc: "Quản lý, vận hành và khai thác bất động sản.",
-    color: "from-amber-500 to-amber-700",
+    color: "from-primary to-primary/80",
     image: "https://picsum.photos/seed/prj3/1200/800",
   },
   {
     name: "KAC Advisory",
     desc: "Tư vấn M&A, tái cấu trúc doanh nghiệp và tư vấn tài chính đầu tư.",
-    color: "from-purple-500 to-purple-700",
+    color: "from-primary to-primary/80",
     image: "https://picsum.photos/seed/prj4/1200/800",
   },
   {
     name: "K-Homes",
     desc: "Thiết kế kiến trúc, nội thất, thi công và cải tạo công trình.",
-    color: "from-rose-500 to-rose-700",
+    color: "from-primary to-primary/80",
     image: "https://picsum.photos/seed/prjint1/1200/800",
   },
   {
     name: "RealHub",
     desc: "Nền tảng công nghệ kết nối dữ liệu, tài sản, nhà đầu tư và hệ sinh thái dịch vụ.",
-    color: "from-cyan-500 to-cyan-700",
+    color: "from-primary to-primary/80",
     image: "https://picsum.photos/seed/prjint2/1200/800",
   },
 ];
@@ -58,13 +58,13 @@ export default function EcosystemSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="text-sm font-semibold tracking-wider text-red-600 uppercase">
+          <span className="text-sm font-semibold tracking-wider text-primary uppercase">
             Hệ sinh thái Kepler
           </span>
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mt-3">
             6 thương hiệu thành viên
           </h2>
-          <div className="mt-4 h-1 w-20 rounded-full bg-red-500" />
+          <div className="mt-4 h-1 w-20 rounded-full bg-primary" />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -80,7 +80,7 @@ export default function EcosystemSection() {
                 transition={{ duration: 0.4, delay: index * 0.06 }}
                 className={`group cursor-pointer border-l-2 px-6 py-5 transition-all duration-300 ${
                   active === index
-                    ? "border-red-500 bg-white shadow-md"
+                    ? "border-primary bg-white shadow-md"
                     : "border-gray-200 hover:border-gray-400 bg-transparent"
                 }`}
               >
