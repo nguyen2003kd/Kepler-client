@@ -1,5 +1,5 @@
 export PROJECT_NAME="kepler-frontend-client"
-export IMAGE_NAME="registry.gitlab.com/meu-solutions/kepler-frontend-client"
+export IMAGE_NAME="registry.gitlab.com/meu-solutions/kepler-frontend-2"
 export ENVIRONMENT_NAME="staging"
 export PORT_APP="8002"
 export ENV_FILE="/home/gitlab-runner/env/kepler-frontend-client/.env"
