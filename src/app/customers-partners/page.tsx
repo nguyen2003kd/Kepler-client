@@ -5,9 +5,9 @@ export const metadata = constructMetadata({
   title: "Khách hàng & Đối tác",
   description:
     "Khách hàng tiêu biểu và mạng lưới đối tác chiến lược của Kepler Group.",
-  url: "/khach-hang-doi-tac",
+  url: "/customers-partners",
 });
 
-export default function KhachHangDoiTacPage() {
+export default function CustomersPartnersPage() {
   return <CustomersPartnersView />;
 }
