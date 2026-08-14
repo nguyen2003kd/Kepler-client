@@ -1,31 +1,7 @@
-﻿"use client";
-
-import { Loading } from "@/components/common/loading";
-import { Suspense } from "react";
-import { useTranslation } from "react-i18next";
-import ServiceGrid from "./components/service-grid";
+import ServicesPageView from "./components/services-page-view";
 
 export default function ServicesPage() {
-  const { t } = useTranslation("pages/services");
-
-  return (
-    <>
-      <Suspense
-        fallback={
-          <div className="min-h-screen flex items-center justify-center bg-[#19426D]">
-            <Loading
-              text={t("loading") || "Đang tải dịch vụ..."}
-              size="lg"
-              className="text-white"
-            />
-          </div>
-        }
-      >
-        <ServiceGrid />
-      </Suspense>
-      {/* <TestimonialSection /> */}
-    </>
-  );
+  return <ServicesPageView basePath="/services" />;
 }
 
 /* 
