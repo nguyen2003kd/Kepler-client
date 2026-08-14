@@ -28,8 +28,8 @@ export default function NewsHeader({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-2">
         {/* Left: Title */}
         <div className="flex items-start gap-3">
-          <div className="bg-red-50 p-2.5 rounded-lg mt-0.5">
-            <Newspaper className="w-7 h-7 text-red-600" />
+          <div className="bg-primary/10 p-2.5 rounded-lg mt-0.5">
+            <Newspaper className="w-7 h-7 text-primary" />
           </div>
           <div>
             <h2 className="text-xl font-bold text-gray-900">{categoryName}</h2>
@@ -52,8 +52,8 @@ export default function NewsHeader({
               size="icon"
               className={
                 viewMode === "grid"
-                  ? "bg-red-600 text-white hover:bg-red-700"
-                  : "hover:bg-gray-100 hover:text-red-600"
+                  ? "bg-primary text-white hover:bg-primary/90"
+                  : "hover:bg-gray-100 hover:text-primary"
               }
             >
               <LayoutGrid className="w-5 h-5" />
@@ -64,8 +64,8 @@ export default function NewsHeader({
               size="icon"
               className={
                 viewMode === "list"
-                  ? "bg-red-600 text-white hover:bg-red-700"
-                  : "hover:bg-gray-100 hover:text-red-600"
+                  ? "bg-primary text-white hover:bg-primary/90"
+                  : "hover:bg-gray-100 hover:text-primary"
               }
             >
               <List className="w-5 h-5" />

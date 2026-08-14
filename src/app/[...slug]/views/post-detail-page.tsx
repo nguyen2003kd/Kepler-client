@@ -198,8 +198,8 @@ export default function DynamicPostDetailPage({
   return (
     <>
       {/* Navbar Section */}
-      <section className="bg-[#0C2449] py-12 border-t border-gray-600"
-      style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
+      <section className="bg-gray-900 py-12 border-t border-gray-600"
+      style={{ backgroundImage: "url('/images/category-banner-investment.png')" }}
       >
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
           <h1 className="text-3xl md:text-4xl font-bold text-white text-center mb-6">
@@ -243,7 +243,7 @@ export default function DynamicPostDetailPage({
                   <div className="mb-4">
                     <Badge
                       variant="secondary"
-                      className="bg-red-100 text-red-700 hover:bg-red-200"
+                      className="bg-primary/10 text-primary hover:bg-primary/20"
                     >
                       {post.category.name}
                     </Badge>
@@ -284,7 +284,7 @@ export default function DynamicPostDetailPage({
                   <Button
                     variant="outline"
                     size="icon"
-                    className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors"
+                    className="hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors"
                     onClick={() => handleShare("facebook")}
                   >
                     <Facebook className="w-4 h-4" />
@@ -292,7 +292,7 @@ export default function DynamicPostDetailPage({
                   <Button
                     variant="outline"
                     size="icon"
-                    className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors"
+                    className="hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors"
                     onClick={() => handleShare("linkedin")}
                   >
                     <Linkedin className="w-4 h-4" />
@@ -300,7 +300,7 @@ export default function DynamicPostDetailPage({
                   <Button
                     variant="outline"
                     size="icon"
-                    className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors"
+                    className="hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors"
                     onClick={() => handleShare("twitter")}
                   >
                     <Twitter className="w-4 h-4" />
@@ -308,7 +308,7 @@ export default function DynamicPostDetailPage({
                   <Button
                     variant="outline"
                     size="icon"
-                    className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors"
+                    className="hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors"
                     onClick={() => handleShare("copy")}
                   >
                     <LinkIcon className="w-4 h-4" />
@@ -316,7 +316,7 @@ export default function DynamicPostDetailPage({
                   <Button
                     variant="outline"
                     size="icon"
-                    className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors"
+                    className="hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors"
                     onClick={() => window.print()}
                   >
                     <Printer className="w-4 h-4" />
@@ -324,7 +324,7 @@ export default function DynamicPostDetailPage({
                   <Button
                     variant="outline"
                     size="icon"
-                    className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors"
+                    className="hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors"
                     onClick={() => handleShare("email")}
                   >
                     <Mail className="w-4 h-4" />
@@ -332,7 +332,7 @@ export default function DynamicPostDetailPage({
                   <Button
                     variant="outline"
                     size="icon"
-                    className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors"
+                    className="hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors"
                     onClick={() => setQrOpen(true)}
                   >
                     <QrCode className="w-4 h-4" />
@@ -389,7 +389,7 @@ export default function DynamicPostDetailPage({
 
                 {/* Summary */}
                 {post.summary && (
-                  <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
+                  <div className="bg-primary/5 border-l-4 border-primary p-4 mb-8">
                     <div className="tiptap prose max-w-none text-gray-700 italic leading-relaxed">
                       {isClient ? parse(post.summary) : null}
                     </div>
@@ -484,7 +484,7 @@ export default function DynamicPostDetailPage({
                       {relatedPosts.map((relatedPost) => (
                         <Card
                           key={relatedPost.id}
-                          className="group overflow-hidden hover:shadow-2xl border-gray-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
+                          className="group overflow-hidden hover:shadow-2xl border-gray-100 hover:border-primary/30 transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
                         >
                           {/* Image */}
                           <div className="relative h-48 overflow-hidden bg-gray-100">
@@ -505,7 +505,7 @@ export default function DynamicPostDetailPage({
                           {/* Content */}
                           <div className="p-5 flex flex-col flex-grow">
                             {/* Title */}
-                            <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
+                            <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                               {relatedPost.title}
                             </h3>
 
@@ -522,7 +522,7 @@ export default function DynamicPostDetailPage({
                                   ? "/"
                                   : `${baseConfig.frontendDomain}/${categorySlug}/`
                               }${relatedPost.slug || ""}`}
-                              className="inline-flex items-center text-red-600 font-semibold text-sm hover:text-red-700 transition-colors group/link mt-auto"
+                              className="inline-flex items-center text-primary font-semibold text-sm hover:text-primary/90 transition-colors group/link mt-auto"
                             >
                               {t("viewDetails")}
                               <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
@@ -546,7 +546,7 @@ export default function DynamicPostDetailPage({
                 <div className="sticky top-6 space-y-4">
                   <Card className="overflow-hidden shadow-lg">
                     {/* Header */}
-                    <div className="bg-[#1e40af] px-4 py-3 flex items-center justify-between">
+                    <div className="bg-gray-900 px-4 py-3 flex items-center justify-between">
                       <h3 className="text-base font-bold text-white">
                         {t("latestPosts")}
                       </h3>
@@ -559,7 +559,7 @@ export default function DynamicPostDetailPage({
                         <Link
                           key={news.id}
                           href={`${baseConfig.frontendDomain}/${news.link}`}
-                          className={`flex gap-4 group hover:bg-red-50 px-4 py-3 transition-colors ${
+                          className={`flex gap-4 group hover:bg-primary/5 px-4 py-3 transition-colors ${
                             index !== latestNews.slice(0, 10).length - 1
                               ? "border-b border-gray-100"
                               : ""
@@ -573,7 +573,7 @@ export default function DynamicPostDetailPage({
                           {/* Content */}
                           <div className="flex-1 space-y-1.5">
                             {/* Title */}
-                            <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-red-600 transition-colors leading-snug">
+                            <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-primary transition-colors leading-snug">
                               {news.title}
                             </h4>
                           </div>
@@ -585,7 +585,7 @@ export default function DynamicPostDetailPage({
                     <div className="px-4 py-2.5 bg-gray-50 text-center border-t border-gray-100">
                       <a
                         href={`${baseConfig.frontendDomain}/${categorySlug}`}
-                        className="text-red-600 font-semibold text-xs hover:text-red-700 inline-flex items-center gap-1"
+                        className="text-primary font-semibold text-xs hover:text-primary/90 inline-flex items-center gap-1"
                       >
                         {t("viewAll")}
                         <ArrowRight className="w-3.5 h-3.5" />
