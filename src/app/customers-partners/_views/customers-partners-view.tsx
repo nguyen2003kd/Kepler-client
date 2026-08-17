@@ -19,7 +19,7 @@ import { useState } from "react";
 
 const MAIN_LINKS = [
   {
-    href: "/khach-hang",
+    href: "/customers",
     title: "Khách hàng tiêu biểu",
     subtitle: "Customers",
     description:
@@ -29,7 +29,7 @@ const MAIN_LINKS = [
     tags: ["Logo", "Case Study", "Testimonials", "Video", "Câu chuyện"],
   },
   {
-    href: "/doi-tac",
+    href: "/partners",
     title: "Đối tác chiến lược",
     subtitle: "Partners",
     description:
@@ -41,14 +41,14 @@ const MAIN_LINKS = [
 ];
 
 const PARTNER_GROUPS = [
-  { label: "Ngân hàng", icon: Building2, href: "/doi-tac#Ngan-hang", desc: "Tài trợ & cấp tín dụng" },
-  { label: "Quỹ đầu tư", icon: Briefcase, href: "/doi-tac#Quy-dau-tu", desc: "Đồng đầu tư & M&A" },
-  { label: "Luật", icon: Scale, href: "/doi-tac#Luat", desc: "Tư vấn pháp lý" },
-  { label: "Kiến trúc", icon: PencilRuler, href: "/doi-tac#Kien-truc", desc: "Thiết kế & quy hoạch" },
-  { label: "Nhà thầu", icon: HardHat, href: "/doi-tac#Nha-thau", desc: "Thi công xây dựng" },
-  { label: "Công nghệ", icon: Cpu, href: "/doi-tac#Cong-nghe", desc: "Chuyển đổi số" },
-  { label: "Marketing", icon: Megaphone, href: "/doi-tac#Marketing", desc: "Truyền thông & branding" },
-  { label: "Đơn vị tư vấn", icon: Lightbulb, href: "/doi-tac#Don-vi-tu-van", desc: "Chiến lược & tài chính" },
+  { label: "Ngân hàng", icon: Building2, href: "/partners#Ngan-hang", desc: "Tài trợ & cấp tín dụng" },
+  { label: "Quỹ đầu tư", icon: Briefcase, href: "/partners#Quy-dau-tu", desc: "Đồng đầu tư & M&A" },
+  { label: "Luật", icon: Scale, href: "/partners#Luat", desc: "Tư vấn pháp lý" },
+  { label: "Kiến trúc", icon: PencilRuler, href: "/partners#Kien-truc", desc: "Thiết kế & quy hoạch" },
+  { label: "Nhà thầu", icon: HardHat, href: "/partners#Nha-thau", desc: "Thi công xây dựng" },
+  { label: "Công nghệ", icon: Cpu, href: "/partners#Cong-nghe", desc: "Chuyển đổi số" },
+  { label: "Marketing", icon: Megaphone, href: "/partners#Marketing", desc: "Truyền thông & branding" },
+  { label: "Đơn vị tư vấn", icon: Lightbulb, href: "/partners#Don-vi-tu-van", desc: "Chiến lược & tài chính" },
 ];
 
 export default function CustomersPartnersView() {
@@ -94,14 +94,14 @@ export default function CustomersPartnersView() {
               </p>
               <div className="mt-8 md:mt-10 flex flex-wrap items-center gap-4">
                 <Link
-                  href="/khach-hang"
+                  href="/customers"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 text-sm font-semibold rounded-full hover:bg-gray-100 transition-all group"
                 >
                   Khám phá khách hàng
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
-                  href="/doi-tac"
+                  href="/partners"
                   className="inline-flex items-center gap-2 px-6 py-3 border border-white/40 text-white text-sm font-semibold rounded-full hover:bg-white/10 hover:border-white/60 transition-all"
                 >
                   Xem đối tác chiến lược
@@ -315,7 +315,7 @@ export default function CustomersPartnersView() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/khach-hang"
+                href="/customers"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-white/20 text-white text-sm font-semibold rounded-full hover:bg-white/5 transition-all"
               >
                 Xem khách hàng tiêu biểu

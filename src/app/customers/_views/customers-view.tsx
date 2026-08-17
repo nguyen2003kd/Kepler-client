@@ -513,7 +513,7 @@ export default function KhachHangView() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/doi-tac"
+                href="/partners"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-white/20 text-white text-sm font-semibold rounded-full hover:bg-white/5 transition-all"
               >
                 Xem đối tác chiến lược

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useGetApiV10Category } from "@/api/endpoints/category";
 import { useGetApiV10Post } from "@/api/endpoints/post";

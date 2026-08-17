@@ -213,7 +213,7 @@ export default function DoiTacView() {
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <Link
-                  href="/khach-hang"
+                  href="/customers"
                   className="inline-flex items-center gap-2 px-6 py-3 border border-white/40 text-white text-sm font-semibold rounded-full hover:bg-white/10 hover:border-white/60 transition-all"
                 >
                   Xem khách hàng tiêu biểu
@@ -573,7 +573,7 @@ export default function DoiTacView() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/khach-hang"
+                href="/customers"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-white/20 text-white text-sm font-semibold rounded-full hover:bg-white/5 transition-all"
               >
                 Xem khách hàng tiêu biểu
