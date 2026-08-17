@@ -9,7 +9,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
 
   if (unitKey === "kpc-appraisal")
     return (
-      <section className="mx-auto max-w-[1400px] px-6 py-24 lg:px-12 lg:py-32">
+      <section id="capabilities" className="mx-auto max-w-[1400px] scroll-mt-20 px-6 py-24 lg:px-12 lg:py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -17,6 +17,12 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
           transition={{ duration: 0.6 }}
           className="mb-16 max-w-2xl"
         >
+          <div className="mb-4 flex items-center gap-3">
+            <div className="h-px w-12 bg-primary" />
+            <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
+              Năng lực cốt lõi
+            </span>
+          </div>
           <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             Một báo cáo. Nhiều quyết định.
           </h2>
@@ -54,7 +60,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
 
   if (unitKey === "kmc-management")
     return (
-      <section className="bg-gray-900 py-24 lg:py-32">
+      <section id="capabilities" className="relative overflow-hidden bg-gray-900 py-24 scroll-mt-20 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -63,6 +69,12 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
             transition={{ duration: 0.6 }}
             className="mb-16 max-w-2xl"
           >
+            <div className="mb-4 flex items-center gap-3">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
+                Năng lực cốt lõi
+              </span>
+            </div>
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
               Vận hành không ngắt quãng.
             </h2>
@@ -95,7 +107,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
 
   if (unitKey === "kac-advisory")
     return (
-      <section className="mx-auto max-w-[1400px] px-6 py-24 lg:px-12 lg:py-32">
+      <section id="capabilities" className="mx-auto max-w-[1400px] scroll-mt-20 px-6 py-24 lg:px-12 lg:py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -103,6 +115,12 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
           transition={{ duration: 0.6 }}
           className="mb-16 max-w-2xl"
         >
+          <div className="mb-4 flex items-center gap-3">
+            <div className="h-px w-12 bg-primary" />
+            <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
+              Năng lực cốt lõi
+            </span>
+          </div>
           <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             Tư vấn theo từng bước tiến.
           </h2>
@@ -137,7 +155,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
 
   if (unitKey === "k-homes")
     return (
-      <section className="bg-gray-900 py-24 lg:py-32">
+      <section id="capabilities" className="relative overflow-hidden bg-gray-900 py-24 scroll-mt-20 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -146,6 +164,12 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
             transition={{ duration: 0.6 }}
             className="mb-16 max-w-2xl"
           >
+            <div className="mb-4 flex items-center gap-3">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
+                Năng lực cốt lõi
+              </span>
+            </div>
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
               Tạo hình. Kiến tạo.
             </h2>
@@ -183,7 +207,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
 
   if (unitKey === "realhub")
     return (
-      <section className="mx-auto max-w-[1400px] px-6 py-24 lg:px-12 lg:py-32">
+      <section id="capabilities" className="mx-auto max-w-[1400px] scroll-mt-20 px-6 py-24 lg:px-12 lg:py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -192,6 +216,12 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
           className="mb-16 flex flex-col justify-between gap-5 md:flex-row md:items-end"
         >
           <div className="max-w-2xl">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
+                Năng lực cốt lõi
+              </span>
+            </div>
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
               Một nền tảng. Nhiều kết nối.
             </h2>
@@ -228,7 +258,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
     );
 
   return (
-    <section className="mx-auto max-w-[1400px] px-6 py-24 lg:px-12 lg:py-32">
+    <section id="capabilities" className="mx-auto max-w-[1400px] scroll-mt-20 px-6 py-24 lg:px-12 lg:py-32">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -236,6 +266,12 @@ export default function UnitCapabilities({ unitKey }: { unitKey: keyof typeof un
         transition={{ duration: 0.6 }}
         className="mb-16 max-w-2xl"
       >
+        <div className="mb-4 flex items-center gap-3">
+          <div className="h-px w-12 bg-primary" />
+          <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
+            Năng lực cốt lõi
+          </span>
+        </div>
         <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
           Giải pháp theo từng chuyên môn
         </h2>

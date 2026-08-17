@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const ecosystem = [
-  { name: "Kepler Property", eyebrow: "Đầu tư & Phát triển", description: "Tư vấn đầu tư, môi giới, leasing và phát triển dự án.", items: ["Tư vấn đầu tư", "Môi giới", "Leasing", "Phát triển dự án"], image: "/images/banner-1.png", href: "/he-sinh-thai/kepler-property" },
+  { name: "Kepler Property", eyebrow: "Đầu tư & Phát triển", description: "Tư vấn đầu tư, môi giới, leasing và phát triển dự án.", items: ["Tư vấn đầu tư", "Môi giới", "Leasing", "Phát triển dự án"], image: "/images/category-banner-investment.png", href: "/he-sinh-thai/kepler-property" },
   { name: "KPC Appraisal", eyebrow: "Thẩm định giá", description: "Thẩm định bất động sản, máy móc - thiết bị, giá trị doanh nghiệp và dự án.", items: ["Bất động sản", "Máy móc - thiết bị", "Giá trị doanh nghiệp", "Dự án"], image: "/images/banner-2.jpg", href: "/he-sinh-thai/kpc-appraisal" },
   { name: "KMC Management", eyebrow: "Quản lý & Vận hành", description: "Quản lý tòa nhà, tài sản, kỹ thuật, tài chính và vận hành.", items: ["Quản lý tòa nhà", "Quản lý tài sản", "Quản lý kỹ thuật", "Quản lý tài chính"], image: "/images/bg-home.jpg", href: "/he-sinh-thai/kmc-management" },
   { name: "KAC Advisory", eyebrow: "Tài chính & M&A", description: "Tư vấn đầu tư, M&A, tái cấu trúc, tài chính và gọi vốn.", items: ["Tư vấn đầu tư", "M&A", "Tái cấu trúc", "Tư vấn tài chính"], image: "/images/banner-3.jpg", href: "/he-sinh-thai/kac-advisory" },
@@ -21,7 +21,7 @@ export default function EcosystemPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/bg-home.jpg"
+            src="/images/category-banner-investment.png"
             alt=""
             fill
             priority
