@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Loading } from "@/components/common/loading";
 import { Suspense } from "react";

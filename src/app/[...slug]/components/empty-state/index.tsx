@@ -31,12 +31,12 @@ export default function EmptyState({
   const displayMsgWithFilter = messageWithFilter || t("noResultsWithFilterDefault");
   const displayMsgWithoutFilter = messageWithoutFilter || t("noResultsWithoutFilterDefault");
   return (
-    <Card className="border-red-100">
+    <Card className="border-primary/20">
       <CardContent className="py-16 px-6">
         <div className="flex flex-col items-center justify-center text-center max-w-md mx-auto space-y-4">
           {/* Icon */}
-          <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center">
-            <Archive className="w-10 h-10 text-red-300" />
+          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+            <Archive className="w-10 h-10 text-primary/40" />
           </div>
 
           {/* Message */}
@@ -54,7 +54,7 @@ export default function EmptyState({
                 <Button
                   onClick={onClearDateFilter}
                   variant="outline"
-                  className="gap-2 border-red-200 text-red-700 hover:bg-red-50 hover:border-red-300 hover:text-red-800 transition-all duration-200 shadow-sm hover:shadow-md"
+                  className="gap-2 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/40 hover:text-primary/90 transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <X className="w-4 h-4" />
                   {t("clearDateFilter")}
@@ -64,7 +64,7 @@ export default function EmptyState({
                 <Button
                   onClick={onClearCategoryFilter}
                   variant="outline"
-                  className="gap-2 border-red-200 text-red-700 hover:bg-red-50 hover:border-red-300 hover:text-red-800 transition-all duration-200 shadow-sm hover:shadow-md"
+                  className="gap-2 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/40 hover:text-primary/90 transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <X className="w-4 h-4" />
                   {t("clearCategoryFilter")}

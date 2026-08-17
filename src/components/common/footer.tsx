@@ -75,7 +75,7 @@ const Footer = () => {
   return (
     <footer className="w-full bg-white text-foreground font-serif relative overflow-hidden border-t border-border">
       {/* Subtle  */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
       </div>
@@ -298,6 +298,23 @@ const Footer = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Legal Links Bar */}
+      <div className="border-t border-border relative z-10">
+        <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+          <Link href="/chinh-sach-bao-mat" className="hover:text-primary transition-colors">
+            Chính sách bảo mật
+          </Link>
+          <span className="text-border">|</span>
+          <Link href="/dieu-khoan-su-dung" className="hover:text-primary transition-colors">
+            Điều khoản sử dụng
+          </Link>
+          <span className="text-border">|</span>
+          <Link href="/chinh-sach-cookie" className="hover:text-primary transition-colors">
+            Chính sách Cookie
+          </Link>
         </div>
       </div>
     </footer>
