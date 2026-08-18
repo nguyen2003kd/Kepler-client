@@ -73,7 +73,7 @@ export default function ProjectsSection() {
               </p>
             </div>
             <Link
-              href="/projects"
+              href="/du-an?category=dfe9d415-8536-44bd-90b3-945c74f83425"
               className="inline-flex items-center gap-2 md:gap-3 text-primary text-xs md:text-sm font-semibold uppercase tracking-widest hover:gap-3 md:hover:gap-4 transition-all group"
             >
               Xem tất cả
