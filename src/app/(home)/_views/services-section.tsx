@@ -122,7 +122,7 @@ export default function ServicesSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <Link
-              href="/services"
+              href="/du-an"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all group"
             >
               {t("viewAllServices")}
