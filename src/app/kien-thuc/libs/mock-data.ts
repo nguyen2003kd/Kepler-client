@@ -80,6 +80,7 @@ export interface ReportItem {
   fileSize: string;
   date: string;
   category: string;
+  fileUrl: string;
 }
 
 export interface RegionItem {
@@ -1560,6 +1561,7 @@ export const REPORTS: ReportItem[] = [
     fileSize: "2.4 MB",
     date: "2024-12-20",
     category: "Thị trường",
+    fileUrl: "/files/bao-cao-thi-truong-bds-q4-2024.pdf",
   },
   {
     id: 2,
@@ -1569,6 +1571,7 @@ export const REPORTS: ReportItem[] = [
     fileSize: "3.1 MB",
     date: "2024-11-15",
     category: "Đầu tư",
+    fileUrl: "/files/bao-cao-bds-cong-nghiep-2024.pdf",
   },
   {
     id: 3,
@@ -1578,6 +1581,7 @@ export const REPORTS: ReportItem[] = [
     fileSize: "1.8 MB",
     date: "2024-10-30",
     category: "Thẩm định giá",
+    fileUrl: "/files/huong-dan-tham-dinh-gia-bds-thuong-mai.pdf",
   },
   {
     id: 4,
@@ -1587,6 +1591,7 @@ export const REPORTS: ReportItem[] = [
     fileSize: "1.2 MB",
     date: "2024-12-01",
     category: "Pháp lý",
+    fileUrl: "/files/cap-nhat-phap-ly-bds-2024.pdf",
   },
 ];
 
