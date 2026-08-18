@@ -25,7 +25,7 @@ export default function KeplerPropertyProjects() {
             </p>
           </div>
           <Link
-            href="/news"
+            href="/du-an?category=dfe9d415-8536-44bd-90b3-945c74f83425"
             className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
           >
             Xem Case Study <ArrowUpRight className="h-4 w-4" />

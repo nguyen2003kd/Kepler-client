@@ -181,7 +181,7 @@ export default function LegalLayout({ data }: { data: LegalPageData }) {
                   </p>
                 </div>
                 <Link
-                  href="/lien-he"
+                  href="/contact"
                   className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary/90 active:scale-[0.98]"
                 >
                   Liên hệ ngay
