@@ -322,7 +322,7 @@ export default function ThiTruongPage() {
             eyebrow={activeSubData?.label || "Bài nổi bật"}
             headline="Bài nổi bật"
             linkText="Xem tất cả"
-            href="#"
+            href="/kien-thuc/tat-ca"
           />
 
           <motion.div
@@ -411,7 +411,7 @@ export default function ThiTruongPage() {
             eyebrow="Bài mới nhất"
             headline={activeSubData?.label || "Bài viết mới nhất"}
             linkText="Xem tất cả"
-            href="#"
+            href="/kien-thuc/tat-ca"
           />
 
           <motion.div

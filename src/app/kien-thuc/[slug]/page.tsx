@@ -289,9 +289,14 @@ export default function ArticleDetailPage() {
                           {report.fileType} · {report.fileSize}
                         </span>
                       </div>
-                      <button className="w-9 h-9 rounded-lg bg-gray-100 hover:bg-red-600 hover:text-white text-gray-600 flex items-center justify-center transition-all shrink-0">
+                      <a
+                        href={report.fileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-9 h-9 rounded-lg bg-gray-100 hover:bg-red-600 hover:text-white text-gray-600 flex items-center justify-center transition-all shrink-0"
+                      >
                         <Download className="w-4 h-4" />
-                      </button>
+                      </a>
                     </div>
                   ))}
                 </div>
@@ -379,7 +384,7 @@ export default function ArticleDetailPage() {
       <section className="bg-white py-12 border-t border-gray-100">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12 text-center">
           <Link
-            href={`/kien-thuc/${article.categorySlug}`}
+            href="/kien-thuc/tat-ca"
             className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-gray-800 transition-all group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

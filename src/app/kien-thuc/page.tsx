@@ -207,7 +207,7 @@ export default function KienThucPage() {
               eyebrow="Bài nổi bật"
               headline="Tin tức đáng chú ý"
               linkText="Xem tất cả"
-              linkHref="#"
+              linkHref="/kien-thuc/tat-ca"
             />
 
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-10">
@@ -291,7 +291,7 @@ export default function KienThucPage() {
               eyebrow="Bài mới"
               headline="Bài viết mới nhất"
               linkText="Xem tất cả"
-              linkHref="#"
+              linkHref="/kien-thuc/tat-ca"
             />
 
             {articles.length > 0 ? (
@@ -594,7 +594,12 @@ export default function KienThucPage() {
                     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
                   }}
                 >
-                  <div className="group flex items-center gap-5 p-6 rounded-lg border border-gray-100 bg-white shadow-md hover:shadow-xl hover:border-red-200 transition-all duration-300 cursor-pointer">
+                  <a
+                    href={report.fileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-5 p-6 rounded-lg border border-gray-100 bg-white shadow-md hover:shadow-xl hover:border-red-200 transition-all duration-300 cursor-pointer"
+                  >
                     <div className="w-14 h-14 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-600 transition-colors">
                       <Download className="w-6 h-6 text-red-600 group-hover:text-white transition-colors" />
                     </div>
@@ -615,7 +620,7 @@ export default function KienThucPage() {
                       </div>
                     </div>
                     <ArrowUpRight className="w-5 h-5 text-gray-300 group-hover:text-red-600 transition-colors shrink-0" />
-                  </div>
+                  </a>
                 </motion.div>
               ))}
             </motion.div>
