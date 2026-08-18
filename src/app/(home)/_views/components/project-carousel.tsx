@@ -3,7 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { ProjectInfo } from "@/constants/kepler-data";
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -32,7 +32,7 @@ export default function ProjectCarousel({ projects }: Props) {
         <SwiperSlide key={p.id}>
           <Link href={`/projects/${p.slug}`} className="group relative overflow-hidden bg-[#1a1a1a] rounded-xl block">
             <div className="relative aspect-[3/4] overflow-hidden">
-              <Image
+              <SafeImage
                 src={p.img}
                 alt={p.title}
                 fill

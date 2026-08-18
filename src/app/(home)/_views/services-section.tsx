@@ -56,7 +56,7 @@ export default function ServicesSection() {
 
   const { i18n, t } = useTranslation("pages/home");
   const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
-  const servicesPageId = currentLang === "en" ? PAGE_IDS.SERVICE_POSITION : PAGE_IDS.HOME_SERVICES;
+  const servicesPageId = currentLang === "en" ? PAGE_IDS.SERVICE_POSITION : PAGE_IDS.HOME_PROJECTS;
 
   const { data, isLoading } = useGetApiV10Post({
     page_id: servicesPageId,

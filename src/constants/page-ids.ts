@@ -1,13 +1,14 @@
 export const PAGE_IDS = {
   // ========== TRANG CHỦ ==========
-  /** Vị trí dịch vụ ở trang chủ */
-  HOME_SERVICES: "bf9d73fa-f067-4c5a-97ed-8c64c310e706",
-
+  /** Vị trí dự án ở trang chủ */
+  HOME_PROJECTS: "52c42fba-3451-4801-a961-64a6c0db0dd1",
+  /** Vị trí case study ở trang chủ */
+  HOME_CASE_STUDY: "089305bb-3b3d-46b8-85ec-883dda1c8258",
   /** Vị trí tin tức ở trang chủ */
-  HOME_NEWS: "76ffefe3-c59d-4f2d-9018-8e225c974f04",
+  HOME_NEWS: "88139632-283c-4fc8-b96d-a717a47a2d0a",
 
   /** Vị trí tin mới ở trang chủ */
-  HOME_LATEST_NEWS: "670f5635-20d6-479f-9c45-07141de757f3",
+  HOME_LATEST_NEWS: "c91d06f2-e01d-4ce9-953c-10dfb6866466",
 
   /** Vị trí tài liệu ở trang chủ */
   HOME_CAPABILITIES: "f5577d43-9d31-485e-9eed-08ce8d40e465",
