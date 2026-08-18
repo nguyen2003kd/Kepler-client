@@ -182,7 +182,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2025-01-15",
     readTime: "8 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     featured: true,
     tags: ["thị trường", "bất động sản", "2025"],
   },
@@ -196,7 +196,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2025-01-12",
     readTime: "12 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     featured: true,
     tags: ["quy hoạch", "TP.HCM"],
   },
@@ -223,7 +223,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2025-01-08",
     readTime: "10 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["pháp lý", "chính sách"],
   },
   {
@@ -236,7 +236,7 @@ export const ARTICLES: Article[] = [
     author: "Hoàng Văn E",
     date: "2025-01-05",
     readTime: "7 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["đầu tư", "BĐS công nghiệp", "phân tích đầu tư"],
   },
   {
@@ -249,7 +249,7 @@ export const ARTICLES: Article[] = [
     author: "Phòng nghiên cứu",
     date: "2024-12-20",
     readTime: "20 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     tags: ["báo cáo", "quý 4", "2024"],
   },
   {
@@ -262,7 +262,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2024-12-18",
     readTime: "11 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["m&a và gọi vốn"],
   },
   {
@@ -275,7 +275,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2024-12-15",
     readTime: "8 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["căn hộ", "thị trường"],
   },
   {
@@ -288,7 +288,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2024-12-10",
     readTime: "7 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["pháp lý", "quy định", "đất nông nghiệp"],
   },
   {
@@ -301,7 +301,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2025-01-20",
     readTime: "10 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     featured: true,
     tags: ["quy hoạch", "TP.HCM", "hạ tầng"],
   },
@@ -315,7 +315,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2025-01-18",
     readTime: "11 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["quy hoạch", "Hà Nội", "vùng"],
   },
   {
@@ -328,7 +328,7 @@ export const ARTICLES: Article[] = [
     author: "Hoàng Văn E",
     date: "2025-01-16",
     readTime: "9 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["quy hoạch", "Bình Dương", "đô thị mới"],
   },
   {
@@ -341,7 +341,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-01-14",
     readTime: "8 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["quy hoạch", "Đà Nẵng", "thông minh"],
   },
   {
@@ -354,7 +354,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2025-01-07",
     readTime: "11 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     featured: true,
     tags: ["pháp lý", "phân tích", "tranh chấp", "sở hữu"],
   },
@@ -368,7 +368,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2025-01-06",
     readTime: "9 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     tags: ["pháp lý", "sổ đỏ", "quy định"],
   },
   {
@@ -381,7 +381,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2025-01-05",
     readTime: "8 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["pháp lý", "chính sách", "thuế đất"],
   },
   {
@@ -394,7 +394,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-01-04",
     readTime: "10 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["pháp lý", "phân tích", "chung cư cũ"],
   },
   {
@@ -407,7 +407,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2025-01-03",
     readTime: "9 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["pháp lý", "phân tích", "người Việt ở nước ngoài"],
   },
   {
@@ -420,7 +420,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2025-01-02",
     readTime: "12 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     tags: ["pháp lý", "phân tích", "chuyển nhượng dự án"],
   },
   {
@@ -433,7 +433,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-01-18",
     readTime: "10 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     tags: ["đầu tư", "tài chính dự án"],
   },
   {
@@ -446,7 +446,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2025-01-17",
     readTime: "8 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["đầu tư", "phân tích đầu tư", "căn hộ cho thuê"],
   },
   {
@@ -459,7 +459,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2025-01-25",
     readTime: "8 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     tags: ["phân tích đầu tư"],
   },
   {
@@ -472,7 +472,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2025-01-22",
     readTime: "6 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["phân tích đầu tư"],
   },
   {
@@ -485,7 +485,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-01-20",
     readTime: "11 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     tags: ["tài chính dự án"],
   },
   {
@@ -498,7 +498,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2025-01-19",
     readTime: "9 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["tài chính dự án"],
   },
   {
@@ -511,7 +511,7 @@ export const ARTICLES: Article[] = [
     author: "Hoàng Văn E",
     date: "2025-01-16",
     readTime: "10 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["m&a và gọi vốn"],
   },
   {
@@ -524,7 +524,7 @@ export const ARTICLES: Article[] = [
     author: "Vũ Thị F",
     date: "2025-01-15",
     readTime: "7 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     tags: ["m&a và gọi vốn"],
   },
   {
@@ -537,7 +537,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-01-26",
     readTime: "9 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     tags: ["kiến thức thẩm định giá"],
   },
   {
@@ -550,7 +550,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2025-01-24",
     readTime: "11 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["kiến thức thẩm định giá"],
   },
   {
@@ -563,7 +563,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2025-01-23",
     readTime: "8 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["kiến thức thẩm định giá"],
   },
   {
@@ -576,7 +576,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2025-01-22",
     readTime: "12 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["tài chính và định giá"],
   },
   {
@@ -589,7 +589,7 @@ export const ARTICLES: Article[] = [
     author: "Hoàng Văn E",
     date: "2025-01-21",
     readTime: "10 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     tags: ["tài chính và định giá"],
   },
   {
@@ -602,7 +602,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-01-20",
     readTime: "13 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     tags: ["tài chính và định giá"],
   },
   {
@@ -615,7 +615,7 @@ export const ARTICLES: Article[] = [
     author: "Vũ Thị F",
     date: "2025-01-19",
     readTime: "7 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["kiến thức thẩm định giá"],
   },
   // ===== Quản lý và Vận hành — Quản lý tòa nhà =====
@@ -629,7 +629,7 @@ export const ARTICLES: Article[] = [
     author: "Vũ Thị F",
     date: "2025-01-03",
     readTime: "9 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     featured: true,
     tags: ["quản lý tòa nhà", "IoT"],
   },
@@ -643,7 +643,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2025-02-08",
     readTime: "11 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     tags: ["quản lý tòa nhà", "bàn giao"],
   },
   {
@@ -656,7 +656,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-02-15",
     readTime: "8 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     tags: ["quản lý tòa nhà", "bảo trì"],
   },
   {
@@ -669,7 +669,7 @@ export const ARTICLES: Article[] = [
     author: "Hoàng Văn E",
     date: "2025-02-20",
     readTime: "10 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     tags: ["quản lý tòa nhà", "an ninh"],
   },
   // ===== Quản lý và Vận hành — Quản lý tài sản =====
@@ -683,7 +683,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2025-02-25",
     readTime: "12 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     featured: true,
     tags: ["quản lý tài sản", "chiến lược"],
   },
@@ -697,7 +697,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2025-03-02",
     readTime: "9 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["quản lý tài sản", "KPI"],
   },
   {
@@ -710,7 +710,7 @@ export const ARTICLES: Article[] = [
     author: "Vũ Thị F",
     date: "2025-03-08",
     readTime: "11 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["quản lý tài sản", "vòng đời"],
   },
   {
@@ -723,7 +723,7 @@ export const ARTICLES: Article[] = [
     author: "Đặng Văn G",
     date: "2025-03-12",
     readTime: "8 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     tags: ["quản lý tài sản", "nâng cấp"],
   },
   // ===== Quản lý và Vận hành — Facility & Operation =====
@@ -737,7 +737,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-03-18",
     readTime: "13 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     featured: true,
     tags: ["facility & operation", "ISO 41001"],
   },
@@ -751,7 +751,7 @@ export const ARTICLES: Article[] = [
     author: "Hoàng Văn E",
     date: "2025-03-22",
     readTime: "10 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     tags: ["facility & operation", "KPI"],
   },
   {
@@ -764,7 +764,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2025-03-28",
     readTime: "12 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["facility & operation", "ESG"],
   },
   // ===== Kiến trúc - Xây dựng — Thiết kế =====
@@ -778,7 +778,7 @@ export const ARTICLES: Article[] = [
     author: "Đặng Văn G",
     date: "2024-12-28",
     readTime: "6 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     featured: true,
     tags: ["thiết kế", "bền vững"],
   },
@@ -792,7 +792,7 @@ export const ARTICLES: Article[] = [
     author: "Đặng Văn G",
     date: "2025-02-05",
     readTime: "10 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     tags: ["thiết kế", "văn phòng"],
   },
   {
@@ -805,7 +805,7 @@ export const ARTICLES: Article[] = [
     author: "Vũ Thị F",
     date: "2025-02-12",
     readTime: "8 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     tags: ["thiết kế", "căn hộ"],
   },
   {
@@ -818,7 +818,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-02-18",
     readTime: "11 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["thiết kế", "khách sạn"],
   },
   // ===== Kiến trúc - Xây dựng — Thi công =====
@@ -832,7 +832,7 @@ export const ARTICLES: Article[] = [
     author: "Hoàng Văn E",
     date: "2025-02-22",
     readTime: "12 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     featured: true,
     tags: ["thi công", "giám sát"],
   },
@@ -846,7 +846,7 @@ export const ARTICLES: Article[] = [
     author: "Trần Thị B",
     date: "2025-02-26",
     readTime: "9 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["thi công", "an toàn"],
   },
   {
@@ -859,7 +859,7 @@ export const ARTICLES: Article[] = [
     author: "Nguyễn Văn A",
     date: "2025-03-04",
     readTime: "10 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     tags: ["thi công", "chất lượng"],
   },
   {
@@ -872,7 +872,7 @@ export const ARTICLES: Article[] = [
     author: "Đặng Văn G",
     date: "2025-03-10",
     readTime: "13 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     tags: ["thi công", "BIM"],
   },
   // ===== Kiến trúc - Xây dựng — Cải tạo công trình =====
@@ -886,7 +886,7 @@ export const ARTICLES: Article[] = [
     author: "Phạm Thị D",
     date: "2025-03-15",
     readTime: "11 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     featured: true,
     tags: ["cải tạo", "văn phòng"],
   },
@@ -900,7 +900,7 @@ export const ARTICLES: Article[] = [
     author: "Vũ Thị F",
     date: "2025-03-20",
     readTime: "8 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["cải tạo", "căn hộ"],
   },
   {
@@ -913,7 +913,7 @@ export const ARTICLES: Article[] = [
     author: "Lê Văn C",
     date: "2025-03-25",
     readTime: "10 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["cải tạo", "công cộng"],
   },
   // ===== Hoạt động Kepler — Tin doanh nghiệp =====
@@ -927,7 +927,7 @@ export const ARTICLES: Article[] = [
     author: "Ban truyền thông",
     date: "2024-12-25",
     readTime: "5 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     featured: true,
     tags: ["tin doanh nghiệp", "kỷ niệm"],
   },
@@ -941,7 +941,7 @@ export const ARTICLES: Article[] = [
     author: "Ban truyền thông",
     date: "2025-01-10",
     readTime: "6 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     tags: ["tin doanh nghiệp", "báo cáo"],
   },
   {
@@ -954,7 +954,7 @@ export const ARTICLES: Article[] = [
     author: "Ban truyền thông",
     date: "2025-01-20",
     readTime: "4 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     tags: ["tin doanh nghiệp", "mở rộng"],
   },
   {
@@ -967,7 +967,7 @@ export const ARTICLES: Article[] = [
     author: "Ban truyền thông",
     date: "2025-02-01",
     readTime: "5 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["tin doanh nghiệp", "chứng nhận"],
   },
   // ===== Hoạt động Kepler — Sự kiện =====
@@ -981,7 +981,7 @@ export const ARTICLES: Article[] = [
     author: "Ban sự kiện",
     date: "2025-02-12",
     readTime: "7 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     featured: true,
     tags: ["sự kiện", "ra mắt"],
   },
@@ -995,7 +995,7 @@ export const ARTICLES: Article[] = [
     author: "Ban sự kiện",
     date: "2025-02-18",
     readTime: "6 phút",
-    image: "/images/case-smeg-thumb.png",
+    image: "/seo.png",
     tags: ["sự kiện", "triển lãm"],
   },
   {
@@ -1008,7 +1008,7 @@ export const ARTICLES: Article[] = [
     author: "Ban sự kiện",
     date: "2025-02-25",
     readTime: "8 phút",
-    image: "/images/service-1.png",
+    image: "/seo.png",
     tags: ["sự kiện", "workshop"],
   },
   {
@@ -1021,7 +1021,7 @@ export const ARTICLES: Article[] = [
     author: "Ban sự kiện",
     date: "2025-03-01",
     readTime: "5 phút",
-    image: "/images/service-2.png",
+    image: "/seo.png",
     tags: ["sự kiện", "gala"],
   },
   // ===== Hoạt động Kepler — Nội bộ & hợp tác =====
@@ -1035,7 +1035,7 @@ export const ARTICLES: Article[] = [
     author: "Ban hợp tác",
     date: "2025-03-08",
     readTime: "6 phút",
-    image: "/images/service-3.png",
+    image: "/seo.png",
     featured: true,
     tags: ["nội bộ & hợp tác", "ngân hàng"],
   },
@@ -1049,7 +1049,7 @@ export const ARTICLES: Article[] = [
     author: "Ban nhân sự",
     date: "2025-03-15",
     readTime: "7 phút",
-    image: "/images/histories.jpg",
+    image: "/seo.png",
     tags: ["nội bộ & hợp tác", "đào tạo"],
   },
   {
@@ -1062,7 +1062,7 @@ export const ARTICLES: Article[] = [
     author: "Ban hợp tác",
     date: "2025-03-22",
     readTime: "6 phút",
-    image: "/images/video-section-1.png",
+    image: "/seo.png",
     tags: ["nội bộ & hợp tác", "đại học"],
   },
 ];
