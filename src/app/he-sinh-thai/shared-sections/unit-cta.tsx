@@ -59,7 +59,7 @@ export default function UnitCta({ unitKey }: { unitKey: keyof typeof units }) {
               </p>
             </div>
             <Link
-              href="/lien-he"
+              href="/contact"
               className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-primary/30 active:scale-[0.98]"
             >
               Liên hệ ngay

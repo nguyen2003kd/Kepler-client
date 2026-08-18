@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useState } from "react";
 import {
   ArrowRight,
-  ArrowUpRight,
   Check,
   Store,
   Users,
