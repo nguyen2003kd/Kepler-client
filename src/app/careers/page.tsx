@@ -390,128 +390,210 @@ export default function CareersPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header Section */}
-      <section className="relative px-4 py-20 text-center text-primary-foreground bg-gradient-to-b from-[#DC2626] via-primary/80 to-background">
-        <div className="mx-auto max-w-full pt-10">
+      {/* Header Section — dark hero with grid pattern + blobs */}
+      <section className="relative min-h-[70vh] bg-gray-900 overflow-hidden flex items-center">
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
+        {/* Floating blobs */}
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
-          <h1 className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            {t("recruitmentTitle")}
-          </h1>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary-foreground/20 px-4 py-1.5 text-sm font-medium backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-            </span>
-            {t("hiringNow")}
-          </div>
-          {/* <p className="mx-auto mb-12 max-w-2xl text-lg text-primary-foreground/90 sm:text-xl">
-            Trung tâm Dịch vụ Phân tích thí nghiệm và Tiêu chuẩn Chất lượng
-            Thành phố Hồ Chí Minh thông báo tuyển dụng nhân sự
-          </p> */}
-          <div className="flex flex-wrap justify-center gap-8 sm:gap-16 mb-20">
-            <div className="flex flex-col items-center">
-              <span className="text-4xl font-bold sm:text-5xl">{visibleJobs.length}</span>
-              <span className="mt-2 text-sm text-primary-foreground/80">
-                {t("positions")}
-              </span>
+        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12 py-24 md:py-32 w-full">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            {/* Left — content */}
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-3 mb-8">
+                <span
+                  className="text-xs font-semibold tracking-[0.25em] text-primary uppercase"
+                  style={{ fontFamily: "'IBM Plex Mono', ui-monospace, monospace" }}
+                >
+                  Kepler · Tuyển dụng
+                </span>
+                <span className="h-px flex-1 bg-primary/30 max-w-[120px]" />
+              </div>
+
+              <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tighter text-white leading-[0.9]">
+                {t("recruitmentTitle")}
+              </h1>
+
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-white/80 backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                </span>
+                {t("hiringNow")}
+              </div>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Button
+                  size="lg"
+                  onClick={() => setIsApplicationModalOpen(true)}
+                  className="rounded-xl bg-primary text-white hover:bg-primary/90 h-12 px-8 text-base font-semibold shadow-lg shadow-primary/20 active:scale-[0.98] transition-all"
+                >
+                  {t("submitNow")}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => setIsQuestionModalOpen(true)}
+                  className="rounded-xl border-white/20 bg-white/5 text-white hover:bg-white/10 backdrop-blur-sm h-12 px-8 text-base"
+                >
+                  <MessageCircleQuestionMark className="mr-2 h-5 w-5" />
+                  {t("askQuestion")}
+                </Button>
+              </div>
             </div>
-            <div className="flex flex-col items-center">
-              <span className="text-4xl font-bold sm:text-5xl">{visibleJobs.reduce((acc, job) => acc + job.count, 0)}</span>
-              <span className="mt-2 text-sm text-primary-foreground/80">
-                {t("quota")}
-              </span>
+
+            {/* Right — stats panel */}
+            <div className="lg:col-span-5 hidden lg:block">
+              <div className="relative rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+
+                <div className="flex items-center gap-3 mb-8">
+                  <Users className="h-6 w-6 text-primary" />
+                  <span
+                    className="text-xs font-semibold tracking-widest text-white/40 uppercase"
+                    style={{ fontFamily: "'IBM Plex Mono', ui-monospace, monospace" }}
+                  >
+                    Thống kê tuyển dụng
+                  </span>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4 rounded-xl border border-white/5 bg-white/5 p-5">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                      <FileText className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-white/50">{t("positions")}</p>
+                      <p className="text-2xl font-bold text-white">{visibleJobs.length}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 rounded-xl border border-white/5 bg-white/5 p-5">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                      <Users className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-white/50">{t("quota")}</p>
+                      <p className="text-2xl font-bold text-white">
+                        {visibleJobs.reduce((acc, job) => acc + job.count, 0)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            {/* <div className="flex flex-col items-center">
-              <span className="text-4xl font-bold sm:text-5xl">TP.HCM</span>
-              <span className="mt-2 text-sm text-primary-foreground/80">
-                Địa điểm
-              </span>
-            </div> */}
           </div>
         </div>
       </section>
 
       {/* Jobs Listing Section */}
-      <section className="px-4 py-16 sm:py-24">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-10 flex flex-col items-center gap-6 border-b pb-12">
-            <div className="text-center">
-              {/* <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Vị trí đang tuyển
-              </h2>
-              <p className="mt-2 text-muted-foreground">
-                Căn cứ vào nhu cầu tuyển dụng
-              </p> */}
+      <section className="py-20 md:py-28 bg-gray-50">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+          <div className="mb-12 md:mb-16">
+            <div className="mb-4 flex items-center gap-3">
+              <span
+                className="text-sm font-medium text-primary"
+                style={{ fontFamily: "'IBM Plex Mono', ui-monospace, monospace" }}
+              >
+                TUYỂN DỤNG
+              </span>
+              <div className="h-px w-12 bg-primary" />
             </div>
-            
-            <div className="flex w-full md:w-max flex-col md:flex-row items-center gap-2 rounded-2xl md:rounded-full bg-card p-2 border border-border shadow-md hover:shadow-lg transition-shadow mt-4">
-              <div className="flex w-full md:w-[380px] items-center gap-3 px-4 h-12">
-                <Search className="h-5 w-5 text-muted-foreground shrink-0" />
-                <Input
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  type="text"
-                  placeholder={t("searchPlaceholder")}
-                  className="flex-1 bg-transparent text-base text-foreground placeholder:text-muted-foreground outline-none w-full border-none shadow-none focus-visible:ring-0 px-0"
-                />
-              </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
+              TUYỂN DỤNG
+            </h2>
+          </div>
 
-              <div className="flex items-center justify-end w-full md:w-auto gap-2 px-2 pt-2 md:pt-0 md:pr-2 md:pb-0 pb-2">
-                <button onClick={handleSearch} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-sm">
-                  <Search className="h-5 w-5" />
-                </button>
-                <button onClick={handleReset} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-sm">
-                  <RefreshCw className="h-5 w-5" />
-                </button>
-              </div>
+          {/* Search bar */}
+          <div className="mb-10 flex flex-col md:flex-row items-center gap-2 rounded-2xl bg-white p-2 border border-gray-200 shadow-sm hover:shadow-md transition-shadow max-w-2xl">
+            <div className="flex w-full items-center gap-3 px-4 h-12">
+              <Search className="h-5 w-5 text-gray-400 shrink-0" />
+              <Input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                type="text"
+                placeholder={t("searchPlaceholder")}
+                className="flex-1 bg-transparent text-base text-gray-900 placeholder:text-gray-400 outline-none w-full border-none shadow-none focus-visible:ring-0 px-0"
+              />
+            </div>
+            <div className="flex items-center gap-2 px-2 pb-2 md:pb-0 md:pr-2">
+              <button onClick={handleSearch} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm active:scale-[0.98]">
+                <Search className="h-5 w-5" />
+              </button>
+              <button onClick={handleReset} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors">
+                <RefreshCw className="h-5 w-5" />
+              </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {loading ? (
-              <div className="col-span-1 md:col-span-2 py-20 text-center text-muted-foreground">
+              <div className="col-span-full py-20 text-center text-gray-400">
                 {t("loadingJobs")}
               </div>
             ) : filteredJobs.length === 0 ? (
-              <div className="col-span-1 md:col-span-2 py-20 text-center text-muted-foreground">
-                {t("noJobsFound")}
+              <div className="col-span-full py-20 text-center rounded-2xl border border-dashed border-gray-200 bg-white">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
+                  <FileText className="h-5 w-5 text-gray-400" />
+                </div>
+                <p className="text-gray-500 text-sm font-medium">{t("noJobsFound")}</p>
               </div>
             ) : (
-             filteredJobs.map((job) => (
+             filteredJobs.map((job, i) => (
               <Link
                 key={job.id}
                 href={`/careers/${job.id}`}
-                // target="_blank"
-                // rel="noopener noreferrer"
-                className="group relative flex flex-col gap-3 rounded-xl border border-border bg-card p-5 transition-all hover:border-primary hover:shadow-md"
+                className="group relative flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5"
               >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="inline-flex rounded bg-[#1589d9] px-3 py-1.5 text-sm font-bold text-white uppercase">
-                    {job.title}
-                  </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary shrink-0" />
+                {/* Number badge */}
+                <span
+                  className="absolute right-4 top-4 rounded-lg bg-gray-50 px-2.5 py-1 text-xs font-semibold text-primary"
+                  style={{ fontFamily: "'IBM Plex Mono', ui-monospace, monospace" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                <div className="inline-flex w-fit rounded-lg bg-primary/10 px-3 py-1.5 text-sm font-bold text-primary uppercase">
+                  {job.title}
                 </div>
 
-                <div className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="h-4 w-4" />
+                <div className="flex items-center gap-2 text-sm text-gray-500">
+                  <Clock className="h-4 w-4 text-gray-400" />
                   <span>{t("deadlineLabel")} {job.deadline ? new Date(job.deadline).toLocaleDateString("vi-VN") : t("updating")}</span>
                 </div>
 
-                <div className="mt-1 flex items-center gap-6 text-sm text-muted-foreground">
+                <div className="flex items-center gap-4 text-sm text-gray-500">
                   <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4" />
+                    <Users className="h-4 w-4 text-gray-400" />
                     <span>
                       {t("quantity")}:{" "}
-                      <strong className="text-foreground">
+                      <strong className="text-gray-900">
                         {job.count.toString().padStart(2, "0")}
                       </strong>
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-[#1589d9]">
+                  <div className="flex items-center gap-2 text-primary">
                     <MapPin className="h-4 w-4" />
                     <span>{job.department}</span>
                   </div>
+                </div>
+
+                <div className="mt-auto pt-3">
+                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-all group-hover:gap-3">
+                    {t("submitNow")}
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
                 </div>
               </Link>
              ))
@@ -520,29 +602,42 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="px-4 py-8 pb-24">
-        <div className="mx-auto max-w-4xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] p-8 text-center sm:p-16 relative">
-          <div className="relative z-10 text-primary-foreground">
-            <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl">
+      {/* CTA Section — glassmorphism with grid pattern */}
+      {/* <section className="relative py-24 md:py-32 bg-gray-900 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+
+        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
+          <div className="relative mx-auto max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-10 md:p-16 text-center backdrop-blur-md">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
               {t("ctaTitle")}
             </h2>
-            <p className="mx-auto mb-10 max-w-2xl text-lg opacity-90">
+            <p className="text-white/50 max-w-xl mx-auto mb-10 leading-relaxed text-lg font-light">
               {t("ctaDesc")}
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Button
                 size="lg"
                 onClick={() => setIsApplicationModalOpen(true)}
-                className="rounded-full bg-background text-primary hover:bg-background/90 h-14 px-8 text-base shadow-lg shadow-black/10"
+                className="rounded-xl bg-primary text-white hover:bg-primary/90 h-12 px-8 text-base font-semibold shadow-lg shadow-primary/20 active:scale-[0.98] transition-all"
               >
                 {t("submitNow")}
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 onClick={() => setIsQuestionModalOpen(true)}
-                className="rounded-full border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 backdrop-blur-sm h-14 px-8 text-base"
+                className="rounded-xl border-white/20 bg-white/5 text-white hover:bg-white/10 backdrop-blur-sm h-12 px-8 text-base"
               >
                 <MessageCircleQuestionMark className="mr-2 h-5 w-5" />
                 {t("askQuestion")}
@@ -550,7 +645,7 @@ export default function CareersPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Question Modal */}
       {isQuestionModalOpen && (
@@ -562,7 +657,8 @@ export default function CareersPage() {
             className="relative w-full max-w-2xl overflow-hidden rounded-2xl bg-background shadow-2xl animate-in fade-in zoom-in duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-gradient-to-r from-[#4a55e6] to-[#3944d6] text-white p-6 relative">
+            <div className="bg-gray-900 text-white p-6 relative">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
               <button
                 onClick={closeQuestionModal}
                 className="absolute top-4 right-4 rounded-full p-2 text-white/80 hover:text-white transition-colors"
@@ -594,7 +690,7 @@ export default function CareersPage() {
                     }
                     placeholder="Nguyễn Văn A"
                     required
-                    className="h-12 bg-muted/40 border-muted-foreground/20 focus-visible:ring-[#4a55e6] focus-visible:border-[#4a55e6]"
+                    className="h-12 bg-muted/40 border-muted-foreground/20 focus-visible:ring-primary focus-visible:border-primary"
                   />
                 </div>
                 <div className="space-y-2">
@@ -612,7 +708,7 @@ export default function CareersPage() {
                     }
                     placeholder="0901 234 567"
                     required
-                    className="h-12 bg-muted/40 border-muted-foreground/20 focus-visible:ring-[#4a55e6] focus-visible:border-[#4a55e6]"
+                    className="h-12 bg-muted/40 border-muted-foreground/20 focus-visible:ring-primary focus-visible:border-primary"
                   />
                 </div>
                 <div className="space-y-2">
@@ -628,7 +724,7 @@ export default function CareersPage() {
                     type="email"
                     placeholder="email@example.com"
                     required
-                    className="h-12 bg-muted/40 border-muted-foreground/20 focus-visible:ring-[#4a55e6] focus-visible:border-[#4a55e6]"
+                    className="h-12 bg-muted/40 border-muted-foreground/20 focus-visible:ring-primary focus-visible:border-primary"
                   />
                 </div>
                 <div className="space-y-2">
@@ -643,7 +739,7 @@ export default function CareersPage() {
                     }
                     placeholder="TP. Hồ Chí Minh"
                     required
-                    className="h-12 bg-muted/40 border-muted-foreground/20 focus-visible:ring-[#4a55e6] focus-visible:border-[#4a55e6]"
+                    className="h-12 bg-muted/40 border-muted-foreground/20 focus-visible:ring-primary focus-visible:border-primary"
                   />
                 </div>
 
@@ -658,7 +754,7 @@ export default function CareersPage() {
                       setQuestionForm((prev) => ({ ...prev, major: e.target.value }))
                     }
                     placeholder={t("positionPlaceholder")}
-                    className="h-12 w-full bg-muted/40 border-muted-foreground/20 focus-visible:ring-[#4a55e6] focus-visible:border-[#4a55e6]"
+                    className="h-12 w-full bg-muted/40 border-muted-foreground/20 focus-visible:ring-primary focus-visible:border-primary"
                   />
                 </div>
               </div>
@@ -671,7 +767,7 @@ export default function CareersPage() {
                   onChange={(e) =>
                     setQuestionForm((prev) => ({ ...prev, question: e.target.value }))
                   }
-                  className="flex min-h-[140px] w-full rounded-xl border border-muted-foreground/20 bg-muted/40 px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4a55e6] focus-visible:border-[#4a55e6] focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 resize-none shadow-sm transition-all"
+                  className="flex min-h-[140px] w-full rounded-xl border border-muted-foreground/20 bg-muted/40 px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 resize-none shadow-sm transition-all"
                   placeholder={t("questionPlaceholder")} 
                   required
                 />
@@ -680,7 +776,7 @@ export default function CareersPage() {
                  <Button
                   type="submit"
                   disabled={isSubmittingQuestion}
-                  className="w-full h-14 text-base font-semibold bg-[#4a55e6] hover:bg-[#3944d6] shadow-lg shadow-[#4a55e6]/20 rounded-xl transition-all"
+                  className="w-full h-14 text-base font-semibold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 rounded-xl transition-all"
                  >
                   <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
                   {isSubmittingQuestion ? t("sending") : t("sendQuestion")}
@@ -712,8 +808,7 @@ export default function CareersPage() {
                 </button>
 
                 <h2
-                  className="text-center text-2xl md:text-3xl font-bold uppercase mb-8 text-[#1a1a1a]"
-                  style={{ fontFamily: "'Times New Roman', serif" }}
+                  className="text-center text-2xl md:text-3xl font-bold uppercase mb-8 text-gray-900 tracking-tight"
                 >
                   {t("appModalTitle")}
                 </h2>
@@ -995,7 +1090,7 @@ export default function CareersPage() {
                     <Button
                       type="submit"
                       disabled={isUploadingCv || isSubmittingCandidate || (appForm.recruitment_id ? isDeadlineExpired(jobs.find((job) => job.id === appForm.recruitment_id)?.deadline || "") : false)}
-                      className="w-full h-12 text-base font-bold bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] transition-colors rounded-md shadow-sm"
+                      className="w-full h-12 text-base font-bold bg-primary hover:bg-primary/90 transition-colors rounded-xl shadow-lg shadow-primary/20 active:scale-[0.98]"
                     >
                       {isUploadingCv || isSubmittingCandidate
                         ? t("submitting")

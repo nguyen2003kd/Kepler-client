@@ -367,7 +367,7 @@ function ModulesSection() {
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 className={`group relative rounded-2xl border p-8 transition-all duration-300 hover:shadow-lg ${
                   i === 0
-                    ? "bg-gray-900 text-white border-white/10"
+                    ? "bg-white border-gray-200 hover:border-gray-300"
                     : "bg-white border-gray-200 hover:border-gray-300"
                 }`}
               >
@@ -376,14 +376,14 @@ function ModulesSection() {
                 }`}>
                   <Icon className={`w-6 h-6 ${i === 0 ? "text-primary" : "text-primary"}`} />
                 </div>
-                <h3 className={`text-xl font-bold ${i === 0 ? "text-white" : "text-gray-900"}`}>{m.name}</h3>
+                <h3 className={`text-xl font-bold ${i === 0 ? "text-gray-900" : "text-gray-900"}`}>{m.name}</h3>
                 <p className={`mt-3 text-sm leading-relaxed ${i === 0 ? "text-gray-400" : "text-gray-500"}`}>{m.desc}</p>
-                <div className={`mt-6 flex items-center gap-2 text-sm font-semibold ${
+                {/* <div className={`mt-6 flex items-center gap-2 text-sm font-semibold ${
                   i === 0 ? "text-primary" : "text-primary"
                 }`}>
                   Tìm hiểu
                   <ArrowUpRight className="w-4 h-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </div>
+                </div> */}
               </motion.div>
             );
           })}
