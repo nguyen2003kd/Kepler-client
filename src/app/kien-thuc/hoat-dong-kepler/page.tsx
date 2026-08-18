@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -28,23 +28,23 @@ const CATEGORY_SLUG = "hoat-dong-kepler";
 const SUB_SECTIONS = [
   {
     key: "tin-doanh-nghiep",
-    title: "Tin doanh nghi?p",
-    description: "Tin t?c ho?t d?ng, b�o c�o v� c?t m?c Kepler Group.",
-    tag: "tin doanh nghi?p",
+    title: "Tin doanh nghiệp",
+    description: "Tin tức hoạt động, báo cáo và cột mốc Kepler Group.",
+    tag: "tin doanh nghiệp",
     accent: "from-red-600 to-red-800",
   },
   {
     key: "su-kien",
-    title: "S? ki?n",
-    description: "Tri?n l�m, workshop, gala v� c�c s? ki?n Kepler tham gia.",
-    tag: "s? ki?n",
+    title: "Sự kiện",
+    description: "Triển lãm, workshop, gala và các sự kiện Kepler tham gia.",
+    tag: "sự kiện",
     accent: "from-amber-500 to-orange-600",
   },
   {
     key: "noi-bo-hop-tac",
-    title: "Ho?t d?ng n?i b? & h?p t�c",
-    description: "��o t?o, h?p t�c chi?n lu?c v� chuong tr�nh d?i t�c.",
-    tag: "n?i b? & h?p t�c",
+    title: "Hoạt động nội bộ & hợp tác",
+    description: "Đào tạo, hợp tác chiến lược và chương trình đối tác.",
+    tag: "nội bộ & hợp tác",
     accent: "from-rose-500 to-pink-600",
   },
 ] as const;
@@ -128,7 +128,7 @@ export default function HoatDongKeplerPage() {
     return bySub[filter] ?? [];
   }, [filter, allArticles, bySub]);
 
-  // Reset pagination khi d?i filter
+  // Reset pagination khi đổi filter
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
   }, [filter]);
@@ -139,10 +139,10 @@ export default function HoatDongKeplerPage() {
   if (!category) return null;
 
   const stats = [
-    { value: allArticles.length, suffix: "", label: "B�i vi?t ho?t d?ng" },
-    { value: SUB_SECTIONS.length, suffix: "", label: "Nh�m n?i dung" },
-    { value: 25, suffix: "+", label: "S? ki?n/nam" },
-    { value: 50, suffix: "+", label: "�?i t�c chi?n lu?c" },
+    { value: allArticles.length, suffix: "", label: "Bài viết hoạt động" },
+    { value: SUB_SECTIONS.length, suffix: "", label: "Nhóm nội dung" },
+    { value: 25, suffix: "+", label: "Sự kiện/năm" },
+    { value: 50, suffix: "+", label: "Đối tác chiến lược" },
   ];
 
   return (
@@ -171,11 +171,11 @@ export default function HoatDongKeplerPage() {
               <nav className="flex items-center gap-1.5 text-sm text-white/60 mb-8">
                 <Link href="/" className="flex items-center gap-1.5 hover:text-white transition-colors">
                   <Home className="w-3.5 h-3.5" />
-                  Trang ch?
+                  Trang chủ
                 </Link>
                 <ChevronRight className="w-3.5 h-3.5 text-white/30" />
                 <Link href="/kien-thuc" className="hover:text-white transition-colors">
-                  Ki?n th?c
+                  Kiến thức
                 </Link>
                 <ChevronRight className="w-3.5 h-3.5 text-white/30" />
                 <span className="text-white font-medium">{category.name}</span>
@@ -186,7 +186,7 @@ export default function HoatDongKeplerPage() {
                   <Users className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-sm font-semibold tracking-wider text-red-400 uppercase">
-                  Ho?t d?ng Kepler
+                  Hoạt động Kepler
                 </span>
               </div>
 
@@ -194,8 +194,8 @@ export default function HoatDongKeplerPage() {
                 {category.name}
               </h1>
               <p className="mt-5 md:mt-6 text-base md:text-lg text-white/80 leading-relaxed max-w-[60ch]">
-                {category.description} � c?p nh?t nh?ng ho?t d?ng, s? ki?n
-                v� c?t m?c ph�t tri?n c?a Kepler Group.
+                {category.description} — cập nhật những hoạt động, sự kiện
+                và cột mốc phát triển của Kepler Group.
               </p>
 
               <div className="mt-8 md:mt-10 flex flex-wrap items-center gap-4">
@@ -203,14 +203,14 @@ export default function HoatDongKeplerPage() {
                   href="#articles"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 text-sm font-semibold rounded-full hover:bg-gray-100 transition-all group"
                 >
-                  Kh�m ph� b�i vi?t
+                  Khám phá bài viết
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <Link
                   href="/lien-he"
                   className="inline-flex items-center gap-2 px-6 py-3 border border-white/40 text-white text-sm font-semibold rounded-full hover:bg-white/10 hover:border-white/60 transition-all"
                 >
-                  K?t n?i Kepler
+                  Kết nối Kepler
                 </Link>
               </div>
             </motion.div>
@@ -258,11 +258,11 @@ export default function HoatDongKeplerPage() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-sm font-semibold tracking-wider text-red-600 uppercase">
-              {filter === "all" ? "T?t c?" : "�� l?c"}
+              {filter === "all" ? "Tất cả" : "Đã lọc"}
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mt-3">
               {filter === "all"
-                ? "Tin ho?t d?ng"
+                ? "Tin hoạt động"
                 : SUB_SECTIONS.find((s) => s.key === filter)?.title}
             </h2>
             <div className="mt-4 h-1 w-20 rounded-full bg-red-500" />
@@ -274,7 +274,7 @@ export default function HoatDongKeplerPage() {
               <FilterTab
                 active={filter === "all"}
                 onClick={() => setFilter("all")}
-                label="T?t c?"
+                label="Tất cả"
                 count={allArticles.length}
               />
               {SUB_SECTIONS.map((s) => (
@@ -347,7 +347,7 @@ export default function HoatDongKeplerPage() {
                           href={`/kien-thuc/${article.slug}`}
                           className="inline-flex items-center text-red-600 hover:text-red-700 text-sm font-semibold transition-colors"
                         >
-                          �?c ti?p ?
+                          Đọc tiếp →
                         </Link>
                       </div>
                     </motion.div>
@@ -363,7 +363,7 @@ export default function HoatDongKeplerPage() {
                     onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-semibold rounded-full hover:bg-gray-800 transition-all group"
                   >
-                    Xem th�m
+                    Xem thêm
                     <span className="text-xs px-2 py-0.5 rounded-full bg-white/15">
                       +{Math.min(PAGE_SIZE, filteredArticles.length - visibleCount)}
                     </span>
@@ -381,7 +381,7 @@ export default function HoatDongKeplerPage() {
                     }}
                     className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 text-gray-700 text-sm font-semibold rounded-full hover:bg-gray-50 transition-all group"
                   >
-                    Thu g?n
+                    Thu gọn
                     <ChevronUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
                   </button>
                 )}
@@ -389,14 +389,14 @@ export default function HoatDongKeplerPage() {
 
               {!hasMore && visibleCount <= PAGE_SIZE && filteredArticles.length > PAGE_SIZE && (
                 <p className="mt-8 text-center text-xs text-gray-400 uppercase tracking-wider">
-                  �� xem t?t c? {filteredArticles.length} b�i vi?t
+                  Đã xem tất cả {filteredArticles.length} bài viết
                 </p>
               )}
 
               {filteredArticles.length === 0 && (
                 <div className="py-16 text-center bg-white rounded-lg border border-gray-100 shadow-sm">
                   <p className="text-gray-500 text-sm">
-                    Chua c� b�i vi?t trong nh�m n�y.
+                    Chưa có bài viết trong nhóm này.
                   </p>
                 </div>
               )}
@@ -415,7 +415,7 @@ export default function HoatDongKeplerPage() {
                 <div className="bg-gray-900 px-5 py-5 border-b border-gray-200">
                   <h3 className="text-base font-extrabold text-white flex items-center gap-2">
                     <div className="w-1 h-4 bg-red-500 rounded-full" />
-                    M?i nh?t
+                    Mới nhất
                   </h3>
                 </div>
                 <div className="p-2">
@@ -455,7 +455,7 @@ export default function HoatDongKeplerPage() {
               <div className="rounded-xl bg-gray-900 overflow-hidden shadow-lg p-6">
                 <h3 className="text-base font-extrabold text-white flex items-center gap-2 mb-4">
                   <div className="w-1 h-4 bg-red-500 rounded-full" />
-                  Thu vi?n
+                  Thư viện
                 </h3>
                 <div className="space-y-2">
                   {[
@@ -502,27 +502,27 @@ export default function HoatDongKeplerPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              K?t n?i c�ng{" "}
+              Kết nối cùng{" "}
               <span className="text-red-500">Kepler Group</span>
             </h2>
             <p className="mt-6 text-gray-400 text-base leading-relaxed max-w-[60ch]">
-              Qu� d?i t�c, kh�ch h�ng v� b�o ch� c� nhu c?u ph?i h?p s? ki?n,
-              h?p t�c chi?n lu?c ho?c trao d?i truy?n th�ng � d?i ngu Kepler
-              lu�n s?n s�ng l?ng nghe v� d?ng h�nh.
+              Quý đối tác, khách hàng và báo chí có nhu cầu phối hợp sự kiện,
+              hợp tác chiến lược hoặc trao đổi truyền thông — đội ngũ Kepler
+              luôn sẵn sàng lắng nghe và đồng hành.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link
                 href="/lien-he"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-red-600 text-white text-sm font-semibold rounded-full hover:bg-red-500 transition-all hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] group"
               >
-                Li�n h? h?p t�c
+                Liên hệ hợp tác
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/dat-lich-tu-van"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-white/20 text-white text-sm font-semibold rounded-full hover:bg-white/5 transition-all"
               >
-                �?t l?ch tu v?n
+                Đặt lịch tư vấn
               </Link>
             </div>
           </motion.div>
