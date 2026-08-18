@@ -6,9 +6,48 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
-import { PROJECTS } from "@/constants/kepler-data";
+import { PROJECTS, ProjectInfo } from "@/constants/kepler-data";
+import { useGetApiV10Post } from "@/api/endpoints/post";
+import { PAGE_IDS } from "@/constants/page-ids";
+import { getThumbnailSrc } from "@/lib/responsive-image";
+import { slugify } from "@/lib/slugify";
+import { PostExtended } from "@/types/post";
+import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 export default function CaseStudySection() {
+  const { i18n } = useTranslation();
+  const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
+  const pageId = currentLang === "en" ? PAGE_IDS.SERVICE_POSITION : PAGE_IDS.HOME_CASE_STUDY;
+
+  const { data, isLoading } = useGetApiV10Post({
+    page_id: pageId,
+    filters: "is_hidden==false",
+    pageSize: 8,
+    position: "true",
+    sortOrderPosition: "ASC",
+    filterBy: "CLIENT",
+  });
+
+  const projects = useMemo<ProjectInfo[]>(() => {
+    const posts = (data?.responseData?.rows as PostExtended[]) || [];
+    if (posts.length === 0) return PROJECTS;
+    return posts.map((post) => ({
+      id: post.id || "",
+      slug: post.slug || slugify(post.title || "") || post.id || "",
+      title: post.title || "",
+      type: post.category?.name || "",
+      location: "",
+      status: "",
+      scale: "",
+      img: getThumbnailSrc(post.thumbnail_compress_info, post.thumbnail_path, "/seo.png"),
+      priceRange: "",
+      handover: "",
+      description: post.summary || "",
+      amenities: [],
+    }));
+  }, [data?.responseData?.rows]);
+
   return (
       <section className="py-10 md:py-16 bg-white">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
@@ -16,7 +55,6 @@ export default function CaseStudySection() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-10">
               <div>
                 <div className="w-10 md:w-16 h-[2px] md:h-1 bg-primary mb-3 md:mb-5" />
-                {/* <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Dự án</span> */}
                 <h2 className="text-[clamp(22px,3.5vw,42px)] font-serif font-bold text-[#1a1a1a] leading-tight mt-2">
                   CASE STUDY
                 </h2>
@@ -34,7 +72,7 @@ export default function CaseStudySection() {
             </div>
           </FadeIn>
           <FadeIn direction="up" delay={0.2} duration={0.5}>
-            <ProjectCarousel projects={PROJECTS} />
+            <ProjectCarousel projects={projects} />
           </FadeIn>
         </div>
       </section>
