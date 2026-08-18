@@ -20,7 +20,7 @@ export default function CaseStudySection() {
   const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
   const pageId = currentLang === "en" ? PAGE_IDS.SERVICE_POSITION : PAGE_IDS.HOME_CASE_STUDY;
 
-  const { data, isLoading } = useGetApiV10Post({
+  const { data } = useGetApiV10Post({
     page_id: pageId,
     filters: "is_hidden==false",
     pageSize: 8,
