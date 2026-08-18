@@ -96,7 +96,7 @@ export default function BusinessSupportSection() {
                             src={getThumbnailSrc(
                               item.thumbnail_compress_info,
                               item.thumbnail_path,
-                              "/images/service-1.png",
+                              "/seo.png",
                             )}
                             alt={item.title || ""}
                             fill

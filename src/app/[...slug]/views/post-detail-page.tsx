@@ -380,7 +380,7 @@ export default function DynamicPostDetailPage({
                   {/* Featured Image */}
                     <div className="relative w-full aspect-video mb-8 rounded-lg overflow-hidden">
                       <Image
-                        src={getThumbnailSrc(post.thumbnail_compress_info, post.thumbnail_path, "/images/service-1.png")}
+                        src={getThumbnailSrc(post.thumbnail_compress_info, post.thumbnail_path, "/seo.png")}
                         alt={post.title || ""}
                         fill
                         className="object-cover"
@@ -422,7 +422,7 @@ export default function DynamicPostDetailPage({
                                 const imageSrc = getThumbnailSrc(
                                   img.file?.compress_info,
                                   img.file?.path,
-                                  "/images/service-1.png",
+                                  "/seo.png",
                                 );
                                 return (
                                   <div
@@ -493,7 +493,7 @@ export default function DynamicPostDetailPage({
                                 getThumbnailSrc(
                                   relatedPost.thumbnail_compress_info ?? undefined,
                                   relatedPost.thumbnail_path,
-                                  "/images/service-1.png",
+                                  "/seo.png",
                                 )
                               }
                               alt={relatedPost.title || ""}

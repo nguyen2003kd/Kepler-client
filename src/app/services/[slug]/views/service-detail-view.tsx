@@ -309,7 +309,7 @@ export default function ServiceDetailView({ slug, initialPost }: ServiceDetailVi
                 {/* Featured Image */}
                   <div className="relative w-full aspect-video mb-8 rounded-lg overflow-hidden">
                     <Image
-                      src={getThumbnailSrc(currentPost.thumbnail_compress_info, currentPost.thumbnail_path, "/images/service-1.png")}
+                      src={getThumbnailSrc(currentPost.thumbnail_compress_info, currentPost.thumbnail_path, "/seo.png")}
                       alt={currentPost.title || ""}
                       fill
                       className="object-cover"
@@ -343,7 +343,7 @@ export default function ServiceDetailView({ slug, initialPost }: ServiceDetailVi
                               const imageSrc = getThumbnailSrc(
                                 img.file?.compress_info,
                                 img.file?.path,
-                                "/images/service-1.png",
+                                "/seo.png",
                               );
                               return (
                                 <div key={img.id} className="relative w-full aspect-video rounded-lg overflow-hidden">
@@ -391,7 +391,7 @@ export default function ServiceDetailView({ slug, initialPost }: ServiceDetailVi
                   {relatedServices.map((service) => (
                     <ServiceCard
                       key={service.id}
-                      image={getThumbnailSrc(service.thumbnail_compress_info, service.thumbnail_path, "/images/service-1.png")}
+                      image={getThumbnailSrc(service.thumbnail_compress_info, service.thumbnail_path, "/seo.png")}
                       title={service.title || ""}
                       description={service.summary || ""}
                       link={`/services/${service.slug}`}

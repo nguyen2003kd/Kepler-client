@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import ServiceCard from "@/components/common/components/service-card";
@@ -76,7 +76,7 @@ export default function ServicesSection() {
       const imageUrl = getThumbnailSrc(
         post.thumbnail_compress_info,
         post.thumbnail_path,
-        "/images/service-1.png",
+        "/seo.png",
       );
 
       return {

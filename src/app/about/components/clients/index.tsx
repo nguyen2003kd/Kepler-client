@@ -22,7 +22,7 @@ interface Partner {
 const CUSTOMERS_PARTNERS_CONFIG_KEY = "Customers_partners_config";
 
 function getImageUrl(logo: string | undefined): string {
-  if (!logo || logo.trim() === "") return "/images/service-1.png";
+  if (!logo || logo.trim() === "") return "/seo.png";
   return logo.startsWith("http")
     ? logo
     : `${baseConfig.imgEndpointDomain}${logo}`;

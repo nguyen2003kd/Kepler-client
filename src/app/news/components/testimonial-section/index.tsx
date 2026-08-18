@@ -10,7 +10,7 @@ export default function TestimonialSection() {
       <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
         <div className="mx-4 md:mx-8 lg:mx-10">
           <VideoTestimonialCard
-            image="/images/service-1.png"
+            image="/seo.png"
             imageAlt="SMEQ Testimonial Video"
             quote="HT 175 2018."
             channelName="Câu chuyện kinh doanh HTV9"

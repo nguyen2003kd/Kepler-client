@@ -98,7 +98,7 @@ export default function RelatedServices() {
           {posts.map((post) => (
             <ServiceCard
               key={post.id}
-              image={getThumbnailSrc(post.thumbnail_compress_info, post.thumbnail_path, "/images/service-1.png")}
+              image={getThumbnailSrc(post.thumbnail_compress_info, post.thumbnail_path, "/seo.png")}
               title={post.title || ""}
               description={post.summary || ""}
               link={`/services/${post.slug || ""}`}

@@ -75,7 +75,7 @@ export default function Banner() {
         const imageUrl = getThumbnailSrc(
           banner.file?.compress_info,
           banner.file?.path ?? banner.img_url,
-          "/images/service-1.png",
+          "/seo.png",
         );
 
         return {
