@@ -84,7 +84,7 @@ function NewsTabContent({
         (news?.thumbnail_path
           ? `${baseConfig?.imgEndpointDomain ?? ""}${news.thumbnail_path}`
           : null) ||
-        "/images/service-1.png"
+        "/seo.png"
                     }
                     alt={news.title || ""}
                     fill
@@ -193,7 +193,7 @@ export default function NewsSection() {
         (post.thumbnail_path
           ? `${baseConfig?.imgEndpointDomain ?? ""}${post.thumbnail_path}`
           : null) ||
-        "/images/service-1.png",
+        "/seo.png",
       created_at: post.created_at,
     }));
   }, [latestNewsData]);

@@ -165,7 +165,7 @@ export default function DocumentsSection() {
                             src={getThumbnailSrc(
                               getColumn1Image()?.thumbnail_compress_info,
                               getColumn1Image()?.thumbnail_path,
-                              "/images/service-1.png",
+                              "/seo.png",
                             )}
                             alt={getColumn1Image().title || ""}
                             fill
@@ -183,7 +183,7 @@ export default function DocumentsSection() {
                         src={getThumbnailSrc(
                           getColumn2Image()?.thumbnail_compress_info,
                           getColumn2Image()?.thumbnail_path,
-                          "/images/service-1.png",
+                          "/seo.png",
                         )}
                         alt={getColumn2Image().title || ""}
                         fill
@@ -232,7 +232,7 @@ export default function DocumentsSection() {
                         src={getThumbnailSrc(
                           getColumn3Image()?.thumbnail_compress_info,
                           getColumn3Image()?.thumbnail_path,
-                          "/images/service-1.png",
+                          "/seo.png",
                         )}
                         alt={getColumn3Image().title || ""}
                         fill

@@ -151,7 +151,7 @@ export default function KienTrucXayDungPage() {
       <section className="relative h-[70vh] min-h-[460px] max-h-[640px] overflow-hidden bg-[#1a1a1a]">
         <div className="absolute inset-0">
           <img
-            src="/images/service-2.png"
+            src="/seo.png"
             alt={category.name}
             className="w-full h-full object-cover"
           />

@@ -32,7 +32,7 @@ export default function SearchResultItem({ result, t }: SearchResultItemProps) {
             src={getThumbnailSrc(
               result.thumbnail_compress_info,
               result.thumbnail_path,
-              "/images/service-1.png",
+              "/seo.png",
             )}
             alt={result.title || ""}
             fill
