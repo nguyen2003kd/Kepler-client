@@ -37,14 +37,14 @@ const nextConfig = {
       },
     ],
   },
-  //  async rewrites() {
-  //   return [
-  //     {
-  //       source: "/admin/:path*",
-  //       destination: "https://kepler-admin.vercel.app/admin/:path*",
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    return [
+      {
+        source: "/api/storage/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_DOMAIN || 'http://localhost:4100'}/api/storage/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

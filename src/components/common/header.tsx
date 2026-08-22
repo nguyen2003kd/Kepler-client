@@ -1001,32 +1001,42 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         <div className="header-inner">
         {/* === TOP BAR (đỏ) — Hotline + Quick links + Search + Language + Auth === */}
         <div
-          className="header-topbar bg-[#DC2626] text-white h-12"
+          className="header-topbar bg-[#DC2626] text-white"
         >
           <div className="max-w-screen-2xl mx-auto px-3 sm:px-6 lg:px-24">
-            <div className="flex items-center justify-between h-12">
+            <div className="flex items-center justify-between h-11 md:h-12 lg:h-12">
               {/* Left side */}
               <a
                 href="tel:18001105"
-                className="flex md:hidden items-center gap-1.5 text-[13px] hover:text-red-200 transition-colors"
+                className="flex md:hidden items-center gap-1.5 text-[12px] hover:text-red-200 transition-colors whitespace-nowrap"
               >
-                <Headphones className="w-3.5 h-3.5" />
+                <Headphones className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="font-semibold tracking-wide">
                   {t("hotline")}: 1800 1105
                 </span>
               </a>
-              <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs lg:text-sm">
+              <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs lg:text-sm min-w-0">
                 <a
                   href="tel:18001105"
-                  className="flex items-center gap-1.5 lg:gap-2 hover:text-red-200 transition-colors"
+                  className="flex items-center gap-1.5 lg:gap-2 hover:text-red-200 transition-colors whitespace-nowrap"
                 >
-                  <Headphones className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
+                  <Headphones className="w-3.5 h-3.5 lg:w-4 lg:h-4 flex-shrink-0" />
                   <span className="font-semibold">{t("hotline")}: 1800 1105</span>
                 </a>
+<<<<<<< HEAD
+=======
+                <div className="hidden lg:block h-4 w-px bg-white/30"></div>
+                <Link
+                  href="/news"
+                  className="hidden lg:flex items-center gap-1.5 hover:text-red-200 transition-colors whitespace-nowrap"
+                >
+                  <span>{t("newsAndEvents")}</span>
+                </Link>
+>>>>>>> f0e2f84 (fix: resolve image CORS issues, add storage rewrite, fix hero banner layout)
               </div>
 
               {/* Right side - Search, Language, Auth */}
-              <div className="flex items-center gap-2 lg:gap-3 md:ml-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 md:ml-0 min-w-0">
                 {/* Search */}
                 <form onSubmit={handleSearch} className="hidden lg:block">
                   <div className="relative">
@@ -1035,7 +1045,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                       placeholder={t("search")}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-64 pl-4 pr-10 py-1.5 text-sm bg-white/20 rounded-full text-white placeholder:text-white/80 focus:outline-none focus:bg-white/30 focus:border-white/50 transition-all"
+                      className="w-48 xl:w-64 pl-4 pr-10 py-1.5 text-sm bg-white/20 rounded-full text-white placeholder:text-white/80 focus:outline-none focus:bg-white/30 focus:border-white/50 transition-all"
                     />
                     <button
                       type="submit"
@@ -1116,6 +1126,19 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   </div>
                 )}
 
+<<<<<<< HEAD
+=======
+                {/* Separator */}
+                <div className="hidden lg:block h-4 w-px bg-white/30"></div>
+
+                {/* Liên hệ Kepler */}
+                <Link
+                  href="/contact"
+                  className="hidden lg:flex items-center gap-1.5 hover:text-red-200 transition-colors text-xs lg:text-sm whitespace-nowrap"
+                >
+                  <span>{t("contactKepler")}</span>
+                </Link>
+>>>>>>> f0e2f84 (fix: resolve image CORS issues, add storage rewrite, fix hero banner layout)
               </div>
             </div>
           </div>

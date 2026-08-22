@@ -1,6 +1,6 @@
 {
   "searchPlaceholder": "Tìm kiếm sản phẩm, dịch vụ, tin tức...",
-  "search": "Tìm",
+  "search": "Tìm kiếm",
   "quotation": "Báo giá",
   "profile": "Hồ sơ",
   "login": "Đăng nhập",
@@ -54,5 +54,7 @@
   "kienThucVideo": "Video",
   "kienThucPodcast": "Podcast",
   "kienThucWebinar": "Webinar",
-  "faq": "FAQ"
+  "faq": "FAQ",
+  "newsAndEvents": "Tin tức và sự kiện",
+  "contactKepler": "Liên hệ Kepler"
 }

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Image from "@/components/common/safe-image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 interface LogoWithFile extends Logo {
   file?: {
@@ -29,6 +30,7 @@ interface LogoWithFile extends Logo {
 }
 
 const Footer = () => {
+  const { i18n } = useTranslation();
   const { data } = useGetApiV10Footer({
     filters: "is_active==true",
   });
@@ -42,7 +44,11 @@ const Footer = () => {
     filters: "is_active==true",
   });
 
-  const footerData = (data?.responseData?.rows?.[0] as FooterType) || null;
+  const currentLang = i18n.language?.split("-")[0] || "vi";
+  const allRows = (data?.responseData?.rows || []) as FooterType[];
+  const langMatch = allRows.find((r) => r.language === currentLang);
+  const hasLinks = (r?: FooterType | null) => !!(r?.links && (r.links as FooterLinksItem[]).length > 0);
+  const footerData = (hasLinks(langMatch) ? langMatch : allRows.find(hasLinks) || allRows[0] || null) as FooterType | null;
   const logoInfo = logoData?.responseData?.rows?.[0] as LogoWithFile;
   const logoUrl = isLogoError
     ? "/seo.png"

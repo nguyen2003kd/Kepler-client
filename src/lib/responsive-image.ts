@@ -1,12 +1,8 @@
-import links from "@/lib/links";
 import type { ImageCompressInfo } from "@/types/post";
 
 const prefixUrl = (path: string): string => {
   if (!path) return "";
   if (path.startsWith("http")) return path;
-  if (path.startsWith("/api/storage/")) {
-    return `${links.storageEndpoint}${path}`;
-  }
   return path;
 };
 
