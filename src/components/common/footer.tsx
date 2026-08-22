@@ -104,6 +104,10 @@ const Footer = () => {
                 </p>
               )}
 
+              {/* Slogan */}
+              <p className="text-sm font-semibold text-primary mt-2 italic">
+                Our Solutions – Your Success
+              </p>
             </div>
 
             {/* Contact Info */}
@@ -233,11 +237,11 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links  */}
+          {/* Liên kết web */}
           <div className="lg:col-span-3">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-1 h-5 bg-primary rounded-full"></div>
-              <h4 className="text-base font-bold">Liên kết</h4>
+              <h4 className="text-base font-bold">Liên kết web</h4>
             </div>
             <nav className="grid grid-cols-1 gap-x-4 gap-y-2.5 text-sm mb-6 max-w-xs">
               {(footerData?.links as FooterLinksItem[] | null | undefined)?.map(
@@ -256,23 +260,42 @@ const Footer = () => {
               )}
               {(!footerData?.links || (footerData.links as FooterLinksItem[]).length === 0) && (
                 <>
+                  {/* TODO: Cập nhật liên kết web thực tế khi có dữ liệu */}
                   <a
-                    href="https://dost.hochiminhcity.gov.vn/"
+                    href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
                   >
                     <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
-                    Sở Khoa học và Công nghệ Thành phố Hồ Chí Minh
+                    Trung tâm nghiên cứu xxx
                   </a>
                   <a
-                    href="https://chicuctdc.gov.vn/"
+                    href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
                   >
                     <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
-                    Chi Cục Tiêu chuẩn Đo lường Chất lượng Thành phố Hồ Chí Minh
+                    Viện đào tạo xxx bất động sản
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
+                    Cục quản lý giá – Bộ Tài Chính
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
+                    Liên đoàn lao động TPHCM
                   </a>
                 </>
               )}

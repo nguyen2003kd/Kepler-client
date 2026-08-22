@@ -148,17 +148,17 @@ const FALLBACK_BLOCKS: PageBlock[] = [
   {
     id: "fallback-header",
     type: "org-header",
-    nameVi1: "TRUNG TÂM DỊCH VỤ PHÂN TÍCH THÍ NGHIỆM",
-    nameVi2: "VÀ TIÊU CHUẨN ĐO LƯỜNG CHẤT LƯỢNG THÀNH PHỐ HỒ CHÍ MINH",
+    nameVi1: "KEPLER GROUP",
+    nameVi2: "Thẩm định giá, Môi giới & Quản lý Bất động sản",
     nameEn:
-      "CENTER OF ANALYTICAL SERVICES, EXPERIMENTATION AND STANDARDS, METROLOGY, QUALITY OF HO CHI MINH CITY",
-    abbreviation: "CASE-SMQ",
+      "KEPLER GROUP — Valuation, Brokerage & Real Estate Management",
+    abbreviation: "KEPLER",
     headquarterAddress:
       "Số 2 Nguyễn Văn Thủ, Phường Tân Định, Thành phố Hồ Chí Minh",
     taxCode: "0319238568",
-    nameEn1: "ANALYTICAL SERVICES CENTER",
-    nameEn2: "EXPERIMENTATION AND STANDARDS, METROLOGY, QUALITY OF HO CHI MINH CITY",
-    abbreviationEn: "CASE-SMQ",
+    nameEn1: "KEPLER GROUP",
+    nameEn2: "Valuation, Brokerage & Real Estate Management",
+    abbreviationEn: "KEPLER",
     headquarterAddressEn: "No. 2 Nguyen Van Thu, Tan Dinh Ward, Ho Chi Minh City",
   },
   {

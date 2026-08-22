@@ -15,9 +15,9 @@ import AboutHero from "../components/about-hero";
 import AboutPageContent from "../components/about-page-content";
 
 export const metadata = constructMetadata({
-  title: "Hội đồng chuyên gia",
+  title: "Hội đồng cố vấn",
   description:
-    "Hội đồng chuyên gia Kepler — các chuyên gia hàng đầu trong lĩnh vực thẩm định giá, luật đầu tư, quản lý vận hành, marketing BĐS và thiết kế thi công.",
+    "Hội đồng cố vấn Kepler — các chuyên gia hàng đầu trong lĩnh vực thẩm định giá, luật đầu tư, quản lý vận hành, marketing BĐS và thiết kế thi công.",
   url: "/about/expert-council",
 });
 
@@ -137,8 +137,8 @@ export default function ExpertCouncilPage() {
       <AboutHero
         icon={<UserCheck className="h-6 w-6 text-red-400" />}
         eyebrow="Chuyên gia tin cậy"
-        title="Hội đồng chuyên gia"
-        description="Hội đồng chuyên gia của Kepler quy tụ những chuyên gia hàng đầu trong nhiều lĩnh vực, đóng góp tri thức và kinh nghiệm vào mọi giải pháp dành cho khách hàng."
+        title="Hội đồng cố vấn"
+        description="Hội đồng cố vấn của Kepler quy tụ những chuyên gia hàng đầu trong nhiều lĩnh vực, đóng góp tri thức và kinh nghiệm vào mọi giải pháp dành cho khách hàng."
         image="/seo.png"
       />
 
@@ -164,7 +164,7 @@ export default function ExpertCouncilPage() {
                   </h2>
                   <div className="mt-6 h-1 w-20 rounded-full bg-red-600" />
                   <p className="mt-8 text-lg text-gray-300 leading-relaxed">
-                    Hội đồng chuyên gia của Kepler là những nhà lãnh đạo thực
+                    Hội đồng cố vấn của Kepler là những nhà lãnh đạo thực
                     tiễn từ thẩm định giá, pháp lý, vận hành, marketing và thiết
                     kế. Họ cùng nhau kiến tạo giá trị bền vững cho khách hàng.
                   </p>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const STATS = [
   { value: 25, suffix: "+", label: "Năm kinh nghiệm" },
@@ -21,45 +21,57 @@ function CountUp({
   suffix: string;
   duration?: number;
 }) {
-  const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const formatNumber = (n: number) => {
+      const rounded = Math.floor(n);
+      if (rounded >= 1000) return `${Math.floor(rounded / 1000)}.000`;
+      return `${rounded}`;
+    };
+
+    // easeOutQuart: nhanh đầu, chậm dần về cuối, cảm giác mượt hơn linear
+    const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+
+    let rafId = 0;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasAnimated.current) {
           hasAnimated.current = true;
-          const steps = 60;
-          const increment = end / steps;
-          let current = 0;
-          const interval = setInterval(() => {
-            current += increment;
-            if (current >= end) {
-              setCount(end);
-              clearInterval(interval);
+          const startTime = performance.now();
+
+          const tick = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const current = end * easeOutQuart(progress);
+
+            el.textContent = formatNumber(current) + suffix;
+
+            if (progress < 1) {
+              rafId = requestAnimationFrame(tick);
             } else {
-              setCount(Math.floor(current));
+              el.textContent = formatNumber(end) + suffix;
             }
-          }, duration / steps);
+          };
+
+          rafId = requestAnimationFrame(tick);
         }
       },
       { threshold: 0.3 },
     );
 
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [end, duration]);
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [end, duration, suffix]);
 
-  const formatted =
-    count >= 1000 ? `${(count / 1000).toFixed(0)}.000` : `${count}`;
-
-  return (
-    <span ref={ref}>
-      {formatted}
-      {suffix}
-    </span>
-  );
+  return <span ref={ref}>0{suffix}</span>;
 }
 
 export default function StatsSection() {
@@ -70,7 +82,7 @@ export default function StatsSection() {
 
       <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
         <motion.div
-          className="text-center mb-14"
+          className="text-center mb-14 will-change-transform"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -86,10 +98,10 @@ export default function StatsSection() {
           {STATS.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="bg-gray-900 p-8 md:p-10 text-center group hover:bg-gray-800 transition-colors"
+              className="bg-gray-900 p-8 md:p-10 text-center group hover:bg-gray-800 transition-colors will-change-transform"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-5% 0px" }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
             >
               <div className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">

@@ -28,7 +28,7 @@ export const metadata = constructMetadata({
 const aboutLinks = [
   {
     href: "/about/company-overview",
-    title: "Tổng quan Kepler Group",
+    title: "Giới thiệu Kepler Group",
     description: "Giới thiệu doanh nghiệp, lĩnh vực hoạt động và mô hình hệ sinh thái.",
     icon: Building2,
   },
@@ -58,7 +58,7 @@ const aboutLinks = [
   },
   {
     href: "/about/expert-council",
-    title: "Hội đồng chuyên gia",
+    title: "Hội đồng cố vấn",
     description: "Đội ngũ chuyên gia và hồ sơ chuyên môn liên quan.",
     icon: Award,
   },

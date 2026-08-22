@@ -18,7 +18,7 @@ const CUSTOMER_LOGOS = [
   { name: "Doanh nghiệp B", image: "/images/client-2.png", sector: "Doanh nghiệp" },
   { name: "Chủ đầu tư C", image: "/images/client-3.png", sector: "Chủ đầu tư" },
   { name: "Quỹ đầu tư D", image: "/images/logo-case.png", sector: "Quỹ đầu tư" },
-  { name: "Đơn vị sản xuất E", image: "/images/logo-smeq.jpg", sector: "Sản xuất" },
+  { name: "Đơn vị sản xuất E", image: "/images/logo-kepler.jpg", sector: "Sản xuất" },
   { name: "Đơn vị thương mại F", image: "/images/logo-no-bg.png", sector: "Thương mại" },
 ];
 

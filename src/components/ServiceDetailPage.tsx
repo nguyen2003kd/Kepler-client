@@ -55,13 +55,12 @@ export default function ServiceDetailPage() {
         <article className="mt-10 space-y-10 text-[16px] leading-[1.5] text-[#19426D]">
           <div className="flex flex-col gap-10">
             <p className="lg:text-base text-xs">
-              Mến chào Quý khách hàng của Trung tâm Kỹ thuật Tiêu chuẩn Đo lường
-              chất lượng TP.HCM!!!
+              Mến chào Quý khách hàng của Kepler Group!!!
             </p>
 
             <p className="lg:text-base text-xs">
               Nhằm mục đích để quý khách hàng đăng ký các dịch vụ thử nghiệm,
-              hiệu chuẩn của SMEQ được nhanh chóng và thuận tiện hơn, các Anh/
+              hiệu chuẩn của Kepler được nhanh chóng và thuận tiện hơn, các Anh/
               Chị có thể thực hiện đăng ký online theo hướng dẫn dưới đây:
             </p>
           </div>
@@ -83,7 +82,7 @@ export default function ServiceDetailPage() {
                 </p>
                 <div className="space-y-3">
                   <p className="lg:text-base text-xs">
-                    Bước 1: Truy cập link https://smeq.com.vn/
+                    Bước 1: Truy cập link https://kepler.com.vn/
                   </p>
                   <p className="lg:text-base text-xs">
                     Bước 2: Ở mục “Khách hàng” chọn “Đăng ký”.
@@ -132,7 +131,7 @@ export default function ServiceDetailPage() {
                     khoản trên phần mềm.
                   </p>
                   <p className="lg:text-base text-xs">
-                    Bước 1: Truy cập link https://smeq.com.vn/.
+                    Bước 1: Truy cập link https://kepler.com.vn/.
                   </p>
                   <p className="lg:text-base text-xs">
                     Bước 2: Ở mục “Khách hàng” chọn “Đăng nhập”.
@@ -179,7 +178,7 @@ export default function ServiceDetailPage() {
 
                 <p className="lg:text-base text-xs">
                   Thông tin khách hàng được cập nhật tự động theo thông tin đăng
-                  ký của khách hàng hoặc theo thông tin do SMEQ tạo.
+                  ký của khách hàng hoặc theo thông tin do Kepler tạo.
                 </p>
                 <p className="lg:text-base text-xs">Giao diện chính:</p>
 
@@ -261,7 +260,7 @@ export default function ServiceDetailPage() {
                 </div>
                 <p className="lg:text-base text-xs">Lưu ý:</p>
                 <p className="lg:text-base text-xs">
-                  Khi chỉnh sửa thông tin khách hàng, site chính SMEQ cũng sẽ
+                  Khi chỉnh sửa thông tin khách hàng, site chính Kepler cũng sẽ
                   cập nhật thông tin đã chỉnh sửa theo site khách hàng
                 </p>
               </div>
@@ -451,7 +450,7 @@ export default function ServiceDetailPage() {
                   </p>
                 </div>
                 <p className="lg:text-base text-xs">
-                  Site chính SMEQ sẽ tự động cập nhật thông tin người liên hệ
+                  Site chính Kepler sẽ tự động cập nhật thông tin người liên hệ
                   theo site khách hàng.
                 </p>
               </div>
@@ -667,7 +666,7 @@ export default function ServiceDetailPage() {
                   />
                   <p className="lg:text-base text-xs">
                     để xác nhận hoàn thành phiếu đăng ký, phiếu đăng ký sẽ được
-                    gửi sang site chính SMEQ.
+                    gửi sang site chính Kepler.
                   </p>
                 </div>
                 <div className="flex justify-start gap-10 items-center">
@@ -713,7 +712,7 @@ export default function ServiceDetailPage() {
                 <ul className="list-disc pl-6 space-y-5 text-[16px] font-normal leading-[1.5] text-[#19426D]">
                   <li>
                     Các thông tin sau trên phiếu yêu cầu của khách hàng sẽ được
-                    bắt tự động trên biểu mẫu phiếu yêu cầu của SMEQ khi khách
+                    bắt tự động trên biểu mẫu phiếu yêu cầu của Kepler khi khách
                     hàng hàng gửi qua site chính:
                   </li>
                   <li>Khách hàng</li>
@@ -837,7 +836,7 @@ export default function ServiceDetailPage() {
                     <li>
                       Phiếu đăng ký được tạo từ site khách hàng sẽ có{" "}
                       <strong>ngày đăng ký</strong>, phiếu đăng ký được tạo từ
-                      site chính SMEQ sẽ không có ngày đăng ký.
+                      site chính Kepler sẽ không có ngày đăng ký.
                     </li>
                   </ul>
                 </div>

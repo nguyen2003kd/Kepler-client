@@ -46,7 +46,7 @@ export const quotationSchema = baseContactSchema.extend({
     "same_as_delivery",
     "same_as_invoice",
     "same_as_certificate",
-    "at_smeq",
+    "at_kepler",
     "other",
   ]),
   language: z.enum(["vi", "en"]),

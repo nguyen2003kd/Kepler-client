@@ -1,17 +1,19 @@
 ﻿import { constructMetadata } from "@/lib/seo";
-import HeroBanner from "./_views/banner-section";
-import IntroSection from "./_views/intro-section";
-import StatsSection from "./_views/stats-section";
-import EcosystemSection from "./_views/ecosystem-section";
-import ServicesSection from "./_views/services-section";
-import SolutionsSection from "./_views/solutions-section";
-import ProcessSection from "./_views/process-section";
-import NewsSection from "./_views/news-section";
-import CaseStudySection from "./_views/case-study-section";
-import CustomersSection from "./_views/customers-section";
-import PartnersSection from "./_views/partners-section";
-import WhyChooseUsSection from "./_views/why-choose-us-section";
-import CtaSection from "./_views/cta-section";
+import dynamic from "next/dynamic";
+
+const HeroBanner = dynamic(() => import("./_views/banner-section"), { ssr: true });
+const IntroSection = dynamic(() => import("./_views/intro-section"), { ssr: true });
+const StatsSection = dynamic(() => import("./_views/stats-section"), { ssr: true });
+const EcosystemSection = dynamic(() => import("./_views/ecosystem-section"), { ssr: true });
+const ServicesSection = dynamic(() => import("./_views/services-section"), { ssr: true });
+const SolutionsSection = dynamic(() => import("./_views/solutions-section"), { ssr: true });
+const ProcessSection = dynamic(() => import("./_views/process-section"), { ssr: true });
+const NewsSection = dynamic(() => import("./_views/news-section"), { ssr: true });
+const CaseStudySection = dynamic(() => import("./_views/case-study-section"), { ssr: true });
+const CustomersSection = dynamic(() => import("./_views/customers-section"), { ssr: true });
+const PartnersSection = dynamic(() => import("./_views/partners-section"), { ssr: true });
+const WhyChooseUsSection = dynamic(() => import("./_views/why-choose-us-section"), { ssr: true });
+const CtaSection = dynamic(() => import("./_views/cta-section"), { ssr: true });
 
 export const metadata = constructMetadata({
   title: "Kepler Group | Tư vấn đầu tư, Thẩm định giá, Phát triển dự án & Quản lý tài sản",

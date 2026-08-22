@@ -4,15 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { units, EcosystemUnit } from "./unit-data";
 
-const ecosystem = [
-  { name: "Kepler Property", eyebrow: "Đầu tư & Phát triển", description: "Tư vấn đầu tư, môi giới, leasing và phát triển dự án.", items: ["Tư vấn đầu tư", "Môi giới", "Leasing", "Phát triển dự án"], image: "/images/category-banner-investment.png", href: "/he-sinh-thai/kepler-property" },
-  { name: "KPC Appraisal", eyebrow: "Thẩm định giá", description: "Thẩm định bất động sản, máy móc - thiết bị, giá trị doanh nghiệp và dự án.", items: ["Bất động sản", "Máy móc - thiết bị", "Giá trị doanh nghiệp", "Dự án"], image: "/images/banner-2.jpg", href: "/he-sinh-thai/kpc-appraisal" },
-  { name: "KMC Management", eyebrow: "Quản lý & Vận hành", description: "Quản lý tòa nhà, tài sản, kỹ thuật, tài chính và vận hành.", items: ["Quản lý tòa nhà", "Quản lý tài sản", "Quản lý kỹ thuật", "Quản lý tài chính"], image: "/images/bg-home.jpg", href: "/he-sinh-thai/kmc-management" },
-  { name: "KAC Advisory", eyebrow: "Tài chính & M&A", description: "Tư vấn đầu tư, M&A, tái cấu trúc, tài chính và gọi vốn.", items: ["Tư vấn đầu tư", "M&A", "Tái cấu trúc", "Tư vấn tài chính"], image: "/images/banner-3.jpg", href: "/he-sinh-thai/kac-advisory" },
-  { name: "K-Homes Design & Build", eyebrow: "Design & Build", description: "Thiết kế kiến trúc, nội thất, thi công và cải tạo công trình.", items: ["Thiết kế kiến trúc", "Thiết kế nội thất", "Thi công", "Cải tạo"], image: "/images/image-111.png", href: "/he-sinh-thai/k-homes" },
-  { name: "RealHub Platform", eyebrow: "PropTech Platform", description: "Nền tảng kết nối dữ liệu, tài sản, nhà đầu tư và dịch vụ.", items: ["Giới thiệu nền tảng", "Đối tượng sử dụng", "Các module dự kiến", "Roadmap"], image: "/images/image-112.png", href: "/realhub" },
-];
+const ecosystemImages: Record<string, string> = {
+  "kepler-property": "/images/category-banner-investment.png",
+  "kpc-appraisal": "/images/banner-2.jpg",
+  "kmc-management": "/images/bg-home.jpg",
+  "kac-advisory": "/images/banner-3.jpg",
+  "k-homes": "/images/image-111.png",
+  "kepler-land": "/images/bg-home.jpg",
+  bizoffice: "/images/banner-3.jpg",
+};
+
+type EcosystemItem = EcosystemUnit & { image: string; href: string };
+
+const ecosystem: EcosystemItem[] = Object.entries(units)
+  .filter(([key]) => key !== "realhub")
+  .map(([key, unit]) => ({
+    ...unit,
+    image: ecosystemImages[key] || "/images/bg-home.jpg",
+    href: `/he-sinh-thai/${key}`,
+  }));
 
 export default function EcosystemPage() {
   return (
@@ -44,7 +56,7 @@ export default function EcosystemPage() {
               </span>
             </div>
             <h1 className="text-5xl font-bold leading-[1.05] text-white sm:text-6xl lg:text-7xl">
-              Sáu đơn vị.
+              Bảy đơn vị.
               <br />
               Một chuỗi giá trị.
             </h1>
@@ -58,7 +70,7 @@ export default function EcosystemPage() {
                 href="#units"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary/90 active:scale-[0.98]"
               >
-                Khám phá 6 đơn vị
+                Khám phá 7 đơn vị
               </a>
               <Link
                 href="/lien-he"
@@ -77,7 +89,7 @@ export default function EcosystemPage() {
             className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-4"
           >
             {[
-              { num: "6", label: "Đơn vị thành viên" },
+              { num: "7", label: "Đơn vị thành viên" },
               { num: "25+", label: "Năm kinh nghiệm" },
               { num: "500+", label: "Khách hàng" },
               { num: "100+", label: "Dự án" },
@@ -110,7 +122,7 @@ export default function EcosystemPage() {
         </motion.div>
 
         <div className="grid auto-rows-[280px] grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {/* Featured — Kepler Property (large) */}
+          {/* Featured — first unit (large) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -155,150 +167,36 @@ export default function EcosystemPage() {
             </Link>
           </motion.div>
 
-          {/* KPC Appraisal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <Link
-              href={ecosystem[1].href}
-              className="group relative block h-full overflow-hidden rounded-3xl bg-gray-900"
+          {/* Remaining units */}
+          {ecosystem.slice(1).map((unit, idx) => (
+            <motion.div
+              key={unit.href}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (idx + 1) * 0.08 }}
+              className={idx === 2 ? "md:col-span-2" : ""}
             >
-              <Image
-                src={ecosystem[1].image}
-                alt={ecosystem[1].name}
-                fill
-                className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">{ecosystem[1].eyebrow}</span>
-                <h3 className="mt-1 text-xl font-bold text-white">{ecosystem[1].name}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-white/60">{ecosystem[1].description}</p>
-              </div>
-            </Link>
-          </motion.div>
-
-          {/* KMC Management */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
-            <Link
-              href={ecosystem[2].href}
-              className="group relative block h-full overflow-hidden rounded-3xl bg-gray-50"
-            >
-              <Image
-                src={ecosystem[2].image}
-                alt={ecosystem[2].name}
-                fill
-                className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/20 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">{ecosystem[2].eyebrow}</span>
-                <h3 className="mt-1 text-xl font-bold text-gray-900">{ecosystem[2].name}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-gray-600">{ecosystem[2].description}</p>
-              </div>
-            </Link>
-          </motion.div>
-
-          {/* KAC Advisory — wide */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:col-span-2"
-          >
-            <Link
-              href={ecosystem[3].href}
-              className="group relative block h-full overflow-hidden rounded-3xl"
-            >
-              <Image
-                src={ecosystem[3].image}
-                alt={ecosystem[3].name}
-                fill
-                className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-center p-8">
-                <span className="w-fit rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-                  {ecosystem[3].eyebrow}
-                </span>
-                <h3 className="mt-3 text-2xl font-bold text-white">{ecosystem[3].name}</h3>
-                <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/70">{ecosystem[3].description}</p>
-                <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-primary">
-                  Xem chi tiết
-                  <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <Link
+                href={unit.href}
+                className={`group relative block h-full overflow-hidden rounded-3xl ${idx % 2 === 0 ? "bg-gray-900" : "bg-gray-50"}`}
+              >
+                <Image
+                  src={unit.image}
+                  alt={unit.name}
+                  fill
+                  className={`object-cover transition-transform duration-700 group-hover:scale-105 ${idx % 2 === 0 ? "opacity-60" : "opacity-80"}`}
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t ${idx % 2 === 0 ? "from-black/90 to-transparent" : "from-white/90 via-white/20 to-transparent"}`} />
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-primary">{unit.eyebrow}</span>
+                  <h3 className={`mt-1 text-xl font-bold ${idx % 2 === 0 ? "text-white" : "text-gray-900"}`}>{unit.name}</h3>
+                  <p className={`mt-1 text-xs leading-relaxed ${idx % 2 === 0 ? "text-white/60" : "text-gray-600"}`}>{unit.description}</p>
                 </div>
-              </div>
-            </Link>
-          </motion.div>
-
-          {/* K-Homes */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-          >
-            <Link
-              href={ecosystem[4].href}
-              className="group relative block h-full overflow-hidden rounded-3xl bg-gray-900"
-            >
-              <Image
-                src={ecosystem[4].image}
-                alt={ecosystem[4].name}
-                fill
-                className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-primary">{ecosystem[4].eyebrow}</span>
-                <h3 className="mt-1 text-xl font-bold text-white">{ecosystem[4].name}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-white/60">{ecosystem[4].description}</p>
-              </div>
-            </Link>
-          </motion.div>
-
-          {/* RealHub */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <Link
-              href={ecosystem[5].href}
-              className="group relative block h-full overflow-hidden rounded-3xl bg-primary"
-            >
-              <Image
-                src={ecosystem[5].image}
-                alt={ecosystem[5].name}
-                fill
-                className="object-cover opacity-30 mix-blend-overlay transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 25vw"
-              />
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-white/80">{ecosystem[5].eyebrow}</span>
-                <h3 className="mt-1 text-xl font-bold text-white">{ecosystem[5].name}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-white/70">{ecosystem[5].description}</p>
-                <div className="mt-3 flex items-center gap-1 text-xs font-semibold text-white">
-                  Khám phá
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </div>
-              </div>
-            </Link>
-          </motion.div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </section>
 

@@ -9,7 +9,7 @@ export default function Testimonial() {
         <div className="mx-4 md:mx-8 lg:mx-10">
           <VideoTestimonialCard
             image="/images/video-section-1.png"
-            imageAlt="SMEQ - HT 175 2018"
+            imageAlt="Kepler - HT 175 2018"
             quote={t("testimonialQuote")}
             channelName={t("testimonialChannel")}
             subscriberCount={t("testimonialSubscribers")}

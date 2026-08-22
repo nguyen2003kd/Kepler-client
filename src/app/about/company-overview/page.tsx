@@ -15,7 +15,7 @@ import AboutHero from "../components/about-hero";
 import AboutPageContent from "../components/about-page-content";
 
 export const metadata = constructMetadata({
-  title: "Tổng quan Kepler Group",
+  title: "Giới thiệu Kepler Group",
   description:
     "Giới thiệu Kepler — công ty tư vấn bất động sản chuyên nghiệp: thẩm định giá, môi giới, marketing, quản lý tòa nhà, thiết kế nội ngoại thất.",
   url: "/about/company-overview",
@@ -70,7 +70,7 @@ export default function CompanyOverviewPage() {
       <AboutHero
         icon={<Building2 className="h-6 w-6 text-red-400" />}
         eyebrow="Giới thiệu doanh nghiệp"
-        title="Tổng quan Kepler Group"
+        title="Giới thiệu Kepler Group"
         description="Công ty tư vấn Bất động sản Kepler — đơn vị tư vấn và cung cấp dịch vụ chuyên nghiệp trong ngành bất động sản."
         image="/seo.png"
       />

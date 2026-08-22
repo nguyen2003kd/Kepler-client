@@ -65,8 +65,8 @@ export default function ExecutionLocationSection({
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="at_smeq" id="exec-smeq" />
-                  <Label htmlFor="exec-smeq" className="text-sm">
+                  <RadioGroupItem value="at_kepler" id="exec-kepler" />
+                  <Label htmlFor="exec-kepler" className="text-sm">
                     {t("atSmeq")}
                   </Label>
                 </div>

@@ -13,6 +13,8 @@ const images: Record<string, string> = {
   "kac-advisory": "/images/banner-3.jpg",
   "k-homes": "/images/image-111.png",
   realhub: "/images/image-112.png",
+  "kepler-land": "/images/bg-home.jpg",
+  bizoffice: "/images/banner-3.jpg",
 };
 
 export default function UnitHero({ unitKey }: { unitKey: keyof typeof units }) {

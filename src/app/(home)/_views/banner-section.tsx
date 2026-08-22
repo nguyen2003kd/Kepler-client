@@ -8,7 +8,6 @@ import { ArrowRight } from "lucide-react";
 import Image from "@/components/common/safe-image";
 import Link from "next/link";
 import * as React from "react";
-import { motion } from "framer-motion";
 
 interface BannerWithFile extends Banner {
   file?: File;
@@ -33,8 +32,8 @@ export default function HeroBanner() {
   const autoplayDelay = React.useMemo(() => {
     const delay = banners[0]?.display_time
       ? parseInt(banners[0].display_time, 10)
-      : 1000;
-    return delay > 0 ? delay : 1000;
+      : 5000;
+    return delay > 0 ? delay : 5000;
   }, [banners]);
 
   const bannerSlides = React.useMemo(() => {
@@ -72,11 +71,11 @@ export default function HeroBanner() {
 
   return (
     <section
-      className="relative h-[70vh] min-h-[400px] max-h-[500px] overflow-hidden bg-[#1a1a1a] md:h-[90vh] md:min-h-[500px] md:max-h-[800px]"
+      className="relative h-screen min-h-[500px] max-h-[900px] overflow-hidden bg-[#0a0a0a]"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Slides */}
+      {/* Background slides */}
       {bannerSlides.map((slide, index) => (
         <div
           key={`${slide.id}-${index}`}
@@ -100,43 +99,57 @@ export default function HeroBanner() {
       ))}
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/45" />
+      <div className="absolute inset-0 bg-black/70" />
 
-      {/* Hero content */}
+      {/* Content — split layout: text left, logo right */}
       <div className="absolute inset-0 z-20 flex items-center">
-        <div className="max-w-[1400px] w-full mx-auto px-6 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Kiến tạo giá trị bền vững cho Bất động sản và Doanh nghiệp
-            </h1>
-            <p className="mt-4 md:mt-6 text-base md:text-lg text-white/80 leading-relaxed max-w-[60ch]">
-              Kepler Group là hệ sinh thái tư vấn và dịch vụ bất động sản chuyên
-              nghiệp, đồng hành cùng doanh nghiệp trong toàn bộ vòng đời tài sản - từ
-              nghiên cứu đầu tư, thẩm định giá, phát triển dự án, quản lý vận hành đến
-              tối ưu khai thác và gia tăng giá trị.
-            </p>
+        <div className="w-full mx-auto px-6 lg:px-12 xl:px-24 flex flex-col-reverse md:flex-row items-center md:items-stretch gap-8 md:gap-0">
+          {/* Left — Text */}
+          <div className="flex-1 flex items-center">
+            <div className="max-w-2xl">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+                Kiến tạo giá trị bền vững cho{" "}
+                <span className="text-[#DC2626]">Bất động sản</span> và{" "}
+                <span className="text-[#DC2626]">Doanh nghiệp</span>
+              </h1>
+              <p className="mt-5 md:mt-6 text-base md:text-lg text-white/80 leading-relaxed max-w-[55ch]">
+                Kepler Group là hệ sinh thái tư vấn và dịch vụ bất động sản chuyên
+                nghiệp, đồng hành cùng doanh nghiệp trong toàn bộ vòng đời tài sản —
+                từ nghiên cứu đầu tư, thẩm định giá, phát triển dự án, quản lý vận hành
+                đến tối ưu khai thác và gia tăng giá trị.
+              </p>
 
-            <div className="mt-8 md:mt-10 flex flex-wrap items-center gap-4">
-              <Link
-                href="/dich-vu"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 text-sm font-semibold rounded-full hover:bg-gray-100 transition-all group"
-              >
-                Khám phá dịch vụ
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/dat-lich-tu-van"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-white/40 text-white text-sm font-semibold rounded-full hover:bg-white/10 hover:border-white/60 transition-all"
-              >
-                Liên hệ tư vấn
-              </Link>
+              <div className="mt-8 md:mt-10 flex flex-wrap items-center gap-3 md:gap-4">
+                <Link
+                  href="/dich-vu"
+                  className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-[#DC2626] text-white text-sm font-semibold rounded-full hover:bg-[#BF2626] transition-colors group"
+                >
+                  Khám phá dịch vụ
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  href="/dat-lich-tu-van"
+                  className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 border border-white/40 text-white text-sm font-semibold rounded-full hover:bg-white/10 hover:border-white/60 transition-colors"
+                >
+                  Liên hệ tư vấn
+                </Link>
+              </div>
             </div>
-          </motion.div>
+          </div>
+
+          {/* Right — Logo */}
+          <div className="flex-1 relative flex items-center justify-center min-h-[250px] md:min-h-full">
+            <div className="relative w-full max-w-[450px] md:max-w-[550px] lg:max-w-[650px] h-[250px] md:h-[400px] lg:h-[500px] hero-logo-float">
+              <Image
+                src="/images/kepler-white-logo.png"
+                alt="Kepler Group"
+                fill
+                className="object-contain"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
         </div>
       </div>
 

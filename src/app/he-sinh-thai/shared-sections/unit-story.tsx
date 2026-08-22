@@ -10,6 +10,8 @@ const stories: Record<string, { label: string; title: string; copy: string; stat
   "k-homes": { label: "Make it real", title: "Không gian bắt đầu từ một ý tưởng đúng.", copy: "K-Homes kết nối thiết kế, vật liệu và thi công để tạo nên những công trình có tính cách và khả năng vận hành thực tế.", stat: "100+", statLabel: "Công trình hoàn thiện" },
   realhub: { label: "One connected platform", title: "Dữ liệu giúp thị trường vận hành thông minh hơn.", copy: "RealHub kết nối tài sản, con người, dữ liệu và công cụ số trong một nền tảng PropTech thống nhất.", stat: "1", statLabel: "Nền tảng duy nhất" },
   "kepler-property": { label: "Real estate, connected", title: "Một góc nhìn rộng hơn cho mỗi quyết định.", copy: "Kepler Property kết nối phân tích, giao dịch và phát triển để biến cơ hội bất động sản thành giá trị dài hạn.", stat: "25+", statLabel: "Năm kinh nghiệm" },
+  "kepler-land": { label: "Transparent trading", title: "Sàn giao dịch minh bạch cho thị trường bất động sản.", copy: "Kepler Land kết nối người mua, người bán và nhà đầu tư trên nền tảng giao dịch minh bạch, hiệu quả và an toàn.", stat: "500+", statLabel: "Giao dịch thành công" },
+  bizoffice: { label: "Work smarter", title: "Không gian làm việc linh hoạt cho doanh nghiệp hiện đại.", copy: "BizOffice cung cấp giải pháp văn phòng chia sẻ, văn phòng ảo và dịch vụ hỗ trợ toàn diện cho doanh nghiệp.", stat: "24/7", statLabel: "Sẵn sàng phục vụ" },
 };
 
 export default function UnitStory({ unitKey }: { unitKey: keyof typeof units }) {

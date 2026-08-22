@@ -16,7 +16,7 @@ import parse from "html-react-parser";
 import { ArrowRight } from "lucide-react";
 import Image from "@/components/common/safe-image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import baseConfig from "@/configs/base";
 interface NewsTabContentProps {
@@ -147,10 +147,15 @@ function NewsTabContent({
 
 export default function NewsSection() {
   const [activeTab, setActiveTab] = useState("all");
+  const [isMounted, setIsMounted] = useState(false);
 
   const { i18n, t } = useTranslation("pages/home");
   const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
   const { data: categoriesData } = useGetApiV10Category({ language: currentLang });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const latestNewsPageId = currentLang === "en" ? PAGE_IDS.HOMEPAGE_LATEST_NEWS_POSITION : PAGE_IDS.HOME_LATEST_NEWS;
 
@@ -173,13 +178,14 @@ export default function NewsSection() {
 
   const tabs = useMemo(() => {
     const allTab = { value: "all", label: t("news"), categoryId: "" };
+    if (!isMounted) return [allTab];
     const categoryTabs = newsCategories.map((cat) => ({
       value: cat.id || "",
       label: cat.name || "",
       categoryId: cat.id || "",
     }));
     return [allTab, ...categoryTabs];
-  }, [newsCategories]);
+  }, [newsCategories, isMounted, t]);
 
   const latestNews = useMemo(() => {
     const posts = (latestNewsData?.responseData?.rows as PostExtended[]) || [];
