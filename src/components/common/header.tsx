@@ -929,22 +929,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         },
       ],
     },
-    // --- Tin tức và sự kiện ---
-    {
-      id: "pinned-news",
-      name: "Tin tức và sự kiện",
-      type: "",
-      content_type: "",
-      link: "/news",
-      sequence: 7,
-      display: true,
-      parent_id: null,
-      children: [
-        { id: "news-1", name: "Tin tức ngành", type: "", content_type: "", link: "/news", sequence: 1, display: true, parent_id: "pinned-news" },
-        // TODO: Trang sự kiện chưa có, tạm comment
-        // { id: "news-2", name: "Sự kiện", type: "", content_type: "", link: "/news/events", sequence: 2, display: true, parent_id: "pinned-news" },
-      ],
-    },
     // --- Chuyên gia (đã gộp vào RealHub > Kết nối Chuyên gia) ---
     // {
     //   id: "pinned-experts",
@@ -974,7 +958,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       .filter(item => item.display !== false);
   }, [filteredNavigation]);
 
-  const { rows, currentGap, isReady, navContainerRef, logoRef, parentRef, rightActionsRef, itemRefs } =
+  const { rows, rowGaps, isReady, navContainerRef, logoRef, parentRef, rightActionsRef, itemRefs } =
     useHeaderMenuLayout(finalNav);
 
   // Close mobile menu on route change
@@ -1039,13 +1023,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   <Headphones className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                   <span className="font-semibold">{t("hotline")}: 1800 1105</span>
                 </a>
-                <div className="h-4 w-px bg-white/30"></div>
-                <Link
-                  href="/news"
-                  className="flex items-center gap-1.5 hover:text-red-200 transition-colors"
-                >
-                  <span>Tin tức và sự kiện</span>
-                </Link>
               </div>
 
               {/* Right side - Search, Language, Auth */}
@@ -1139,27 +1116,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   </div>
                 )}
 
-                {/* Separator */}
-                <div className="hidden md:block h-4 w-px bg-white/30"></div>
-
-                {/* Tin tức và sự kiện */}
-                <Link
-                  href="/news"
-                  className="hidden md:flex items-center gap-1.5 hover:text-red-200 transition-colors text-xs lg:text-sm"
-                >
-                  <span>Tin tức và sự kiện</span>
-                </Link>
-
-                {/* Separator */}
-                <div className="hidden md:block h-4 w-px bg-white/30"></div>
-
-                {/* Liên hệ Kepler */}
-                <Link
-                  href="/contact"
-                  className="hidden md:flex items-center gap-1.5 hover:text-red-200 transition-colors text-xs lg:text-sm"
-                >
-                  <span>Liên hệ Kepler</span>
-                </Link>
               </div>
             </div>
           </div>
@@ -1231,7 +1187,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                         )}
                         <div
                           className="flex items-center w-full"
-                          style={{ gap: `${currentGap}px` }}
+                          style={{ gap: `${rowGaps[rowIdx]}px` }}
                         >
                           {rowItems.map((item) => (
                             <MenuItem

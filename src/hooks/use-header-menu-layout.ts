@@ -8,6 +8,7 @@ export interface HeaderMenuLayoutResult<T> {
   rows: MenuRow<T>[];
   isTwoRows: boolean;
   currentGap: number;
+  rowGaps: number[];
   isReady: boolean;
   recalculate: () => void;
   navContainerRef: React.RefObject<HTMLDivElement>;
@@ -29,6 +30,7 @@ export function useHeaderMenuLayout<T extends Record<string, any>>(
 ): HeaderMenuLayoutResult<T> {
   const [rows, setRows] = useState<MenuRow<T>[]>([]);
   const [currentGap, setCurrentGap] = useState(GAP_LARGE);
+  const [rowGaps, setRowGaps] = useState<number[]>([]);
   const [isReady, setIsReady] = useState(false);
 
   const navContainerRef = useRef<HTMLDivElement>(null);
@@ -69,50 +71,31 @@ export function useHeaderMenuLayout<T extends Record<string, any>>(
     );
   }, []);
 
-  /**
-   * Find the best split index that minimizes |row1Width - row2Width|
-   * while both rows fit within availableWidth.
-   * Returns:
-   *   n           if all items fit in 1 row
-   *   i (1..n-1)  if best split is at index i (row1 = [0,i), row2 = [i,n))
-   *  -1           if no valid split found (even 2 rows can't fit)
-   */
+
   const findBestSplit = useCallback(
     (itemWidths: number[], availableWidth: number, gap: number): number => {
       const n = itemWidths.length;
       if (n <= 1) return n;
 
-      // Prefix sums for O(1) row width calculation
       const prefix: number[] = [0];
       for (const w of itemWidths) {
         prefix.push(prefix[prefix.length - 1] + w);
       }
-      const total = prefix[n];
 
-      // Check if all fit in 1 row
-      const totalWithGaps = total + gap * (n - 1);
-      if (totalWithGaps <= availableWidth) {
-        return n;
-      }
+      // Find the largest k (top row count) that fits; n means all fit in 1 row
+      for (let k = n; k >= 1; k--) {
+        const row1Width = prefix[k] + gap * (k - 1);
+        if (row1Width > availableWidth) continue;
 
-      // Find split that minimizes |row1Width - row2Width|
-      let bestIndex = -1;
-      let smallestDiff = Infinity;
+        if (k === n) return n;
 
-      for (let i = 1; i < n; i++) {
-        const row1Width = prefix[i] + gap * (i - 1);
-        const row2Width = total - prefix[i] + gap * (n - i - 1);
-
-        if (row1Width <= availableWidth && row2Width <= availableWidth) {
-          const diff = Math.abs(row1Width - row2Width);
-          if (diff < smallestDiff) {
-            smallestDiff = diff;
-            bestIndex = i;
-          }
+        const row2Width = (prefix[n] - prefix[k]) + gap * (n - k - 1);
+        if (row2Width <= availableWidth) {
+          return k;
         }
       }
 
-      return bestIndex;
+      return -1;
     },
     [],
   );
@@ -130,46 +113,33 @@ export function useHeaderMenuLayout<T extends Record<string, any>>(
         return;
       }
 
+      const n = itemWidths.length;
+
       for (const gap of GAP_LEVELS) {
         const splitIndex = findBestSplit(itemWidths, available, gap);
 
-        if (splitIndex >= itemWidths.length) {
-          // All fit in 1 row
+        if (splitIndex === n) {
           setRows([menus]);
           setCurrentGap(gap);
+          setRowGaps([gap]);
           setIsReady(true);
           return;
         }
 
         if (splitIndex > 0) {
-          // Split into 2 rows
           setRows([menus.slice(0, splitIndex), menus.slice(splitIndex)]);
           setCurrentGap(gap);
+          setRowGaps([gap, gap]);
           setIsReady(true);
-
-          if (process.env.NODE_ENV === "development") {
-            const row1Width =
-              itemWidths.slice(0, splitIndex).reduce((a, b) => a + b, 0) +
-              gap * (splitIndex - 1);
-            const row2Width =
-              itemWidths.slice(splitIndex).reduce((a, b) => a + b, 0) +
-              gap * (itemWidths.length - splitIndex - 1);
-            if (row1Width > available || row2Width > available) {
-              console.warn(
-                "Header navigation exceeds maximum 2-row capacity at gap",
-                gap,
-              );
-            }
-          }
           return;
         }
       }
 
-      // Fallback: can't fit even in 2 rows with smallest gap
-      // Best effort: split at midpoint to balance rows
-      const mid = Math.floor(menus.length / 2);
+      // Fallback: split at midpoint using the smallest fixed gap
+      const mid = Math.floor(n / 2);
       setRows([menus.slice(0, mid), menus.slice(mid)]);
       setCurrentGap(GAP_SMALL);
+      setRowGaps([GAP_SMALL, GAP_SMALL]);
       setIsReady(true);
 
       if (process.env.NODE_ENV === "development") {
@@ -234,6 +204,7 @@ export function useHeaderMenuLayout<T extends Record<string, any>>(
     rows: isReady ? rows : [],
     isTwoRows: isReady && rows.length === 2,
     currentGap,
+    rowGaps,
     isReady,
     recalculate,
     navContainerRef,
