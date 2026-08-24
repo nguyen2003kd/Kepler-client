@@ -1,21 +1,76 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { units } from "../unit-data";
+import { useEcosystemUnits } from "../use-ecosystem-units";
 
 const stories: Record<string, { label: string; title: string; copy: string; stat: string; statLabel: string }> = {
-  "kpc-appraisal": { label: "Accuracy matters", title: "Một quyết định tốt bắt đầu từ một giá trị đúng.", copy: "KPC Appraisal cung cấp góc nhìn độc lập, minh bạch và có cơ sở cho các quyết định tài chính, đầu tư và giao dịch.", stat: "100%", statLabel: "Độc lập & khách quan" },
-  "kmc-management": { label: "Operate better", title: "Tài sản tốt hơn mỗi ngày.", copy: "KMC Management kết hợp con người, quy trình và dữ liệu để nâng cao chất lượng vận hành và hiệu quả khai thác.", stat: "24/7", statLabel: "Giám sát liên tục" },
-  "kac-advisory": { label: "Create value", title: "Biến chiến lược thành giá trị có thể đo lường.", copy: "KAC Advisory đồng hành trong các quyết định M&A, tái cấu trúc, tài chính và cấu trúc vốn.", stat: "500+", statLabel: "Giao dịch tư vấn" },
-  "k-homes": { label: "Make it real", title: "Không gian bắt đầu từ một ý tưởng đúng.", copy: "K-Homes kết nối thiết kế, vật liệu và thi công để tạo nên những công trình có tính cách và khả năng vận hành thực tế.", stat: "100+", statLabel: "Công trình hoàn thiện" },
-  realhub: { label: "One connected platform", title: "Dữ liệu giúp thị trường vận hành thông minh hơn.", copy: "RealHub kết nối tài sản, con người, dữ liệu và công cụ số trong một nền tảng PropTech thống nhất.", stat: "1", statLabel: "Nền tảng duy nhất" },
-  "kepler-property": { label: "Real estate, connected", title: "Một góc nhìn rộng hơn cho mỗi quyết định.", copy: "Kepler Property kết nối phân tích, giao dịch và phát triển để biến cơ hội bất động sản thành giá trị dài hạn.", stat: "25+", statLabel: "Năm kinh nghiệm" },
-  "kepler-land": { label: "Transparent trading", title: "Sàn giao dịch minh bạch cho thị trường bất động sản.", copy: "Kepler Land kết nối người mua, người bán và nhà đầu tư trên nền tảng giao dịch minh bạch, hiệu quả và an toàn.", stat: "500+", statLabel: "Giao dịch thành công" },
-  bizoffice: { label: "Work smarter", title: "Không gian làm việc linh hoạt cho doanh nghiệp hiện đại.", copy: "BizOffice cung cấp giải pháp văn phòng chia sẻ, văn phòng ảo và dịch vụ hỗ trợ toàn diện cho doanh nghiệp.", stat: "24/7", statLabel: "Sẵn sàng phục vụ" },
+  "kpc-appraisal": {
+    label: "Thẩm định giá & Tư vấn giá trị",
+    title: "Một quyết định tốt bắt đầu từ một giá trị đúng.",
+    copy: "KAC tập trung xây dựng năng lực chuyên sâu về thẩm định giá, phân tích thị trường và tư vấn giá trị, phục vụ cả mục đích pháp lý, tài chính và đầu tư. KAC kết hợp phương pháp thẩm định chuyên nghiệp với dữ liệu thị trường và phân tích đầu tư để hỗ trợ khách hàng ra quyết định tài chính, đầu tư và giao dịch.",
+    stat: "100%",
+    statLabel: "Độc lập & khách quan",
+  },
+  "kmc-management": {
+    label: "Quản lý BĐS & Tài sản",
+    title: "Tài sản tốt hơn mỗi ngày.",
+    copy: "KMC cung cấp giải pháp quản lý bất động sản theo vòng đời tài sản, hướng tới chuyển tài sản từ trạng thái 'đang sở hữu' thành 'đang tạo ra giá trị'. KMC kết hợp quản lý vận hành, kỹ thuật, tài chính, khách thuê, cho thuê và quản trị tài sản nhằm nâng cao hiệu suất vận hành, dòng tiền và giá trị tài sản.",
+    stat: "24/7",
+    statLabel: "Giám sát liên tục",
+  },
+  "kac-advisory": {
+    label: "M&A & Tư vấn BĐS doanh nghiệp",
+    title: "Biến chiến lược thành giá trị có thể đo lường.",
+    copy: "KMAC là đơn vị chuyên trách các giao dịch bất động sản có cấu trúc phức tạp, tập trung vào việc tạo lập và thực hiện các thương vụ có giá trị. KMAC hỗ trợ toàn bộ quá trình từ tìm kiếm cơ hội, định giá, phân tích thương vụ, thẩm định chi tiết, đàm phán đến hoàn tất giao dịch.",
+    stat: "500+",
+    statLabel: "Giao dịch tư vấn",
+  },
+  "k-homes": {
+    label: "Thiết kế – Xây dựng – Quản lý thi công",
+    title: "Không gian bắt đầu từ một ý tưởng đúng.",
+    copy: "KCC hướng tới kiểm soát đồng bộ chất lượng – chi phí – tiến độ – công năng – hiệu quả khai thác. KCC kết nối giữa ý tưởng đầu tư, thiết kế và công trình thực tế, đảm bảo giải pháp thiết kế thực tế, đồng bộ và hiệu quả.",
+    stat: "100+",
+    statLabel: "Công trình hoàn thiện",
+  },
+  realhub: {
+    label: "Nền tảng dữ liệu & công nghệ BĐS",
+    title: "Dữ liệu giúp thị trường vận hành thông minh hơn.",
+    copy: "RealHub là nền tảng hỗ trợ Kepler phát triển mô hình công nghệ bất động sản (PropTech), từng bước số hóa quy trình tư vấn, quản lý tài sản, giao dịch và khai thác dữ liệu. RealHub kết nối dữ liệu – tài sản – chuyên gia – dịch vụ – nhà đầu tư – giao dịch bất động sản trên một hệ thống số.",
+    stat: "1",
+    statLabel: "Nền tảng duy nhất",
+  },
+  "kepler-property": {
+    label: "Tư vấn & Phát triển BĐS",
+    title: "Một góc nhìn rộng hơn cho mỗi quyết định.",
+    copy: "Kepler Property – KPC Group định hướng trở thành nền tảng tư vấn và phát triển bất động sản chuyên nghiệp, lấy dữ liệu – chuyên môn – mạng lưới – công nghệ làm nền tảng. KPC tập trung giải quyết các bài toán xuyên suốt vòng đời bất động sản: từ ý tưởng đầu tư, đánh giá cơ hội, phát triển dự án đến đưa tài sản vào vận hành, khai thác và tối ưu giá trị.",
+    stat: "25+",
+    statLabel: "Năm kinh nghiệm",
+  },
+  "kepler-land": {
+    label: "Sàn giao dịch & Tư vấn BĐS",
+    title: "Sàn giao dịch minh bạch cho thị trường bất động sản.",
+    copy: "Kepler Land kết hợp dữ liệu thị trường, tư vấn giá trị và năng lực marketing – bán hàng để nâng cao hiệu quả giao dịch. Kepler Land kết nối chủ sở hữu, chủ đầu tư, nhà đầu tư và khách hàng có nhu cầu mua – bán – thuê bất động sản.",
+    stat: "500+",
+    statLabel: "Giao dịch thành công",
+  },
+  bizoffice: {
+    label: "Văn phòng linh hoạt & Hệ sinh thái doanh nghiệp",
+    title: "Không gian làm việc linh hoạt cho doanh nghiệp hiện đại.",
+    copy: "Biz Space hướng tới xây dựng môi trường làm việc – kết nối – giao thương – phát triển doanh nghiệp trong hệ sinh thái Kepler. Biz Space cung cấp giải pháp không gian làm việc linh hoạt và hệ sinh thái dịch vụ doanh nghiệp.",
+    stat: "24/7",
+    statLabel: "Sẵn sàng phục vụ",
+  },
 };
 
-export default function UnitStory({ unitKey }: { unitKey: keyof typeof units }) {
-  const story = stories[unitKey];
+export default function UnitStory({ unitKey }: { unitKey: string }) {
+  const units = useEcosystemUnits();
+  const story = stories[unitKey] || {
+    label: units[unitKey]?.eyebrow || "",
+    title: units[unitKey]?.name || "",
+    copy: units[unitKey]?.overview || units[unitKey]?.description || "",
+    stat: "",
+    statLabel: "",
+  };
   return (
     <section className="relative overflow-hidden bg-gray-900 py-24 lg:py-32">
       {/* Grid pattern */}

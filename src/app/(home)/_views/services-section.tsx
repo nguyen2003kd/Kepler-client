@@ -84,7 +84,7 @@ export default function ServicesSection() {
         image: imageUrl,
         title: post.title || "",
         description: post.summary || "",
-        link: `/${post.slug || slugify(post.title || "")}`,
+        link: `/du-an/${post.slug || slugify(post.title || "")}`,
         date: post.created_at
           ? new Date(post.created_at).toLocaleDateString("vi-VN")
           : undefined,
@@ -212,7 +212,7 @@ export default function ServicesSection() {
               transition={{ duration: 0.4, delay: 0.5 }}
             >
               <Link
-                href="/services"
+                href="/du-an"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all group"
               >
                 {t("viewAllServices")}

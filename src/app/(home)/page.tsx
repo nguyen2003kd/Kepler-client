@@ -41,10 +41,10 @@ export default function Home() {
       {/* <ServicesSection /> */}
 
       {/* 6. Section Giải pháp theo đối tượng */}
-      <SolutionsSection />
+      {/* <SolutionsSection /> */}
 
       {/* 7. Section Quy trình làm việc */}
-      <ProcessSection />
+      {/* <ProcessSection /> */}
 
       {/* 8. Section Thị trường / Tin tức */}
       {/* <NewsSection /> */}
@@ -53,7 +53,7 @@ export default function Home() {
       {/* <ProjectsSection /> */}
       <ServicesSection />
       {/* 10. Section Case Study */}
-      <CaseStudySection />
+      {/* <CaseStudySection /> */}
 
       {/* 11. Section Khách hàng */}
       <CustomersSection />

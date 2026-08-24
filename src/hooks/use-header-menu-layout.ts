@@ -87,25 +87,11 @@ export function useHeaderMenuLayout<T extends Record<string, any>>(
         const row1Width = prefix[k] + gap * (k - 1);
         if (row1Width > availableWidth) continue;
 
-<<<<<<< HEAD
         if (k === n) return n;
 
         const row2Width = (prefix[n] - prefix[k]) + gap * (n - k - 1);
         if (row2Width <= availableWidth) {
           return k;
-=======
-      // Fill row 1 as much as possible, then put the rest in row 2
-      // Find the largest i where row1 fits, and row2 also fits
-      let bestIndex = -1;
-
-      for (let i = n - 1; i >= 1; i--) {
-        const row1Width = prefix[i] + gap * (i - 1);
-        const row2Width = total - prefix[i] + gap * (n - i - 1);
-
-        if (row1Width <= availableWidth && row2Width <= availableWidth) {
-          bestIndex = i;
-          break;
->>>>>>> f0e2f84 (fix: resolve image CORS issues, add storage rewrite, fix hero banner layout)
         }
       }
 

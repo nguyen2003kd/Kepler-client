@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
+import DynamicContactForm from "../components/dynamic-contact-form";
 
 interface ContactSubPageProps {
   params: { slug: string[] };
@@ -23,5 +23,5 @@ export async function generateMetadata({ params }: ContactSubPageProps): Promise
 
 export default function ContactSubPage({ params }: ContactSubPageProps) {
   const formType = params.slug[0];
-  redirect(`/contact?type=${formType}`);
+  return <DynamicContactForm formType={formType} />;
 }

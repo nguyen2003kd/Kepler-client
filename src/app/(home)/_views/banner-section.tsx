@@ -33,7 +33,7 @@ const defaultHeroConfig: HeroConfigData = {
   subtitle:
     "Kepler Group là hệ sinh thái tư vấn và dịch vụ bất động sản chuyên nghiệp, đồng hành cùng doanh nghiệp trong toàn bộ vòng đời tài sản — từ nghiên cứu đầu tư, thẩm định giá, phát triển dự án, quản lý vận hành đến tối ưu khai thác và gia tăng giá trị.",
   cta1Text: "Khám phá dịch vụ",
-  cta1Link: "/dich-vu",
+  cta1Link: "/services",
   cta2Text: "Liên hệ tư vấn",
   cta2Link: "/dat-lich-tu-van",
   logoImage: "/api/storage/uploads/images/file-1787394265327-698518208.png",

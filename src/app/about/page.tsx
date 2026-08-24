@@ -39,16 +39,10 @@ const aboutLinks = [
     icon: Target,
   },
   {
-    href: "/about/history",
-    title: "Lịch sử phát triển",
-    description: "Hành trình hình thành và các dấu mốc nổi bật của Kepler Group.",
-    icon: History,
-  },
-  {
-    href: "/about/organizational-chart",
-    title: "Cơ cấu tổ chức",
-    description: "Sơ đồ cơ cấu và các đơn vị, bộ phận chính của Kepler.",
-    icon: Network,
+    href: "/services",
+    title: "Lĩnh vực hoạt động chính",
+    description: "Các lĩnh vực dịch vụ cốt lõi mà Kepler Group cung cấp.",
+    icon: Zap,
   },
   {
     href: "/about/board-of-directors",
@@ -61,12 +55,6 @@ const aboutLinks = [
     title: "Hội đồng cố vấn",
     description: "Đội ngũ chuyên gia và hồ sơ chuyên môn liên quan.",
     icon: Award,
-  },
-  {
-    href: "/about/capabilities",
-    title: "Năng lực và thành tựu",
-    description: "Số liệu năng lực, thành tựu, phạm vi và nhóm khách hàng.",
-    icon: Zap,
   },
   {
     href: "/about/certifications",

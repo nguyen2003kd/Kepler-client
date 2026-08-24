@@ -27,11 +27,11 @@ export default function KeplerPropertyHero() {
           className="max-w-4xl"
         >
           <Link
-            href="/he-sinh-thai"
+            href="/"
             className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-primary"
           >
             <ArrowLeft className="h-4 w-4" />
-            Hệ sinh thái Kepler
+            Trang chủ
           </Link>
           <div className="mt-8 flex items-center gap-3">
             <div className="h-px w-12 bg-primary" />

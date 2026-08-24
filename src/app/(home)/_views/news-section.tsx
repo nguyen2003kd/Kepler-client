@@ -113,7 +113,7 @@ function NewsTabContent({
                       )}
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1 hover:text-cyan-500 transition-colors">
-                      <Link href={`/${news.slug || ""}`}>{news.title}</Link>
+                      <Link href={`/news/${news.slug || ""}`}>{news.title}</Link>
                     </h3>
                     {news.summary && (
                       <div className="text-gray-600 text-xs line-clamp-2 mb-3">
@@ -122,7 +122,7 @@ function NewsTabContent({
                     )}
                   </div>
                   <Link
-                    href={`/${news.slug || ""}`}
+                    href={`/news/${news.slug || ""}`}
                     className="inline-flex items-center text-cyan-500 hover:text-cyan-600 text-sm font-medium transition-colors"
                   >
                     {t("readMore")} →
@@ -193,7 +193,7 @@ export default function NewsSection() {
     return dataToUse.map((post) => ({
       id: post.id,
       title: post.title || "",
-      link: `/${post.slug || ""}`,
+      link: `/news/${post.slug || ""}`,
       thumbnail:
         getResponsiveImage(post.thumbnail_compress_info) ||
         (post.thumbnail_path
