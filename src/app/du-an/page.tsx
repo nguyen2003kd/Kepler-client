@@ -7,20 +7,27 @@ import { getThumbnailSrc } from "@/lib/responsive-image";
 import { slugify } from "@/lib/slugify";
 import type { PostExtended } from "@/types/post";
 import { mockPosts } from "@/utils/mock-data";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { GridCardSkeleton } from "@/components/common/loading";
 import SafeImage from "@/components/common/safe-image";
 import { FadeIn } from "@/components/ui/fade-in";
 
 export default function ProjectsPage() {
+  return (
+    <Suspense fallback={<GridCardSkeleton count={6} />}>
+      <ProjectsPageContent />
+    </Suspense>
+  );
+}
+
+function ProjectsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
 
   const [currentPage, setCurrentPage] = useState(1);
