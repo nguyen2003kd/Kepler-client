@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
 import { useMemo } from "react";
@@ -22,7 +22,7 @@ const defaultConfig: CtaConfig = {
   subtitle:
     "Nếu Quý khách đang tìm kiếm một đơn vị tư vấn chuyên nghiệp trong lĩnh vực đầu tư, thẩm định giá, phát triển dự án, quản lý tài sản hoặc M&A, đội ngũ Kepler luôn sẵn sàng đồng hành để đưa ra giải pháp phù hợp với mục tiêu phát triển của doanh nghiệp.",
   cta1Text: "Đặt lịch tư vấn",
-  cta1Link: "/contact/lien-he-kepler",
+  cta1Link: "/contact",
   cta2Text: "Gửi yêu cầu",
   cta2Link: "/lien-he",
 };
@@ -76,13 +76,6 @@ export default function CtaSection() {
             >
               {config.cta1Text}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href={config.cta2Link}
-              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-white/30 text-white text-sm font-semibold rounded-full hover:bg-white/10 transition-all"
-            >
-              <Mail className="w-4 h-4" />
-              {config.cta2Text}
             </Link>
           </div>
         </motion.div>
