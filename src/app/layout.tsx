@@ -2,7 +2,8 @@ import Footer from "@/components/common/footer";
 import Header from "@/components/common/header";
 import Providers from "@/components/providers";
 import { AbilityProvider } from "@/components/providers/ability-provider";
-import QuotationPopup from "@/components/quotation-popup";
+import dynamic from "next/dynamic";
+const QuotationPopup = dynamic(() => import("@/components/quotation-popup"), { ssr: false });
 import baseConfig from "@/configs/base";
 import { getQueryClient } from "@/lib/get-query-client";
 import { prefetchLayoutData } from "@/lib/prefetch-helpers";
@@ -62,18 +63,17 @@ export const metadata: Metadata = {
     "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
 
   keywords: [
-    "tiêu chuẩn đo lường chất lượng",
-    "kiểm định",
-    "hiệu chuẩn",
-    "thử nghiệm",
-    "chuẩn đo lường",
-    "kiểm định thiết bị y tế",
-    "đo lường",
-    "chất lượng sản phẩm",
-    "quy chuẩn kỹ thuật",
-    "dịch vụ khoa học công nghệ",
-    "Sở Khoa học và Công nghệ TP.HCM",
-    "kiểm định an toàn thiết bị y tế",
+    "Kepler Group",
+    "thẩm định giá",
+    "môi giới bất động sản",
+    "quản lý bất động sản",
+    "bất động sản",
+    "nhà đất",
+    "căn hộ",
+    "biệt thự",
+    "đất nền",
+    "cho thuê nhà đất",
+    "mua bán nhà đất",
   ],
 
   robots: {
@@ -94,10 +94,10 @@ export const metadata: Metadata = {
     siteName: "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
     images: [
       {
-        url: `${baseConfig.frontendDomain}/images/case-smeg-thumb.png`,
+        url: `${baseConfig.frontendDomain}/images/kepler-thumb.png`,
         width: 1200,
         height: 630,
-        alt: "Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng TP. Hồ Chí Minh",
+        alt: "Kepler Group — Thẩm định giá, Môi giới & Quản lý Bất động sản",
       },
     ],
     locale: "vi_VN",

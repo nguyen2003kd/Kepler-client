@@ -57,7 +57,7 @@ export default function RelatedSidebar({
   return (
     <Card className="overflow-hidden shadow-lg">
       {/* Header */}
-      <div className="bg-gray-900 px-4 py-3 flex items-center justify-between">
+      <div className="bg-primary px-4 py-3 flex items-center justify-between">
         <h3 className="text-base font-bold text-white text-center">{categoryName? `${t("latestCapabilityInfo")}` : siderbarName}</h3>
         <Newspaper className="w-5 h-5 text-white" />
       </div>

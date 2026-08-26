@@ -67,7 +67,7 @@ export default function DocumentsSection() {
 
   if (isLoading) {
     return (
-      <section className="bg-[#2563EB]-to-br  py-16">
+      <section className="bg-primary py-16">
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
           <div className="mx-4 md:mx-8 lg:mx-10">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">

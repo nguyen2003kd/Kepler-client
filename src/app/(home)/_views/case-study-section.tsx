@@ -8,6 +8,8 @@ import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { PROJECTS, ProjectInfo } from "@/constants/kepler-data";
 import { useGetApiV10Post } from "@/api/endpoints/post";
+import { useGetApiV10Category } from "@/api/endpoints/category";
+import { CategoryWithChildren } from "@/api/models/categoryWithChildren";
 import { PAGE_IDS } from "@/constants/page-ids";
 import { getThumbnailSrc } from "@/lib/responsive-image";
 import { slugify } from "@/lib/slugify";
@@ -18,15 +20,29 @@ import { useMemo } from "react";
 export default function CaseStudySection() {
   const { i18n } = useTranslation();
   const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
-  const pageId = currentLang === "en" ? PAGE_IDS.SERVICE_POSITION : PAGE_IDS.HOME_CASE_STUDY;
+
+  const { data: categoriesData } = useGetApiV10Category({ language: currentLang });
+
+  const projectCategoryId = useMemo(() => {
+    const allCats = (categoriesData?.responseData as CategoryWithChildren[]) || [];
+    for (const root of allCats) {
+      if (root.link === "/du-an") return root.id || "";
+      if (root.categories) {
+        const sub = root.categories.find((c) => c.link === "/du-an");
+        if (sub) return sub.id || "";
+      }
+    }
+    return "";
+  }, [categoriesData]);
 
   const { data } = useGetApiV10Post({
-    page_id: pageId,
     filters: "is_hidden==false",
     pageSize: 8,
     position: "true",
     sortOrderPosition: "ASC",
     filterBy: "CLIENT",
+    page_id: PAGE_IDS.LATEST_POSTS,
+    ...(projectCategoryId && { category_id: projectCategoryId }),
   });
 
   const projects = useMemo<ProjectInfo[]>(() => {
@@ -63,7 +79,7 @@ export default function CaseStudySection() {
                 </p>
               </div>
               <Link
-                href="/du-an?category=dfe9d415-8536-44bd-90b3-945c74f83425"
+                href="/du-an"
                 className="inline-flex items-center gap-2 md:gap-3 text-primary text-xs md:text-sm font-semibold uppercase tracking-widest hover:gap-3 md:hover:gap-4 transition-all group"
               >
                 Xem tất cả

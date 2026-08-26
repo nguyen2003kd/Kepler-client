@@ -186,7 +186,7 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
     <>
       {/* Hero Navbar Section */}
       <section
-        className="bg-[#0C2449] py-12 border-t border-gray-600"
+        className="bg-primary py-12 border-t border-gray-600"
         style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
       >
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
@@ -411,7 +411,7 @@ export default function NewsDetailView({ slug, initialPost }: NewsDetailViewProp
             <div className="lg:col-span-1">
               <div className="sticky top-6 space-y-4">
                 <Card className="overflow-hidden shadow-lg">
-                  <div className="bg-[#1e40af] px-4 py-3 flex items-center justify-between">
+                  <div className="bg-primary px-4 py-3 flex items-center justify-between">
                     <h3 className="text-base font-bold text-white">{t("latestNews")}</h3>
                     <Newspaper className="w-5 h-5 text-white" />
                   </div>

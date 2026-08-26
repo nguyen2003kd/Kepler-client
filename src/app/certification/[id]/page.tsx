@@ -94,7 +94,7 @@ export default function CertificationDetailPage({
     <div className="min-h-screen bg-gray-50">
       {/* Breadcrumb */}
       <section
-        className="bg-[#0C2449] py-12 border-t border-gray-600"
+        className="bg-primary py-12 border-t border-gray-600"
         style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
       >
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
@@ -177,7 +177,7 @@ export default function CertificationDetailPage({
         <div className="mt-8 text-center">
           <Link
             href="/certification"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#0C2449] hover:bg-[#1a3a5c] text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 group"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all duration-300 group"
           >
             <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
             Quay lại danh sách

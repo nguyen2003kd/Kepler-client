@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { units } from "../unit-data";
+import { useEcosystemUnits } from "../use-ecosystem-units";
 
-export default function UnitCta({ unitKey }: { unitKey: keyof typeof units }) {
+export default function UnitCta({ unitKey }: { unitKey: string }) {
+  const units = useEcosystemUnits();
   const unit = units[unitKey];
 
   return (

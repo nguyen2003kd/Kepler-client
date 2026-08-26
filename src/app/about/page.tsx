@@ -28,7 +28,7 @@ export const metadata = constructMetadata({
 const aboutLinks = [
   {
     href: "/about/company-overview",
-    title: "Tổng quan Kepler Group",
+    title: "Giới thiệu Kepler Group",
     description: "Giới thiệu doanh nghiệp, lĩnh vực hoạt động và mô hình hệ sinh thái.",
     icon: Building2,
   },
@@ -39,16 +39,10 @@ const aboutLinks = [
     icon: Target,
   },
   {
-    href: "/about/history",
-    title: "Lịch sử phát triển",
-    description: "Hành trình hình thành và các dấu mốc nổi bật của Kepler Group.",
-    icon: History,
-  },
-  {
-    href: "/about/organizational-chart",
-    title: "Cơ cấu tổ chức",
-    description: "Sơ đồ cơ cấu và các đơn vị, bộ phận chính của Kepler.",
-    icon: Network,
+    href: "/services",
+    title: "Lĩnh vực hoạt động chính",
+    description: "Các lĩnh vực dịch vụ cốt lõi mà Kepler Group cung cấp.",
+    icon: Zap,
   },
   {
     href: "/about/board-of-directors",
@@ -58,15 +52,9 @@ const aboutLinks = [
   },
   {
     href: "/about/expert-council",
-    title: "Hội đồng chuyên gia",
+    title: "Hội đồng cố vấn",
     description: "Đội ngũ chuyên gia và hồ sơ chuyên môn liên quan.",
     icon: Award,
-  },
-  {
-    href: "/about/capabilities",
-    title: "Năng lực và thành tựu",
-    description: "Số liệu năng lực, thành tựu, phạm vi và nhóm khách hàng.",
-    icon: Zap,
   },
   {
     href: "/about/certifications",
@@ -83,9 +71,9 @@ const aboutLinks = [
 ];
 
 const stats = [
-  { value: "10+", label: "Năm kinh nghiệm" },
-  { value: "05", label: "Lĩnh vực cốt lõi" },
-  { value: "50+", label: "Đối tác chiến lược" },
+  { value: "25+", label: "Năm kinh nghiệm" },
+  { value: "06", label: "Lĩnh vực cốt lõi" },
+  { value: "08", label: "Công ty thành viên" },
 ];
 
 export default function AboutPage() {
@@ -116,17 +104,17 @@ export default function AboutPage() {
             <FadeIn className="lg:col-span-7" delay={0.15}>
               <div className="space-y-8">
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Công ty tư vấn Bất động sản Kepler cung cấp giải pháp toàn
-                  diện trong ngành bất động sản: từ thẩm định giá, môi giới,
-                  marketing & phát triển BĐS, quản lý vận hành đến thiết kế và
-                  hoàn thiện nội ngoại thất.
+                  Kepler Group là doanh nghiệp hoạt động trong lĩnh vực tư vấn
+                  phát triển dự án, tư vấn đầu tư, thẩm định giá, quản lý và
+                  khai thác tài sản, thực hiện các thương vụ M&A và giải pháp số
+                  cho bất động sản.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Với đội ngũ nhân sự có trình độ chuyên môn cao, từng đảm
-                  nhận vai trò lãnh đạo tại nhiều tập đoàn bất động sản trong
-                  và ngoài nước, Kepler hướng đến một giải pháp dịch vụ trọn
-                  gói khép kín, với sự chuyên nghiệp, hiệu quả và chi phí tốt
-                  nhất.
+                  Đội ngũ sáng lập có hơn 25 năm kinh nghiệm, đã từng và đang
+                  công tác tại các tổ chức tập đoàn lớn trong và ngoài nước
+                  chuyên về lĩnh vực bất động sản. Kepler không chỉ tư vấn mà
+                  còn đồng hành trong quá trình triển khai, vận hành và tối ưu
+                  hiệu quả đầu tư cùng khách hàng.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-4">

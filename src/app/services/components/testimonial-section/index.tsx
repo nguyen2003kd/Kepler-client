@@ -11,7 +11,7 @@ export default function TestimonialSection() {
         <div className="mx-4 md:mx-8 lg:mx-10">
           <VideoTestimonialCard
             image="/seo.png"
-            imageAlt="SMEQ Testimonial Video"
+            imageAlt="Kepler Testimonial Video"
             quote="HT 175 2018."
             channelName="Câu chuyện kinh doanh HTV9"
             subscriberCount="7,09 N người đăng ký"

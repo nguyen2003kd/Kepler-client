@@ -190,3 +190,44 @@
 .duration-300 {
   --animate-duration: 300ms;
 }
+
+/* === Header scroll transitions === */
+.header-topbar {
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.header-inner {
+  display: block;
+}
+
+.header-mainbar {
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-logo {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), filter 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Hero banner floating logo */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+.hero-logo-float {
+  animation: floatUpDown 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

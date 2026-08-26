@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import useAuthStore from "@/stores/auth-store";
 import type { NavItem } from "@/types";
 import type { MenuItem as MenuItemType } from "@/types/menu";
-import { LanguageSwitcher } from "@components/common/components/language-switcher";
 import { MenuItem } from "@components/common/components/menu-item";
 import { UserNav } from "@components/common/user-nav";
 import { Skeleton } from "@components/ui/skeleton";
@@ -17,22 +16,22 @@ import { getResponsiveImage } from "@/lib/responsive-image";
 import {
   // Briefcase,
   // Calendar,
-  ChevronDown,
   FileText,
   Headphones,
   Menu,
-  Phone,
+  // Phone,
   Search,
   User,
   UserPen,
   X,
 } from "lucide-react";
 import Image from "@/components/common/safe-image";
+import QuotationPopupDialog from "@/components/quotation-popup/quotation-popup-dialog";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
-import { useDragScroll } from "@/hooks/use-drag-scroll";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useHeaderMenuLayout } from "@/hooks/use-header-menu-layout";
 interface HeaderProps {
   navItems?: NavItem[];
   className?: string;
@@ -97,61 +96,15 @@ export const headerRoot = cva("header-base", {
 });
 
 export default function Header({ navItems = [], className }: HeaderProps) {
-  const { t } = useTranslation("header");
+  const { t, i18n } = useTranslation("header");
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isScrolled, setIsScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
-  const { ref: navRef, isDragging } = useDragScroll<HTMLElement>();
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(false);
-
   const { data: logoData } = useGetApiV10Logo({
     filters: "is_active==true",
   });
-
-  // Scroll navigation functions
-  const scrollMenu = (direction: "left" | "right") => {
-    if (navRef.current) {
-      const scrollAmount = 200;
-      navRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const checkScrollPosition = () => {
-    if (navRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = navRef.current;
-      setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
-    }
-  };
-
-  const handleWheel = (e: WheelEvent) => {
-    if (navRef.current && !isDragging) {
-      e.preventDefault();
-      const scrollAmount = e.deltaY * 0.8;
-      navRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
-
-  useEffect(() => {
-    const nav = navRef.current;
-    if (nav) {
-      checkScrollPosition();
-      nav.addEventListener("scroll", checkScrollPosition);
-      nav.addEventListener("wheel", handleWheel as EventListener, { passive: false });
-      window.addEventListener("resize", checkScrollPosition);
-      return () => {
-        nav.removeEventListener("scroll", checkScrollPosition);
-        nav.removeEventListener("wheel", handleWheel as EventListener);
-        window.removeEventListener("resize", checkScrollPosition);
-      };
-    }
-  }, [isDragging]);
 
   const logoInfo = logoData?.responseData?.rows?.[0] as LogoWithFile;
   const logoUrl = logoInfo?.file?.compress_info
@@ -160,30 +113,28 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       ? `${links.storageEndpoint}${logoInfo.file.path}`
       : "/seo.png";
 
-  // Fetch categories from API with current language
-  const { i18n } = useTranslation();
   const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
   const { data: categoriesData } = useGetApiV10Category(
     { language: currentLang },
     {
     query: {
-      staleTime: 1000 * 30,
-      refetchOnMount: true,
-      refetchOnWindowFocus: true,
+      staleTime: 1000 * 60 * 5,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     },
     },
   );
 
-  // Auth state
   const { email, first_name, last_name } = useAuthStore();
   const isAuthenticated = !!email;
   const [isMounted, setIsMounted] = useState(false);
+  const [quotationPopupOpen, setQuotationPopupOpen] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const defaultNavItems: NavItem[] = [
+  const defaultNavItems: NavItem[] = useMemo(() => [
     {
       id: "1",
       name: "Trang chủ",
@@ -206,57 +157,73 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       children: [
         {
           id: "2-1",
-          name: "Tổng quan",
+          name: "Giới thiệu Kepler Group",
           type: "",
           content_type: "",
-          link: "/about/overview",
+          link: "/about/company-overview",
           sequence: 1,
           display: true,
           parent_id: "2",
-          children: [
-            {
-              id: "2-1-1",
-              name: "Lịch sử hình thành",
-              type: "",
-              content_type: "",
-              link: "/about/overview/history",
-              sequence: 1,
-              display: true,
-              parent_id: "2-1",
-            },
-            {
-              id: "2-1-2",
-              name: "Cơ cấu tổ chức",
-              type: "",
-              content_type: "",
-              link: "/about/overview/organization",
-              sequence: 2,
-              display: true,
-              parent_id: "2-1",
-            },
-          ],
         },
         {
           id: "2-2",
-          name: "Tầm nhìn & Sứ mệnh",
+          name: "Tầm nhìn – Sứ mệnh",
           type: "",
           content_type: "",
           link: "/about/vision-mission",
           sequence: 2,
           display: true,
           parent_id: "2",
-          children: [
-            {
-              id: "2-2-1",
-              name: "Giá trị cốt lõi",
-              type: "",
-              content_type: "",
-              link: "/about/vision-mission/core-values",
-              sequence: 1,
-              display: true,
-              parent_id: "2-2",
-            },
-          ],
+        },
+        {
+          id: "2-3",
+          name: "Lĩnh vực hoạt động chính",
+          type: "",
+          content_type: "",
+          link: "/services",
+          sequence: 3,
+          display: true,
+          parent_id: "2",
+        },
+        {
+          id: "2-4",
+          name: "Ban điều hành",
+          type: "",
+          content_type: "",
+          link: "/about/board-of-directors",
+          sequence: 4,
+          display: true,
+          parent_id: "2",
+        },
+        {
+          id: "2-5",
+          name: "Hội đồng cố vấn",
+          type: "",
+          content_type: "",
+          link: "/about/expert-council",
+          sequence: 5,
+          display: true,
+          parent_id: "2",
+        },
+        {
+          id: "2-6",
+          name: "Chứng chỉ và giấy phép",
+          type: "",
+          content_type: "",
+          link: "/about/certifications",
+          sequence: 6,
+          display: true,
+          parent_id: "2",
+        },
+        {
+          id: "2-7",
+          name: "Hồ sơ năng lực",
+          type: "",
+          content_type: "",
+          link: "/about/capability-profile",
+          sequence: 7,
+          display: true,
+          parent_id: "2",
         },
       ],
     },
@@ -270,131 +237,188 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       display: true,
       parent_id: null,
       children: [
-        {
-          id: "3-1",
-          name: "Tư vấn pháp lý",
-          type: "",
-          content_type: "",
-          link: "/services/legal-consulting",
-          sequence: 1,
-          display: true,
-          parent_id: "3",
-          children: [
-            {
-              id: "3-1-1",
-              name: "Doanh nghiệp vừa và nhỏ",
-              type: "",
-              content_type: "",
-              link: "/services/legal-consulting/sme",
-              sequence: 1,
-              display: true,
-              parent_id: "3-1",
-            },
-            {
-              id: "3-1-2",
-              name: "Khởi nghiệp",
-              type: "",
-              content_type: "",
-              link: "/services/legal-consulting/startup",
-              sequence: 2,
-              display: true,
-              parent_id: "3-1",
-            },
-          ],
-        },
-        {
-          id: "3-2",
-          name: "Hỗ trợ tài chính",
-          type: "",
-          content_type: "",
-          link: "/services/financial-support",
-          sequence: 2,
-          display: true,
-          parent_id: "3",
-          children: [
-            {
-              id: "3-2-1",
-              name: "Vốn vay ưu đãi",
-              type: "",
-              content_type: "",
-              link: "/services/financial-support/loans",
-              sequence: 1,
-              display: true,
-              parent_id: "3-2",
-            },
-            {
-              id: "3-2-2",
-              name: "Quỹ đầu tư",
-              type: "",
-              content_type: "",
-              link: "/services/financial-support/funds",
-              sequence: 2,
-              display: true,
-              parent_id: "3-2",
-            },
-          ],
-        },
+        { id: "3-1", name: "Tư vấn định giá và thẩm định giá", type: "", content_type: "", link: "/services/tu-van-dinh-gia-va-tham-dinh-gia", sequence: 1, display: true, parent_id: "3" },
+        { id: "3-2", name: "Phát triển dự án BĐS", type: "", content_type: "", link: "/services/phat-trien-du-an-bds", sequence: 2, display: true, parent_id: "3" },
+        { id: "3-3", name: "Quản lý & khai thác tài sản", type: "", content_type: "", link: "/services/quan-ly-va-khai-thac-tai-san", sequence: 3, display: true, parent_id: "3" },
+        { id: "3-4", name: "Tư vấn & thực hiện M&A", type: "", content_type: "", link: "/services/tu-van-va-thuc-hien-ma", sequence: 4, display: true, parent_id: "3" },
+        { id: "3-5", name: "Tư vấn dịch vụ khác BĐS", type: "", content_type: "", link: "/services/tu-van-dich-vu-khac-bds", sequence: 5, display: true, parent_id: "3" },
+        { id: "3-6", name: "Giải pháp số BĐS", type: "", content_type: "", link: "/services/giai-phap-so-bds", sequence: 6, display: true, parent_id: "3" },
+        { id: "3-7", name: "Cho thuê HĐ cố vấn & chuyên gia", type: "", content_type: "", link: "/services/cho-thue-hop-dong-co-van-va-chuyen-gia", sequence: 7, display: true, parent_id: "3" },
       ],
     },
     {
-      id: "4",
-      name: "Tin tức",
+      id: "5",
+      name: "Sàn giao dịch và dự án",
       type: "",
       content_type: "",
-      link: "/news",
+      link: "/san-giao-dich",
       sequence: 4,
       display: true,
       parent_id: null,
       children: [
-        {
-          id: "4-1",
-          name: "Tin SME",
-          type: "",
-          content_type: "",
-          link: "/news/sme",
-          sequence: 1,
-          display: true,
-          parent_id: "4",
-          children: [
-            {
-              id: "4-1-1",
-              name: "Hoạt động nổi bật",
-              type: "",
-              content_type: "",
-              link: "/news/sme/activities",
-              sequence: 1,
-              display: true,
-              parent_id: "4-1",
-            },
-          ],
-        },
+        { id: "5-1", name: "Mua và bán nhà lẻ", type: "", content_type: "", link: "/san-giao-dich/mua-ban-nha-le", sequence: 1, display: true, parent_id: "5" },
+        { id: "5-2", name: "Thuê và cho thuê", type: "", content_type: "", link: "/san-giao-dich/thue-va-cho-thue", sequence: 2, display: true, parent_id: "5" },
+        { id: "5-3", name: "Dự án phân phối", type: "", content_type: "", link: "/san-giao-dich/du-an-phan-phoi", sequence: 3, display: true, parent_id: "5" },
+        { id: "5-4", name: "Kêu gọi đầu tư dự án", type: "", content_type: "", link: "/san-giao-dich/keu-goi-dau-tu", sequence: 4, display: true, parent_id: "5" },
+        { id: "5-5", name: "Dự án cần M&A", type: "", content_type: "", link: "/san-giao-dich/du-an-can-ma", sequence: 5, display: true, parent_id: "5" },
+      ],
+    },
+    {
+      id: "6",
+      name: "Đối tác & khách hàng tiêu biểu",
+      type: "",
+      content_type: "",
+      link: "/doi-tac-khach-hang",
+      sequence: 5,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "6-1", name: "Khách hàng cá nhân cao cấp", type: "", content_type: "", link: "/doi-tac-khach-hang/khach-hang-ca-nhan-cao-cap", sequence: 1, display: true, parent_id: "6" },
+        { id: "6-2", name: "Khách hàng doanh nghiệp tiêu biểu", type: "", content_type: "", link: "/doi-tac-khach-hang/khach-hang-doanh-nghiep-tieu-bieu", sequence: 2, display: true, parent_id: "6" },
+        { id: "6-3", name: "Đối tác chiến lược", type: "", content_type: "", link: "/doi-tac-khach-hang/doi-tac-chien-luoc", sequence: 3, display: true, parent_id: "6" },
+        { id: "6-4", name: "Quỹ đầu tư quốc tế và trong nước", type: "", content_type: "", link: "/doi-tac-khach-hang/quy-dau-tu-quoc-te-va-trong-nuoc", sequence: 4, display: true, parent_id: "6" },
+        { id: "6-5", name: "Đơn vị công nghệ proptech", type: "", content_type: "", link: "/doi-tac-khach-hang/don-vi-cong-nghe-proptech", sequence: 5, display: true, parent_id: "6" },
+        { id: "6-6", name: "Mạng lưới phân phối độc quyền", type: "", content_type: "", link: "/doi-tac-khach-hang/mang-luoi-phan-phoi-doc-quyen", sequence: 6, display: true, parent_id: "6" },
+        { id: "6-7", name: "Ngân hàng và tổ chức tài chính", type: "", content_type: "", link: "/doi-tac-khach-hang/ngan-hang-va-to-chuc-tai-chinh", sequence: 7, display: true, parent_id: "6" },
+        { id: "6-8", name: "Đơn vị thẩm định giá và pháp lý", type: "", content_type: "", link: "/doi-tac-khach-hang/don-vi-tham-dinh-gia-va-phap-ly", sequence: 8, display: true, parent_id: "6" },
       ],
     },
     {
       id: "7",
-      name: "Liên hệ",
+      name: "Cộng đồng bất động sản – Real Hub",
       type: "",
       content_type: "",
-      link: "/contact",
+      link: "/cong-dong-bds",
+      sequence: 6,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "7-1", name: "Real Hub Offline", type: "", content_type: "", link: "/cong-dong-bds/offline", sequence: 1, display: true, parent_id: "7" },
+        { id: "7-2", name: "Real Hub Online", type: "", content_type: "", link: "/cong-dong-bds/online", sequence: 2, display: true, parent_id: "7" },
+        { id: "7-3", name: "Mô hình Real Hub", type: "", content_type: "", link: "/cong-dong-bds/mo-hinh-real-hub", sequence: 3, display: true, parent_id: "7" },
+        { id: "7-4", name: "Tham gia Real Hub", type: "", content_type: "", link: "/cong-dong-bds/tham-gia-real-hub", sequence: 4, display: true, parent_id: "7" },
+      ],
+    },
+    {
+      id: "9",
+      name: "Hệ sinh thái Kepler",
+      type: "",
+      content_type: "",
+      link: "/he-sinh-thai",
       sequence: 7,
       display: true,
       parent_id: null,
+      children: [
+        { id: "9-1", name: "Kepler Property – KPC Group", type: "", content_type: "", link: "/he-sinh-thai/kepler-property", sequence: 1, display: true, parent_id: "9" },
+        { id: "9-2", name: "Kepler Appraisal – KAC", type: "", content_type: "", link: "/he-sinh-thai/kpc-appraisal", sequence: 2, display: true, parent_id: "9" },
+        { id: "9-3", name: "Kepler Management – KMC", type: "", content_type: "", link: "/he-sinh-thai/kmc-management", sequence: 3, display: true, parent_id: "9" },
+        { id: "9-4", name: "Kepler Advisory – KAC Advisory", type: "", content_type: "", link: "/he-sinh-thai/kac-advisory", sequence: 4, display: true, parent_id: "9" },
+        { id: "9-5", name: "Kepler Land", type: "", content_type: "", link: "/he-sinh-thai/kepler-land", sequence: 5, display: true, parent_id: "9" },
+        { id: "9-6", name: "K-Homes", type: "", content_type: "", link: "/he-sinh-thai/k-homes", sequence: 6, display: true, parent_id: "9" },
+        { id: "9-7", name: "BizOffice", type: "", content_type: "", link: "/he-sinh-thai/bizoffice", sequence: 7, display: true, parent_id: "9" },
+      ],
     },
-  ];
+    {
+      id: "12",
+      name: "Chuyên gia & Cố vấn",
+      type: "",
+      content_type: "",
+      link: "/chuyen-gia",
+      sequence: 8,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "12-1", name: "Chuyên gia độc lập", type: "", content_type: "", link: "/chuyen-gia/chuyen-gia-doc-lap", sequence: 1, display: true, parent_id: "12" },
+        { id: "12-2", name: "Hội đồng cố vấn", type: "", content_type: "", link: "/chuyen-gia/hoi-dong-co-van", sequence: 2, display: true, parent_id: "12" },
+      ],
+    },
+    {
+      id: "8",
+      name: "Tin tức ngành và sự kiện",
+      type: "",
+      content_type: "",
+      link: "/news",
+      sequence: 9,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "8-1", name: "Văn bản Luật", type: "", content_type: "", link: "/news/van-ban-luat", sequence: 1, display: true, parent_id: "8" },
+        { id: "8-2", name: "Bất động sản – Quy hoạch", type: "", content_type: "", link: "/news/bds-quy-hoach", sequence: 2, display: true, parent_id: "8" },
+        { id: "8-3", name: "Tài chính – Thẩm định giá", type: "", content_type: "", link: "/news/tai-chinh-tham-dinh", sequence: 3, display: true, parent_id: "8" },
+        { id: "8-4", name: "Kiến trúc – Xây dựng", type: "", content_type: "", link: "/news/kien-truc-xay-dung", sequence: 4, display: true, parent_id: "8" },
+        { id: "8-5", name: "Nghiên cứu – Báo cáo", type: "", content_type: "", link: "/news/nghien-cuu-bao-cao", sequence: 5, display: true, parent_id: "8" },
+      ],
+    },
+    {
+      id: "10",
+      name: "Kiến thức",
+      type: "",
+      content_type: "",
+      link: "/kien-thuc",
+      sequence: 10,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "10-1", name: "Đầu tư bất động sản", type: "", content_type: "", link: "/kien-thuc/dau-tu-bat-dong-san", sequence: 1, display: true, parent_id: "10" },
+        { id: "10-2", name: "Tài chính và các khoản vay", type: "", content_type: "", link: "/kien-thuc/tai-chinh-va-cac-khoan-vay", sequence: 2, display: true, parent_id: "10" },
+        { id: "10-3", name: "Thẩm định giá và định giá", type: "", content_type: "", link: "/kien-thuc/tham-dinh-gia-va-dinh-gia", sequence: 3, display: true, parent_id: "10" },
+        { id: "10-4", name: "Thiết kế và xây dựng", type: "", content_type: "", link: "/kien-thuc/thiet-ke-va-xay-dung", sequence: 4, display: true, parent_id: "10" },
+        { id: "10-5", name: "Quản lý và vận hành", type: "", content_type: "", link: "/kien-thuc/quan-ly-va-van-hanh", sequence: 5, display: true, parent_id: "10" },
+        { id: "10-6", name: "Podcast và video", type: "", content_type: "", link: "/kien-thuc/podcast-va-video", sequence: 6, display: true, parent_id: "10" },
+        { id: "10-7", name: "Khóa đào tạo", type: "", content_type: "", link: "/kien-thuc/khoa-dao-tao", sequence: 7, display: true, parent_id: "10" },
+        { id: "10-8", name: "Tiêu điểm bất động sản", type: "", content_type: "", link: "/kien-thuc/tieu-diem-bat-dong-san", sequence: 8, display: true, parent_id: "10" },
+      ],
+    },
+    {
+      id: "11",
+      name: "Liên hệ và đặt lịch",
+      type: "",
+      content_type: "",
+      link: "/contact",
+      sequence: 11,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "11-1", name: "Liên hệ Kepler", type: "", content_type: "", link: "/contact/lien-he-kepler", sequence: 1, display: true, parent_id: "11" },
+        { id: "11-2", name: "Liên hệ hợp tác", type: "", content_type: "", link: "/contact/lien-he-hop-tac", sequence: 2, display: true, parent_id: "11" },
+        { id: "11-3", name: "Yêu cầu bán/cho thuê BĐS", type: "", content_type: "", link: "/contact/yeu-cau-ban-cho-thue", sequence: 3, display: true, parent_id: "11" },
+        { id: "11-4", name: "Yêu cầu thẩm định giá", type: "", content_type: "", link: "/contact/yeu-cau-tham-dinh-gia", sequence: 4, display: true, parent_id: "11" },
+        { id: "11-5", name: "Yêu cầu dịch vụ BĐS", type: "", content_type: "", link: "/contact/yeu-cau-dich-vu", sequence: 5, display: true, parent_id: "11" },
+        { id: "11-6", name: "Tư vấn thương vụ M&A", type: "", content_type: "", link: "/contact/tu-van-thuong-vu-ma", sequence: 6, display: true, parent_id: "11" },
+        { id: "11-7", name: "Đặt lịch hẹn chuyên gia", type: "", content_type: "", link: "/contact/dat-lich-hen-chuyen-gia", sequence: 7, display: true, parent_id: "11" },
+      ],
+    },
+  ], []);
+
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
+  const [isHeaderHovered, setIsHeaderHovered] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          if (currentScrollY > 100 && currentScrollY > lastScrollY.current) {
+            setIsHeaderHidden(true);
+          } else if (currentScrollY < lastScrollY.current - 5 || currentScrollY < 100) {
+            setIsHeaderHidden(false);
+          }
+          lastScrollY.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const contactItem: HeaderMenuItem = {
+  const contactItem: HeaderMenuItem = useMemo(() => ({
     id: "contact",
     name: t("contact"),
     type: "",
@@ -465,9 +489,9 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         parent_id: "contact",
       },
     ],
-  };
+  }), [t]);
 
-  const kienThucItem: HeaderMenuItem = {
+  const kienThucItem: HeaderMenuItem = useMemo(() => ({
     id: "kien-thuc",
     name: t("kienThuc"),
     type: "",
@@ -618,11 +642,11 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         parent_id: "kien-thuc",
       },
     ],
-  };
+  }), [t]);
 
-  const aboutItem: HeaderMenuItem = {
+  const aboutItem: HeaderMenuItem = useMemo(() => ({
     id: "about",
-    name: t("menu:about"),
+    name: "Giới thiệu",
     type: "",
     content_type: "",
     link: "/about",
@@ -630,16 +654,16 @@ export default function Header({ navItems = [], className }: HeaderProps) {
     display: true,
     parent_id: null,
     children: [
-      {
-        id: "about-overview",
-        name: t("aboutOverview"),
-        type: "",
-        content_type: "",
-        link: "/about",
-        sequence: 1,
-        display: true,
-        parent_id: "about",
-      },
+      // {
+      //   id: "about-overview",
+      //   name: t("aboutOverview"),
+      //   type: "",
+      //   content_type: "",
+      //   link: "/about",
+      //   sequence: 1,
+      //   display: true,
+      //   parent_id: "about",
+      // },
       {
         id: "about-company-overview",
         name: t("aboutCompanyOverview"),
@@ -661,22 +685,12 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         parent_id: "about",
       },
       {
-        id: "about-history",
-        name: t("aboutHistory"),
+        id: "about-services",
+        name: "Lĩnh vực hoạt động chính",
         type: "",
         content_type: "",
-        link: "/about/history",
+        link: "/services",
         sequence: 4,
-        display: true,
-        parent_id: "about",
-      },
-      {
-        id: "about-organizational-structure",
-        name: t("aboutOrganizationalChart"),
-        type: "",
-        content_type: "",
-        link: "/about/organizational-chart",
-        sequence: 5,
         display: true,
         parent_id: "about",
       },
@@ -700,16 +714,16 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         display: true,
         parent_id: "about",
       },
-      {
-        id: "about-capabilities",
-        name: t("aboutCapabilities"),
-        type: "",
-        content_type: "",
-        link: "/about/capabilities",
-        sequence: 8,
-        display: true,
-        parent_id: "about",
-      },
+      // {
+      //   id: "about-capabilities",
+      //   name: t("aboutCapabilities"),
+      //   type: "",
+      //   content_type: "",
+      //   link: "/about/capabilities",
+      //   sequence: 8,
+      //   display: true,
+      //   parent_id: "about",
+      // },
       // TODO: Không có trong list khách gửi — tạm ẩn
       // {
       //   id: "about-branches-offices",
@@ -742,9 +756,9 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         parent_id: "about",
       },
     ],
-  };
+  }), [t]);
 
-  const customersPartnersItem: HeaderMenuItem = {
+  const customersPartnersItem: HeaderMenuItem = useMemo(() => ({
     id: "customers-partners",
     name: t("customersPartners"),
     type: "",
@@ -785,17 +799,27 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         parent_id: "customers-partners",
       },
     ],
-  };
+  }), [t]);
 
-  const baseNavigation: HeaderMenuItem[] = categoriesData?.responseData?.length
-    ? withCategoryQueryMode(
-        categoriesData.responseData as unknown as HeaderMenuItem[],
-        true,
-      )
-    : withCategoryQueryMode(
-        (navItems.length > 0 ? navItems : defaultNavItems) as HeaderMenuItem[],
-        false,
-      );
+  const baseNavigation: HeaderMenuItem[] = useMemo(() => {
+    const apiData = categoriesData?.responseData?.length
+      ? withCategoryQueryMode(
+          (categoriesData.responseData as unknown as HeaderMenuItem[]).map((item) => ({
+
+            ...item,
+            sequence: ((item as Record<string, unknown>).position as number) || 99,
+            display: true,
+            parent_id: ((item as Record<string, unknown>).parent_category_id as string | null) ?? null,
+          })) as HeaderMenuItem[],
+          false,
+        )
+      : null;
+    if (apiData) return apiData;
+    return withCategoryQueryMode(
+      (navItems.length > 0 ? navItems : defaultNavItems) as HeaderMenuItem[],
+      false,
+    );
+  }, [categoriesData, navItems, defaultNavItems]);
 
   // Inject "Chứng nhận" vào children của "Năng lực" (TẠM THỜI ẨN)
   // TODO: Uncomment khi cần hiển thị certification
@@ -837,11 +861,13 @@ export default function Header({ navItems = [], className }: HeaderProps) {
   */
   const navigation = baseNavigation;
 
-  const filteredNavigation = navigation.filter(
-    (item) => item.link !== "/contact" && item.link !== "/about",
-  );
+  const filteredNavigation: HeaderMenuItem[] = useMemo(() => {
+    return navigation.filter(
+      (item) => !item.parent_id,
+    );
+  }, [navigation]);
 
-  const pinnedItems: HeaderMenuItem[] = [
+  const pinnedItems: HeaderMenuItem[] = useMemo(() => [
     {
       id: "pinned-services",
       name: "Dịch vụ",
@@ -852,20 +878,18 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       display: true,
       parent_id: null,
       children: [
-        { id: "svc-1", name: "Tư vấn đầu tư", type: "", content_type: "", link: "/services/tu-van-dau-tu", sequence: 1, display: true, parent_id: "pinned-services" },
-        { id: "svc-2", name: "Thẩm định giá", type: "", content_type: "", link: "/services/tham-dinh-gia", sequence: 2, display: true, parent_id: "pinned-services" },
-        { id: "svc-3", name: "Phát triển dự án", type: "", content_type: "", link: "/services/phat-trien-du-an", sequence: 3, display: true, parent_id: "pinned-services" },
-        { id: "svc-4", name: "Quản lý BĐS", type: "", content_type: "", link: "/services/quan-ly-bat-dong-san", sequence: 4, display: true, parent_id: "pinned-services" },
-        { id: "svc-5", name: "Asset Enhancement", type: "", content_type: "", link: "/services/asset-enhancement", sequence: 5, display: true, parent_id: "pinned-services" },
-        { id: "svc-6", name: "Tư vấn M&A", type: "", content_type: "", link: "/services/tu-van-ma", sequence: 6, display: true, parent_id: "pinned-services" },
-        { id: "svc-7", name: "Môi giới & Leasing", type: "", content_type: "", link: "/services/moi-gioi-leasing", sequence: 7, display: true, parent_id: "pinned-services" },
-        { id: "svc-8", name: "Thiết kế & Xây dựng", type: "", content_type: "", link: "/services/thiet-ke-xay-dung", sequence: 8, display: true, parent_id: "pinned-services" },
-        { id: "svc-9", name: "Giải pháp số", type: "", content_type: "", link: "/services/giai-phap-so", sequence: 9, display: true, parent_id: "pinned-services" },
+        { id: "svc-1", name: "Tư vấn định giá và thẩm định giá", type: "", content_type: "", link: "/services/tu-van-dinh-gia-va-tham-dinh-gia", sequence: 1, display: true, parent_id: "pinned-services" },
+        { id: "svc-2", name: "Phát triển dự án BĐS", type: "", content_type: "", link: "/services/phat-trien-du-an-bds", sequence: 2, display: true, parent_id: "pinned-services" },
+        { id: "svc-3", name: "Quản lý và khai thác tài sản", type: "", content_type: "", link: "/services/quan-ly-va-khai-thac-tai-san", sequence: 3, display: true, parent_id: "pinned-services" },
+        { id: "svc-4", name: "Tư vấn và thực hiện M&A", type: "", content_type: "", link: "/services/tu-van-va-thuc-hien-ma", sequence: 4, display: true, parent_id: "pinned-services" },
+        { id: "svc-5", name: "Tư vấn dịch vụ khác BĐS", type: "", content_type: "", link: "/services/tu-van-dich-vu-khac-bds", sequence: 5, display: true, parent_id: "pinned-services" },
+        { id: "svc-6", name: "Giải pháp số BĐS", type: "", content_type: "", link: "/services/giai-phap-so-bds", sequence: 6, display: true, parent_id: "pinned-services" },
+        { id: "svc-7", name: "Cho thuê HĐ cố vấn & chuyên gia", type: "", content_type: "", link: "/services/cho-thue-hop-dong-co-van-va-chuyen-gia", sequence: 7, display: true, parent_id: "pinned-services" },
       ],
     },
     {
       id: "pinned-ecosystem",
-      name: "Hệ sinh thái",
+      name: "Hệ thống công ty thành viên",
       type: "",
       content_type: "",
       link: "/he-sinh-thai",
@@ -873,12 +897,37 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       display: true,
       parent_id: null,
       children: [
-        { id: "eco-1", name: "Kepler Property", type: "", content_type: "", link: "/he-sinh-thai/kepler-property", sequence: 1, display: true, parent_id: "pinned-ecosystem" },
-        { id: "eco-2", name: "KPC Appraisal", type: "", content_type: "", link: "/he-sinh-thai/kpc-appraisal", sequence: 2, display: true, parent_id: "pinned-ecosystem" },
-        { id: "eco-3", name: "KMC Management", type: "", content_type: "", link: "/he-sinh-thai/kmc-management", sequence: 3, display: true, parent_id: "pinned-ecosystem" },
-        { id: "eco-4", name: "KAC Advisory", type: "", content_type: "", link: "/he-sinh-thai/kac-advisory", sequence: 4, display: true, parent_id: "pinned-ecosystem" },
-        { id: "eco-5", name: "K-Homes Design & Build", type: "", content_type: "", link: "/he-sinh-thai/k-homes", sequence: 5, display: true, parent_id: "pinned-ecosystem" },
-        { id: "eco-6", name: "RealHub Platform", type: "", content_type: "", link: "/realhub", sequence: 6, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-1", name: "Kepler Property – KPC Group", type: "", content_type: "", link: "/he-sinh-thai/kepler-property", sequence: 1, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-2", name: "Kepler Appraisal - KAC", type: "", content_type: "", link: "/he-sinh-thai/kpc-appraisal", sequence: 2, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-3", name: "Kepler Managnement – KMC", type: "", content_type: "", link: "/he-sinh-thai/kmc-management", sequence: 3, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-4", name: "Kepler M&A – KMAC", type: "", content_type: "", link: "/he-sinh-thai/kac-advisory", sequence: 4, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-5", name: "Kepler Contruction – KCC", type: "", content_type: "", link: "/he-sinh-thai/k-homes", sequence: 5, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-6", name: "Kepler Land – Sàn giao dịch BĐS", type: "", content_type: "", link: "/he-sinh-thai/kepler-land", sequence: 6, display: true, parent_id: "pinned-ecosystem" },
+        { id: "eco-7", name: "BizOffice", type: "", content_type: "", link: "/he-sinh-thai/bizoffice", sequence: 7, display: true, parent_id: "pinned-ecosystem" },
+      ],
+    },
+    {
+      id: "pinned-san-giao-dich",
+      name: "Sàn giao dịch và dự án",
+      type: "",
+      content_type: "",
+      link: "/san-giao-dich",
+      sequence: 5,
+      display: true,
+      parent_id: null,
+    },
+    {
+      id: "pinned-partners-customers",
+      name: "Đối tác & Khách hàng",
+      type: "",
+      content_type: "",
+      link: "/doi-tac-khach-hang",
+      sequence: 6,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "pc-1", name: "Khách hàng", type: "", content_type: "", link: "/khach-hang", sequence: 1, display: true, parent_id: "pinned-partners-customers" },
+        { id: "pc-2", name: "Đối tác", type: "", content_type: "", link: "/doi-tac", sequence: 2, display: true, parent_id: "pinned-partners-customers" },
       ],
     },
     {
@@ -887,59 +936,133 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       type: "",
       content_type: "",
       link: "/realhub",
-      sequence: 5,
+      sequence: 7,
       display: true,
       parent_id: null,
       children: [
-        { id: "rh-1", name: "Marketplace", type: "", content_type: "", link: "/realhub#modules", sequence: 1, display: true, parent_id: "pinned-realhub" },
-        { id: "rh-2", name: "CRM", type: "", content_type: "", link: "/realhub#modules", sequence: 2, display: true, parent_id: "pinned-realhub" },
-        { id: "rh-3", name: "Dashboard", type: "", content_type: "", link: "/realhub#modules", sequence: 3, display: true, parent_id: "pinned-realhub" },
-        { id: "rh-4", name: "Broker Network", type: "", content_type: "", link: "/realhub#modules", sequence: 4, display: true, parent_id: "pinned-realhub" },
-        { id: "rh-5", name: "AI Assistant", type: "", content_type: "", link: "/realhub#modules", sequence: 5, display: true, parent_id: "pinned-realhub" },
-        { id: "rh-6", name: "Valuation", type: "", content_type: "", link: "/realhub#modules", sequence: 6, display: true, parent_id: "pinned-realhub" },
-        { id: "rh-7", name: "Roadmap", type: "", content_type: "", link: "/realhub#roadmap", sequence: 7, display: true, parent_id: "pinned-realhub" },
-        { id: "rh-8", name: "Đăng ký quan tâm", type: "", content_type: "", link: "/realhub#register", sequence: 8, display: true, parent_id: "pinned-realhub" },
+        // --- Sàn giao dịch và dự án ---
+        {
+          id: "rh-san-giao-dich",
+          name: "Sàn giao dịch và dự án",
+          type: "", content_type: "",
+          link: "/du-an",
+          sequence: 1, display: true, parent_id: "pinned-realhub",
+          children: [
+            { id: "rh-du-an-list", name: "Danh sách dự án", type: "", content_type: "", link: "/du-an", sequence: 1, display: true, parent_id: "rh-san-giao-dich" },
+            { id: "rh-case-study", name: "Danh sách Case Study", type: "", content_type: "", link: "/danh-sach-case-study", sequence: 2, display: true, parent_id: "rh-san-giao-dich" },
+          ],
+        },
+        // --- Cộng đồng BĐS (offline) ---
+        {
+          id: "rh-cong-dong-bds",
+          name: "Cộng đồng BĐS (offline)",
+          type: "", content_type: "",
+          link: "/cong-dong-bds",
+          sequence: 2, display: true, parent_id: "pinned-realhub",
+          children: [
+            { id: "rh-cd-1", name: "Cộng đồng chuyên gia", type: "", content_type: "", link: "/cong-dong-bds/chuyen-gia", sequence: 1, display: true, parent_id: "rh-cong-dong-bds" },
+            { id: "rh-cd-2", name: "Hệ sinh thái BĐS", type: "", content_type: "", link: "/cong-dong-bds/he-sinh-thai", sequence: 2, display: true, parent_id: "rh-cong-dong-bds" },
+          ],
+        },
+        // --- RealHub Platform (online) ---
+        {
+          id: "rh-platform",
+          name: "RealHub Platform",
+          type: "", content_type: "",
+          link: "/realhub",
+          sequence: 3, display: true, parent_id: "pinned-realhub",
+          children: [
+            { id: "rh-1", name: "Marketplace", type: "", content_type: "", link: "/realhub#modules", sequence: 1, display: true, parent_id: "rh-platform" },
+            { id: "rh-2", name: "CRM", type: "", content_type: "", link: "/realhub#modules", sequence: 2, display: true, parent_id: "rh-platform" },
+            { id: "rh-3", name: "Dashboard", type: "", content_type: "", link: "/realhub#modules", sequence: 3, display: true, parent_id: "rh-platform" },
+            { id: "rh-4", name: "Broker Network", type: "", content_type: "", link: "/realhub#modules", sequence: 4, display: true, parent_id: "rh-platform" },
+            { id: "rh-5", name: "AI Assistant", type: "", content_type: "", link: "/realhub#modules", sequence: 5, display: true, parent_id: "rh-platform" },
+            { id: "rh-6", name: "Valuation", type: "", content_type: "", link: "/realhub#modules", sequence: 6, display: true, parent_id: "rh-platform" },
+            { id: "rh-7", name: "Roadmap", type: "", content_type: "", link: "/realhub#roadmap", sequence: 7, display: true, parent_id: "rh-platform" },
+            { id: "rh-8", name: "Đăng ký quan tâm", type: "", content_type: "", link: "/realhub#register", sequence: 8, display: true, parent_id: "rh-platform" },
+          ],
+        },
       ],
     },
     {
-      id: "pinned-experts",
+      id: "pinned-chuyen-gia",
       name: "Chuyên gia",
       type: "",
       content_type: "",
-      link: "/chuyen-gia",
-      sequence: 6,
+      link: "/chuyen-gia-kepler",
+      sequence: 8,
       display: true,
       parent_id: null,
       children: [
-        { id: "exp-1", name: "Luật", type: "", content_type: "", link: "/chuyen-gia?category=Luật", sequence: 1, display: true, parent_id: "pinned-experts" },
-        { id: "exp-2", name: "Thẩm định giá", type: "", content_type: "", link: "/chuyen-gia?category=Thẩm định giá", sequence: 2, display: true, parent_id: "pinned-experts" },
-        { id: "exp-3", name: "Kiến trúc", type: "", content_type: "", link: "/chuyen-gia?category=Kiến trúc", sequence: 3, display: true, parent_id: "pinned-experts" },
-        { id: "exp-4", name: "Tài chính", type: "", content_type: "", link: "/chuyen-gia?category=Tài chính", sequence: 4, display: true, parent_id: "pinned-experts" },
-        { id: "exp-5", name: "Xây dựng", type: "", content_type: "", link: "/chuyen-gia?category=Xây dựng", sequence: 5, display: true, parent_id: "pinned-experts" },
-        { id: "exp-6", name: "Kế toán", type: "", content_type: "", link: "/chuyen-gia?category=Kế toán", sequence: 6, display: true, parent_id: "pinned-experts" },
-        { id: "exp-7", name: "Bất động sản", type: "", content_type: "", link: "/chuyen-gia?category=Bất động sản", sequence: 7, display: true, parent_id: "pinned-experts" },
-        { id: "exp-8", name: "Quản lý vận hành", type: "", content_type: "", link: "/chuyen-gia?category=Quản lý vận hành", sequence: 8, display: true, parent_id: "pinned-experts" },
+        { id: "exp-1", name: "Luật", type: "", content_type: "", link: "/chuyen-gia?category=Luật", sequence: 1, display: true, parent_id: "pinned-chuyen-gia" },
+        { id: "exp-2", name: "Thẩm định giá", type: "", content_type: "", link: "/chuyen-gia?category=Thẩm định giá", sequence: 2, display: true, parent_id: "pinned-chuyen-gia" },
+        { id: "exp-3", name: "Kiến trúc", type: "", content_type: "", link: "/chuyen-gia?category=Kiến trúc", sequence: 3, display: true, parent_id: "pinned-chuyen-gia" },
+        { id: "exp-4", name: "Tài chính", type: "", content_type: "", link: "/chuyen-gia?category=Tài chính", sequence: 4, display: true, parent_id: "pinned-chuyen-gia" },
+        { id: "exp-5", name: "Xây dựng", type: "", content_type: "", link: "/chuyen-gia?category=Xây dựng", sequence: 5, display: true, parent_id: "pinned-chuyen-gia" },
+        { id: "exp-6", name: "Kế toán", type: "", content_type: "", link: "/chuyen-gia?category=Kế toán", sequence: 6, display: true, parent_id: "pinned-chuyen-gia" },
+        { id: "exp-7", name: "Bất động sản", type: "", content_type: "", link: "/chuyen-gia?category=Bất động sản", sequence: 7, display: true, parent_id: "pinned-chuyen-gia" },
+        { id: "exp-8", name: "Quản lý vận hành", type: "", content_type: "", link: "/chuyen-gia?category=Quản lý vận hành", sequence: 8, display: true, parent_id: "pinned-chuyen-gia" },
       ],
     },
-  ];
+    {
+      id: "pinned-news",
+      name: "Tin tức và sự kiện",
+      type: "",
+      content_type: "",
+      link: "/news",
+      sequence: 9,
+      display: true,
+      parent_id: null,
+    },
+    {
+      id: "pinned-kien-thuc",
+      name: "Kiến thức",
+      type: "",
+      content_type: "",
+      link: "/kien-thuc",
+      sequence: 10,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "pkt-1", name: "Đầu tư bất động sản", type: "", content_type: "", link: "/kien-thuc/dau-tu-bat-dong-san", sequence: 1, display: true, parent_id: "pinned-kien-thuc" },
+        { id: "pkt-2", name: "Tài chính và các khoản vay", type: "", content_type: "", link: "/kien-thuc/tai-chinh-va-cac-khoan-vay", sequence: 2, display: true, parent_id: "pinned-kien-thuc" },
+        { id: "pkt-3", name: "Thẩm định giá và định giá", type: "", content_type: "", link: "/kien-thuc/tham-dinh-gia-va-dinh-gia", sequence: 3, display: true, parent_id: "pinned-kien-thuc" },
+        { id: "pkt-4", name: "Thiết kế và xây dựng", type: "", content_type: "", link: "/kien-thuc/thiet-ke-va-xay-dung", sequence: 4, display: true, parent_id: "pinned-kien-thuc" },
+        { id: "pkt-5", name: "Quản lý và vận hành", type: "", content_type: "", link: "/kien-thuc/quan-ly-va-van-hanh", sequence: 5, display: true, parent_id: "pinned-kien-thuc" },
+        { id: "pkt-6", name: "Podcast và video", type: "", content_type: "", link: "/kien-thuc/podcast-va-video", sequence: 6, display: true, parent_id: "pinned-kien-thuc" },
+        { id: "pkt-7", name: "Khóa đào tạo", type: "", content_type: "", link: "/kien-thuc/khoa-dao-tao", sequence: 7, display: true, parent_id: "pinned-kien-thuc" },
+        { id: "pkt-8", name: "Tiêu điểm bất động sản", type: "", content_type: "", link: "/kien-thuc/tieu-diem-bat-dong-san", sequence: 8, display: true, parent_id: "pinned-kien-thuc" },
+      ],
+    },
+    {
+      id: "pinned-contact",
+      name: "Liên hệ và đặt lịch",
+      type: "",
+      content_type: "",
+      link: "/contact",
+      sequence: 11,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "pc-1", name: "Liên hệ Kepler", type: "", content_type: "", link: "/contact/lien-he-kepler", sequence: 1, display: true, parent_id: "pinned-contact" },
+        { id: "pc-2", name: "Liên hệ hợp tác", type: "", content_type: "", link: "/contact/lien-he-hop-tac", sequence: 2, display: true, parent_id: "pinned-contact" },
+        { id: "pc-3", name: "Yêu cầu bán/cho thuê BĐS", type: "", content_type: "", link: "/contact/yeu-cau-ban-cho-thue", sequence: 3, display: true, parent_id: "pinned-contact" },
+        { id: "pc-4", name: "Yêu cầu thẩm định giá", type: "", content_type: "", link: "/contact/yeu-cau-tham-dinh-gia", sequence: 4, display: true, parent_id: "pinned-contact" },
+        { id: "pc-5", name: "Yêu cầu dịch vụ BĐS", type: "", content_type: "", link: "/contact/yeu-cau-dich-vu", sequence: 5, display: true, parent_id: "pinned-contact" },
+        { id: "pc-6", name: "Tư vấn thương vụ M&A", type: "", content_type: "", link: "/contact/tu-van-thuong-vu-ma", sequence: 6, display: true, parent_id: "pinned-contact" },
+        { id: "pc-7", name: "Đặt lịch hẹn chuyên gia", type: "", content_type: "", link: "/contact/dat-lich-hen-chuyen-gia", sequence: 7, display: true, parent_id: "pinned-contact" },
+      ],
+    },
+  ], []);
 
-  const finalNav = [
-    ...(filteredNavigation[0] ? [filteredNavigation[0]] : []),
-    aboutItem,
-    ...pinnedItems,
-    kienThucItem,
-    ...filteredNavigation.slice(1).filter(
-      (item) =>
-        item.link !== "/services" &&
-        item.link !== "/dich-vu" &&
-        item.link !== "/he-sinh-thai" &&
-        item.link !== "/realhub" &&
-        item.link !== "/chuyen-gia" &&
-        item.link !== "/kien-thuc",
-    ),
-    customersPartnersItem,
-    contactItem,
-  ];
+  const finalNav: HeaderMenuItem[] = useMemo(() => {
+    return [...filteredNavigation]
+      .sort((a, b) => (a.sequence || 99) - (b.sequence || 99))
+      .filter(item => item.display !== false);
+  }, [filteredNavigation]);
+
+  const { rows, rowGaps, isReady, navContainerRef, logoRef, parentRef, rightActionsRef, itemRefs } =
+    useHeaderMenuLayout(finalNav);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -958,71 +1081,62 @@ export default function Header({ navItems = [], className }: HeaderProps) {
     [router, searchQuery],
   );
 
+  const showHeader = !isHeaderHidden || isHeaderHovered;
+
   return (
-    <div className="h-[68px] md:h-[80px] lg:h-[84px]">
+    <div className="min-h-[112px] md:min-h-[124px] lg:min-h-[128px]">
+      {/* Hover trigger zone — invisible strip at top to reveal header */}
+      {isHeaderHidden && (
+        <div
+          className="fixed top-0 left-0 right-0 h-8 z-[51]"
+          onMouseEnter={() => setIsHeaderHovered(true)}
+        />
+      )}
       <header
+        ref={headerRef}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
+          "fixed top-0 left-0 right-0 z-50 transition-transform duration-300",
+          showHeader ? "translate-y-0" : "-translate-y-full",
           className,
         )}
+        onMouseLeave={() => setIsHeaderHovered(false)}
       >
+        <div className="header-inner">
         {/* === TOP BAR (đỏ) — Hotline + Quick links + Search + Language + Auth === */}
         <div
-          className={cn(
-            "bg-[#DC2626] text-white overflow-hidden",
-            isScrolled
-              ? "h-0 transition-all duration-500 ease-in-out"
-              : "h-12 transition-all duration-300 ease-in-out",
-          )}
+          className="header-topbar bg-[#DC2626] text-white"
         >
           <div className="max-w-screen-2xl mx-auto px-3 sm:px-6 lg:px-24">
-            <div className="flex items-center justify-between h-12">
+            <div className="flex items-center justify-between h-11 md:h-12 lg:h-12">
               {/* Left side */}
               <a
                 href="tel:18001105"
-                className="flex md:hidden items-center gap-1.5 text-[13px] hover:text-red-200 transition-colors"
+                className="flex md:hidden items-center gap-1.5 text-[12px] hover:text-red-200 transition-colors whitespace-nowrap"
               >
-                <Headphones className="w-3.5 h-3.5" />
+                <Headphones className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="font-semibold tracking-wide">
                   {t("hotline")}: 1800 1105
                 </span>
               </a>
-              <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs lg:text-sm">
-                <Link
-                  href="/contact"
-                  className="hover:text-red-200 transition-colors flex items-center gap-1.5 lg:gap-2"
-                >
-                  <Phone className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
-                  <span>{t("contact")}</span>
-                </Link>
-                {/* <div className="h-3 w-px bg-white/30"></div>
-                <Link
-                  href="/careers"
-                  className="hover:text-red-200 transition-colors flex items-center gap-1.5 lg:gap-2"
-                >
-                  <Briefcase className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
-                  <span>{t("careers")}</span>
-                </Link>
-                <div className="h-3 w-px bg-white/30"></div>
-                <Link
-                  href="/work-schedule"
-                  className="hover:text-red-200 transition-colors flex items-center gap-1.5 lg:gap-2"
-                >
-                  <Calendar className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
-                  <span>{t("workSchedule")}</span>
-                </Link> */}
-                <div className="h-3 w-px bg-white/30"></div>
+              <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs lg:text-sm min-w-0">
                 <a
                   href="tel:18001105"
-                  className="flex items-center gap-1.5 lg:gap-2 hover:text-red-200 transition-colors"
+                  className="flex items-center gap-1.5 lg:gap-2 hover:text-red-200 transition-colors whitespace-nowrap"
                 >
-                  <Headphones className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
+                  <Headphones className="w-3.5 h-3.5 lg:w-4 lg:h-4 flex-shrink-0" />
                   <span className="font-semibold">{t("hotline")}: 1800 1105</span>
                 </a>
+                <div className="hidden lg:block h-4 w-px bg-white/30"></div>
+                <Link
+                  href="/news"
+                  className="hidden lg:flex items-center gap-1.5 hover:text-red-200 transition-colors whitespace-nowrap"
+                >
+                  <span>{t("newsAndEvents")}</span>
+                </Link>
               </div>
 
               {/* Right side - Search, Language, Auth */}
-              <div className="flex items-center gap-2 lg:gap-3 md:ml-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 md:ml-0 min-w-0">
                 {/* Search */}
                 <form onSubmit={handleSearch} className="hidden lg:block">
                   <div className="relative">
@@ -1031,7 +1145,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                       placeholder={t("search")}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-64 pl-4 pr-10 py-1.5 text-sm bg-white/10 rounded-full text-white placeholder:text-white/60 focus:outline-none focus:bg-white/20 focus:border-white/40 transition-all"
+                      className="w-48 xl:w-64 pl-4 pr-10 py-1.5 text-sm bg-white/20 rounded-full text-white placeholder:text-white/80 focus:outline-none focus:bg-white/30 focus:border-white/50 transition-all"
                     />
                     <button
                       type="submit"
@@ -1041,11 +1155,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                     </button>
                   </div>
                 </form>
-
-                {/* Language */}
-                <div className="hidden md:block">
-                  <LanguageSwitcher />
-                </div>
 
                 {/* Separator */}
                 <div className="hidden md:block h-4 w-px bg-white/30"></div>
@@ -1088,30 +1197,40 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 md:gap-2">
+                    <button
+                      onClick={() => setQuotationPopupOpen(true)}
+                      className="hidden md:flex items-center gap-1.5 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-all text-xs md:text-sm font-medium"
+                    >
+                      <FileText className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                      <span>{t("quotation")}</span>
+                    </button>
                     <Link
                       href="/login"
-                      className="flex items-center gap-1 md:gap-2 pl-1.5 pr-2.5 md:pr-4 py-1 md:py-1 bg-white/10 hover:bg-white/20 rounded-full transition-all min-w-[85px] md:min-w-0"
+                      className="flex items-center gap-1.5 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full border border-white/40 hover:border-white/70 hover:bg-white/10 transition-all text-xs md:text-sm font-medium"
                     >
-                      <div className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-white/20 flex items-center justify-center">
-                        <User className="w-3 h-3 md:w-4 md:h-4" />
-                      </div>
-                      <span className="text-xs md:text-sm font-medium">
-                        {t("login")}
-                      </span>
+                      <User className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                      <span>{t("login")}</span>
                     </Link>
                     <Link
                       href="/register"
-                      className="flex items-center gap-1 md:gap-2 pl-1.5 pr-2.5 md:pr-4 py-1 md:py-1 bg-white/10 hover:bg-white/20 rounded-full transition-all min-w-[75px] md:min-w-0"
+                      className="flex items-center gap-1.5 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full bg-white text-[#DC2626] hover:bg-white/90 hover:shadow-md transition-all text-xs md:text-sm font-semibold"
                     >
-                      <div className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-white/20 flex items-center justify-center">
-                        <UserPen className="w-3 h-3 md:w-4 md:h-4" />
-                      </div>
-                      <span className="text-xs md:text-sm font-medium">
-                        {t("register")}
-                      </span>
+                      <UserPen className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                      <span>{t("register")}</span>
                     </Link>
                   </div>
                 )}
+
+                {/* Separator */}
+                <div className="hidden lg:block h-4 w-px bg-white/30"></div>
+
+                {/* Liên hệ Kepler */}
+                <Link
+                  href="/contact"
+                  className="hidden lg:flex items-center gap-1.5 hover:text-red-200 transition-colors text-xs lg:text-sm whitespace-nowrap"
+                >
+                  <span>{t("contactKepler")}</span>
+                </Link>
               </div>
             </div>
           </div>
@@ -1119,30 +1238,18 @@ export default function Header({ navItems = [], className }: HeaderProps) {
 
         {/* === MAIN BAR (trắng) — Logo + Nav + Mobile menu === */}
         <div
-          className={cn(
-            "bg-white border-b border-gray-200 overflow-hidden",
-            isScrolled
-              ? "py-2 shadow-[0_4px_12px_0_rgba(0,0,0,0.35)] transition-all duration-300 ease-in-out"
-              : "py-2 md:py-3 lg:py-3 shadow-sm transition-all duration-200 ease-in-out",
-          )}
+          className="header-mainbar bg-white border-b border-gray-200 py-2 md:py-3 lg:py-3 shadow-sm"
         >
-          <div className="max-w-screen-2xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24">
+          <div className="w-full px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24">
             <div
-              className={cn(
-                "relative flex flex-row justify-between transition-all duration-500 ease-in-out",
-                isScrolled
-                  ? "items-center"
-                  : "items-center",
-              )}
+              ref={parentRef}
+              className="relative flex flex-row justify-between items-stretch"
             >
               {/* Logo */}
-              <div className="flex-shrink-0 z-10">
-                <Link href="/" className="flex items-center h-10 md:h-12 lg:h-12 overflow-visible">
+              <div ref={logoRef} className="flex-shrink-0 z-10 flex items-center self-stretch">
+                <Link href="/" className="flex items-center justify-center h-full overflow-visible py-1">
                   <div
-                    className={cn(
-                      "relative w-28 sm:w-32 md:w-36 lg:w-40 h-9 sm:h-10 md:h-11 lg:h-11 origin-left transition-all duration-300",
-                      isScrolled ? "scale-90 drop-shadow-md" : "scale-100 drop-shadow-none",
-                    )}
+                    className="header-logo relative w-28 sm:w-32 md:w-36 lg:w-40 h-full origin-left"
                   >
                     <Image
                       src={logoUrl}
@@ -1155,49 +1262,77 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                 </Link>
               </div>
 
-              {/* Navigation Menu - Desktop with Scroll */}
-              <div className="hidden lg:flex items-center flex-1 min-w-0 justify-start ml-8 relative group">
-                {showLeftArrow && (
-                  <button
-                    onClick={() => scrollMenu("left")}
-                    className="absolute left-0 z-30 p-2 bg-gradient-to-r from-white via-white to-transparent hover:from-red-50 transition-all duration-200 opacity-0 group-hover:opacity-100"
-                    aria-label="Scroll left"
-                  >
-                    <ChevronDown className="w-5 h-5 text-[#DC2626] rotate-90" />
-                  </button>
-                )}
-
-                <nav
-                  ref={navRef}
-                  className="hidden lg:flex items-center flex-1 min-w-0 justify-start overflow-x-auto scrollbar-hide py-2 px-4 select-none scroll-smooth"
-                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              {/* Navigation Menu - Desktop with dynamic 1/2 row layout */}
+              <div
+                ref={navContainerRef}
+                className="hidden lg:flex flex-1 min-w-0 flex-col justify-center ml-4"
+              >
+                {/* Hidden measurement container — measures real item widths */}
+                <div
+                  aria-hidden="true"
+                  className="absolute pointer-events-none invisible"
+                  style={{ whiteSpace: "nowrap" }}
                 >
-                  {finalNav.map((item) => (
-                    <MenuItem
-                      variant="main"
-                      key={item.id}
-                      menu={item}
-                      active={pathname === item.link}
-                    />
+                  {finalNav.map((item, idx) => (
+                    <span
+                      key={`measure-${item.id}`}
+                      ref={(el) => {
+                        if (itemRefs.current) {
+                          itemRefs.current[idx] = el;
+                        }
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3 py-2 text-base font-semibold"
+                      style={{ visibility: "hidden" }}
+                    >
+                      <span>{item.name}</span>
+                      {item.children && item.children.length > 0 && (
+                        <span style={{ display: "inline-block", width: 14, height: 14 }} />
+                      )}
+                    </span>
                   ))}
-                </nav>
+                </div>
 
-                {showRightArrow && (
-                  <button
-                    onClick={() => scrollMenu("right")}
-                    className="absolute right-0 z-30 p-2 bg-gradient-to-l from-white via-white to-transparent hover:from-red-50 transition-all duration-200 opacity-0 group-hover:opacity-100"
-                    aria-label="Scroll right"
-                  >
-                    <ChevronDown className="w-5 h-5 text-[#DC2626] -rotate-90" />
-                  </button>
+                {/* Actual navigation */}
+                {isReady ? (
+                  <nav className="flex flex-col gap-0 w-full">
+                    {rows.map((rowItems, rowIdx) => (
+                      <Fragment key={`row-${rowIdx}`}>
+                        {rowIdx > 0 && (
+                          <div className="h-px bg-gray-200 my-0.5" />
+                        )}
+                        <div
+                          className="flex items-center w-full"
+                          style={{ gap: `${rowGaps[rowIdx]}px` }}
+                        >
+                          {rowItems.map((item) => (
+                            <MenuItem
+                              variant="main"
+                              key={item.id}
+                              menu={item}
+                              active={pathname === item.link}
+                            />
+                          ))}
+                        </div>
+                      </Fragment>
+                    ))}
+                  </nav>
+                ) : (
+                  <div className="flex items-center gap-4 py-2">
+                    {finalNav.map((item) => (
+                      <Skeleton
+                        key={`skeleton-${item.id}`}
+                        className="h-6 w-20 rounded-md"
+                      />
+                    ))}
+                  </div>
                 )}
               </div>
 
+              {/* Right actions placeholder (desktop) */}
+              <div ref={rightActionsRef} className="hidden lg:flex items-center" />
+
               {/* Mobile & Tablet menu button */}
               <div className="lg:hidden flex items-center gap-2">
-                <div className="md:hidden p-1 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors border border-gray-300 scale-90">
-                  <LanguageSwitcher />
-                </div>
                 <button
                   onClick={() => setIsMobileMenuOpen(true)}
                   className="p-2 text-gray-600 hover:text-red-600 transition-colors"
@@ -1328,7 +1463,14 @@ export default function Header({ navItems = [], className }: HeaderProps) {
             </div>
           </>
         )}
+        </div>
       </header>
+      {isMounted && !isAuthenticated && (
+        <QuotationPopupDialog
+          open={quotationPopupOpen}
+          onOpenChange={setQuotationPopupOpen}
+        />
+      )}
     </div>
   );
 }
