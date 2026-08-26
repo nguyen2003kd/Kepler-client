@@ -3,18 +3,60 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import Image from "next/image";
+import { useMemo, useState, useEffect } from "react";
+import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
 
-const ADVANTAGES = [
-  "Đội ngũ chuyên gia đa ngành",
-  "Kinh nghiệm thực tiễn trong nhiều lĩnh vực bất động sản",
-  "Giải pháp xuyên suốt từ tư vấn đến triển khai",
-  "Phương pháp làm việc dựa trên dữ liệu",
-  "Mạng lưới đối tác rộng",
-  "Cam kết minh bạch và bảo mật",
-  "Đồng hành dài hạn cùng khách hàng",
-];
+const FALLBACK = {
+  eyebrow: "Lợi thế cạnh tranh",
+  title: "Tại sao chọn Kepler",
+  image: "/logo.png",
+  advantages: [
+    "Đội ngũ chuyên gia đa ngành",
+    "Kinh nghiệm thực tiễn trong nhiều lĩnh vực bất động sản",
+    "Giải pháp xuyên suốt từ tư vấn đến triển khai",
+    "Phương pháp làm việc dựa trên dữ liệu",
+    "Mạng lưới đối tác rộng",
+    "Cam kết minh bạch và bảo mật",
+    "Đồng hành dài hạn cùng khách hàng",
+  ],
+};
 
 export default function WhyChooseUsSection() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const { data } = useGetApiV10PageConfig(
+    { filters: "key==WHY_CHOOSE_US" },
+    { query: { staleTime: 1000 * 60 * 5, refetchOnMount: false, refetchOnWindowFocus: false } },
+  );
+
+  const config = useMemo(() => {
+    if (!mounted) return FALLBACK;
+
+    const rows = data?.responseData?.rows;
+    if (rows && rows.length > 0) {
+      const viRow = rows.find((r: { language?: string }) => r.language === "vi") as
+        | { value: string | null }
+        | undefined;
+      const row = viRow || (rows[0] as { value: string | null });
+      if (row?.value) {
+        try {
+          const parsed = JSON.parse(row.value);
+          if (parsed.advantages && Array.isArray(parsed.advantages)) {
+            return {
+              eyebrow: parsed.eyebrow || FALLBACK.eyebrow,
+              title: parsed.title || FALLBACK.title,
+              image: parsed.image || FALLBACK.image,
+              advantages: parsed.advantages as string[],
+            };
+          }
+        } catch {
+          // ignore
+        }
+      }
+    }
+    return FALLBACK;
+  }, [mounted, data]);
   return (
     <section className="relative bg-white py-20 md:py-28 overflow-hidden">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-red-50/50 blur-[120px] pointer-events-none" />
@@ -31,7 +73,7 @@ export default function WhyChooseUsSection() {
           >
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-red-600 shadow-2xl">
               <Image
-                src="/logo.png"
+                src={config.image}
                 alt="Kepler"
                 fill
                 className="object-cover"
@@ -70,13 +112,13 @@ export default function WhyChooseUsSection() {
             transition={{ duration: 0.6, delay: 0.15 }}
           >
             <span className="text-sm font-semibold tracking-wider text-red-600 uppercase">
-              Lợi thế cạnh tranh
+              {config.eyebrow}
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mt-3 mb-8">
-              Tại sao chọn Kepler
+              {config.title}
             </h2>
             <ul className="space-y-4">
-              {ADVANTAGES.map((advantage, index) => (
+              {config.advantages.map((advantage: string, index: number) => (
                 <motion.li
                   key={advantage}
                   className="flex items-start gap-3"

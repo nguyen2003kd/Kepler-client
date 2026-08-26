@@ -2,7 +2,7 @@ import { constructMetadata } from "@/lib/seo";
 import MaConsultingView from "./_views/ma-consulting-view";
 
 export const metadata = constructMetadata({
-  title: "Tư vấn M&A",
+  title: "Tư vấn và thực hiện M&A",
   description:
     "Đăng ký tư vấn M&A Kepler Group: nhu cầu bên mua/bên bán, thông tin doanh nghiệp/dự án và file đính kèm.",
   url: "/ma-consulting",

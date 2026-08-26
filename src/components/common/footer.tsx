@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Image from "@/components/common/safe-image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 interface LogoWithFile extends Logo {
   file?: {
@@ -29,6 +30,7 @@ interface LogoWithFile extends Logo {
 }
 
 const Footer = () => {
+  const { i18n } = useTranslation();
   const { data } = useGetApiV10Footer({
     filters: "is_active==true",
   });
@@ -42,7 +44,11 @@ const Footer = () => {
     filters: "is_active==true",
   });
 
-  const footerData = (data?.responseData?.rows?.[0] as FooterType) || null;
+  const currentLang = i18n.language?.split("-")[0] || "vi";
+  const allRows = (data?.responseData?.rows || []) as FooterType[];
+  const langMatch = allRows.find((r) => r.language === currentLang);
+  const hasLinks = (r?: FooterType | null) => !!(r?.links && (r.links as FooterLinksItem[]).length > 0);
+  const footerData = (hasLinks(langMatch) ? langMatch : allRows.find(hasLinks) || allRows[0] || null) as FooterType | null;
   const logoInfo = logoData?.responseData?.rows?.[0] as LogoWithFile;
   const logoUrl = isLogoError
     ? "/seo.png"
@@ -104,6 +110,10 @@ const Footer = () => {
                 </p>
               )}
 
+              {/* Slogan */}
+              <p className="text-sm font-semibold text-primary mt-2 italic">
+                Our Solutions – Your Success
+              </p>
             </div>
 
             {/* Contact Info */}
@@ -233,11 +243,11 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links  */}
+          {/* Liên kết web */}
           <div className="lg:col-span-3">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-1 h-5 bg-primary rounded-full"></div>
-              <h4 className="text-base font-bold">Liên kết</h4>
+              <h4 className="text-base font-bold">Liên kết web</h4>
             </div>
             <nav className="grid grid-cols-1 gap-x-4 gap-y-2.5 text-sm mb-6 max-w-xs">
               {(footerData?.links as FooterLinksItem[] | null | undefined)?.map(
@@ -256,23 +266,42 @@ const Footer = () => {
               )}
               {(!footerData?.links || (footerData.links as FooterLinksItem[]).length === 0) && (
                 <>
+                  {/* TODO: Cập nhật liên kết web thực tế khi có dữ liệu */}
                   <a
-                    href="https://dost.hochiminhcity.gov.vn/"
+                    href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
                   >
                     <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
-                    Sở Khoa học và Công nghệ Thành phố Hồ Chí Minh
+                    Trung tâm nghiên cứu xxx
                   </a>
                   <a
-                    href="https://chicuctdc.gov.vn/"
+                    href="#"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
                   >
                     <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
-                    Chi Cục Tiêu chuẩn Đo lường Chất lượng Thành phố Hồ Chí Minh
+                    Viện đào tạo xxx bất động sản
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
+                    Cục quản lý giá – Bộ Tài Chính
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
+                    Liên đoàn lao động TPHCM
                   </a>
                 </>
               )}
@@ -302,17 +331,17 @@ const Footer = () => {
       </div>
 
       {/* Legal Links Bar */}
-      <div className="border-t border-border relative z-10">
-        <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
-          <Link href="/chinh-sach-bao-mat" className="hover:text-primary transition-colors">
+      <div className="bg-primary relative z-10">
+        <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-white">
+          <Link href="/chinh-sach-bao-mat" className="hover:text-white/80 transition-colors">
             Chính sách bảo mật
           </Link>
-          <span className="text-border">|</span>
-          <Link href="/dieu-khoan-su-dung" className="hover:text-primary transition-colors">
+          <span className="text-white/40">|</span>
+          <Link href="/dieu-khoan-su-dung" className="hover:text-white/80 transition-colors">
             Điều khoản sử dụng
           </Link>
-          <span className="text-border">|</span>
-          <Link href="/chinh-sach-cookie" className="hover:text-primary transition-colors">
+          <span className="text-white/40">|</span>
+          <Link href="/chinh-sach-cookie" className="hover:text-white/80 transition-colors">
             Chính sách Cookie
           </Link>
         </div>

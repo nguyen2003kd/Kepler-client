@@ -1,6 +1,6 @@
 {
   "searchPlaceholder": "Tìm kiếm sản phẩm, dịch vụ, tin tức...",
-  "search": "Tìm",
+  "search": "Tìm kiếm",
   "quotation": "Báo giá",
   "profile": "Hồ sơ",
   "login": "Đăng nhập",
@@ -19,11 +19,11 @@
   "hi": "Hi",
   "user": "User",
   "aboutOverview": "Tổng quan Giới thiệu",
-  "aboutCompanyOverview": "Tổng quan Kepler Group",
-  "aboutVisionMission": "Tầm nhìn - Sứ mệnh - Giá trị cốt lõi",
+  "aboutCompanyOverview": "Giới thiệu Kepler Group",
+  "aboutVisionMission": "Tầm nhìn - Sứ mệnh",
   "aboutHistory": "Lịch sử phát triển",
   "aboutOrganizationalChart": "Cơ cấu tổ chức",
-  "aboutExpertCouncil": "Hội đồng chuyên gia",
+  "aboutExpertCouncil": "Hội đồng cố vấn",
   "aboutBoardOfDirectors": "Ban điều hành",
   "aboutCapabilities": "Năng lực và thành tựu",
   "aboutBranchesOffices": "Trụ sở & Văn phòng",
@@ -37,7 +37,7 @@
   "booking": "Đặt lịch tư vấn",
   "quotationRequest": "Yêu cầu báo giá",
   "appraisalRequest": "Yêu cầu thẩm định",
-  "maConsulting": "Tư vấn M&A",
+  "maConsulting": "Tư vấn và thực hiện M&A",
   "surveyRegistration": "Đăng ký khảo sát tài sản",
   "reportSubscription": "Đăng ký nhận báo cáo",
   "kienThuc": "Kiến thức & Tin tức",
@@ -54,5 +54,7 @@
   "kienThucVideo": "Video",
   "kienThucPodcast": "Podcast",
   "kienThucWebinar": "Webinar",
-  "faq": "FAQ"
+  "faq": "FAQ",
+  "newsAndEvents": "Tin tức và sự kiện",
+  "contactKepler": "Liên hệ Kepler"
 }

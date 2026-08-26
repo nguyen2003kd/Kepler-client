@@ -29,7 +29,7 @@ export default function RelatedServices() {
 
   if (isLoading) {
     return (
-      <section className="bg-[#2563EB] py-16">
+      <section className="bg-primary py-16">
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
           <div className="mx-4 md:mx-8 lg:mx-10">
             <Skeleton className="h-10 w-64 mx-auto mb-12" />

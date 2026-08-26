@@ -16,7 +16,7 @@ import parse from "html-react-parser";
 import { ArrowRight } from "lucide-react";
 import Image from "@/components/common/safe-image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import baseConfig from "@/configs/base";
 interface NewsTabContentProps {
@@ -113,7 +113,7 @@ function NewsTabContent({
                       )}
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1 hover:text-cyan-500 transition-colors">
-                      <Link href={`/${news.slug || ""}`}>{news.title}</Link>
+                      <Link href={`/news/${news.slug || ""}`}>{news.title}</Link>
                     </h3>
                     {news.summary && (
                       <div className="text-gray-600 text-xs line-clamp-2 mb-3">
@@ -122,7 +122,7 @@ function NewsTabContent({
                     )}
                   </div>
                   <Link
-                    href={`/${news.slug || ""}`}
+                    href={`/news/${news.slug || ""}`}
                     className="inline-flex items-center text-cyan-500 hover:text-cyan-600 text-sm font-medium transition-colors"
                   >
                     {t("readMore")} →
@@ -147,10 +147,15 @@ function NewsTabContent({
 
 export default function NewsSection() {
   const [activeTab, setActiveTab] = useState("all");
+  const [isMounted, setIsMounted] = useState(false);
 
   const { i18n, t } = useTranslation("pages/home");
   const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
   const { data: categoriesData } = useGetApiV10Category({ language: currentLang });
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const latestNewsPageId = currentLang === "en" ? PAGE_IDS.HOMEPAGE_LATEST_NEWS_POSITION : PAGE_IDS.HOME_LATEST_NEWS;
 
@@ -173,13 +178,14 @@ export default function NewsSection() {
 
   const tabs = useMemo(() => {
     const allTab = { value: "all", label: t("news"), categoryId: "" };
+    if (!isMounted) return [allTab];
     const categoryTabs = newsCategories.map((cat) => ({
       value: cat.id || "",
       label: cat.name || "",
       categoryId: cat.id || "",
     }));
     return [allTab, ...categoryTabs];
-  }, [newsCategories]);
+  }, [newsCategories, isMounted, t]);
 
   const latestNews = useMemo(() => {
     const posts = (latestNewsData?.responseData?.rows as PostExtended[]) || [];
@@ -187,7 +193,7 @@ export default function NewsSection() {
     return dataToUse.map((post) => ({
       id: post.id,
       title: post.title || "",
-      link: `/${post.slug || ""}`,
+      link: `/news/${post.slug || ""}`,
       thumbnail:
         getResponsiveImage(post.thumbnail_compress_info) ||
         (post.thumbnail_path

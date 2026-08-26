@@ -391,10 +391,10 @@ export default function CareersPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header Section — dark hero with grid pattern + blobs */}
-      <section className="relative min-h-[70vh] bg-gray-900 overflow-hidden flex items-center">
+      <section className="relative min-h-[70vh] bg-primary overflow-hidden flex items-center">
         {/* Grid pattern */}
         <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          className="absolute inset-0 opacity-[0.08] pointer-events-none"
           style={{
             backgroundImage:
               "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
@@ -423,44 +423,26 @@ export default function CareersPage() {
                 {t("recruitmentTitle")}
               </h1>
 
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-white/80 backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-                </span>
-                {t("hiringNow")}
-              </div>
-
               <div className="mt-10 flex flex-wrap gap-3">
-                <Button
-                  size="lg"
-                  onClick={() => setIsApplicationModalOpen(true)}
-                  className="rounded-xl bg-primary text-white hover:bg-primary/90 h-12 px-8 text-base font-semibold shadow-lg shadow-primary/20 active:scale-[0.98] transition-all"
-                >
-                  {t("submitNow")}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => setIsQuestionModalOpen(true)}
-                  className="rounded-xl border-white/20 bg-white/5 text-white hover:bg-white/10 backdrop-blur-sm h-12 px-8 text-base"
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white text-primary hover:bg-white/90 h-12 px-8 text-base font-medium transition-all"
                 >
                   <MessageCircleQuestionMark className="mr-2 h-5 w-5" />
                   {t("askQuestion")}
-                </Button>
+                </Link>
               </div>
             </div>
 
             {/* Right — stats panel */}
             <div className="lg:col-span-5 hidden lg:block">
-              <div className="relative rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-md">
+              <div className="relative rounded-2xl border border-white/20 bg-white p-8">
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
                 <div className="flex items-center gap-3 mb-8">
                   <Users className="h-6 w-6 text-primary" />
                   <span
-                    className="text-xs font-semibold tracking-widest text-white/40 uppercase"
+                    className="text-xs font-semibold tracking-widest text-gray-500 uppercase"
                     style={{ fontFamily: "'IBM Plex Mono', ui-monospace, monospace" }}
                   >
                     Thống kê tuyển dụng
@@ -468,23 +450,23 @@ export default function CareersPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4 rounded-xl border border-white/5 bg-white/5 p-5">
+                  <div className="flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-5">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                       <FileText className="h-5 w-5 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm text-white/50">{t("positions")}</p>
-                      <p className="text-2xl font-bold text-white">{visibleJobs.length}</p>
+                      <p className="text-sm text-gray-500">{t("positions")}</p>
+                      <p className="text-2xl font-bold text-gray-900">{visibleJobs.length}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 rounded-xl border border-white/5 bg-white/5 p-5">
+                  <div className="flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-5">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                       <Users className="h-5 w-5 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm text-white/50">{t("quota")}</p>
-                      <p className="text-2xl font-bold text-white">
+                      <p className="text-sm text-gray-500">{t("quota")}</p>
+                      <p className="text-2xl font-bold text-gray-900">
                         {visibleJobs.reduce((acc, job) => acc + job.count, 0)}
                       </p>
                     </div>
@@ -657,7 +639,7 @@ export default function CareersPage() {
             className="relative w-full max-w-2xl overflow-hidden rounded-2xl bg-background shadow-2xl animate-in fade-in zoom-in duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-gray-900 text-white p-6 relative">
+            <div className="bg-primary text-white p-6 relative">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
               <button
                 onClick={closeQuestionModal}

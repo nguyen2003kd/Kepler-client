@@ -78,7 +78,7 @@ export function MenuItem(props: {
     const nextTarget = event?.relatedTarget as Node | null;
 
     if (
-      nextTarget &&
+      nextTarget instanceof Node &&
       (triggerRef.current?.contains(nextTarget) ||
         dropdownRef.current?.contains(nextTarget))
     ) {

@@ -184,7 +184,7 @@ export default function ServiceDetailView({ slug, initialPost }: ServiceDetailVi
     <>
       {/* Hero Navbar Section */}
       <section
-        className="bg-[#0C2449] py-12 border-t border-gray-600"
+        className="bg-primary py-12 border-t border-gray-600"
         style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
       >
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
@@ -448,7 +448,7 @@ export default function ServiceDetailView({ slug, initialPost }: ServiceDetailVi
                   className="group rounded-xl p-5 shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden bg-cover bg-center"
                   style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
                 >
-                  <div className="absolute inset-0 bg-[#1e40af]/50" />
+                  <div className="absolute inset-0 bg-primary/50" />
                   <div className="absolute top-5 right-8 z-10">
                     <Mail className="w-7 h-7 text-white/30 transition-all group-hover:text-white/60" />
                   </div>

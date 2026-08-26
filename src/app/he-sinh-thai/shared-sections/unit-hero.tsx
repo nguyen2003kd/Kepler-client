@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { units, type EcosystemUnit } from "../unit-data";
+import { type EcosystemUnit } from "../unit-data";
+import { useEcosystemUnits } from "../use-ecosystem-units";
 
 const images: Record<string, string> = {
   "kepler-property": "/images/category-banner-investment.png",
@@ -13,9 +14,12 @@ const images: Record<string, string> = {
   "kac-advisory": "/images/banner-3.jpg",
   "k-homes": "/images/image-111.png",
   realhub: "/images/image-112.png",
+  "kepler-land": "/images/bg-home.jpg",
+  bizoffice: "/images/banner-3.jpg",
 };
 
-export default function UnitHero({ unitKey }: { unitKey: keyof typeof units }) {
+export default function UnitHero({ unitKey }: { unitKey: string }) {
+  const units = useEcosystemUnits();
   const unit: EcosystemUnit = units[unitKey];
   return (
     <section className="relative min-h-[85vh] overflow-hidden bg-gray-900">
@@ -58,11 +62,11 @@ export default function UnitHero({ unitKey }: { unitKey: keyof typeof units }) {
           className="max-w-4xl"
         >
           <Link
-            href="/he-sinh-thai"
+            href="/"
             className="inline-flex items-center gap-2 text-sm text-white/40 transition-colors hover:text-primary"
           >
             <ArrowLeft className="h-4 w-4" />
-            Hệ sinh thái Kepler
+            Trang chủ
           </Link>
 
           <div className="mt-8 flex items-center gap-3">

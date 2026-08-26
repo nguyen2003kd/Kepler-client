@@ -39,7 +39,7 @@ export function LanguageSwitcher() {
   if (!mounted) {
     return (
       <button
-        className="relative flex items-center w-16 h-8 bg-white/10 hover:bg-white/20 rounded-full p-0.5 transition-all duration-300"
+        className="relative flex items-center w-16 h-8 bg-white/10 hover:bg-white/20 rounded-full p-0.5 transition-all duration-300 cursor-pointer"
         aria-label="Toggle Language"
       >
         <div className="absolute inset-0 flex items-center justify-between px-1.5 pointer-events-none">
@@ -80,7 +80,7 @@ export function LanguageSwitcher() {
   return (
     <button
       onClick={handleLanguageChange}
-      className="relative flex items-center w-16 h-8 bg-white/10 hover:bg-white/20 rounded-full p-0.5 transition-all duration-300"
+      className="relative flex items-center w-16 h-8 bg-white/10 hover:bg-white/20 rounded-full p-0.5 transition-all duration-300 cursor-pointer"
       aria-label="Toggle Language"
     >
       {/* Background inactive flag */}

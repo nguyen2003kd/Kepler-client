@@ -30,7 +30,7 @@ export default function ServiceSidebar({
       {/* Latest Services Card */}
       <Card className="overflow-hidden">
         {/* Header */}
-        <div className="bg-[#1e40af] px-4 py-3 flex items-center justify-between">
+        <div className="bg-primary px-4 py-3 flex items-center justify-between">
           <h3 className="text-base font-bold text-white">{t("featuredServices")}</h3>
           <Newspaper className="w-5 h-5 text-white" />
         </div>
@@ -97,7 +97,7 @@ export default function ServiceSidebar({
         style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-[#1e40af]/50"></div>
+        <div className="absolute inset-0 bg-primary/50"></div>
 
         {/* Icon */}
         <div className="absolute top-5 right-8 z-10">
