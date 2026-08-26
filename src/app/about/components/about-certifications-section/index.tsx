@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Eye, Download, Award } from "lucide-react";
-import Link from "next/link";
+import { Download, Award } from "lucide-react";
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
 import { FadeIn } from "@/components/ui/fade-in";
 import baseConfig from "@/configs/base";
@@ -158,13 +157,6 @@ export default function AboutCertificationsSection() {
                 </p>
               )}
 
-              <Link
-                href="/about/certifications"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#DC2626] hover:bg-red-700 text-white text-sm font-semibold rounded-full transition-colors self-start"
-              >
-                <Eye className="h-4 w-4" />
-                Xem chứng chỉ
-              </Link>
             </div>
           </FadeIn>
 
