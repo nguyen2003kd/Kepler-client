@@ -131,7 +131,7 @@ export function ListCardSkeleton({ count = 3 }: { count?: number }) {
 export function SidebarNewsSkeleton() {
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-      <div className="bg-[#1e40af] px-4 py-3 rounded-t-lg flex items-center justify-between">
+      <div className="bg-primary px-4 py-3 rounded-t-lg flex items-center justify-between">
         <Skeleton className="h-5 w-32 bg-red-300/30" />
         <Skeleton className="h-5 w-5 rounded bg-red-300/30" />
       </div>

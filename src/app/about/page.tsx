@@ -71,9 +71,9 @@ const aboutLinks = [
 ];
 
 const stats = [
-  { value: "10+", label: "Năm kinh nghiệm" },
-  { value: "05", label: "Lĩnh vực cốt lõi" },
-  { value: "50+", label: "Đối tác chiến lược" },
+  { value: "25+", label: "Năm kinh nghiệm" },
+  { value: "06", label: "Lĩnh vực cốt lõi" },
+  { value: "08", label: "Công ty thành viên" },
 ];
 
 export default function AboutPage() {
@@ -104,17 +104,17 @@ export default function AboutPage() {
             <FadeIn className="lg:col-span-7" delay={0.15}>
               <div className="space-y-8">
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Công ty tư vấn Bất động sản Kepler cung cấp giải pháp toàn
-                  diện trong ngành bất động sản: từ thẩm định giá, môi giới,
-                  marketing & phát triển BĐS, quản lý vận hành đến thiết kế và
-                  hoàn thiện nội ngoại thất.
+                  Kepler Group là doanh nghiệp hoạt động trong lĩnh vực tư vấn
+                  phát triển dự án, tư vấn đầu tư, thẩm định giá, quản lý và
+                  khai thác tài sản, thực hiện các thương vụ M&A và giải pháp số
+                  cho bất động sản.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Với đội ngũ nhân sự có trình độ chuyên môn cao, từng đảm
-                  nhận vai trò lãnh đạo tại nhiều tập đoàn bất động sản trong
-                  và ngoài nước, Kepler hướng đến một giải pháp dịch vụ trọn
-                  gói khép kín, với sự chuyên nghiệp, hiệu quả và chi phí tốt
-                  nhất.
+                  Đội ngũ sáng lập có hơn 25 năm kinh nghiệm, đã từng và đang
+                  công tác tại các tổ chức tập đoàn lớn trong và ngoài nước
+                  chuyên về lĩnh vực bất động sản. Kepler không chỉ tư vấn mà
+                  còn đồng hành trong quá trình triển khai, vận hành và tối ưu
+                  hiệu quả đầu tư cùng khách hàng.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-4">

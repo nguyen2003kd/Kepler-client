@@ -420,56 +420,65 @@ export default function DynamicContactForm({ formType }: DynamicContactFormProps
             </div>
 
             {/* Address List Side */}
-            <div className="bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] p-8 lg:p-10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-72 h-72 bg-red-400/10 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#DC2626] to-[#991B1B] p-8 lg:p-10">
+              <div className="pointer-events-none absolute top-0 right-0 w-72 h-72 bg-red-300/10 rounded-full blur-3xl" />
+              <div className="pointer-events-none absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
 
-              <div className="relative z-10">
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Header */}
                 <div className="mb-6">
-                  <div className="flex gap-3">
-                    <div className="px-3.5 py-2.5 bg-red-500/20 rounded-lg flex items-center">
-                      <MapPin className="w-7 h-7 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-1">
-                        {t("contactInfo")}
-                      </h3>
-                      <p className="text-gray-300 text-sm">{t("branchesOffices")}</p>
-                    </div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/20 mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-white font-medium">
+                      {t("branchesOffices")}
+                    </span>
                   </div>
+                  <h3 className="text-2xl font-bold text-white tracking-tight">
+                    {t("contactInfo")}
+                  </h3>
+                  <div className="mt-3 h-px bg-gradient-to-r from-white/50 via-white/15 to-transparent" />
                 </div>
 
-                <div className="space-y-3 max-h-[580px] overflow-y-auto pr-1">
+                {/* Address cards */}
+                <div className="space-y-3 flex-1 overflow-y-auto pr-1 -mr-1">
+                  {/* HQ - Featured card */}
                   {addresses[0] && (
-                    <div className="group bg-white/5 backdrop-blur-sm hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg p-4 transition-all duration-300">
-                      <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-red-400" />
-                        {addresses[0].name}
-                      </h4>
-                      <div className="space-y-1.5 pl-3 text-xs">
-                        <div className="flex items-start gap-2">
-                          <MapPin className="w-3 h-3 text-white mt-0.5 flex-shrink-0" />
-                          <p className="text-gray-200 leading-snug">{addresses[0].address}</p>
+                    <div className="group rounded-xl bg-white/95 hover:bg-white transition-all duration-300 p-5 shadow-lg">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-50 ring-1 ring-red-100">
+                          <MapPin className="w-4 h-4 text-red-600" />
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Phone className="w-3 h-3 text-white flex-shrink-0" />
-                          <a href={`tel:${addresses[0].phone.replace(/[^\d]/g, "")}`} className="text-gray-200 hover:text-white transition-colors hover:underline">
+                        <h4 className="font-semibold text-gray-900 text-[15px] tracking-tight">
+                          {addresses[0].name}
+                        </h4>
+                        <span className="ml-auto text-[9px] uppercase tracking-wider text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded-full">
+                          HQ
+                        </span>
+                      </div>
+                      <div className="space-y-2 pl-10">
+                        <div className="flex items-start gap-2.5">
+                          <MapPin className="w-3.5 h-3.5 text-gray-400 mt-0.5 flex-shrink-0" />
+                          <p className="text-gray-600 text-[13px] leading-relaxed">{addresses[0].address}</p>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <Phone className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
+                          <a href={`tel:${addresses[0].phone.replace(/[^\d]/g, "")}`} className="text-gray-700 hover:text-red-600 transition-colors text-[13px]">
                             {addresses[0].phone}
                           </a>
                         </div>
                         {addresses[0].hotline && (
-                          <div className="flex items-center gap-2">
-                            <Headphones className="w-3 h-3 text-white flex-shrink-0" />
-                            <span className="text-gray-400">{t("hotline")}: </span>
-                            <a href={`tel:${addresses[0].hotline.replace(/[^\d]/g, "")}`} className="text-red-200 hover:text-white transition-colors font-medium hover:underline">
+                          <div className="flex items-center gap-2.5">
+                            <Headphones className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
+                            <span className="text-gray-400 text-[13px]">{t("hotline")}</span>
+                            <a href={`tel:${addresses[0].hotline.replace(/[^\d]/g, "")}`} className="text-red-600 hover:text-red-700 transition-colors font-semibold text-[13px]">
                               {addresses[0].hotline}
                             </a>
                           </div>
                         )}
                         {addresses[0].email && (
-                          <div className="flex items-center gap-2">
-                            <Mail className="w-3 h-3 text-white flex-shrink-0" />
-                            <a href={`mailto:${addresses[0].email}`} className="text-gray-200 hover:text-white transition-colors hover:underline">
+                          <div className="flex items-center gap-2.5">
+                            <Mail className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
+                            <a href={`mailto:${addresses[0].email}`} className="text-gray-700 hover:text-red-600 transition-colors text-[13px]">
                               {addresses[0].email}
                             </a>
                           </div>
@@ -478,37 +487,44 @@ export default function DynamicContactForm({ formType }: DynamicContactFormProps
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {/* Branch offices grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {addresses.slice(1, 5).map((addr) => (
-                      <div key={addr.id} className="group bg-white/5 backdrop-blur-sm hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg p-4 transition-all duration-300">
-                        <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-red-400" />
-                          {addr.name}
-                        </h4>
-                        <div className="space-y-1.5 pl-3 text-xs">
+                      <div
+                        key={addr.id}
+                        className="group rounded-xl bg-white/90 hover:bg-white transition-all duration-300 p-4 h-full shadow-sm hover:shadow-md"
+                      >
+                        <div className="flex items-center gap-2 mb-2.5">
+                          <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-50 ring-1 ring-red-100">
+                            <MapPin className="w-3 h-3 text-red-500" />
+                          </div>
+                          <h4 className="font-medium text-gray-800 text-[13px] tracking-tight">
+                            {addr.name}
+                          </h4>
+                        </div>
+                        <div className="space-y-1.5 pl-8">
                           <div className="flex items-start gap-2">
-                            <MapPin className="w-3 h-3 text-white mt-0.5 flex-shrink-0" />
-                            <p className="text-gray-200 leading-snug">{addr.address}</p>
+                            <MapPin className="w-3 h-3 text-gray-300 mt-0.5 flex-shrink-0" />
+                            <p className="text-gray-500 text-[11px] leading-relaxed">{addr.address}</p>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Phone className="w-3 h-3 text-white flex-shrink-0" />
-                            <a href={`tel:${addr.phone.replace(/[^\d]/g, "")}`} className="text-gray-200 hover:text-white transition-colors hover:underline">
+                            <Phone className="w-3 h-3 text-gray-300 flex-shrink-0" />
+                            <a href={`tel:${addr.phone.replace(/[^\d]/g, "")}`} className="text-gray-600 hover:text-red-600 transition-colors text-[11px]">
                               {addr.phone}
                             </a>
                           </div>
                           {addr.hotline && (
                             <div className="flex items-center gap-2">
-                              <Headphones className="w-3 h-3 text-white flex-shrink-0" />
-                              <span className="text-gray-400">{t("hotline")}: </span>
-                              <a href={`tel:${addr.hotline.replace(/[^\d]/g, "")}`} className="text-red-200 hover:text-white transition-colors font-medium hover:underline">
+                              <Headphones className="w-3 h-3 text-gray-300 flex-shrink-0" />
+                              <a href={`tel:${addr.hotline.replace(/[^\d]/g, "")}`} className="text-red-600 hover:text-red-700 transition-colors font-medium text-[11px]">
                                 {addr.hotline}
                               </a>
                             </div>
                           )}
                           {addr.email && (
                             <div className="flex items-center gap-2">
-                              <Mail className="w-3 h-3 text-white flex-shrink-0" />
-                              <a href={`mailto:${addr.email}`} className="text-gray-200 hover:text-white transition-colors hover:underline">
+                              <Mail className="w-3 h-3 text-gray-300 flex-shrink-0" />
+                              <a href={`mailto:${addr.email}`} className="text-gray-600 hover:text-red-600 transition-colors text-[11px]">
                                 {addr.email}
                               </a>
                             </div>
@@ -518,36 +534,40 @@ export default function DynamicContactForm({ formType }: DynamicContactFormProps
                     ))}
                   </div>
 
+                  {/* Extra address (5th index+) */}
                   {addresses[5] && (
-                    <div className="group bg-white/5 backdrop-blur-sm hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg p-4 transition-all duration-300">
-                      <h4 className="font-semibold text-white text-sm mb-2 flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-red-400" />
-                        {addresses[5].name}
-                      </h4>
-                      <div className="space-y-1.5 pl-3 text-xs">
+                    <div className="group rounded-xl bg-white/90 hover:bg-white transition-all duration-300 p-4 shadow-sm hover:shadow-md">
+                      <div className="flex items-center gap-2 mb-2.5">
+                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-red-50 ring-1 ring-red-100">
+                          <MapPin className="w-3 h-3 text-red-500" />
+                        </div>
+                        <h4 className="font-medium text-gray-800 text-[13px] tracking-tight">
+                          {addresses[5].name}
+                        </h4>
+                      </div>
+                      <div className="space-y-1.5 pl-8">
                         <div className="flex items-start gap-2">
-                          <MapPin className="w-3 h-3 text-white mt-0.5 flex-shrink-0" />
-                          <p className="text-gray-200 leading-snug">{addresses[5].address}</p>
+                          <MapPin className="w-3 h-3 text-gray-300 mt-0.5 flex-shrink-0" />
+                          <p className="text-gray-500 text-[11px] leading-relaxed">{addresses[5].address}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Phone className="w-3 h-3 text-white flex-shrink-0" />
-                          <a href={`tel:${addresses[5].phone.replace(/[^\d]/g, "")}`} className="text-gray-200 hover:text-white transition-colors hover:underline">
+                          <Phone className="w-3 h-3 text-gray-300 flex-shrink-0" />
+                          <a href={`tel:${addresses[5].phone.replace(/[^\d]/g, "")}`} className="text-gray-600 hover:text-red-600 transition-colors text-[11px]">
                             {addresses[5].phone}
                           </a>
                         </div>
                         {addresses[5].hotline && (
                           <div className="flex items-center gap-2">
-                            <Headphones className="w-3 h-3 text-white flex-shrink-0" />
-                            <span className="text-gray-400">{t("hotline")}: </span>
-                            <a href={`tel:${addresses[5].hotline.replace(/[^\d]/g, "")}`} className="text-red-200 hover:text-white transition-colors font-medium hover:underline">
+                            <Headphones className="w-3 h-3 text-gray-300 flex-shrink-0" />
+                            <a href={`tel:${addresses[5].hotline.replace(/[^\d]/g, "")}`} className="text-red-600 hover:text-red-700 transition-colors font-medium text-[11px]">
                               {addresses[5].hotline}
                             </a>
                           </div>
                         )}
                         {addresses[5].email && (
                           <div className="flex items-center gap-2">
-                            <Mail className="w-3 h-3 text-white flex-shrink-0" />
-                            <a href={`mailto:${addresses[5].email}`} className="text-gray-200 hover:text-white transition-colors hover:underline">
+                            <Mail className="w-3 h-3 text-gray-300 flex-shrink-0" />
+                            <a href={`mailto:${addresses[5].email}`} className="text-gray-600 hover:text-red-600 transition-colors text-[11px]">
                               {addresses[5].email}
                             </a>
                           </div>
@@ -556,6 +576,33 @@ export default function DynamicContactForm({ formType }: DynamicContactFormProps
                     </div>
                   )}
                 </div>
+
+                {/* Bottom hotline CTA */}
+                {addresses[0]?.hotline && (
+                  <div className="mt-5 pt-4 border-t border-white/15">
+                    <a
+                      href={`tel:${addresses[0].hotline.replace(/[^\d]/g, "")}`}
+                      className="group flex items-center justify-between rounded-xl bg-white hover:bg-gray-50 px-5 py-3.5 shadow-lg transition-all duration-300"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-center w-9 h-9 rounded-full bg-red-50 ring-1 ring-red-100 group-hover:scale-105 transition-transform duration-300">
+                          <Headphones className="w-4 h-4 text-red-600" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.15em] text-gray-400 font-medium">
+                            {t("hotline")}
+                          </p>
+                          <p className="text-red-600 font-bold text-[15px] tracking-tight">
+                            {addresses[0].hotline}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-red-50 group-hover:translate-x-0.5 transition-all duration-300">
+                        <Phone className="w-3.5 h-3.5 text-red-500" />
+                      </div>
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>

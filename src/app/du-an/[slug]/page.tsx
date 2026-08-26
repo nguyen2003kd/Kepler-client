@@ -3,7 +3,7 @@ import type { PostExtended } from "@/types/post";
 import type { CategoryWithChildren } from "@/api/models/categoryWithChildren";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import ProjectDetailView from "./views/project-detail-view";
+import DynamicPostDetailPage from "@/app/[...slug]/views/post-detail-page";
 
 interface ProjectDetailPageProps {
   params: { slug: string };
@@ -18,6 +18,25 @@ async function getPost(slug: string): Promise<PostExtended | null> {
     if (!res.ok) return null;
     const data = await res.json();
     return (data?.responseData as PostExtended) || null;
+  } catch {
+    return null;
+  }
+}
+
+async function getCategory(language?: "vi" | "en") {
+  try {
+    const url = new URL(`${baseConfig.backendDomain}/api/v1.0/category`);
+    if (language) url.searchParams.set("language", language);
+    const res = await fetch(url.toString(), { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const all = (data?.responseData || []) as CategoryWithChildren[];
+    const flat: CategoryWithChildren[] = [];
+    const flatten = (cats: CategoryWithChildren[]) => {
+      for (const c of cats) { flat.push(c); if (c.categories) flatten(c.categories); }
+    };
+    flatten(all);
+    return flat.find((cat) => cat.link === "/du-an") || null;
   } catch {
     return null;
   }
@@ -72,11 +91,21 @@ export async function generateMetadata({
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
-  const post = await getPost(params.slug);
+  const [post, category] = await Promise.all([
+    getPost(params.slug),
+    getCategory("vi"),
+  ]);
 
   if (!post) {
     notFound();
   }
 
-  return <ProjectDetailView slug={params.slug} initialPost={post} />;
+  return (
+    <DynamicPostDetailPage
+      post={post}
+      categoryName={category?.name || "Dự án"}
+      categorySlug="du-an"
+      urlCategoryId={category?.id}
+    />
+  );
 }

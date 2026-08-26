@@ -13,12 +13,17 @@ interface DynamicCategoryPageProps {
   categoryEn?: Category & { categories?: Category[] } | null;
   date?: string;
   initialPosts?: PostExtended[];
+  siblingCategories?: Category[];
+  parentLink?: string;
 }
 
 export default function DynamicCategoryPage({
   category,
   categoryEn,
   date,
+  initialPosts,
+  siblingCategories,
+  parentLink,
 }: DynamicCategoryPageProps) {
   const { i18n } = useTranslation("pages/post-detail");
   const isEn = i18n.language?.startsWith("en");
@@ -55,7 +60,8 @@ export default function DynamicCategoryPage({
             <div className="sticky top-6 space-y-6">
               {/* Category Tab */}
               <CategoryTab 
-                categories={category.categories || []} 
+                categories={siblingCategories && siblingCategories.length > 0 ? siblingCategories : (category.categories || [])}
+                parentLink={parentLink}
               />
 
               {/* Related Sidebar */}
@@ -74,6 +80,7 @@ export default function DynamicCategoryPage({
               categoryName={displayCategory.name || ""}
               categoryCode={category.link?.replace(/^\//, "")}
               date={date}
+              initialPosts={initialPosts}
             />
           </div>
         </div>

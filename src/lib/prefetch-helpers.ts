@@ -4,11 +4,11 @@ import { QueryClient } from "@tanstack/react-query";
 
 export async function prefetchCategories(queryClient: QueryClient) {
   await queryClient.prefetchQuery({
-    queryKey: getGetApiV10CategoryQueryKey(),
+    queryKey: getGetApiV10CategoryQueryKey({ language: "vi" }),
     queryFn: async () => {
       const apiUrl = baseConfig.backendDomain;
 
-      const res = await fetch(`${apiUrl}/api/v1.0/category`, {
+      const res = await fetch(`${apiUrl}/api/v1.0/category?language=vi`, {
         next: { revalidate: 30 },
         headers: {
           "Content-Type": "application/json",

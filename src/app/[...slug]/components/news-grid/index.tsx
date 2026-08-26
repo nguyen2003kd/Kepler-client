@@ -15,6 +15,7 @@ interface NewsGridProps {
   categoryName?: string;
   categoryCode?: string;
   date?: string;
+  initialPosts?: PostExtended[];
 }
 
 export default function NewsGrid({
@@ -22,6 +23,7 @@ export default function NewsGrid({
   categoryName = "Bài viết",
   categoryCode,
   date: initialDate,
+  initialPosts,
 }: NewsGridProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -43,16 +45,14 @@ export default function NewsGrid({
     filters,
     page: currentPage,
     pageSize: 10,
-    position: "true",
-    sortOrderPosition: "ASC",
     filterBy: "CLIENT",
     category_id: activeCategoryId,
-    page_id: PAGE_IDS.LATEST_POSTS,
+    ...(activeCategoryId ? {} : { position: "true", sortOrderPosition: "ASC", page_id: PAGE_IDS.LATEST_POSTS }),
   });
 
   const apiPosts = (data?.responseData?.rows as PostExtended[]) || [];
 
-  const posts = apiPosts.length > 0 ? apiPosts : mockPosts.slice(0, 10);
+  const posts = apiPosts.length > 0 ? apiPosts : (initialPosts && initialPosts.length > 0 ? initialPosts : mockPosts.slice(0, 10));
 
   const totalPages = data?.responseData?.count
     ? Math.ceil(data.responseData.count / (data.responseData.pageSize || 10))

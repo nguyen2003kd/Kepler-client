@@ -129,7 +129,7 @@ export default function ServiceGrid() {
         className="relative bg-cover bg-center bg-no-repeat pt-16 pb-32 overflow-hidden"
         style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
       >
-        <div className="absolute inset-0 bg-[#1a3a5c]/60"></div>
+        <div className="absolute inset-0 bg-primary/60"></div>
         <div className="relative max-w-7xl mx-auto px-6 text-center">
             <h1 className="text-5xl md:text-8xl font-bold text-white mb-4">
             {rootCategoryName}

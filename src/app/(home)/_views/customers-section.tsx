@@ -29,24 +29,28 @@ export default function CustomersSection() {
 
   const customerCategoryIds = useMemo(() => {
     const root = (categoriesData?.responseData as CategoryWithChildren[])?.find(
-      (cat) => cat.link === "/khach-hang"
+      (cat) => cat.link === "/doi-tac-khach-hang"
     );
     if (!root?.categories) return [];
     return root.categories
+      .filter((sub) => sub.link?.includes("khach-hang"))
       .map((sub) => sub.id)
       .filter(Boolean);
   }, [categoriesData]);
 
-  const { data } = useGetApiV10Post({
-    filters: "is_hidden==false",
-    pageSize: 20,
-    position: "true",
-    sortOrderPosition: "ASC",
-    filterBy: "CLIENT",
-    ...(customerCategoryIds.length > 0 && {
-      category_id: customerCategoryIds.join(","),
-    }),
-  });
+  const { data } = useGetApiV10Post(
+    {
+      filters: "is_hidden==false",
+      pageSize: 20,
+      sortField: "created_at",
+      sortOrder: "desc",
+      filterBy: "CLIENT",
+      ...(customerCategoryIds.length > 0 && {
+        category_id: customerCategoryIds.join(","),
+      }),
+    },
+    { query: { enabled: customerCategoryIds.length > 0 } },
+  );
 
   const customers = useMemo(() => {
     const posts = (data?.responseData?.rows as PostExtended[]) || [];

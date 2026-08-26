@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import NewsDetailView from "./views/news-detail-view";
 import DynamicCategoryPage from "@/app/[...slug]/views/category-page";
-import { getMockPostsForCategory } from "@/utils/mock-data";
+import { getMockPostsForCategory, getMockPostBySlug } from "@/utils/mock-data";
 
 interface NewsDetailPageProps {
   params: { slug: string };
@@ -17,8 +17,17 @@ async function getPost(slug: string): Promise<PostExtended | null> {
       `${baseConfig.backendDomain}/api/v1.0/post/slug/${slug}`,
       { cache: "no-store" },
     );
-    if (!res.ok) return null;
+    if (!res.ok) {
+      const mockPost = getMockPostBySlug(slug);
+      if (mockPost) return mockPost;
+      return null;
+    }
     const data = await res.json();
+    if (!data?.responseData) {
+      const mockPost = getMockPostBySlug(slug);
+      if (mockPost) return mockPost;
+      return null;
+    }
     return (data?.responseData as PostExtended) || null;
   } catch {
     return null;
@@ -41,6 +50,31 @@ async function getCategoryByLink(fullSlug: string, language?: "vi" | "en") {
     return flat.find((cat) => cat.link === `/${fullSlug}`) || null;
   } catch {
     return null;
+  }
+}
+
+async function getCategoryWithSiblings(fullSlug: string, language?: "vi" | "en") {
+  try {
+    const url = new URL(`${baseConfig.backendDomain}/api/v1.0/category`);
+    if (language) url.searchParams.set("language", language);
+    const res = await fetch(url.toString(), { cache: "no-store" });
+    if (!res.ok) return { category: null, siblings: [] as CategoryWithChildren[] };
+    const data = await res.json();
+    const all = (data?.responseData || []) as CategoryWithChildren[];
+    const flat: CategoryWithChildren[] = [];
+    const flatten = (cats: CategoryWithChildren[]) => {
+      for (const c of cats) { flat.push(c); if (c.categories) flatten(c.categories); }
+    };
+    flatten(all);
+    const category = flat.find((cat) => cat.link === `/${fullSlug}`) || null;
+    let siblings: CategoryWithChildren[] = [];
+    if (category?.parent_category_id) {
+      const parent = flat.find((cat) => cat.id === category.parent_category_id);
+      siblings = parent?.categories || [];
+    }
+    return { category, siblings };
+  } catch {
+    return { category: null, siblings: [] as CategoryWithChildren[] };
   }
 }
 
@@ -122,8 +156,8 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
   // Try category page (e.g. /news/van-ban-luat)
   const fullSlug = `news/${params.slug}`;
-  const [category, categoryEn] = await Promise.all([
-    getCategoryByLink(fullSlug, "vi"),
+  const [{ category, siblings }, categoryEn] = await Promise.all([
+    getCategoryWithSiblings(fullSlug, "vi"),
     getCategoryByLink(fullSlug, "en"),
   ]);
 
@@ -139,6 +173,8 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
         category={category}
         categoryEn={categoryEn}
         initialPosts={posts}
+        siblingCategories={siblings}
+        parentLink="/news"
       />
     );
   }

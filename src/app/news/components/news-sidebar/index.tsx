@@ -25,7 +25,7 @@ export default function NewsSidebar({
   return (
     <Card className="overflow-hidden shadow-lg">
       {/* Header */}
-      <div className="bg-[#1e40af] px-4 py-3 flex items-center justify-between">
+      <div className="bg-primary px-4 py-3 flex items-center justify-between">
         <h3 className="text-base font-bold text-white">{t("featuredNews")}</h3>
         <Newspaper className="w-5 h-5 text-white" />
       </div>

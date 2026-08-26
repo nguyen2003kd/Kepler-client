@@ -37,7 +37,7 @@ i18n
   .init({
     lng: "vi",
     fallbackLng: "vi",
-    supportedLngs: ["vi", "en"],
+    supportedLngs: ["vi"],
     defaultNS: "header",
     load: "languageOnly",
     partialBundledLanguages: true,

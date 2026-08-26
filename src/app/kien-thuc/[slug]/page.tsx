@@ -2,7 +2,6 @@ import { CategoryWithChildren } from "@/api/models/categoryWithChildren";
 import baseConfig from "@/configs/base";
 import { getMockPostsForCategory } from "@/utils/mock-data";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 import DynamicCategoryPage from "@/app/[...slug]/views/category-page";
 import ArticleDetailPage from "./article-detail";
 
@@ -31,6 +30,27 @@ async function getCategory(fullSlug: string, language?: "vi" | "en") {
     return flat.find((cat) => cat.link === `/${fullSlug}`) || null;
   } catch {
     return null;
+  }
+}
+
+async function getCategoryWithSiblings(fullSlug: string, language?: "vi" | "en") {
+  try {
+    const url = new URL(`${baseConfig.backendDomain}/api/v1.0/category`);
+    if (language) url.searchParams.set("language", language);
+    const res = await fetch(url.toString(), { cache: "no-store" });
+    if (!res.ok) return { category: null, siblings: [] as CategoryWithChildren[] };
+    const data = await res.json();
+    const all = (data?.responseData || []) as CategoryWithChildren[];
+    const flat = flattenCategories(all);
+    const category = flat.find((cat) => cat.link === `/${fullSlug}`) || null;
+    let siblings: CategoryWithChildren[] = [];
+    if (category?.parent_category_id) {
+      const parent = flat.find((cat) => cat.id === category.parent_category_id);
+      siblings = parent?.categories || [];
+    }
+    return { category, siblings };
+  } catch {
+    return { category: null, siblings: [] as CategoryWithChildren[] };
   }
 }
 
@@ -64,8 +84,8 @@ export default async function KienThucSlugPage({ params, searchParams }: KienThu
   const fullSlug = `kien-thuc/${params.slug}`;
 
   // Try category page first (e.g. /kien-thuc/tai-chinh-khoan-vay)
-  const [category, categoryEn] = await Promise.all([
-    getCategory(fullSlug, "vi"),
+  const [{ category, siblings }, categoryEn] = await Promise.all([
+    getCategoryWithSiblings(fullSlug, "vi"),
     getCategory(fullSlug, "en"),
   ]);
 
@@ -82,6 +102,8 @@ export default async function KienThucSlugPage({ params, searchParams }: KienThu
         categoryEn={categoryEn}
         initialPosts={posts}
         date={searchParams.date}
+        siblingCategories={siblings}
+        parentLink="/kien-thuc"
       />
     );
   }

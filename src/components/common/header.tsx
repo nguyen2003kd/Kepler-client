@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import useAuthStore from "@/stores/auth-store";
 import type { NavItem } from "@/types";
 import type { MenuItem as MenuItemType } from "@/types/menu";
-import { LanguageSwitcher } from "@components/common/components/language-switcher";
 import { MenuItem } from "@components/common/components/menu-item";
 import { UserNav } from "@components/common/user-nav";
 import { Skeleton } from "@components/ui/skeleton";
@@ -239,32 +238,12 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       parent_id: null,
       children: [
         { id: "3-1", name: "Tư vấn định giá và thẩm định giá", type: "", content_type: "", link: "/services/tu-van-dinh-gia-va-tham-dinh-gia", sequence: 1, display: true, parent_id: "3" },
-        { id: "3-2", name: "Phát triển dự án bất động sản", type: "", content_type: "", link: "/services/phat-trien-du-an-bat-dong-san", sequence: 2, display: true, parent_id: "3" },
-        { id: "3-3", name: "Quản lý và khai thác tài sản", type: "", content_type: "", link: "/services/quan-ly-va-khai-thac-tai-san", sequence: 3, display: true, parent_id: "3" },
-        { id: "3-4", name: "Tư vấn và thực hiện M&A", type: "", content_type: "", link: "/services/tu-van-va-thuc-hien-ma", sequence: 4, display: true, parent_id: "3" },
-        { id: "3-5", name: "Tư vấn các dịch vụ bất động sản", type: "", content_type: "", link: "/services/tu-van-cac-dich-vu-bat-dong-san", sequence: 5, display: true, parent_id: "3" },
-        { id: "3-6", name: "Giải pháp số bất động sản", type: "", content_type: "", link: "/services/giai-phap-so-bat-dong-san", sequence: 6, display: true, parent_id: "3" },
-        { id: "3-7", name: "Cho thuê hội đồng cố vấn", type: "", content_type: "", link: "/services/cho-thue-hoi-dong-co-van", sequence: 7, display: true, parent_id: "3" },
-      ],
-    },
-    {
-      id: "4",
-      name: "Hệ thống công ty thành viên",
-      type: "",
-      content_type: "",
-      link: "/he-sinh-thai",
-      sequence: 4,
-      display: true,
-      parent_id: null,
-      children: [
-        { id: "4-1", name: "Kepler Property – KPC Group", type: "", content_type: "", link: "/he-sinh-thai/kepler-property", sequence: 1, display: true, parent_id: "4" },
-        { id: "4-2", name: "Kepler Appraisal – KAC", type: "", content_type: "", link: "/he-sinh-thai/kpc-appraisal", sequence: 2, display: true, parent_id: "4" },
-        { id: "4-3", name: "Kepler Management – KMC", type: "", content_type: "", link: "/he-sinh-thai/kmc-management", sequence: 3, display: true, parent_id: "4" },
-        { id: "4-4", name: "Kepler M&A – KMAC", type: "", content_type: "", link: "/he-sinh-thai/kac-advisory", sequence: 4, display: true, parent_id: "4" },
-        { id: "4-5", name: "Kepler Construction – KCC", type: "", content_type: "", link: "/he-sinh-thai/k-homes", sequence: 5, display: true, parent_id: "4" },
-        { id: "4-6", name: "Kepler Land – Sàn giao dịch BĐS", type: "", content_type: "", link: "/he-sinh-thai/kepler-land", sequence: 6, display: true, parent_id: "4" },
-        { id: "4-7", name: "RealHub Platform", type: "", content_type: "", link: "/realhub", sequence: 7, display: true, parent_id: "4" },
-        { id: "4-8", name: "Biz Space", type: "", content_type: "", link: "/he-sinh-thai/bizoffice", sequence: 8, display: true, parent_id: "4" },
+        { id: "3-2", name: "Phát triển dự án BĐS", type: "", content_type: "", link: "/services/phat-trien-du-an-bds", sequence: 2, display: true, parent_id: "3" },
+        { id: "3-3", name: "Quản lý & khai thác tài sản", type: "", content_type: "", link: "/services/quan-ly-va-khai-thac-tai-san", sequence: 3, display: true, parent_id: "3" },
+        { id: "3-4", name: "Tư vấn & thực hiện M&A", type: "", content_type: "", link: "/services/tu-van-va-thuc-hien-ma", sequence: 4, display: true, parent_id: "3" },
+        { id: "3-5", name: "Tư vấn dịch vụ khác BĐS", type: "", content_type: "", link: "/services/tu-van-dich-vu-khac-bds", sequence: 5, display: true, parent_id: "3" },
+        { id: "3-6", name: "Giải pháp số BĐS", type: "", content_type: "", link: "/services/giai-phap-so-bds", sequence: 6, display: true, parent_id: "3" },
+        { id: "3-7", name: "Cho thuê HĐ cố vấn & chuyên gia", type: "", content_type: "", link: "/services/cho-thue-hop-dong-co-van-va-chuyen-gia", sequence: 7, display: true, parent_id: "3" },
       ],
     },
     {
@@ -273,53 +252,102 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       type: "",
       content_type: "",
       link: "/san-giao-dich",
-      sequence: 5,
-      display: true,
-      parent_id: null,
-    },
-    {
-      id: "6",
-      name: "Đối tác & Khách hàng",
-      type: "",
-      content_type: "",
-      link: "/doi-tac-khach-hang",
-      sequence: 6,
+      sequence: 4,
       display: true,
       parent_id: null,
       children: [
-        { id: "6-1", name: "Khách hàng", type: "", content_type: "", link: "/khach-hang", sequence: 1, display: true, parent_id: "6" },
-        { id: "6-2", name: "Đối tác", type: "", content_type: "", link: "/doi-tac", sequence: 2, display: true, parent_id: "6" },
+        { id: "5-1", name: "Mua và bán nhà lẻ", type: "", content_type: "", link: "/san-giao-dich/mua-ban-nha-le", sequence: 1, display: true, parent_id: "5" },
+        { id: "5-2", name: "Thuê và cho thuê", type: "", content_type: "", link: "/san-giao-dich/thue-va-cho-thue", sequence: 2, display: true, parent_id: "5" },
+        { id: "5-3", name: "Dự án phân phối", type: "", content_type: "", link: "/san-giao-dich/du-an-phan-phoi", sequence: 3, display: true, parent_id: "5" },
+        { id: "5-4", name: "Kêu gọi đầu tư dự án", type: "", content_type: "", link: "/san-giao-dich/keu-goi-dau-tu", sequence: 4, display: true, parent_id: "5" },
+        { id: "5-5", name: "Dự án cần M&A", type: "", content_type: "", link: "/san-giao-dich/du-an-can-ma", sequence: 5, display: true, parent_id: "5" },
+      ],
+    },
+    {
+      id: "6",
+      name: "Đối tác & khách hàng tiêu biểu",
+      type: "",
+      content_type: "",
+      link: "/doi-tac-khach-hang",
+      sequence: 5,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "6-1", name: "Khách hàng cá nhân cao cấp", type: "", content_type: "", link: "/doi-tac-khach-hang/khach-hang-ca-nhan-cao-cap", sequence: 1, display: true, parent_id: "6" },
+        { id: "6-2", name: "Khách hàng doanh nghiệp tiêu biểu", type: "", content_type: "", link: "/doi-tac-khach-hang/khach-hang-doanh-nghiep-tieu-bieu", sequence: 2, display: true, parent_id: "6" },
+        { id: "6-3", name: "Đối tác chiến lược", type: "", content_type: "", link: "/doi-tac-khach-hang/doi-tac-chien-luoc", sequence: 3, display: true, parent_id: "6" },
+        { id: "6-4", name: "Quỹ đầu tư quốc tế và trong nước", type: "", content_type: "", link: "/doi-tac-khach-hang/quy-dau-tu-quoc-te-va-trong-nuoc", sequence: 4, display: true, parent_id: "6" },
+        { id: "6-5", name: "Đơn vị công nghệ proptech", type: "", content_type: "", link: "/doi-tac-khach-hang/don-vi-cong-nghe-proptech", sequence: 5, display: true, parent_id: "6" },
+        { id: "6-6", name: "Mạng lưới phân phối độc quyền", type: "", content_type: "", link: "/doi-tac-khach-hang/mang-luoi-phan-phoi-doc-quyen", sequence: 6, display: true, parent_id: "6" },
+        { id: "6-7", name: "Ngân hàng và tổ chức tài chính", type: "", content_type: "", link: "/doi-tac-khach-hang/ngan-hang-va-to-chuc-tai-chinh", sequence: 7, display: true, parent_id: "6" },
+        { id: "6-8", name: "Đơn vị thẩm định giá và pháp lý", type: "", content_type: "", link: "/doi-tac-khach-hang/don-vi-tham-dinh-gia-va-phap-ly", sequence: 8, display: true, parent_id: "6" },
       ],
     },
     {
       id: "7",
-      name: "RealHub",
+      name: "Cộng đồng bất động sản – Real Hub",
       type: "",
       content_type: "",
-      link: "/realhub",
-      sequence: 7,
+      link: "/cong-dong-bds",
+      sequence: 6,
       display: true,
       parent_id: null,
-    },
-    {
-      id: "8",
-      name: "Chuyên gia",
-      type: "",
-      content_type: "",
-      link: "/chuyen-gia-kepler",
-      sequence: 8,
-      display: true,
-      parent_id: null,
+      children: [
+        { id: "7-1", name: "Real Hub Offline", type: "", content_type: "", link: "/cong-dong-bds/offline", sequence: 1, display: true, parent_id: "7" },
+        { id: "7-2", name: "Real Hub Online", type: "", content_type: "", link: "/cong-dong-bds/online", sequence: 2, display: true, parent_id: "7" },
+        { id: "7-3", name: "Mô hình Real Hub", type: "", content_type: "", link: "/cong-dong-bds/mo-hinh-real-hub", sequence: 3, display: true, parent_id: "7" },
+        { id: "7-4", name: "Tham gia Real Hub", type: "", content_type: "", link: "/cong-dong-bds/tham-gia-real-hub", sequence: 4, display: true, parent_id: "7" },
+      ],
     },
     {
       id: "9",
-      name: "Tin tức và sự kiện",
+      name: "Hệ sinh thái Kepler",
+      type: "",
+      content_type: "",
+      link: "/he-sinh-thai",
+      sequence: 7,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "9-1", name: "Kepler Property – KPC Group", type: "", content_type: "", link: "/he-sinh-thai/kepler-property", sequence: 1, display: true, parent_id: "9" },
+        { id: "9-2", name: "Kepler Appraisal – KAC", type: "", content_type: "", link: "/he-sinh-thai/kpc-appraisal", sequence: 2, display: true, parent_id: "9" },
+        { id: "9-3", name: "Kepler Management – KMC", type: "", content_type: "", link: "/he-sinh-thai/kmc-management", sequence: 3, display: true, parent_id: "9" },
+        { id: "9-4", name: "Kepler Advisory – KAC Advisory", type: "", content_type: "", link: "/he-sinh-thai/kac-advisory", sequence: 4, display: true, parent_id: "9" },
+        { id: "9-5", name: "Kepler Land", type: "", content_type: "", link: "/he-sinh-thai/kepler-land", sequence: 5, display: true, parent_id: "9" },
+        { id: "9-6", name: "K-Homes", type: "", content_type: "", link: "/he-sinh-thai/k-homes", sequence: 6, display: true, parent_id: "9" },
+        { id: "9-7", name: "BizOffice", type: "", content_type: "", link: "/he-sinh-thai/bizoffice", sequence: 7, display: true, parent_id: "9" },
+      ],
+    },
+    {
+      id: "12",
+      name: "Chuyên gia & Cố vấn",
+      type: "",
+      content_type: "",
+      link: "/chuyen-gia",
+      sequence: 8,
+      display: true,
+      parent_id: null,
+      children: [
+        { id: "12-1", name: "Chuyên gia độc lập", type: "", content_type: "", link: "/chuyen-gia/chuyen-gia-doc-lap", sequence: 1, display: true, parent_id: "12" },
+        { id: "12-2", name: "Hội đồng cố vấn", type: "", content_type: "", link: "/chuyen-gia/hoi-dong-co-van", sequence: 2, display: true, parent_id: "12" },
+      ],
+    },
+    {
+      id: "8",
+      name: "Tin tức ngành và sự kiện",
       type: "",
       content_type: "",
       link: "/news",
       sequence: 9,
       display: true,
       parent_id: null,
+      children: [
+        { id: "8-1", name: "Văn bản Luật", type: "", content_type: "", link: "/news/van-ban-luat", sequence: 1, display: true, parent_id: "8" },
+        { id: "8-2", name: "Bất động sản – Quy hoạch", type: "", content_type: "", link: "/news/bds-quy-hoach", sequence: 2, display: true, parent_id: "8" },
+        { id: "8-3", name: "Tài chính – Thẩm định giá", type: "", content_type: "", link: "/news/tai-chinh-tham-dinh", sequence: 3, display: true, parent_id: "8" },
+        { id: "8-4", name: "Kiến trúc – Xây dựng", type: "", content_type: "", link: "/news/kien-truc-xay-dung", sequence: 4, display: true, parent_id: "8" },
+        { id: "8-5", name: "Nghiên cứu – Báo cáo", type: "", content_type: "", link: "/news/nghien-cuu-bao-cao", sequence: 5, display: true, parent_id: "8" },
+      ],
     },
     {
       id: "10",
@@ -776,17 +804,22 @@ export default function Header({ navItems = [], className }: HeaderProps) {
   const baseNavigation: HeaderMenuItem[] = useMemo(() => {
     const apiData = categoriesData?.responseData?.length
       ? withCategoryQueryMode(
-          categoriesData.responseData as unknown as HeaderMenuItem[],
+          (categoriesData.responseData as unknown as HeaderMenuItem[]).map((item) => ({
+
+            ...item,
+            sequence: ((item as Record<string, unknown>).position as number) || 99,
+            display: true,
+            parent_id: ((item as Record<string, unknown>).parent_category_id as string | null) ?? null,
+          })) as HeaderMenuItem[],
           false,
         )
       : null;
-    // Only use API data after mount to avoid hydration mismatch
-    if (apiData && isMounted) return apiData;
+    if (apiData) return apiData;
     return withCategoryQueryMode(
       (navItems.length > 0 ? navItems : defaultNavItems) as HeaderMenuItem[],
       false,
     );
-  }, [categoriesData, navItems, defaultNavItems, isMounted]);
+  }, [categoriesData, navItems, defaultNavItems]);
 
   // Inject "Chứng nhận" vào children của "Năng lực" (TẠM THỜI ẨN)
   // TODO: Uncomment khi cần hiển thị certification
@@ -846,12 +879,12 @@ export default function Header({ navItems = [], className }: HeaderProps) {
       parent_id: null,
       children: [
         { id: "svc-1", name: "Tư vấn định giá và thẩm định giá", type: "", content_type: "", link: "/services/tu-van-dinh-gia-va-tham-dinh-gia", sequence: 1, display: true, parent_id: "pinned-services" },
-        { id: "svc-2", name: "Phát triển dự án bất động sản", type: "", content_type: "", link: "/services/phat-trien-du-an-bat-dong-san", sequence: 2, display: true, parent_id: "pinned-services" },
+        { id: "svc-2", name: "Phát triển dự án BĐS", type: "", content_type: "", link: "/services/phat-trien-du-an-bds", sequence: 2, display: true, parent_id: "pinned-services" },
         { id: "svc-3", name: "Quản lý và khai thác tài sản", type: "", content_type: "", link: "/services/quan-ly-va-khai-thac-tai-san", sequence: 3, display: true, parent_id: "pinned-services" },
         { id: "svc-4", name: "Tư vấn và thực hiện M&A", type: "", content_type: "", link: "/services/tu-van-va-thuc-hien-ma", sequence: 4, display: true, parent_id: "pinned-services" },
-        { id: "svc-5", name: "Tư vấn các dịch vụ bất động sản", type: "", content_type: "", link: "/services/tu-van-cac-dich-vu-bat-dong-san", sequence: 5, display: true, parent_id: "pinned-services" },
-        { id: "svc-6", name: "Giải pháp số bất động sản", type: "", content_type: "", link: "/services/giai-phap-so-bat-dong-san", sequence: 6, display: true, parent_id: "pinned-services" },
-        { id: "svc-7", name: "Cho thuê hội đồng cố vấn", type: "", content_type: "", link: "/services/cho-thue-hoi-dong-co-van", sequence: 7, display: true, parent_id: "pinned-services" },
+        { id: "svc-5", name: "Tư vấn dịch vụ khác BĐS", type: "", content_type: "", link: "/services/tu-van-dich-vu-khac-bds", sequence: 5, display: true, parent_id: "pinned-services" },
+        { id: "svc-6", name: "Giải pháp số BĐS", type: "", content_type: "", link: "/services/giai-phap-so-bds", sequence: 6, display: true, parent_id: "pinned-services" },
+        { id: "svc-7", name: "Cho thuê HĐ cố vấn & chuyên gia", type: "", content_type: "", link: "/services/cho-thue-hop-dong-co-van-va-chuyen-gia", sequence: 7, display: true, parent_id: "pinned-services" },
       ],
     },
     {
@@ -1123,11 +1156,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                   </div>
                 </form>
 
-                {/* Language */}
-                <div className="hidden md:block">
-                  <LanguageSwitcher />
-                </div>
-
                 {/* Separator */}
                 <div className="hidden md:block h-4 w-px bg-white/30"></div>
 
@@ -1305,9 +1333,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
 
               {/* Mobile & Tablet menu button */}
               <div className="lg:hidden flex items-center gap-2">
-                <div className="md:hidden p-1 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors border border-gray-300 scale-90">
-                  <LanguageSwitcher />
-                </div>
                 <button
                   onClick={() => setIsMobileMenuOpen(true)}
                   className="p-2 text-gray-600 hover:text-red-600 transition-colors"

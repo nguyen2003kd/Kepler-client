@@ -6,10 +6,6 @@ const IntroSection = dynamic(() => import("./_views/intro-section"), { ssr: true
 const StatsSection = dynamic(() => import("./_views/stats-section"), { ssr: true });
 const EcosystemSection = dynamic(() => import("./_views/ecosystem-section"), { ssr: true });
 const ServicesSection = dynamic(() => import("./_views/services-section"), { ssr: true });
-const SolutionsSection = dynamic(() => import("./_views/solutions-section"), { ssr: true });
-const ProcessSection = dynamic(() => import("./_views/process-section"), { ssr: true });
-const NewsSection = dynamic(() => import("./_views/news-section"), { ssr: true });
-const CaseStudySection = dynamic(() => import("./_views/case-study-section"), { ssr: true });
 const CustomersSection = dynamic(() => import("./_views/customers-section"), { ssr: true });
 const PartnersSection = dynamic(() => import("./_views/partners-section"), { ssr: true });
 const WhyChooseUsSection = dynamic(() => import("./_views/why-choose-us-section"), { ssr: true });
@@ -63,7 +59,7 @@ export default function Home() {
 
       {/* 13. Section Thị trường */}
       {/* <MarketSection /> */}
-     <NewsSection />
+      {/* <NewsSection /> */}
       {/* 14. Section Tại sao chọn Kepler */}
       <WhyChooseUsSection />
 

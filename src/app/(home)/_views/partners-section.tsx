@@ -27,24 +27,28 @@ export default function PartnersSection() {
 
   const partnerCategoryIds = useMemo(() => {
     const root = (categoriesData?.responseData as CategoryWithChildren[])?.find(
-      (cat) => cat.link === "/doi-tac"
+      (cat) => cat.link === "/doi-tac-khach-hang"
     );
     if (!root?.categories) return [];
     return root.categories
+      .filter((sub) => !sub.link?.includes("khach-hang"))
       .map((sub) => sub.id)
       .filter(Boolean);
   }, [categoriesData]);
 
-  const { data } = useGetApiV10Post({
-    filters: "is_hidden==false",
-    pageSize: 20,
-    position: "true",
-    sortOrderPosition: "ASC",
-    filterBy: "CLIENT",
-    ...(partnerCategoryIds.length > 0 && {
-      category_id: partnerCategoryIds.join(","),
-    }),
-  });
+  const { data } = useGetApiV10Post(
+    {
+      filters: "is_hidden==false",
+      pageSize: 20,
+      sortField: "created_at",
+      sortOrder: "desc",
+      filterBy: "CLIENT",
+      ...(partnerCategoryIds.length > 0 && {
+        category_id: partnerCategoryIds.join(","),
+      }),
+    },
+    { query: { enabled: partnerCategoryIds.length > 0 } },
+  );
 
   const partners = useMemo(() => {
     const posts = (data?.responseData?.rows as PostExtended[]) || [];

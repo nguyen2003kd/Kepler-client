@@ -103,7 +103,7 @@ export default function ProjectDetailView({ slug, initialPost }: ProjectDetailVi
     <>
       {/* Hero / Breadcrumb */}
       <section
-        className="bg-[#0C2449] py-12 border-t border-gray-600"
+        className="bg-primary py-12 border-t border-gray-600"
         style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
       >
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">

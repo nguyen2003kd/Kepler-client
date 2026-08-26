@@ -123,8 +123,8 @@ export default function ProcessSection() {
 
                   <div className="mt-10 flex flex-wrap items-center gap-4">
                     <Link
-                      href="/dat-lich-tu-van"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all group"
+                      href="/contact/lien-he-kepler"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition-all group"
                     >
                       Đăng ký tư vấn
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

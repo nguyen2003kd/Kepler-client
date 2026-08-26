@@ -44,6 +44,31 @@ async function getCategoryByLink(fullSlug: string, language?: "vi" | "en") {
   }
 }
 
+async function getCategoryWithSiblings(fullSlug: string, language?: "vi" | "en") {
+  try {
+    const url = new URL(`${baseConfig.backendDomain}/api/v1.0/category`);
+    if (language) url.searchParams.set("language", language);
+    const res = await fetch(url.toString(), { cache: "no-store" });
+    if (!res.ok) return { category: null, siblings: [] as CategoryWithChildren[] };
+    const data = await res.json();
+    const all = (data?.responseData || []) as CategoryWithChildren[];
+    const flat: CategoryWithChildren[] = [];
+    const flatten = (cats: CategoryWithChildren[]) => {
+      for (const c of cats) { flat.push(c); if (c.categories) flatten(c.categories); }
+    };
+    flatten(all);
+    const category = flat.find((cat) => cat.link === `/${fullSlug}`) || null;
+    let siblings: CategoryWithChildren[] = [];
+    if (category?.parent_category_id) {
+      const parent = flat.find((cat) => cat.id === category.parent_category_id);
+      siblings = parent?.categories || [];
+    }
+    return { category, siblings };
+  } catch {
+    return { category: null, siblings: [] as CategoryWithChildren[] };
+  }
+}
+
 async function getPostsForCategory(categoryId: string) {
   try {
     const res = await fetch(
@@ -125,8 +150,8 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
   }
 
   const fullSlug = `services/${params.slug}`;
-  const [category, categoryEn] = await Promise.all([
-    getCategoryByLink(fullSlug, "vi"),
+  const [{ category, siblings }, categoryEn] = await Promise.all([
+    getCategoryWithSiblings(fullSlug, "vi"),
     getCategoryByLink(fullSlug, "en"),
   ]);
 
@@ -137,6 +162,8 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
         category={category}
         categoryEn={categoryEn}
         initialPosts={posts}
+        siblingCategories={siblings}
+        parentLink="/services"
       />
     );
   }

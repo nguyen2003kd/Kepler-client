@@ -331,17 +331,17 @@ const Footer = () => {
       </div>
 
       {/* Legal Links Bar */}
-      <div className="border-t border-border relative z-10">
-        <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
-          <Link href="/chinh-sach-bao-mat" className="hover:text-primary transition-colors">
+      <div className="bg-primary relative z-10">
+        <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-white">
+          <Link href="/chinh-sach-bao-mat" className="hover:text-white/80 transition-colors">
             Chính sách bảo mật
           </Link>
-          <span className="text-border">|</span>
-          <Link href="/dieu-khoan-su-dung" className="hover:text-primary transition-colors">
+          <span className="text-white/40">|</span>
+          <Link href="/dieu-khoan-su-dung" className="hover:text-white/80 transition-colors">
             Điều khoản sử dụng
           </Link>
-          <span className="text-border">|</span>
-          <Link href="/chinh-sach-cookie" className="hover:text-primary transition-colors">
+          <span className="text-white/40">|</span>
+          <Link href="/chinh-sach-cookie" className="hover:text-white/80 transition-colors">
             Chính sách Cookie
           </Link>
         </div>

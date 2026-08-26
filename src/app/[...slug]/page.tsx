@@ -59,6 +59,36 @@ async function getCategory(slug: string, language?: "vi" | "en") {
   }
 }
 
+async function getCategoryWithSiblings(slug: string, language?: "vi" | "en") {
+  try {
+    const url = new URL(`${baseConfig.backendDomain}/api/v1.0/category`);
+    if (language) url.searchParams.set("language", language);
+    const res = await fetch(url.toString(), {
+      cache: "no-store",
+    });
+    if (!res.ok) return { category: null, siblings: [] as CategoryWithChildren[] };
+
+    const data = await res.json();
+    const allCategories = (data?.responseData || []) as CategoryWithChildren[];
+    const flat = flattenCategories(allCategories);
+
+    const category =
+      flat.find((cat) => cat.link === `/${slug}`) ||
+      flat.find((cat) => cat.link === slug) ||
+      null;
+
+    let siblings: CategoryWithChildren[] = [];
+    if (category?.parent_category_id) {
+      const parent = flat.find((cat) => cat.id === category.parent_category_id);
+      siblings = parent?.categories || [];
+    }
+
+    return { category, siblings };
+  } catch {
+    return { category: null, siblings: [] as CategoryWithChildren[] };
+  }
+}
+
 async function getPostsForCategory(categoryId: string) {
   try {
     const res = await fetch(
@@ -203,8 +233,8 @@ export default async function DynamicPage({
     }
 
     // Try category page (e.g. /cong-dong-bds/luat, /du-an/mua-ban-nha-le)
-    const [category, categoryEn] = await Promise.all([
-      getCategory(fullSlug, "vi"),
+    const [{ category, siblings }, categoryEn] = await Promise.all([
+      getCategoryWithSiblings(fullSlug, "vi"),
       getCategory(fullSlug, "en"),
     ]);
 
@@ -221,6 +251,8 @@ export default async function DynamicPage({
           categoryEn={categoryEn}
           initialPosts={posts}
           date={searchParams.date}
+          siblingCategories={siblings}
+          parentLink={`/${firstSlug}`}
         />
       );
     }
@@ -250,8 +282,8 @@ export default async function DynamicPage({
     }
 
     // Try category page
-    const [category, categoryEn] = await Promise.all([
-      getCategory(fullSlug, "vi"),
+    const [{ category, siblings }, categoryEn] = await Promise.all([
+      getCategoryWithSiblings(fullSlug, "vi"),
       getCategory(fullSlug, "en"),
     ]);
 
@@ -262,12 +294,16 @@ export default async function DynamicPage({
           ? apiPosts
           : getMockPostsForCategory(category.id!, category.name!, category.link!);
 
+      const parentSlug = params.slug.slice(0, -1).join("/");
+
       return (
         <DynamicCategoryPage
           category={category}
           categoryEn={categoryEn}
           initialPosts={posts}
           date={searchParams.date}
+          siblingCategories={siblings}
+          parentLink={`/${parentSlug}`}
         />
       );
     }

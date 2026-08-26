@@ -79,6 +79,22 @@ export default function DynamicPostDetailPage({
     },
   );
 
+  // Fallback: fetch latest posts without category filter when category has no other posts
+  const { data: latestFallbackData } = useGetApiV10Post(
+    {
+      filters: "is_hidden==false",
+      pageSize: 10,
+      sortField: "created_at",
+      sortOrder: "desc",
+      filterBy: "CLIENT",
+    },
+    {
+      query: {
+        enabled: !isMockPost,
+      },
+    },
+  );
+
   const latestNews = useMemo(() => {
     const posts = (latestData?.responseData?.rows as PostExtended[]) || [];
     const apiNews = posts
@@ -90,23 +106,24 @@ export default function DynamicPostDetailPage({
         link: `/${categorySlug}/${p.slug || ""}`,
       }));
 
-    if (apiNews.length === 0) {
-      return mockPosts
-        .filter((p) => p.id !== post.id)
-        .slice(0, 10)
-        .map((p) => ({
-          id: p.id,
-          title: p.title,
-          slug: p.slug,
-          link:
-            typeof p.id === "string" && p.id.startsWith("mock-")
-              ? "/"
-              : `/${categorySlug}/${p.slug || ""}`,
-        }));
+    if (apiNews.length > 0) {
+      return apiNews;
     }
 
-    return apiNews;
-  }, [latestData, categorySlug, post.id]);
+    // Fallback to global latest posts
+    const fallbackPosts = (latestFallbackData?.responseData?.rows as PostExtended[]) || [];
+    return fallbackPosts
+      .filter((p) => p.id !== post.id)
+      .slice(0, 10)
+      .map((p) => ({
+        id: p.id,
+        title: p.title,
+        slug: p.slug,
+        link: p.category?.link
+          ? `${p.category.link}/${p.slug || ""}`
+          : `/${categorySlug}/${p.slug || ""}`,
+      }));
+  }, [latestData, latestFallbackData, categorySlug, post.id]);
 
   const { data: relatedData, isLoading: isLoadingRelated } = useGetApiV10Post(
     {
@@ -198,7 +215,7 @@ export default function DynamicPostDetailPage({
   return (
     <>
       {/* Navbar Section */}
-      <section className="bg-gray-900 py-12 border-t border-gray-600"
+      <section className="bg-primary py-12 border-t border-gray-600"
       style={{ backgroundImage: "url('/images/category-banner-investment.png')" }}
       >
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
@@ -510,9 +527,9 @@ export default function DynamicPostDetailPage({
                             </h3>
 
                             {/* Description */}
-                            <p className="text-gray-500 text-sm line-clamp-2 mb-4">
+                            <div className="text-gray-500 text-sm line-clamp-2 mb-4">
                               {isClient ? parse(relatedPost.summary || "") : null}
-                            </p>
+                            </div>
 
                             {/* Link */}
                             <Link
@@ -546,7 +563,7 @@ export default function DynamicPostDetailPage({
                 <div className="sticky top-6 space-y-4">
                   <Card className="overflow-hidden shadow-lg">
                     {/* Header */}
-                    <div className="bg-gray-900 px-4 py-3 flex items-center justify-between">
+                    <div className="bg-primary px-4 py-3 flex items-center justify-between">
                       <h3 className="text-base font-bold text-white">
                         {t("latestPosts")}
                       </h3>
@@ -555,41 +572,47 @@ export default function DynamicPostDetailPage({
 
                     {/* Compact List */}
                     <div>
-                      {latestNews.slice(0, 10).map((news, index) => (
-                        <Link
-                          key={news.id}
-                          href={`${baseConfig.frontendDomain}/${news.link}`}
-                          className={`flex gap-4 group hover:bg-primary/5 px-4 py-3 transition-colors ${
-                            index !== latestNews.slice(0, 10).length - 1
-                              ? "border-b border-gray-100"
-                              : ""
-                          }`}
-                        >
-                          {/* Number */}
-                          <div className="flex-shrink-0 text-3xl font-bold text-gray-200">
-                            {String(index + 1).padStart(2, "0")}
-                          </div>
+                      {latestNews.length === 0 ? (
+                        <div className="px-4 py-8 text-center">
+                          <p className="text-gray-500 text-sm">{t("noFeaturedPosts")}</p>
+                        </div>
+                      ) : (
+                        latestNews.slice(0, 10).map((news, index) => (
+                          <Link
+                            key={news.id}
+                            href={news.link}
+                            className={`flex gap-4 group hover:bg-primary/5 px-4 py-3 transition-colors ${
+                              index !== latestNews.slice(0, 10).length - 1
+                                ? "border-b border-gray-100"
+                                : ""
+                            }`}
+                          >
+                            {/* Number */}
+                            <div className="flex-shrink-0 text-3xl font-bold text-gray-200">
+                              {String(index + 1).padStart(2, "0")}
+                            </div>
 
-                          {/* Content */}
-                          <div className="flex-1 space-y-1.5">
-                            {/* Title */}
-                            <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-primary transition-colors leading-snug">
-                              {news.title}
-                            </h4>
-                          </div>
-                        </Link>
-                      ))}
+                            {/* Content */}
+                            <div className="flex-1 space-y-1.5">
+                              {/* Title */}
+                              <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-primary transition-colors leading-snug">
+                                {news.title}
+                              </h4>
+                            </div>
+                          </Link>
+                        ))
+                      )}
                     </div>
 
                     {/* View All Link */}
                     <div className="px-4 py-2.5 bg-gray-50 text-center border-t border-gray-100">
-                      <a
-                        href={`${baseConfig.frontendDomain}/${categorySlug}`}
+                      <Link
+                        href={`/${categorySlug}`}
                         className="text-primary font-semibold text-xs hover:text-primary/90 inline-flex items-center gap-1"
                       >
                         {t("viewAll")}
                         <ArrowRight className="w-3.5 h-3.5" />
-                      </a>
+                      </Link>
                     </div>
                   </Card>
                 </div>

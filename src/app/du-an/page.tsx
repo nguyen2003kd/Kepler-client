@@ -3,7 +3,6 @@
 import { useGetApiV10Category } from "@/api/endpoints/category";
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import { CategoryWithChildren } from "@/api/models/categoryWithChildren";
-import { PAGE_IDS } from "@/constants/page-ids";
 import { getThumbnailSrc } from "@/lib/responsive-image";
 import { slugify } from "@/lib/slugify";
 import type { PostExtended } from "@/types/post";
@@ -71,11 +70,10 @@ export default function ProjectsPage() {
     filters: "is_hidden==false",
     page: currentPage,
     pageSize: 12,
-    position: "true",
-    sortOrderPosition: "ASC",
+    sortField: "created_at",
+    sortOrder: "desc",
     filterBy: "CLIENT",
-    page_id: PAGE_IDS.LATEST_POSTS,
-    category_id: selectedCategory || projectCategoryId,
+    ...(selectedCategory ? { category_id: selectedCategory } : { category_id: projectCategoryId }),
   });
 
   const postsFromAPI = (data?.responseData?.rows as PostExtended[]) || [];
@@ -92,7 +90,7 @@ export default function ProjectsPage() {
         className="relative bg-cover bg-center bg-no-repeat pt-16 pb-24 overflow-hidden"
         style={{ backgroundImage: "url('/images/banner_service_2.png')" }}
       >
-        <div className="absolute inset-0 bg-[#1a3a5c]/60" />
+        <div className="absolute inset-0 bg-primary/60" />
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-8xl font-bold text-white mb-4">
             {rootCategoryName}
