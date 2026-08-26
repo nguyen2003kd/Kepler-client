@@ -2,8 +2,6 @@
 import {
   Building2,
   Target,
-  History,
-  Network,
   Users,
   Award,
   Zap,
