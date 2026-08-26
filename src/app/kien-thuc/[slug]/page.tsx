@@ -1,24 +1,41 @@
-import { CategoryWithChildren } from "@/api/models/categoryWithChildren";
 import baseConfig from "@/configs/base";
-import { getMockPostsForCategory } from "@/utils/mock-data";
-import { Metadata } from "next";
+import type { PostExtended } from "@/types/post";
+import type { CategoryWithChildren } from "@/api/models/categoryWithChildren";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import DynamicPostDetailPage from "@/app/[...slug]/views/post-detail-page";
 import DynamicCategoryPage from "@/app/[...slug]/views/category-page";
-import ArticleDetailPage from "./article-detail";
+import { getMockPostsForCategory, getMockPostBySlug } from "@/utils/mock-data";
 
-interface KienThucSlugPageProps {
+interface KienThucDetailPageProps {
   params: { slug: string };
   searchParams: { date?: string };
 }
 
-function flattenCategories(cats: CategoryWithChildren[], result: CategoryWithChildren[] = []): CategoryWithChildren[] {
-  for (const c of cats) {
-    result.push(c);
-    if (c.categories) flattenCategories(c.categories, result);
+async function getPost(slug: string): Promise<PostExtended | null> {
+  try {
+    const res = await fetch(
+      `${baseConfig.backendDomain}/api/v1.0/post/slug/${slug}`,
+      { cache: "no-store" },
+    );
+    if (!res.ok) {
+      const mockPost = getMockPostBySlug(slug);
+      if (mockPost) return mockPost;
+      return null;
+    }
+    const data = await res.json();
+    if (!data?.responseData) {
+      const mockPost = getMockPostBySlug(slug);
+      if (mockPost) return mockPost;
+      return null;
+    }
+    return (data?.responseData as PostExtended) || null;
+  } catch {
+    return null;
   }
-  return result;
 }
 
-async function getCategory(fullSlug: string, language?: "vi" | "en") {
+async function getCategoryByLink(fullSlug: string, language?: "vi" | "en") {
   try {
     const url = new URL(`${baseConfig.backendDomain}/api/v1.0/category`);
     if (language) url.searchParams.set("language", language);
@@ -26,7 +43,11 @@ async function getCategory(fullSlug: string, language?: "vi" | "en") {
     if (!res.ok) return null;
     const data = await res.json();
     const all = (data?.responseData || []) as CategoryWithChildren[];
-    const flat = flattenCategories(all);
+    const flat: CategoryWithChildren[] = [];
+    const flatten = (cats: CategoryWithChildren[]) => {
+      for (const c of cats) { flat.push(c); if (c.categories) flatten(c.categories); }
+    };
+    flatten(all);
     return flat.find((cat) => cat.link === `/${fullSlug}`) || null;
   } catch {
     return null;
@@ -41,7 +62,11 @@ async function getCategoryWithSiblings(fullSlug: string, language?: "vi" | "en")
     if (!res.ok) return { category: null, siblings: [] as CategoryWithChildren[] };
     const data = await res.json();
     const all = (data?.responseData || []) as CategoryWithChildren[];
-    const flat = flattenCategories(all);
+    const flat: CategoryWithChildren[] = [];
+    const flatten = (cats: CategoryWithChildren[]) => {
+      for (const c of cats) { flat.push(c); if (c.categories) flatten(c.categories); }
+    };
+    flatten(all);
     const category = flat.find((cat) => cat.link === `/${fullSlug}`) || null;
     let siblings: CategoryWithChildren[] = [];
     if (category?.parent_category_id) {
@@ -68,25 +93,80 @@ async function getPostsForCategory(categoryId: string) {
   }
 }
 
-export async function generateMetadata({ params }: KienThucSlugPageProps): Promise<Metadata> {
-  const fullSlug = `kien-thuc/${params.slug}`;
-  const category = await getCategory(fullSlug, "vi");
-  if (category) {
+export async function generateMetadata({
+  params,
+}: KienThucDetailPageProps): Promise<Metadata> {
+  const post = await getPost(params.slug);
+
+  if (!post) {
+    const category = await getCategoryByLink(`kien-thuc/${params.slug}`, "vi");
+    if (category) {
+      return {
+        title: `${category.name} | Kepler Property`,
+        description: category.description || category.name,
+      };
+    }
     return {
-      title: `${category.name} | Kepler Property`,
-      description: category.description || category.name,
+      title: "Không tìm thấy bài viết",
+      description: "Bài viết không tồn tại hoặc đã bị xóa.",
     };
   }
-  return { title: "Kiến thức | Kepler Property" };
+
+  const thumbnailUrl =
+    post.thumbnail_compress_info?.desktop
+      ? `${baseConfig.backendDomain}${post.thumbnail_compress_info.desktop}`
+      : post.thumbnail_path
+        ? `${baseConfig.backendDomain}${post.thumbnail_path}`
+        : undefined;
+
+  const pageUrl = `${baseConfig.frontendDomain}/kien-thuc/${params.slug}`;
+  const description = post.summary?.replace(/<[^>]*>/g, "").slice(0, 160) || "Bài viết mới nhất";
+
+  return {
+    title: post.title || "Kiến thức",
+    description,
+    openGraph: {
+      title: post.title || "Kiến thức",
+      description,
+      url: pageUrl,
+      type: "article",
+      publishedTime: post.created_at || undefined,
+      siteName: "Kepler Property",
+      ...(thumbnailUrl && {
+        images: [{ url: thumbnailUrl, width: 1200, height: 630, alt: post.title || "" }],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title || "Kiến thức",
+      description,
+      ...(thumbnailUrl && { images: [thumbnailUrl] }),
+    },
+    alternates: {
+      canonical: pageUrl,
+    },
+  };
 }
 
-export default async function KienThucSlugPage({ params, searchParams }: KienThucSlugPageProps) {
-  const fullSlug = `kien-thuc/${params.slug}`;
+export default async function KienThucDetailPage({ params, searchParams }: KienThucDetailPageProps) {
+  const post = await getPost(params.slug);
 
-  // Try category page first (e.g. /kien-thuc/tai-chinh-khoan-vay)
+  if (post) {
+    return (
+      <DynamicPostDetailPage
+        post={post}
+        categoryName="Kiến thức"
+        categorySlug={`kien-thuc/${params.slug}`}
+        urlCategoryId={undefined}
+      />
+    );
+  }
+
+  // Try category page (e.g. /kien-thuc/tai-chinh-khoan-vay)
+  const fullSlug = `kien-thuc/${params.slug}`;
   const [{ category, siblings }, categoryEn] = await Promise.all([
     getCategoryWithSiblings(fullSlug, "vi"),
-    getCategory(fullSlug, "en"),
+    getCategoryByLink(fullSlug, "en"),
   ]);
 
   if (category) {
@@ -108,6 +188,5 @@ export default async function KienThucSlugPage({ params, searchParams }: KienThu
     );
   }
 
-  // Not a category — render article detail (client component with mock data)
-  return <ArticleDetailPage />;
+  notFound();
 }

@@ -13,6 +13,7 @@ import {
 import { FadeIn } from "@/components/ui/fade-in";
 import AboutHero from "../components/about-hero";
 import AboutPageContent from "../components/about-page-content";
+import EcosystemMembersSection from "../components/ecosystem-members-section";
 import baseConfig from "@/configs/base";
 import type { CategoryWithChildren } from "@/api/models/categoryWithChildren";
 

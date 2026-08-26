@@ -1,11 +1,13 @@
-﻿"use client";
+"use client";
 
 import { Category } from "@/api/models/category";
 import { PostExtended } from "@/types/post";
 import CategoryTab from "../components/category-tab";
 import NewsGrid from "../components/news-grid";
 import RelatedSidebar from "../components/related-sidebar";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { useMemo } from "react";
 
 
 interface DynamicCategoryPageProps {
@@ -27,7 +29,27 @@ export default function DynamicCategoryPage({
 }: DynamicCategoryPageProps) {
   const { i18n } = useTranslation("pages/post-detail");
   const isEn = i18n.language?.startsWith("en");
-  const displayCategory = isEn && categoryEn ? categoryEn : category;
+  const searchParams = useSearchParams();
+  const subcategoryCode = searchParams.get("category");
+  const isPodcastVideo = subcategoryCode === "podcast-video";
+
+  const activeCategory = useMemo(() => {
+    const sibs = siblingCategories && siblingCategories.length > 0 ? siblingCategories : (category.categories || []);
+    if (!subcategoryCode || sibs.length === 0) return null;
+    return sibs.find((cat) => {
+      if (!cat.link) return false;
+      try {
+        const url = new URL(cat.link, "http://placeholder");
+        return url.searchParams.get("category") === subcategoryCode;
+      } catch {
+        return false;
+      }
+    }) || null;
+  }, [subcategoryCode, siblingCategories, category.categories]);
+
+  const displayCategory = activeCategory
+    ? (isEn ? activeCategory : activeCategory)
+    : (isEn && categoryEn ? categoryEn : category);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -64,12 +86,15 @@ export default function DynamicCategoryPage({
                 parentLink={parentLink}
               />
 
-              {/* Related Sidebar */}
-              <RelatedSidebar
-                categoryId={category.id || ""}
-                categoryCode={category.link?.replace(/^\//, "")}
-                categoryName={displayCategory.name || ""}
-              />
+              {/* Related Sidebar — hidden for podcast/video */}
+              {!isPodcastVideo && (
+                <RelatedSidebar
+                  categoryId={category.id || ""}
+                  categoryCode={category.link?.replace(/^\//, "")}
+                  categoryName={displayCategory.name || ""}
+                  siblingCategories={siblingCategories && siblingCategories.length > 0 ? siblingCategories : (category.categories || [])}
+                />
+              )}
             </div>
           </div>
 
@@ -78,9 +103,10 @@ export default function DynamicCategoryPage({
             <NewsGrid
               categoryId={category.id || ""}
               categoryName={displayCategory.name || ""}
-              categoryCode={category.link?.replace(/^\//, "")}
+              categoryCode={displayCategory.link?.replace(/^\//, "")}
               date={date}
               initialPosts={initialPosts}
+              siblingCategories={siblingCategories && siblingCategories.length > 0 ? siblingCategories : (category.categories || [])}
             />
           </div>
         </div>
