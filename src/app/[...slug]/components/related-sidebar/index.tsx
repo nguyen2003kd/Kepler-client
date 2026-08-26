@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useGetApiV10Post } from "@/api/endpoints/post";
+import { Category } from "@/api/models/category";
 import { SidebarSkeleton } from "@/components/common/loading";
 import { Card } from "@/components/ui/card";
 import { PAGE_IDS } from "@/constants/page-ids";
@@ -8,23 +9,42 @@ import { PostExtended } from "@/types/post";
 import { mockPosts } from "@/utils/mock-data";
 import { Newspaper } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 interface RelatedSidebarProps {
   categoryId: string;
   categoryCode?: string;
   categoryName?: string;
+  siblingCategories?: Category[];
 }
 
 export default function RelatedSidebar({
   categoryId,
   categoryCode,
   categoryName,
+  siblingCategories,
 }: RelatedSidebarProps) {
   const { t, i18n } = useTranslation("pages/post-detail");
   const locale = i18n.language?.startsWith("en") ? "en-US" : "vi-VN";
   const searchParams = useSearchParams();
-  const subcategoryId = searchParams.get("category");
+  const subcategoryCode = searchParams.get("category");
+
+  // Map subcategory code (from URL ?category=xxx) to UUID via sibling categories
+  const subcategoryId = useMemo(() => {
+    if (!subcategoryCode || !siblingCategories || siblingCategories.length === 0) return null;
+    const matched = siblingCategories.find((cat) => {
+      if (!cat.link) return false;
+      try {
+        const url = new URL(cat.link, "http://placeholder");
+        return url.searchParams.get("category") === subcategoryCode;
+      } catch {
+        return false;
+      }
+    });
+    return matched?.id || null;
+  }, [subcategoryCode, siblingCategories]);
+
   const activeCategoryId = subcategoryId || categoryId;
   const siderbarName = t("latestCapabilityInfo");
   const { data: relatedNewsData, isLoading } = useGetApiV10Post(
