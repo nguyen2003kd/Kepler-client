@@ -92,18 +92,23 @@ export default function AboutCertificationsSection() {
         <div className="grid md:grid-cols-2 gap-6">
           {/* Chứng chỉ */}
           <FadeIn>
-            <div className="h-full bg-white rounded-2xl p-8 md:p-10 border border-gray-200 hover:shadow-lg transition-shadow">
-              <div className="mb-6">
-                <span className="text-xs font-semibold tracking-wider text-[#DC2626] uppercase">
-                  Minh bạch & Uy tín
-                </span>
-                <h3 className="text-2xl font-bold text-gray-900 mt-1">
-                  Chứng chỉ và giấy phép
-                </h3>
+            <div className="h-full bg-white rounded-2xl p-8 md:p-10 border border-gray-200 hover:shadow-lg transition-shadow flex flex-col">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-[#DC2626] flex items-center justify-center shrink-0">
+                  <Award className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <span className="text-xs font-semibold tracking-wider text-[#DC2626] uppercase">
+                    Minh bạch & Uy tín
+                  </span>
+                  <h3 className="text-2xl font-bold text-gray-900 mt-0.5">
+                    Chứng chỉ và giấy phép
+                  </h3>
+                </div>
               </div>
 
               {certConfig.data.length > 0 ? (
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3 flex-1 mb-6">
                   {certConfig.data.map((item) => (
                     <div
                       key={item.id}
@@ -147,7 +152,7 @@ export default function AboutCertificationsSection() {
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-600 leading-relaxed mb-6">
+                <p className="text-gray-600 leading-relaxed flex-1 mb-6">
                   Các chứng chỉ, giấy phép và tài liệu pháp lý được Kepler Group
                   công bố, khẳng định sự tuân thủ và uy tín trong hoạt động kinh doanh.
                 </p>
@@ -155,7 +160,7 @@ export default function AboutCertificationsSection() {
 
               <Link
                 href="/about/certifications"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#DC2626] hover:bg-red-700 text-white text-sm font-semibold rounded-full transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#DC2626] hover:bg-red-700 text-white text-sm font-semibold rounded-full transition-colors self-start"
               >
                 <Eye className="h-4 w-4" />
                 Xem chứng chỉ
@@ -165,30 +170,74 @@ export default function AboutCertificationsSection() {
 
           {/* Hồ sơ năng lực */}
           <FadeIn delay={0.1}>
-            <div className="h-full bg-white rounded-2xl p-8 md:p-10 border border-gray-200 hover:shadow-lg transition-shadow">
-              <div className="mb-6">
-                <span className="text-xs font-semibold tracking-wider text-[#DC2626] uppercase">
-                  Năng lực Kepler
-                </span>
-                <h3 className="text-2xl font-bold text-gray-900 mt-1">
-                  {capability.title || "Hồ sơ năng lực"}
-                </h3>
+            <div className="h-full relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#DC2626] to-red-800 p-8 md:p-10 flex flex-col">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[length:48px_48px]" />
+
+              <div className="relative flex flex-col h-full">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                    <Download className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-semibold tracking-wider text-red-100 uppercase">
+                      Năng lực Kepler
+                    </span>
+                    <h3 className="text-2xl font-bold text-white mt-0.5">
+                      {capability.title || "Hồ sơ năng lực"}
+                    </h3>
+                  </div>
+                </div>
+
+                {capability.imageUrl ? (
+                  <div className="relative mb-6 flex-1 flex items-center justify-center">
+                    <img
+                      src={getImageUrl(capability.imageUrl)}
+                      alt={capability.title || "Hồ sơ năng lực"}
+                      className="max-h-48 w-auto object-contain rounded-xl shadow-lg"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative flex-1 flex flex-col justify-center mb-6">
+                    <p className="text-red-50 text-base leading-relaxed">
+                      {capability.description}
+                    </p>
+                    <div className="mt-6 grid grid-cols-3 gap-3">
+                      <div className="text-center p-3 rounded-xl bg-white/10">
+                        <div className="text-2xl font-black text-white">25+</div>
+                        <div className="text-xs text-red-100 mt-1">Năm kinh nghiệm</div>
+                      </div>
+                      <div className="text-center p-3 rounded-xl bg-white/10">
+                        <div className="text-2xl font-black text-white">08</div>
+                        <div className="text-xs text-red-100 mt-1">Công ty thành viên</div>
+                      </div>
+                      <div className="text-center p-3 rounded-xl bg-white/10">
+                        <div className="text-2xl font-black text-white">50+</div>
+                        <div className="text-xs text-red-100 mt-1">Chuyên gia</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {capability.imageUrl && (
+                  <p className="relative text-red-50 text-sm leading-relaxed mb-6">
+                    {capability.description}
+                  </p>
+                )}
+
+                {capability.fileUrl && (
+                  <a
+                    href={capability.fileUrl}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-[#DC2626] text-sm font-semibold rounded-full hover:bg-red-50 transition-colors self-start"
+                  >
+                    <Download className="h-4 w-4" />
+                    Tải hồ sơ năng lực
+                  </a>
+                )}
               </div>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                {capability.description}
-              </p>
-              {capability.fileUrl && (
-                <a
-                  href={capability.fileUrl}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#DC2626] hover:bg-red-700 text-white text-sm font-semibold rounded-full transition-colors"
-                >
-                  <Download className="h-4 w-4" />
-                  Tải hồ sơ năng lực
-                </a>
-              )}
             </div>
           </FadeIn>
         </div>
