@@ -24,11 +24,25 @@ export default function CategoryTab({
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  // Sync selected category with current pathname
+  // Sync selected category with current pathname + query param ?category
   useEffect(() => {
-    const matched = categories.find((cat) => cat.link === pathname);
+    const currentSubcategory = searchParams.get("category");
+    const matched = categories.find((cat) => {
+      if (!cat.link) return false;
+      if (cat.link === pathname) return true;
+      try {
+        const catUrl = new URL(cat.link, "http://placeholder");
+        const isSamePath = catUrl.pathname === pathname || catUrl.pathname === basePathname;
+        const hasMatchingCategory = currentSubcategory
+          ? catUrl.searchParams.get("category") === currentSubcategory
+          : false;
+        return isSamePath && hasMatchingCategory;
+      } catch {
+        return false;
+      }
+    });
     setSelectedCategory(matched?.id || null);
-  }, [pathname, categories]);
+  }, [pathname, basePathname, searchParams, categories]);
 
   const handleCategoryChange = (category: Category | null) => {
     setSelectedCategory(category?.id || null);

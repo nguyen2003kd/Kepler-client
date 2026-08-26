@@ -35,7 +35,7 @@ const defaultHeroConfig: HeroConfigData = {
   cta1Text: "Khám phá dịch vụ",
   cta1Link: "/services",
   cta2Text: "Liên hệ tư vấn",
-  cta2Link: "/contact/lien-he-kepler",
+  cta2Link: "/contact",
   logoImage: "/api/storage/uploads/images/file-1787394265327-698518208.png",
 };
 

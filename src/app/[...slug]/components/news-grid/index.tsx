@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetApiV10Post } from "@/api/endpoints/post";
+import { Category } from "@/api/models/category";
 import { PAGE_IDS } from "@/constants/page-ids";
 import { buildPostFilters } from "@/lib/filters";
 import { PostExtended } from "@/types/post";
@@ -9,6 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import NewsHeader from "../news-header";
 import NewsList from "./components/news-list";
+import VideoGrid from "../video-grid";
 
 interface NewsGridProps {
   categoryId?: string;
@@ -16,6 +18,7 @@ interface NewsGridProps {
   categoryCode?: string;
   date?: string;
   initialPosts?: PostExtended[];
+  siblingCategories?: Category[];
 }
 
 export default function NewsGrid({
@@ -24,10 +27,11 @@ export default function NewsGrid({
   categoryCode,
   date: initialDate,
   initialPosts,
+  siblingCategories,
 }: NewsGridProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const subcategoryId = searchParams.get("category");
+  const subcategoryCode = searchParams.get("category");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [date, setDate] = useState<Date | undefined>(
@@ -39,6 +43,22 @@ export default function NewsGrid({
     return buildPostFilters(date, "is_hidden==false");
   }, [date]);
 
+  // Map subcategory code (from URL ?category=xxx) to UUID via sibling categories
+  const subcategoryId = useMemo(() => {
+    if (!subcategoryCode || !siblingCategories || siblingCategories.length === 0) return null;
+    // Match by extracting code from link (e.g. /kien-thuc?category=da-u-bds → da-u-bds)
+    const matched = siblingCategories.find((cat) => {
+      if (!cat.link) return false;
+      try {
+        const url = new URL(cat.link, "http://placeholder");
+        return url.searchParams.get("category") === subcategoryCode;
+      } catch {
+        return false;
+      }
+    });
+    return matched?.id || null;
+  }, [subcategoryCode, siblingCategories]);
+
   const activeCategoryId = subcategoryId || categoryId;
 
   const { data, isLoading, error } = useGetApiV10Post({
@@ -47,7 +67,9 @@ export default function NewsGrid({
     pageSize: 10,
     filterBy: "CLIENT",
     category_id: activeCategoryId,
-    ...(activeCategoryId ? {} : { position: "true", sortOrderPosition: "ASC", page_id: PAGE_IDS.LATEST_POSTS }),
+    position: "true",
+    sortOrderPosition: "ASC",
+    page_id: PAGE_IDS.LATEST_POSTS,
   });
 
   const apiPosts = (data?.responseData?.rows as PostExtended[]) || [];
@@ -57,6 +79,16 @@ export default function NewsGrid({
   const totalPages = data?.responseData?.count
     ? Math.ceil(data.responseData.count / (data.responseData.pageSize || 10))
     : 1;
+
+  // If subcategory is podcast-video, render VideoGrid (uses /api/v1.0/file instead of /post)
+  if (subcategoryCode === "podcast-video") {
+    return (
+      <VideoGrid
+        categoryName={categoryName}
+        categoryCode={categoryCode}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
