@@ -3,9 +3,7 @@
 import NextImage, { type ImageProps } from "next/image";
 import { useEffect, useState } from "react";
 
-const FALLBACK_IMAGE =
-  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y1ZjVmNSIvPjxyZWN0IHg9IjE3MCIgeT0iMTIwIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIGZpbGw9IiNkNGQ0ZDQiLz48L3N2Zz4=";
-
+const FALLBACK_IMAGE = "/seo.png";
 const isBackendUrl = (src: unknown): boolean => {
   if (typeof src !== "string") return false;
   return src.includes("/api/storage/") || src.includes("localhost:4100");
