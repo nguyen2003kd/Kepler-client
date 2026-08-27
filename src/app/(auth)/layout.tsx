@@ -3,8 +3,8 @@ import "../globals.css";
 import GuestGuard from "@/auth/GuestGuard";
 import { FallbackSpinner } from "@/components/ui/fallbackspinner";
 export const metadata: Metadata = {
-  title: "SMQ - Đăng nhập",
-  description: "Đăng nhập hệ thống SMQ",
+  title: "Đăng nhập",
+  description: "Đăng nhập hệ thống KEPLER",
 };
 
 export default function AuthLayout({
