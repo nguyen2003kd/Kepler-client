@@ -30,11 +30,9 @@ export const baseContactSchema = z.object({
 export type BaseContactValues = z.infer<typeof baseContactSchema>;
 
 export const quotationSchema = baseContactSchema.extend({
-  post_id: z.string().min(1, "Vui lòng chọn dịch vụ"),
-  service_id: z.string().min(1, "Vui lòng chọn dịch vụ"),
-  receive_method_id: z
-    .string()
-    .min(1, "Vui lòng chọn phương thức nhận kết quả"),
+  post_id: z.string().optional(),
+  service_id: z.string().optional(),
+  receive_method_id: z.string().optional(),
   calibration_id: z.string().optional(),
   invoice_same_as_delivery: z.boolean(),
   certificate_info_type: z.enum([

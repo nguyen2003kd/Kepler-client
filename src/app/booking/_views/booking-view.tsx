@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toaster";
+import { mainInstance } from "@/api/mutator/custom-instance";
 
 const CONSULTATION_TOPICS = [
   "Thẩm định giá tài sản",
@@ -69,13 +70,52 @@ export default function BookingView() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    toast.success({
-      title: "Đăng ký thành công",
-      content: "Chúng tôi sẽ liên hệ để xác nhận lịch tư vấn trong thời gian sớm nhất.",
-    });
+    setIsSubmitting(true);
+
+    const descriptionParts = [
+      `Họ tên: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Điện thoại: ${formData.phone}`,
+      formData.company && `Doanh nghiệp: ${formData.company}`,
+      formData.notes && `Ghi chú: ${formData.notes}`,
+    ].filter(Boolean).join("\n");
+
+    const slotTimeMap: Record<string, string> = {
+      "Sáng (8:00 - 12:00)": "08:00:00",
+      "Chiều (13:00 - 17:30)": "13:00:00",
+      "Tối (18:00 - 20:00)": "18:00:00",
+    };
+    const scheduledAt = `${formData.preferredDate}T${slotTimeMap[formData.preferredSlot] || "08:00:00"}`;
+
+    try {
+      await mainInstance({
+        url: "/api/v1.0/appointment/public",
+        method: "POST",
+        data: {
+          title: formData.topic,
+          description: descriptionParts,
+          scheduled_at: scheduledAt,
+          status: "PENDING",
+        },
+      });
+      setSubmitted(true);
+      toast.success({
+        title: "Đăng ký thành công",
+        content: "Chúng tôi sẽ liên hệ để xác nhận lịch tư vấn trong thời gian sớm nhất.",
+      });
+    } catch (error) {
+      console.error("Booking submission error:", error);
+      toast.error({
+        title: "Đăng ký thất bại",
+        content: "Có lỗi xảy ra, vui lòng thử lại sau.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -267,6 +307,7 @@ export default function BookingView() {
               <div className="flex justify-end pt-4">
                 <Button
                   type="submit"
+                  disabled={isSubmitting}
                   className="bg-red-600 hover:bg-red-700 text-white px-8 rounded-lg h-12 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] group"
                 >
                   Gửi đăng ký

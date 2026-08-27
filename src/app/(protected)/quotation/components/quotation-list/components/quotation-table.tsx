@@ -301,9 +301,6 @@ export default function QuotationTable({
                   <TableHead className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[33%] after:w-px after:bg-gray-300">
                     {t("tableService")}
                   </TableHead>
-                  <TableHead className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[33%] after:w-px after:bg-gray-300">
-                    {t("tableReceiveMethod")}
-                  </TableHead>
                   <TableHead className="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider relative after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-[33%] after:w-px after:bg-gray-300">
                     {t("tableSentDate")}
                   </TableHead>
@@ -330,12 +327,7 @@ export default function QuotationTable({
                     </TableCell>
                     <TableCell className="px-6 py-4 whitespace-nowrap">
                       <span className="text-sm text-gray-900">
-                        {item.post?.title || t("serviceUnknown")}
-                      </span>
-                    </TableCell>
-                    <TableCell className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm text-gray-700">
-                        {item.receive_method?.name || t("notAvailable")}
+                        {item.post?.title || item.contact_person || t("notAvailable")}
                       </span>
                     </TableCell>
                     <TableCell className="px-6 py-4 whitespace-nowrap text-center">
