@@ -91,7 +91,7 @@ export default function ForgotPasswordPage() {
             <div className="relative z-10">
               <Image
                 src="/images/logo-no-bg.png"
-                alt="CASE-SMQ Logo"
+                alt="Logo"
                 width={400}
                 height={150}
                 className="drop-shadow-2xl"

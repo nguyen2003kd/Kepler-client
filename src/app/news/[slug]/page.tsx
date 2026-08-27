@@ -130,7 +130,7 @@ export async function generateMetadata({
       url: pageUrl,
       type: "article",
       publishedTime: post.created_at || undefined,
-      siteName: "CASE-SMQ",
+      siteName: "KEPLER",
       ...(thumbnailUrl && {
         images: [{ url: thumbnailUrl, width: 1200, height: 630, alt: post.title || "" }],
       }),
