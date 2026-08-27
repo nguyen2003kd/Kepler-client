@@ -5,6 +5,7 @@ import AboutPageContent from "../components/about-page-content";
 import AboutBanner from "../components/banner";
 import AboutStatsSection from "../components/about-stats-section";
 import AboutEcosystemSection from "../components/about-ecosystem-section";
+import AboutMainServicesSection from "../components/about-main-services-section";
 import AboutVisionMissionSection from "../components/about-vision-mission-section";
 import AboutExpertCouncilSection from "../components/about-expert-council-section";
 import AboutCertificationsSection from "../components/about-certifications-section";
@@ -151,10 +152,13 @@ export default async function CompanyOverviewPage() {
             {/* Section 2: Tầm nhìn – Sứ mệnh */}
             <AboutVisionMissionSection />
 
-            {/* Section 3: Hệ thống thành viên */}
+            {/* Section 3: Lĩnh vực hoạt động chính */}
+            <AboutMainServicesSection categoryLink="/about/main-services" />
+
+            {/* Section 4: Hệ thống thành viên */}
             <AboutEcosystemSection />
 
-            {/* Section 4: Ban điều hành */}
+            {/* Section 5: Ban điều hành */}
             <section className="py-20 md:py-28 bg-gray-50">
               <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
                 <FadeIn className="max-w-2xl mb-14">
@@ -344,10 +348,10 @@ export default async function CompanyOverviewPage() {
               </div>
             </section>
 
-            {/* Section 5: Hội đồng cố vấn */}
+            {/* Section 6: Hội đồng cố vấn */}
             <AboutExpertCouncilSection />
 
-            {/* Section 6 & 7: Chứng chỉ + Hồ sơ năng lực */}
+            {/* Section 7 & 8: Chứng chỉ + Hồ sơ năng lực */}
             <AboutCertificationsSection />
 
             {/* Contact CTA */}
