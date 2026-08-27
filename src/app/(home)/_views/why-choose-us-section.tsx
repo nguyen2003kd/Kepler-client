@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import { useMemo, useState, useEffect } from "react";
 import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
 
@@ -72,7 +72,7 @@ export default function WhyChooseUsSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-red-600 shadow-2xl">
-              <Image
+              <SafeImage
                 src={config.image}
                 alt="Kepler"
                 fill

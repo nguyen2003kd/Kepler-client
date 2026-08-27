@@ -118,6 +118,7 @@ export default function AboutCertificationsSection() {
                           src={getImageUrl(item.img)}
                           alt={item["describe-img"] || ""}
                           className="w-12 h-12 rounded-lg object-cover shrink-0"
+                          onError={(e) => { e.currentTarget.style.display = "none"; }}
                         />
                       ) : (
                         <div className="w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
@@ -187,6 +188,7 @@ export default function AboutCertificationsSection() {
                       src={getImageUrl(capability.imageUrl)}
                       alt={capability.title || "Hồ sơ năng lực"}
                       className="max-h-48 w-auto object-contain rounded-xl shadow-lg"
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
                     />
                   </div>
                 ) : (

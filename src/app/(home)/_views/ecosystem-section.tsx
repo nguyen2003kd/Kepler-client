@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 import { useState, useMemo, useEffect } from "react";
 import { useGetApiV10Category } from "@/api/endpoints/category";
@@ -178,7 +178,7 @@ export default function EcosystemSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Image
+              <SafeImage
                 src={members[active]?.image || FALLBACK_MEMBERS[0].image}
                 alt={members[active]?.name || ""}
                 fill

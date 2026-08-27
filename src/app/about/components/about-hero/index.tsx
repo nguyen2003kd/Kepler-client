@@ -1,11 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { ReactNode } from "react";
+import SafeImage from "@/components/common/safe-image";
 
 interface AboutHeroProps {
-  icon: ReactNode;
   eyebrow: string;
   title: string;
   description: string;
@@ -13,7 +11,6 @@ interface AboutHeroProps {
 }
 
 export default function AboutHero({
-  icon,
   eyebrow,
   title,
   description,
@@ -23,7 +20,7 @@ export default function AboutHero({
     <section className="relative bg-gray-900 text-white overflow-hidden">
       {image && (
         <div className="absolute inset-0">
-          <Image
+          <SafeImage
             src={image}
             alt=""
             fill
@@ -46,10 +43,7 @@ export default function AboutHero({
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-3xl"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center">
-              {icon}
-            </div>
+          <div className="mb-6">
             <span className="text-sm font-semibold tracking-wider text-red-400 uppercase">
               {eyebrow}
             </span>

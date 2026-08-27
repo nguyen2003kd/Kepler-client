@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 import { ArrowUpRight, ArrowLeft, Award, Briefcase, FileText } from "lucide-react";
 import { motion } from "framer-motion";
@@ -12,7 +12,7 @@ export default function ExpertProfileContent({ expert }: { expert: Expert }) {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image
+          <SafeImage
             src={expert.avatar}
             alt={expert.name}
             fill

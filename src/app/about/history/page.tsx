@@ -149,7 +149,6 @@ export default function HistoryPage() {
   return (
     <div className="bg-white">
       <AboutHero
-        icon={<History className="h-6 w-6 text-red-400" />}
         eyebrow="Hành trình phát triển"
         title="Lịch sử phát triển"
         description="Timeline hình thành và phát triển của Kepler Group — những dấu mốc quan trọng đánh dấu chặng đường trưởng thành của tập đoàn."

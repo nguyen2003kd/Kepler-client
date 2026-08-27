@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useState } from "react";
 import {
   ArrowRight,
@@ -19,8 +18,15 @@ import {
   Lightbulb,
   Target,
 } from "lucide-react";
+import UnitHero from "../he-sinh-thai/shared-sections/unit-hero";
+import UnitStory from "../he-sinh-thai/shared-sections/unit-story";
+import UnitCapabilities from "../he-sinh-thai/shared-sections/unit-capabilities";
+import UnitIndustries from "../he-sinh-thai/shared-sections/unit-industries";
+import UnitProducts from "../he-sinh-thai/shared-sections/unit-products";
+import UnitClients from "../he-sinh-thai/shared-sections/unit-clients";
+import UnitCta from "../he-sinh-thai/shared-sections/unit-cta";
 
-/* ── Data ────────────────────────────────────────────── */
+/* ── Data (RealHub-specific custom sections) ────────── */
 
 const PROBLEMS = [
   { title: "Thông tin phân tán", desc: "Dữ liệu BĐS nằm rải rác trên nhiều nền tảng, thiếu chuẩn hóa và khó đối chiếu." },
@@ -86,72 +92,22 @@ const ROADMAP = [
 
 export default function RealHubPage() {
   return (
-    <div className="bg-white">
-      <HeroSection />
+    <main>
+      <UnitHero unitKey="realhub" />
       <ProblemSection />
       <SolutionSection />
+      <UnitStory unitKey="realhub" />
       <AudienceSection />
       <ModulesSection />
+      <UnitCapabilities unitKey="realhub" />
       <CalculatorsSection />
       <RoadmapSection />
+      <UnitIndustries unitKey="realhub" />
+      <UnitProducts unitKey="realhub" />
+      <UnitClients unitKey="realhub" />
       <RegisterSection />
-    </div>
-  );
-}
-
-/* ── 1. Hero ─────────────────────────────────────────── */
-
-function HeroSection() {
-  return (
-    <section className="relative h-[70vh] min-h-[400px] max-h-[600px] overflow-hidden bg-[#1a1a1a] md:h-[90vh] md:min-h-[500px] md:max-h-[800px]">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/category-banner-investment.png"
-          alt="RealHub Platform"
-          fill
-          priority
-          className="object-cover opacity-60"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
-      <div className="absolute inset-0 z-20 flex items-center">
-        <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="max-w-3xl"
-          >
-            <span className="text-sm font-semibold tracking-wider text-primary uppercase">
-              RealHub Platform
-            </span>
-            <h1 className="mt-4 text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Nền tảng PropTech kết nối dữ liệu, tài sản và con người
-            </h1>
-            <p className="mt-4 md:mt-6 text-base md:text-lg text-white/80 leading-relaxed max-w-[60ch]">
-              RealHub là hệ sinh thái công nghệ của Kepler Group — nơi dữ liệu bất động sản,
-              chuyên gia và công cụ phân tích hội tụ trong một nền tảng duy nhất.
-            </p>
-            <div className="mt-8 md:mt-10 flex flex-wrap items-center gap-4">
-              <a
-                href="#modules"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm font-semibold rounded-full hover:bg-primary/90 transition-all group"
-              >
-                Khám phá module
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="#register"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-white/40 text-white text-sm font-semibold rounded-full hover:bg-white/10 hover:border-white/60 transition-all"
-              >
-                Đăng ký quan tâm
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
+      <UnitCta unitKey="realhub" />
+    </main>
   );
 }
 

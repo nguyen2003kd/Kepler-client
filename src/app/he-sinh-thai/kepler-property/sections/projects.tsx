@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -42,7 +42,7 @@ export default function KeplerPropertyProjects() {
               href="/news"
               className="group relative block min-h-[420px] overflow-hidden rounded-3xl"
             >
-              <Image
+              <SafeImage
                 src="/images/banner-1.png"
                 alt="Dự án Kepler Property"
                 fill

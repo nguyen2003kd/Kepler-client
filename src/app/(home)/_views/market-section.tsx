@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 
 const POSTS = [
@@ -72,7 +72,7 @@ export default function MarketSection() {
                 className="group block bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
-                  <Image
+                  <SafeImage
                     src={post.image}
                     alt={post.title}
                     fill

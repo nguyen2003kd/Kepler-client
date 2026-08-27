@@ -1,17 +1,20 @@
 "use client";
 
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEcosystemUnits } from "../../use-ecosystem-units";
 
 export default function KeplerPropertyHero() {
+  const units = useEcosystemUnits();
+  const unit = units["kepler-property"];
+
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
-        <Image
-          src="/images/banner-1.png"
-          alt="Kepler Property"
+        <SafeImage
+          src={unit.image || "/images/banner-1.png"}
+          alt={unit.name}
           fill
           priority
           className="object-cover"
@@ -26,30 +29,30 @@ export default function KeplerPropertyHero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-4xl"
         >
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-primary"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Trang chủ
-          </Link>
-          <div className="mt-8 flex items-center gap-3">
-            <div className="h-px w-12 bg-primary" />
-            <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
-              Real Estate Advisory
-            </span>
-          </div>
-          <h1 className="mt-6 text-5xl font-bold leading-[1.05] text-white sm:text-6xl lg:text-7xl">
-            Từ cơ hội
-            <br />
-            <span className="text-primary">đến giá trị.</span>
+          <h1 className="text-5xl font-bold leading-[1.05] text-white sm:text-6xl lg:text-7xl">
+            {unit.name}
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70">
-            Đồng hành cùng chủ đầu tư, chủ tài sản và nhà đầu tư trong mọi quyết định bất động sản quan trọng.
+            {unit.description}
           </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-8 flex flex-wrap gap-2"
+          >
+            {unit.items.map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/70 backdrop-blur-sm"
+              >
+                {item}
+              </span>
+            ))}
+          </motion.div>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
-              href="/lien-he"
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary/90 active:scale-[0.98]"
             >
               Trao đổi nhu cầu
