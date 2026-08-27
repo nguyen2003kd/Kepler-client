@@ -42,39 +42,54 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(baseConfig.frontendDomain),
+  applicationName: "Kepler Group",
+  manifest: "/favicon-for-app/manifest.json",
   icons: {
     icon: [
-      { url: "/images/favicon.ico", type: "image/x-icon" },
-      // { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      // { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      // { url: "/images/favicon-64x64.png", sizes: "64x64", type: "image/png" },
+      { url: "/favicon-for-app/favicon.ico", sizes: "any" },
+      { url: "/favicon-for-app/icon0.svg", type: "image/svg+xml" },
+      { url: "/favicon-for-app/icon1.png", sizes: "96x96", type: "image/png" },
     ],
-    shortcut: "/images/favicon.ico",
+    shortcut: "/favicon-for-app/favicon.ico",
+    apple: [
+      { url: "/favicon-for-app/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 
-
   title: {
-    default:
-      "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
-    template: "%s | Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
+    default: "Kepler Group | Hệ sinh thái dịch vụ bất động sản toàn diện",
+    template: "%s | Kepler Group",
   },
 
   description:
-    "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
+    "Kepler Group cung cấp hệ sinh thái dịch vụ bất động sản toàn diện: tư vấn đầu tư, thẩm định giá, phát triển dự án, quản lý tài sản, M&A, thiết kế xây dựng và giải pháp số.",
 
   keywords: [
     "Kepler Group",
+    "Kepler Property",
+    "dịch vụ bất động sản",
+    "tư vấn đầu tư bất động sản",
     "thẩm định giá",
     "môi giới bất động sản",
     "quản lý bất động sản",
+    "phát triển dự án bất động sản",
+    "tư vấn M&A",
+    "thiết kế xây dựng",
+    "giải pháp số bất động sản",
     "bất động sản",
-    "nhà đất",
-    "căn hộ",
-    "biệt thự",
-    "đất nền",
-    "cho thuê nhà đất",
-    "mua bán nhà đất",
   ],
+
+  alternates: {
+    canonical: "/",
+  },
+
+  category: "business",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 
   robots: {
     index: true,
@@ -83,21 +98,24 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
 
   openGraph: {
-    title: "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
+    title: "Kepler Group | Hệ sinh thái dịch vụ bất động sản toàn diện",
     description:
-      "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
+      "Kepler Group cung cấp hệ sinh thái dịch vụ bất động sản toàn diện: tư vấn đầu tư, thẩm định giá, phát triển dự án, quản lý tài sản, M&A, thiết kế xây dựng và giải pháp số.",
     url: baseConfig.frontendDomain,
-    siteName: "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
+    siteName: "Kepler Group",
     images: [
       {
-        url: `${baseConfig.frontendDomain}/images/kepler-thumb.png`,
-        width: 1200,
-        height: 630,
-        alt: "Kepler Group — Thẩm định giá, Môi giới & Quản lý Bất động sản",
+        url: "/seo.png",
+        width: 1731,
+        height: 909,
+        alt: "Kepler Group | Hệ sinh thái dịch vụ bất động sản toàn diện",
       },
     ],
     locale: "vi_VN",
@@ -106,10 +124,10 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
+    title: "Kepler Group | Hệ sinh thái dịch vụ bất động sản toàn diện",
     description:
-      "Kepler Property - Cập nhật tin đăng mua bán, cho thuê nhà đất, căn hộ, biệt thự, đất nền nhanh chóng và chính xác nhất",
-    images: [`${baseConfig.frontendDomain}/images/case-smeg-thumb.png`],
+      "Kepler Group cung cấp hệ sinh thái dịch vụ bất động sản toàn diện: tư vấn đầu tư, thẩm định giá, phát triển dự án, quản lý tài sản, M&A, thiết kế xây dựng và giải pháp số.",
+    images: ["/seo.png"],
   },
 };
 export default async function RootLayout({
