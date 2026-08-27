@@ -93,7 +93,6 @@ export default function CapabilitiesPage() {
   return (
     <div className="bg-white">
       <AboutHero
-        icon={<Award className="h-6 w-6 text-red-400" />}
         eyebrow="Năng lực & Thành tựu"
         title="Năng lực và thành tựu"
         description="Những con số và dấu ấn khẳng định vị thế của Kepler Group trên thị trường."

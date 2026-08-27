@@ -234,9 +234,7 @@ export default function VideoList() {
                         src={thumbnailSrc}
                         alt={video.title ?? `Video ${index + 1}`}
                         onError={(event) => {
-                          if (event.currentTarget.src !== `${window.location.origin}/seo.png`) {
-                            event.currentTarget.src = '/seo.png';
-                          }
+                          event.currentTarget.style.display = "none";
                         }}
                         className="w-full h-full object-cover"
                       />

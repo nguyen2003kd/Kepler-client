@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowUpRight, ArrowLeft } from "lucide-react";
@@ -29,7 +29,7 @@ export default function ExpertsPage() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <Image
+          <SafeImage
             src="/images/bg-home.jpg"
             alt=""
             fill
@@ -149,7 +149,7 @@ export default function ExpertsPage() {
               >
                 {/* Avatar / gradient header */}
                 <div className="relative h-48 overflow-hidden">
-                  <Image
+                  <SafeImage
                     src={expert.avatar}
                     alt={expert.name}
                     fill

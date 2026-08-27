@@ -1,69 +1,25 @@
 import { constructMetadata } from "@/lib/seo";
-import {
-  Users,
-  Award,
-  Briefcase,
-  GraduationCap,
-  Target,
-  Shield,
-  Scale,
-  TrendingUp,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import AboutHero from "../components/about-hero";
 import AboutPageContent from "../components/about-page-content";
+import { getThumbnailSrc } from "@/lib/responsive-image";
+import MemberAvatar from "../components/member-avatar";
+import { fetchBoardMembers, type BoardPost } from "../lib/fetch-board-members";
 
 export const metadata = constructMetadata({
   title: "Ban điều hành",
   description:
-    "Ban lãnh đạo Kepler — Ông Nguyễn Thái Hiền, Thạc sỹ Quản trị Kinh doanh, chuyên gia tư vấn bất động sản và thẩm định viên quốc gia với hơn 12 năm kinh nghiệm.",
+    "Ban lãnh đạo Kepler — đội ngũ chuyên gia dày dặn kinh nghiệm trong lĩnh vực bất động sản, thẩm định giá, tài chính và quản trị.",
   url: "/about/board-of-directors",
 });
 
-const leadershipValues = [
-  {
-    title: "Tầm nhìn & chiến lược",
-    description:
-      "Định hướng phát triển dài hạn, tận dụng cơ hội thị trường và xây dựng lộ trình bền vững cho Kepler.",
-    icon: Target,
-  },
-  {
-    title: "Chuẩn mực đạo đức",
-    description:
-      "Làm việc với tinh thần trách nhiệm, liêm chính và tuân thủ cao nhất trong mọi quyết định.",
-    icon: Shield,
-  },
-  {
-    title: "Chuyên môn sâu rộng",
-    description:
-      "Đội ngũ lãnh đạo tích lũy nhiều năm kinh nghiệm từ các tập đoàn bất động sản trong và ngoài nước.",
-    icon: Award,
-  },
-  {
-    title: "Minh bạch & công bằng",
-    description:
-      "Quản trị dựa trên sự công khai, công bằng và có trách nhiệm giải trình với khách hàng.",
-    icon: Scale,
-  },
-  {
-    title: "Phát triển bền vững",
-    description:
-      "Cân bằng giữa lợi ích doanh nghiệp, đối tác và cộng đồng trong từng dự án triển khai.",
-    icon: TrendingUp,
-  },
-  {
-    title: "Khách hàng là trọng tâm",
-    description:
-      "Mọi chiến lược đều hướng đến việc mang lại giá trị tối ưu và trải nghiệm chuyên nghiệp cho khách hàng.",
-    icon: Users,
-  },
-];
+export default async function BoardOfDirectorsPage() {
+  const boardPosts = await fetchBoardMembers();
 
-export default function BoardOfDirectorsPage() {
   return (
     <div className="bg-white">
       <AboutHero
-        icon={<Users className="h-6 w-6 text-red-400" />}
         eyebrow="Đội ngũ lãnh đạo"
         title="Ban điều hành"
         description="Đội ngũ lãnh đạo dày dặn kinh nghiệm, dẫn dắt Kepler trên con đường phát triển bền vững."
@@ -73,138 +29,133 @@ export default function BoardOfDirectorsPage() {
         pageKeyVi="about-board-of-directors"
         pageKeyEn="about-board-of-directors_en"
         fallback={
-          <>
-            {/* Featured director */}
-            <section className="py-24 md:py-32">
-              <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-                <FadeIn className="mb-16">
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wider text-red-600 uppercase">
-                    <Briefcase className="h-4 w-4" />
-                    Đội ngũ lãnh đạo
-                  </span>
-                  <h2 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
-                    Ban điều hành
-                  </h2>
-                  <div className="mt-6 h-1 w-20 rounded-full bg-red-500" />
-                </FadeIn>
+          <section className="py-24 md:py-32">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+              <FadeIn className="max-w-2xl mb-16">
+                <span className="text-sm font-semibold tracking-wider text-red-600 uppercase">
+                  Đội ngũ lãnh đạo
+                </span>
+                <h2 className="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+                  Ban điều hành
+                </h2>
+                <div className="mt-6 h-1 w-20 rounded-full bg-red-500" />
+              </FadeIn>
 
-                <FadeIn delay={0.1}>
-                  <div className="group relative overflow-hidden rounded-3xl bg-gray-900 border border-white/10 shadow-2xl">
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(239,68,68,0.18),_transparent_60%)]" />
-                    <div className="absolute -top-24 -right-24 w-80 h-80 bg-red-600/10 rounded-full blur-3xl" />
-
-                    <div className="relative grid grid-cols-1 md:grid-cols-12">
-                      {/* Avatar area */}
-                      <div className="md:col-span-5 flex flex-col items-center justify-center gap-8 p-10 md:p-14 border-b md:border-b-0 md:border-r border-white/10 bg-gray-900/50">
-                        <div className="relative">
-                          <div className="w-44 h-44 rounded-full bg-gradient-to-br from-red-500 to-rose-800 shadow-2xl border-4 border-white/10 flex items-center justify-center">
-                            <span className="text-5xl font-black text-white/95 tracking-tight">
-                              NTH
+              {boardPosts.length > 0 ? (
+                <>
+                  {/* Featured leader — first member */}
+                  {boardPosts[0] && (
+                    <FadeIn className="mb-8">
+                      <a
+                        href={`/about/board-of-directors/${boardPosts[0].slug}`}
+                        className="group relative block overflow-hidden rounded-3xl bg-white border border-gray-200 hover:shadow-2xl transition-all duration-500"
+                      >
+                        <div className="grid md:grid-cols-5 gap-0">
+                          {/* Left: avatar area */}
+                          <div className="md:col-span-2 relative bg-gradient-to-br from-red-600 to-red-800 p-10 md:p-12 flex flex-col items-center justify-center min-h-[320px]">
+                            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-red-500 to-red-700" />
+                            {(() => {
+                              const post = boardPosts[0] as BoardPost;
+                              const imgSrc = getThumbnailSrc(
+                                post.thumbnail_compress_info,
+                                post.thumbnail_path
+                              );
+                              return imgSrc ? (
+                                <MemberAvatar
+                                  thumbnailPath={post.thumbnail_path}
+                                  thumbnailCompressInfo={post.thumbnail_compress_info}
+                                  title={post.title}
+                                  size="lg"
+                                  className="relative ring-4 ring-white/20 shadow-2xl"
+                                />
+                              ) : (
+                                <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full bg-white/10 backdrop-blur-sm ring-4 ring-white/20 flex items-center justify-center shadow-2xl">
+                                  <span className="text-4xl md:text-5xl font-black text-white">
+                                    {post.title.replace(/^(KTS\.|LS\.|KS\.)\s*/, "").charAt(0)}
+                                  </span>
+                                </div>
+                              );
+                            })()}
+                            <span className="relative mt-6 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-bold tracking-widest uppercase border border-white/20">
+                              {(boardPosts[0] as BoardPost).summary?.split(" - ")[0] || "Lãnh đạo"}
                             </span>
                           </div>
-                          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2">
-                            <span className="inline-block px-4 py-1.5 rounded-full bg-red-600 text-white text-xs font-bold tracking-widest uppercase shadow-lg">
-                              Lãnh đạo
-                            </span>
+
+                          {/* Right: info */}
+                          <div className="md:col-span-3 p-10 md:p-12 flex flex-col justify-center">
+                            <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight group-hover:text-red-600 transition-colors">
+                              {boardPosts[0].title}
+                            </h3>
+                            <div className="mt-4 w-12 h-0.5 bg-red-600" />
+                            <p className="mt-6 text-base md:text-lg text-gray-600 leading-relaxed">
+                              {boardPosts[0].summary?.split(" - ").slice(1).join(" - ") || "Thành viên Ban điều hành Kepler Group"}
+                            </p>
+                            <div className="mt-8 inline-flex items-center gap-2 text-red-600 font-semibold text-sm group-hover:gap-3 transition-all">
+                              Xem hồ sơ chi tiết
+                              <ArrowRight className="h-4 w-4" />
+                            </div>
                           </div>
                         </div>
-
-                        <div className="text-center">
-                          <div className="inline-flex items-center gap-2 text-gray-300 font-medium">
-                            <GraduationCap className="h-4 w-4 text-red-400" />
-                            Thạc sỹ Quản trị Kinh doanh
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Bio area */}
-                      <div className="md:col-span-7 p-10 md:p-14">
-                        <span className="text-sm font-semibold tracking-wider text-red-500 uppercase">
-                          Lãnh đạo điều hành
-                        </span>
-                        <h3 className="mt-3 text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                          Ông Nguyễn Thái Hiền
-                        </h3>
-
-                        <div className="h-1 w-20 rounded-full bg-red-500 mt-6 mb-8" />
-
-                        <div className="space-y-5 text-gray-300 leading-relaxed">
-                          <p>
-                            Am hiểu lĩnh vực bất động sản, thẩm định giá, tài
-                            chính & quản trị. Ông đã có hơn 12 năm công tác
-                            trong lĩnh vực bất động sản, thẩm định giá và tài
-                            chính; là một chuyên gia về tư vấn bất động sản và
-                            là thẩm định viên quốc gia.
-                          </p>
-                          <p>
-                            Đã từng làm việc tại Tập đoàn bất động sản Hoàng Quân,
-                            Tập đoàn Cengroup, Tập đoàn BĐS quốc tế Henry Butcher
-                            Malaysia, Công ty CP thẩm định giá IVC Việt Nam… với
-                            những vị trí cấp cao.
-                          </p>
-                          <p>
-                            Ngoài ra, ông còn là giảng viên thỉnh giảng cho các
-                            trường và trung tâm đào tạo bất động sản.
-                          </p>
-                        </div>
-
-                        <div className="mt-10 flex flex-wrap gap-3">
-                          {[
-                            "Bất động sản",
-                            "Thẩm định giá",
-                            "Tài chính",
-                            "Quản trị",
-                            "Giảng viên",
-                          ].map((tag) => (
-                            <span
-                              key={tag}
-                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 text-gray-300 text-sm font-medium border border-white/10 hover:bg-red-600 hover:text-white transition-colors"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </FadeIn>
-              </div>
-            </section>
-
-            {/* Leadership values / governance */}
-            <section className="py-24 md:py-32 bg-gray-50">
-              <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-                <FadeIn className="max-w-2xl mb-16">
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wider text-red-600 uppercase">
-                    <Shield className="h-4 w-4" />
-                    Giá trị cốt lõi
-                  </span>
-                  <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
-                    Định hướng lãnh đạo & quản trị
-                  </h2>
-                  <div className="mt-6 h-1 w-20 rounded-full bg-red-500" />
-                </FadeIn>
-
-                <div className="grid md:grid-cols-3 gap-8">
-                  {leadershipValues.map((value, idx) => (
-                    <FadeIn key={value.title} delay={idx * 0.1}>
-                      <div className="h-full p-8 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:border-red-100 transition-all duration-300">
-                        <div className="w-14 h-14 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center mb-6">
-                          <value.icon className="h-6 w-6 text-red-600" />
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">
-                          {value.title}
-                        </h3>
-                        <p className="text-gray-600 leading-relaxed">
-                          {value.description}
-                        </p>
-                      </div>
+                      </a>
                     </FadeIn>
-                  ))}
+                  )}
+
+                  {/* Executive grid — remaining members */}
+                  {boardPosts.length > 1 && (
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+                      {boardPosts.slice(1).map((post: BoardPost, idx: number) => {
+                        const role = post.summary?.split(" - ")[0] || "";
+                        const imgSrc = getThumbnailSrc(post.thumbnail_compress_info, post.thumbnail_path);
+                        return (
+                          <FadeIn key={post.id} delay={idx * 0.05}>
+                            <a
+                              href={`/about/board-of-directors/${post.slug}`}
+                              className="group block bg-white rounded-2xl border border-gray-200 hover:border-red-600 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                            >
+                              {/* Top accent */}
+                              <div className="h-1.5 bg-gradient-to-r from-red-500 to-red-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
+                              <div className="p-6 flex flex-col items-center text-center">
+                                {imgSrc ? (
+                                  <MemberAvatar
+                                    thumbnailPath={post.thumbnail_path}
+                                    thumbnailCompressInfo={post.thumbnail_compress_info}
+                                    title={post.title}
+                                    size="sm"
+                                    className="ring-2 ring-gray-100 mb-4"
+                                  />
+                                ) : (
+                                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 group-hover:from-red-600 group-hover:to-red-800 flex items-center justify-center mb-4 transition-all duration-300">
+                                    <span className="text-xl font-bold text-gray-400 group-hover:text-white transition-colors">
+                                      {post.title.replace(/^(KTS\.|LS\.|KS\.)\s*/, "").charAt(0)}
+                                    </span>
+                                  </div>
+                                )}
+                                <h3 className="text-sm md:text-base font-bold text-gray-900 leading-snug group-hover:text-red-600 transition-colors">
+                                  {post.title}
+                                </h3>
+                                {role && (
+                                  <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
+                                    {role}
+                                  </p>
+                                )}
+                              </div>
+                            </a>
+                          </FadeIn>
+                        );
+                      })}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="text-center py-20">
+                  <p className="text-gray-500 text-lg">
+                    Nội dung đang được cập nhật.
+                  </p>
                 </div>
-              </div>
-            </section>
-          </>
+              )}
+            </div>
+          </section>
         }
       />
     </div>

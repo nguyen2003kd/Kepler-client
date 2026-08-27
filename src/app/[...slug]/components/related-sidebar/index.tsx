@@ -4,9 +4,7 @@ import { useGetApiV10Post } from "@/api/endpoints/post";
 import { Category } from "@/api/models/category";
 import { SidebarSkeleton } from "@/components/common/loading";
 import { Card } from "@/components/ui/card";
-import { PAGE_IDS } from "@/constants/page-ids";
 import { PostExtended } from "@/types/post";
-import { mockPosts } from "@/utils/mock-data";
 import { Newspaper } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
@@ -54,7 +52,6 @@ export default function RelatedSidebar({
       position: "true",
       sortOrderPosition: "ASC",
       filterBy: "CLIENT",
-      page_id: PAGE_IDS.FEATURED_NEWS,
       category_id: activeCategoryId,
     },
     {
@@ -68,7 +65,7 @@ export default function RelatedSidebar({
   const apiPosts =
     (relatedNewsData?.responseData?.rows as PostExtended[]) || [];
 
-  const relatedNews = apiPosts.length > 0 ? apiPosts : mockPosts.slice(0, 5);
+  const relatedNews = apiPosts;
 
   if (isLoading) {
     return <SidebarSkeleton />;

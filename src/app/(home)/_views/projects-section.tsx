@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -105,7 +105,7 @@ export default function ProjectsSection() {
                   className="group relative overflow-hidden bg-[#1a1a1a] rounded-xl block"
                 >
                   <div className="relative aspect-[3/4] overflow-hidden">
-                    <Image
+                    <SafeImage
                       src={project.image}
                       alt={project.title}
                       fill

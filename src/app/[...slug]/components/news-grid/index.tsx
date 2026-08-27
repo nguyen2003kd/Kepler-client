@@ -2,10 +2,8 @@
 
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import { Category } from "@/api/models/category";
-import { PAGE_IDS } from "@/constants/page-ids";
 import { buildPostFilters } from "@/lib/filters";
 import { PostExtended } from "@/types/post";
-import { mockPosts } from "@/utils/mock-data";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import NewsHeader from "../news-header";
@@ -69,12 +67,11 @@ export default function NewsGrid({
     category_id: activeCategoryId,
     position: "true",
     sortOrderPosition: "ASC",
-    page_id: PAGE_IDS.LATEST_POSTS,
   });
 
   const apiPosts = (data?.responseData?.rows as PostExtended[]) || [];
 
-  const posts = apiPosts.length > 0 ? apiPosts : (initialPosts && initialPosts.length > 0 ? initialPosts : mockPosts.slice(0, 10));
+  const posts = apiPosts.length > 0 ? apiPosts : (initialPosts && initialPosts.length > 0 ? initialPosts : []);
 
   const totalPages = data?.responseData?.count
     ? Math.ceil(data.responseData.count / (data.responseData.pageSize || 10))

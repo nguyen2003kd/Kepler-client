@@ -7,12 +7,14 @@ export interface EcosystemUnit {
   industries: string[];
   products: string[];
   clients: string;
+  image?: string;
 }
 
 export const units: Record<string, EcosystemUnit> = {
   "kepler-property": {
     name: "Kepler Property – KPC Group",
     eyebrow: "Tư vấn & Phát triển BĐS",
+    image: "/images/banner-1.png",
     description:
       "Công ty đầu mối chủ lực chính điều phối hệ sinh thái Kepler, cung cấp các dịch vụ tư vấn và giải pháp tổng thể trong lĩnh vực bất động sản, từ đầu tư, thẩm định, phát triển dự án, M&A đến quản lý, khai thác và tối ưu tài sản.",
     items: ["Tư vấn đầu tư", "Môi giới", "Leasing", "Phát triển dự án"],
@@ -47,6 +49,7 @@ export const units: Record<string, EcosystemUnit> = {
   "kpc-appraisal": {
     name: "Kepler Appraisal – KAC",
     eyebrow: "Thẩm định giá & Tư vấn giá trị",
+    image: "/images/banner-2.jpg",
     description:
       "Đơn vị chuyên về thẩm định giá và tư vấn giá trị tài sản, cung cấp các giải pháp đánh giá độc lập cho bất động sản, dự án, doanh nghiệp và các tài sản liên quan.",
     items: [
@@ -82,6 +85,7 @@ export const units: Record<string, EcosystemUnit> = {
   "kmc-management": {
     name: "Kepler Management – KMC",
     eyebrow: "Quản lý BĐS & Tài sản",
+    image: "/images/bg-home.jpg",
     description:
       "Chuyên quản lý, vận hành, khai thác và tối ưu giá trị bất động sản, từ tòa nhà văn phòng, thương mại đến danh mục tài sản và dự án.",
     items: [
@@ -122,6 +126,7 @@ export const units: Record<string, EcosystemUnit> = {
   "kac-advisory": {
     name: "Kepler M&A – KMAC",
     eyebrow: "M&A & Tư vấn BĐS doanh nghiệp",
+    image: "/images/banner-3.jpg",
     description:
       "Chuyên tư vấn mua bán & sáp nhập, chuyển nhượng dự án, doanh nghiệp và tài sản bất động sản, kết nối bên bán, bên mua và nguồn vốn.",
     items: ["Tư vấn đầu tư", "M&A", "Tái cấu trúc", "Tư vấn tài chính"],
@@ -155,6 +160,7 @@ export const units: Record<string, EcosystemUnit> = {
   "k-homes": {
     name: "Kepler Construction – KCC",
     eyebrow: "Thiết kế – Xây dựng – Quản lý thi công",
+    image: "/images/image-111.png",
     description:
       "Cung cấp giải pháp thiết kế, xây dựng và quản lý triển khai dự án, kết nối giữa ý tưởng đầu tư, thiết kế và công trình thực tế.",
     items: [
@@ -193,6 +199,7 @@ export const units: Record<string, EcosystemUnit> = {
   "kepler-land": {
     name: "Kepler Land – Sàn giao dịch BĐS",
     eyebrow: "Sàn giao dịch & Tư vấn BĐS",
+    image: "/images/bg-home.jpg",
     description:
       "Đơn vị chuyên môi giới, phân phối và tư vấn giao dịch bất động sản, kết nối chủ sở hữu, chủ đầu tư, nhà đầu tư và khách hàng có nhu cầu mua – bán – thuê.",
     items: [
@@ -229,6 +236,7 @@ export const units: Record<string, EcosystemUnit> = {
   realhub: {
     name: "RealHub Platform",
     eyebrow: "Nền tảng dữ liệu & công nghệ BĐS",
+    image: "/images/category-banner-investment.png",
     description:
       "Nền tảng công nghệ trong hệ sinh thái Kepler, hướng tới kết nối dữ liệu – tài sản – chuyên gia – dịch vụ – nhà đầu tư – giao dịch bất động sản trên một hệ thống số.",
     items: [
@@ -266,6 +274,7 @@ export const units: Record<string, EcosystemUnit> = {
   bizoffice: {
     name: "Biz Space",
     eyebrow: "Văn phòng linh hoạt & Hệ sinh thái doanh nghiệp",
+    image: "/images/banner-3.jpg",
     description:
       "Thương hiệu phát triển mô hình không gian làm việc linh hoạt và hệ sinh thái dịch vụ doanh nghiệp, cung cấp văn phòng, coworking, phòng họp, đào tạo và các dịch vụ hỗ trợ doanh nghiệp.",
     items: [

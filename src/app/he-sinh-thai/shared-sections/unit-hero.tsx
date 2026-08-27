@@ -1,32 +1,24 @@
 "use client";
 
-import Image from "next/image";
+import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { type EcosystemUnit } from "../unit-data";
 import { useEcosystemUnits } from "../use-ecosystem-units";
 
-const images: Record<string, string> = {
-  "kepler-property": "/images/category-banner-investment.png",
-  "kpc-appraisal": "/images/banner-2.jpg",
-  "kmc-management": "/images/bg-home.jpg",
-  "kac-advisory": "/images/banner-3.jpg",
-  "k-homes": "/images/image-111.png",
-  realhub: "/images/image-112.png",
-  "kepler-land": "/images/bg-home.jpg",
-  bizoffice: "/images/banner-3.jpg",
-};
+const defaultImage = "/images/bg-home.jpg";
 
 export default function UnitHero({ unitKey }: { unitKey: string }) {
   const units = useEcosystemUnits();
   const unit: EcosystemUnit = units[unitKey];
+  const heroImage = unit.image || defaultImage;
   return (
     <section className="relative min-h-[85vh] overflow-hidden bg-gray-900">
       {/* Background */}
       <div className="absolute inset-0">
-        <Image
-          src={images[unitKey]}
+        <SafeImage
+          src={heroImage}
           alt={unit.name}
           fill
           priority
@@ -61,25 +53,7 @@ export default function UnitHero({ unitKey }: { unitKey: string }) {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-4xl"
         >
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-white/40 transition-colors hover:text-primary"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Trang chủ
-          </Link>
-
-          <div className="mt-8 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-              <div className="h-2 w-2 rounded-full bg-primary" />
-            </div>
-            <div className="h-px w-16 bg-primary" />
-            <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
-              {unit.eyebrow}
-            </span>
-          </div>
-
-          <h1 className="mt-6 text-5xl font-bold leading-[1.05] tracking-tighter text-white sm:text-6xl lg:text-7xl">
+          <h1 className="text-5xl font-bold leading-[1.05] tracking-tighter text-white sm:text-6xl lg:text-7xl">
             {unit.name}
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/60">
@@ -118,7 +92,7 @@ export default function UnitHero({ unitKey }: { unitKey: string }) {
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
             <Link
-              href="/lien-he"
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:border-primary/40 hover:bg-primary/10 hover:text-primary active:scale-[0.98]"
             >
               Liên hệ tư vấn

@@ -54,6 +54,7 @@ export function useEcosystemUnits(): Record<string, EcosystemUnit> {
                 industries: member.industries || fallbackUnits[member.slug]?.industries || [],
                 products: member.products || fallbackUnits[member.slug]?.products || [],
                 clients: member.clients || fallbackUnits[member.slug]?.clients || "",
+                image: member.image || fallbackUnits[member.slug]?.image || "",
               };
             }
             return { ...fallbackUnits, ...apiUnits };
