@@ -17,7 +17,6 @@ import {
   MessageCircle,
   Paperclip,
   Phone,
-  Truck,
   User,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -171,7 +170,7 @@ export default function QuotationDetails({
                         {t("serviceType")}
                       </p>
                       <p className="text-xs font-semibold text-gray-900">
-                        {quotation.post?.title || t("serviceUnknown")}
+                        {quotation.post?.title || quotation.contact_person || t("notAvailable")}
                       </p>
                     </div>
                     <div className="bg-gray-50 p-3 rounded-lg">
@@ -180,17 +179,6 @@ export default function QuotationDetails({
                       </p>
                       <p className="text-xs font-semibold text-gray-900">
                         {formatDate(quotation.created_at)}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="bg-red-50 p-3 rounded-lg">
-                    <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">
-                      {t("receiveMethod")}
-                    </p>
-                    <div className="flex items-center gap-1.5">
-                      <Truck className="w-3.5 h-3.5 text-red-600" />
-                      <p className="text-xs font-semibold text-red-600">
-                        {quotation.receive_method?.name || t("notAvailable")}
                       </p>
                     </div>
                   </div>

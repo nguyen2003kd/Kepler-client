@@ -37,7 +37,7 @@ const aboutLinks = [
     icon: Target,
   },
   {
-    href: "/services",
+    href: "/about/main-services",
     title: "Lĩnh vực hoạt động chính",
     description: "Các lĩnh vực dịch vụ cốt lõi mà Kepler Group cung cấp.",
     icon: Zap,

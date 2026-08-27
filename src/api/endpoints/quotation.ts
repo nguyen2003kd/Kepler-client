@@ -514,6 +514,9 @@ if(postApiV10QuotationBody.quotation_status_id !== undefined && postApiV10Quotat
 if(postApiV10QuotationBody.service_id !== undefined && postApiV10QuotationBody.service_id !== null) {
  formData.append(`service_id`, postApiV10QuotationBody.service_id)
  }
+if(postApiV10QuotationBody.contact_person !== undefined && postApiV10QuotationBody.contact_person !== null) {
+ formData.append(`contact_person`, postApiV10QuotationBody.contact_person)
+ }
 
 if(postApiV10QuotationBody.files !== undefined) {
  postApiV10QuotationBody.files.forEach(value => formData.append(`files`, value));

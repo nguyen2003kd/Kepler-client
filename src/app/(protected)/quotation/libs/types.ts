@@ -29,6 +29,7 @@ export interface ExtendedQuotation extends QuotationWithFiles {
   code?: string;
   quotation_status_id?: string;
   receive_method_id?: string;
+  contact_person?: string;
   quotation_status?: {
     id: string;
     name: string;
