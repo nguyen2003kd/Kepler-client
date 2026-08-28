@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toaster";
 import { usePageConfigByKey } from "@/lib/page-config-helpers";
+import { useContactFormTypes } from "../../hooks/use-contact-form-types";
 import {
   Calendar,
   Headphones,
@@ -30,76 +31,6 @@ interface AddressItem {
   hotline?: string;
 }
 
-export interface ContactFormConfig {
-  type: string;
-  title: string;
-  subtitle: string;
-  showSubject?: boolean;
-  showPreferredDate?: boolean;
-  showPropertyInfo?: boolean;
-  showOrganization?: boolean;
-  contentLabel: string;
-  contentPlaceholder: string;
-}
-
-const FORM_CONFIGS: Record<string, ContactFormConfig> = {
-  "lien-he-kepler": {
-    type: "lien-he-kepler",
-    title: "Liên hệ Kepler",
-    subtitle: "Gửi tin nhắn cho chúng tôi, chúng tôi sẽ phản hồi trong thời gian sớm nhất.",
-    contentLabel: "Nội dung",
-    contentPlaceholder: "Nhập nội dung tin nhắn của bạn...",
-  },
-  "lien-he-hop-tac": {
-    type: "lien-he-hop-tac",
-    title: "Liên hệ hợp tác",
-    subtitle: "Hợp tác kinh doanh, phân phối, chiến lược cùng Kepler Group.",
-    showOrganization: true,
-    contentLabel: "Nội dung hợp tác",
-    contentPlaceholder: "Mô tả ngắn gọn về cơ hội hợp tác...",
-  },
-  "yeu-cau-ban-cho-thue": {
-    type: "yeu-cau-ban-cho-thue",
-    title: "Yêu cầu bán/cho thuê BĐS",
-    subtitle: "Để lại thông tin BĐS, chuyên viên Kepler sẽ liên hệ tư vấn.",
-    showPropertyInfo: true,
-    contentLabel: "Thông tin BĐS",
-    contentPlaceholder: "Địa chỉ, loại BĐS, diện tích, giá mong muốn...",
-  },
-  "yeu-cau-tham-dinh-gia": {
-    type: "yeu-cau-tham-dinh-gia",
-    title: "Yêu cầu thẩm định giá",
-    subtitle: "Yêu cầu dịch vụ thẩm định giá BĐS, máy móc, doanh nghiệp.",
-    showOrganization: true,
-    contentLabel: "Mô tả tài sản cần thẩm định",
-    contentPlaceholder: "Loại tài sản, mục đích thẩm định, thời gian mong muốn...",
-  },
-  "yeu-cau-dich-vu": {
-    type: "yeu-cau-dich-vu",
-    title: "Yêu cầu dịch vụ BĐS",
-    subtitle: "Tư vấn mua, bán, cho thuê, đầu tư, khai thác BĐS.",
-    showSubject: true,
-    contentLabel: "Chi tiết yêu cầu",
-    contentPlaceholder: "Mô tả chi tiết dịch vụ bạn cần...",
-  },
-  "tu-van-thuong-vu-ma": {
-    type: "tu-van-thuong-vu-ma",
-    title: "Tư vấn thương vụ M&A",
-    subtitle: "Tư vấn M&A, tái cấu trúc, tìm đối tác đầu tư.",
-    showOrganization: true,
-    contentLabel: "Mô tả thương vụ",
-    contentPlaceholder: "Loại giao dịch, quy mô, ngành nghề, thời gian...",
-  },
-  "dat-lich-hen-chuyen-gia": {
-    type: "dat-lich-hen-chuyen-gia",
-    title: "Đặt lịch hẹn chuyên gia",
-    subtitle: "Đặt lịch tư vấn trực tiếp với chuyên gia Kepler.",
-    showPreferredDate: true,
-    contentLabel: "Nội dung cần tư vấn",
-    contentPlaceholder: "Chủ đề bạn muốn tư vấn...",
-  },
-};
-
 interface DynamicContactFormProps {
   formType: string;
 }
@@ -110,12 +41,18 @@ export default function DynamicContactForm({ formType }: DynamicContactFormProps
 
   const contactKey = i18n.language?.startsWith("en") ? "CONTACT_EN" : "CONTACT";
   const { data: pageConfigData } = usePageConfigByKey(contactKey);
+  const formTypes = useContactFormTypes();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const config = FORM_CONFIGS[formType] || FORM_CONFIGS["lien-he-kepler"];
+  const config =
+    formTypes[formType] ||
+    Object.entries(formTypes).find(
+      ([key]) => key.startsWith(formType) || key.includes(formType),
+    )?.[1] ||
+    formTypes["lien-he-kepler"];
 
   const fallbackAddresses: AddressItem[] = [
     {

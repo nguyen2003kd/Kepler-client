@@ -21,7 +21,7 @@ export default function MainServicesPage() {
         fallbackImage="/seo.png"
       />
 
-      <AboutMainServicesSection variant="page" categoryLink="/about/main-services" />
+      <AboutMainServicesSection variant="page" categoryCode="nav-services" />
 
       {/* Contact CTA */}
       <section className="py-20 md:py-28">

@@ -59,7 +59,7 @@ export default function IntroSection() {
   }, [data]);
 
   return (
-    <section className="relative bg-white py-20 md:py-28">
+    <section className="relative bg-white py-20 md:py-28 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left: Content */}
@@ -92,7 +92,7 @@ export default function IntroSection() {
 
           {/* Right: Visual */}
           <motion.div
-            className="relative aspect-[4/5]"
+            className="relative aspect-[4/5] overflow-hidden"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}

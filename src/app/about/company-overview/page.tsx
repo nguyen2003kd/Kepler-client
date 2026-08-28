@@ -153,7 +153,7 @@ export default async function CompanyOverviewPage() {
             <AboutVisionMissionSection />
 
             {/* Section 3: Lĩnh vực hoạt động chính */}
-            <AboutMainServicesSection categoryLink="/about/main-services" />
+            <AboutMainServicesSection />
 
             {/* Section 4: Hệ thống thành viên */}
             <AboutEcosystemSection />

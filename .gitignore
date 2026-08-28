@@ -57,4 +57,16 @@ agents
 .env.local
 .env.development.local
 .env.test.local
+
+# playwright cli
+.playwright-cli/
+
+# temp test files
+*-desktop.png
+*-mobile.png
+*-tablet.png
+*-fullpage.png
+test-responsive.js
+test-results/
+responsive-test-results.json
 .env.production.local
