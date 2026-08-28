@@ -23,7 +23,6 @@ import UnitStory from "../he-sinh-thai/shared-sections/unit-story";
 import UnitCapabilities from "../he-sinh-thai/shared-sections/unit-capabilities";
 import UnitIndustries from "../he-sinh-thai/shared-sections/unit-industries";
 import UnitProducts from "../he-sinh-thai/shared-sections/unit-products";
-import UnitClients from "../he-sinh-thai/shared-sections/unit-clients";
 import UnitCta from "../he-sinh-thai/shared-sections/unit-cta";
 
 /* ── Data (RealHub-specific custom sections) ────────── */
@@ -104,7 +103,6 @@ export default function RealHubPage() {
       <RoadmapSection />
       <UnitIndustries unitKey="realhub" />
       <UnitProducts unitKey="realhub" />
-      <UnitClients unitKey="realhub" />
       <RegisterSection />
       <UnitCta unitKey="realhub" />
     </main>
@@ -165,7 +163,7 @@ function ProblemSection() {
 
 function SolutionSection() {
   return (
-    <section className="relative bg-white py-20 md:py-28">
+    <section className="relative bg-white py-20 md:py-28 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <motion.div
@@ -197,7 +195,7 @@ function SolutionSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-            className="grid grid-cols-2 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {SOLUTIONS.map((s, i) => (
               <div

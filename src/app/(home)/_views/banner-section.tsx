@@ -152,16 +152,16 @@ export default function HeroBanner() {
           {/* Left — Text */}
           <div className="flex-1 flex items-center">
             <div className="max-w-2xl">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-white leading-[4]">
+              <h1 className="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-white leading-tight md:leading-snug">
                 {heroConfig.title}{" "}
                 <span className="text-[#DC2626]">{heroConfig.titleHighlight1}</span>{" "}
                 <span className="text-[#DC2626]">{heroConfig.titleHighlight2}</span>
               </h1>
-              <p className="mt-10 md:mt-16 text-sm md:text-base lg:text-lg text-white/80 leading-[4.5] max-w-[55ch]">
+              <p className="mt-6 md:mt-16 text-sm md:text-base lg:text-lg text-white/80 leading-relaxed md:leading-relaxed max-w-[55ch]">
                 {heroConfig.subtitle}
               </p>
 
-              <div className="mt-8 md:mt-10 flex flex-wrap items-center gap-3 md:gap-4">
+              <div className="mt-6 md:mt-10 flex flex-wrap items-center gap-3 md:gap-4">
                 <Link
                   href={heroConfig.cta1Link}
                   className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-[#DC2626] text-white text-sm font-semibold rounded-full hover:bg-[#BF2626] transition-colors group"
@@ -181,8 +181,8 @@ export default function HeroBanner() {
 
 
           {/* Right — Logo */}
-          <div className="flex-1 relative flex items-center justify-center min-h-[250px] md:min-h-full">
-            <div className="relative w-full max-w-[450px] md:max-w-[550px] lg:max-w-[650px] h-[250px] md:h-[400px] lg:h-[500px] hero-logo-float">
+          <div className="flex-1 relative flex items-center justify-center min-h-[180px] md:min-h-full">
+            <div className="relative w-full max-w-[300px] md:max-w-[550px] lg:max-w-[650px] h-[180px] md:h-[400px] lg:h-[500px] hero-logo-float">
               <Image
                 src={heroConfig.logoImage}
                 alt="Kepler Group"

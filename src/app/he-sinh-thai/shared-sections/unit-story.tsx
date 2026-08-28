@@ -72,13 +72,13 @@ export default function UnitStory({ unitKey }: { unitKey: string }) {
     statLabel: "",
   };
   return (
-    <section className="relative overflow-hidden bg-gray-900 py-24 lg:py-32">
-      {/* Grid pattern */}
+    <section className="relative overflow-hidden bg-white py-24 lg:py-32">
+      {/* Subtle grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+            "linear-gradient(to right, #DC2626 1px, transparent 1px), linear-gradient(to bottom, #DC2626 1px, transparent 1px)",
           backgroundSize: "64px 64px",
         }}
       />
@@ -87,7 +87,7 @@ export default function UnitStory({ unitKey }: { unitKey: string }) {
       <motion.div
         animate={{ x: [0, -15, 0], y: [0, 10, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl"
+        className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-primary/8 blur-3xl"
       />
 
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
@@ -103,21 +103,21 @@ export default function UnitStory({ unitKey }: { unitKey: string }) {
             <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
               {story.label}
             </span>
-            <div className="flex h-32 w-32 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+            <div className="flex h-32 w-32 items-center justify-center rounded-2xl border border-primary/20 bg-primary/5 backdrop-blur-sm shadow-sm">
               <div className="text-center">
                 <p className="text-4xl font-bold text-primary">{story.stat}</p>
-                <p className="mt-1 text-[10px] uppercase tracking-wider text-white/40">{story.statLabel}</p>
+                <p className="mt-1 text-[10px] uppercase tracking-wider text-gray-500">{story.statLabel}</p>
               </div>
             </div>
           </div>
 
           {/* Right — title + copy */}
           <div>
-            <h2 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl">
+            <h2 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-gray-900 sm:text-5xl">
               {story.title}
             </h2>
             <div className="mt-6 h-px w-16 bg-primary" />
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/50">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
               {story.copy}
             </p>
           </div>

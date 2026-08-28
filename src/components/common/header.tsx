@@ -16,6 +16,7 @@ import { getResponsiveImage } from "@/lib/responsive-image";
 import {
   // Briefcase,
   // Calendar,
+  ChevronDown,
   FileText,
   Headphones,
   Menu,
@@ -99,6 +100,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
   const { t, i18n } = useTranslation("header");
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedMenuId, setExpandedMenuId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
@@ -496,6 +498,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
   // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setExpandedMenuId(null);
   }, [pathname]);
 
   const handleSearch = useCallback(
@@ -774,7 +777,9 @@ export default function Header({ navItems = [], className }: HeaderProps) {
           </div>
         </div>
 
-        {/* === MOBILE DRAWER (slide-in from right) === */}
+        {/* === MOBILE DRAWER (moved outside header to avoid transform stacking context) === */}
+        </div>
+      </header>
         {isMobileMenuOpen && (
           <>
             {/* Backdrop */}
@@ -818,22 +823,55 @@ export default function Header({ navItems = [], className }: HeaderProps) {
               </form>
 
               {/* Mobile Navigation */}
-              <div className="px-3 pt-2 pb-3 space-y-1">
-                {finalNav.map((item) => (
-                  <Link
-                    key={item.link}
-                    href={item.link}
-                    className="block px-3 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg text-base font-medium transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                    {item.badge && (
-                      <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-600">
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                ))}
+              <div className="px-3 pt-2 pb-3 space-y-0.5">
+                {finalNav.map((item) => {
+                  const hasChildren = item.children && item.children.length > 0;
+                  const isExpanded = expandedMenuId === item.id;
+                  return (
+                    <div key={item.id}>
+                      {hasChildren ? (
+                        <button
+                          onClick={() => setExpandedMenuId(isExpanded ? null : item.id)}
+                          className="w-full flex items-center justify-between px-3 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg text-base font-medium transition-colors"
+                        >
+                          <span>{item.name}</span>
+                          <ChevronDown
+                            className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                          />
+                        </button>
+                      ) : (
+                        <Link
+                          href={item.link}
+                          className="block px-3 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg text-base font-medium transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      )}
+                      {hasChildren && isExpanded && (
+                        <div className="ml-3 pl-3 border-l border-gray-200 space-y-0.5 mt-0.5 mb-1">
+                          <Link
+                            href={item.link}
+                            className="block px-3 py-2 text-sm text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            Xem tất cả
+                          </Link>
+                          {item.children!.map((child) => (
+                            <Link
+                              key={child.id}
+                              href={child.link}
+                              className="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              {child.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Mobile Auth Section */}
@@ -892,8 +930,6 @@ export default function Header({ navItems = [], className }: HeaderProps) {
             </div>
           </>
         )}
-        </div>
-      </header>
       {isMounted && !isAuthenticated && (
         <QuotationPopupDialog
           open={quotationPopupOpen}

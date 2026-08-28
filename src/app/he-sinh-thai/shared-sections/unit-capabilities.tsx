@@ -61,7 +61,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: string }) {
 
   if (unitKey === "kmc-management")
     return (
-      <section id="capabilities" className="relative overflow-hidden bg-gray-900 py-24 scroll-mt-20 lg:py-32">
+      <section id="capabilities" className="relative overflow-hidden bg-gray-50 py-24 scroll-mt-20 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -76,10 +76,10 @@ export default function UnitCapabilities({ unitKey }: { unitKey: string }) {
                 Năng lực cốt lõi
               </span>
             </div>
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
               Vận hành không ngắt quãng.
             </h2>
-            <p className="mt-4 text-lg text-white/50">
+            <p className="mt-4 text-lg text-gray-500">
               Giám sát, quản lý và tối ưu tài sản 24/7.
             </p>
           </motion.div>
@@ -91,14 +91,14 @@ export default function UnitCapabilities({ unitKey }: { unitKey: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className={`rounded-2xl border p-8 backdrop-blur-sm transition hover:bg-white/10 ${
+                className={`rounded-2xl border p-8 transition hover:shadow-lg ${
                   index === 0
-                    ? "border-primary/30 bg-primary/10"
-                    : "border-white/10 bg-white/5"
+                    ? "border-primary/30 bg-primary/5"
+                    : "border-gray-200 bg-white"
                 }`}
               >
                 <span className="text-5xl font-bold text-primary/30">0{index + 1}</span>
-                <h3 className="mt-6 text-lg font-bold text-white">{item}</h3>
+                <h3 className="mt-6 text-lg font-bold text-gray-900">{item}</h3>
               </motion.div>
             ))}
           </div>
@@ -138,7 +138,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: string }) {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className={`group relative overflow-hidden rounded-3xl p-8 transition hover:shadow-lg ${
-                index % 2 === 0 ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"
+                index % 2 === 0 ? "bg-primary text-white" : "bg-gray-50 text-gray-900"
               }`}
             >
               <span className={`absolute -right-4 -top-8 text-[8rem] font-bold opacity-10 ${index % 2 === 0 ? "text-white" : "text-gray-900"}`}>
@@ -156,7 +156,7 @@ export default function UnitCapabilities({ unitKey }: { unitKey: string }) {
 
   if (unitKey === "k-homes")
     return (
-      <section id="capabilities" className="relative overflow-hidden bg-gray-900 py-24 scroll-mt-20 lg:py-32">
+      <section id="capabilities" className="relative overflow-hidden bg-gray-50 py-24 scroll-mt-20 lg:py-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -171,10 +171,10 @@ export default function UnitCapabilities({ unitKey }: { unitKey: string }) {
                 Năng lực cốt lõi
               </span>
             </div>
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
               Tạo hình. Kiến tạo.
             </h2>
-            <p className="mt-4 text-lg text-white/50">
+            <p className="mt-4 text-lg text-gray-500">
               Một quy trình liền mạch từ bản vẽ đầu tiên đến không gian hoàn thiện.
             </p>
           </motion.div>
@@ -188,17 +188,17 @@ export default function UnitCapabilities({ unitKey }: { unitKey: string }) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`relative min-h-64 overflow-hidden rounded-3xl p-8 transition hover:shadow-lg ${
                   index % 2 === 0
-                    ? "border border-white/10 bg-white/5 backdrop-blur-sm"
+                    ? "border border-gray-200 bg-white"
                     : "bg-primary"
                 }`}
               >
-                <span className={`absolute -right-4 -top-8 text-[8rem] font-bold opacity-20 ${index % 2 === 0 ? "text-white" : "text-white"}`}>
+                <span className={`absolute -right-4 -top-8 text-[8rem] font-bold opacity-20 ${index % 2 === 0 ? "text-primary" : "text-white"}`}>
                   0{index + 1}
                 </span>
                 <span className={`text-sm font-medium uppercase tracking-[0.25em] ${index % 2 === 0 ? "text-primary" : "text-white/80"}`}>
                   K-Homes / 0{index + 1}
                 </span>
-                <h3 className="relative mt-24 text-2xl font-bold text-white">{item}</h3>
+                <h3 className={`relative mt-24 text-2xl font-bold ${index % 2 === 0 ? "text-gray-900" : "text-white"}`}>{item}</h3>
               </motion.div>
             ))}
           </div>
