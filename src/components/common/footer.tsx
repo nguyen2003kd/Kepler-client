@@ -1,7 +1,6 @@
 "use client";
 
 import { useGetApiV10Footer } from "@/api/endpoints/footer";
-import { useGetApiV10AnalyticsActiveUsers } from "@/api/endpoints/analytics";
 import { useGetApiV10Logo } from "@/api/endpoints/logo";
 import { Footer as FooterType } from "@/api/models/footer";
 import type { FooterLinksItem } from "@/api/models/footerLinksItem";
@@ -13,6 +12,7 @@ import {
   Instagram,
   Linkedin,
   Mail,
+  MessageCircle,
   Phone,
   Twitter,
   Youtube,
@@ -34,11 +34,6 @@ const Footer = () => {
   const { data } = useGetApiV10Footer({
     filters: "is_active==true",
   });
-
-  const { data: analyticsData } = useGetApiV10AnalyticsActiveUsers(
-    { allTime: true },
-    { query: { refetchInterval: 60_000 } }
-  );
 
   const { data: logoData, isError: isLogoError } = useGetApiV10Logo({
     filters: "is_active==true",
@@ -73,11 +68,6 @@ const Footer = () => {
     (footerData?.social_links as Record<string, string> | null | undefined) ||
     {};
 
-  const formatViews = (views: string | number | null | undefined): string => {
-    if (!views) return "0";
-    return views.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  };
-
   return (
     <footer className="w-full bg-white text-foreground font-serif relative overflow-hidden border-t border-border">
       {/* Subtle  */}
@@ -89,8 +79,8 @@ const Footer = () => {
       <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-8 lg:py-10 relative z-10">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-10">
-          {/* Logo and Company Info - Takes 4 columns */}
-          <div className="lg:col-span-4 space-y-4">
+          {/* Cột 1 - Logo + mô tả + liên hệ + mạng xã hội */}
+          <div className="lg:col-span-3 space-y-4">
             <div className="w-[150px] h-[60px] relative">
               <Image
                 src={logoUrl}
@@ -133,7 +123,7 @@ const Footer = () => {
                 </div>
               </a>
               <a
-                href={`mailto:${footerData?.email || "casehcm@case.vn"}`}
+                href={`mailto:${footerData?.email || "keplerland@gmail.com"}`}
                 className="flex items-start gap-3 group cursor-pointer"
               >
                 <div className="w-9 h-9 bg-primary/10 text-primary rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
@@ -154,7 +144,7 @@ const Footer = () => {
                 <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wider font-medium">
                   Kết nối với chúng tôi
                 </p>
-                <div className="grid grid-cols-4 gap-2.5 max-w-[180px]">
+                <div className="grid grid-cols-4 gap-2.5 max-w-[210px]">
                   {socialLinks?.facebook && (
                     <Link
                       href={socialLinks.facebook as string}
@@ -210,40 +200,120 @@ const Footer = () => {
                       <Youtube className="w-4 h-4" />
                     </Link>
                   )}
+                  {socialLinks?.whatsapp && (
+                    <Link
+                      href={socialLinks.whatsapp as string}
+                      aria-label="WhatsApp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 bg-primary/10 text-primary hover:bg-green-500 hover:text-white rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    >
+                      <Phone className="w-4 h-4" />
+                    </Link>
+                  )}
+                  {socialLinks?.zalo && (
+                    <Link
+                      href={socialLinks.zalo as string}
+                      aria-label="Zalo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 bg-primary/10 text-primary hover:bg-sky-500 hover:text-white rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                    </Link>
+                  )}
                 </div>
               </div>
             )}
           </div>
 
-          {/* Addresses  */}
-          <div className="lg:col-span-5">
+          {/* Cột 2 - Về Kepler Property (menu nội bộ + địa chỉ) */}
+          <div className="lg:col-span-3">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-1 h-5 bg-primary rounded-full"></div>
-              <h4 className="text-base font-bold">Địa chỉ</h4>
+              <h4 className="text-base font-bold">Về Kepler Property</h4>
             </div>
-            <div
-              className={`grid grid-cols-1 gap-5 ${
-                addresses.length >= 4
-                  ? "md:grid-cols-2"
-                  : addresses.length === 3
-                    ? "md:grid-cols-3"
-                    : "md:grid-cols-1"
-              }`}
-            >
-              {addresses.map((addr, index) => (
-                <div key={index} className="text-sm group">
-                  <p className="font-semibold mb-1.5 text-foreground group-hover:text-primary transition-colors">
-                    {addr.title}
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors">
-                    {addr.location}
-                  </p>
-                </div>
-              ))}
+
+            {/* Menu nội bộ */}
+            {(footerData?.internal_links ?? []).length > 0 && (
+              <nav className="grid grid-cols-1 gap-x-4 gap-y-2.5 text-sm mb-6">
+                {(footerData?.internal_links ?? []).map((link, idx) => (
+                  <Link
+                    key={idx}
+                    href={link.link || "#"}
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
+                    {link.title}
+                  </Link>
+                ))}
+              </nav>
+            )}
+
+            {/* Địa chỉ */}
+            <div className="border-t border-border pt-4">
+              <div className="flex flex-col gap-1.5">
+                {addresses.map((addr, index) => (
+                  <div key={index} className="text-sm group">
+                    <p className="font-semibold mb-1.5 text-foreground group-hover:text-primary transition-colors">
+                      {addr.title}
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors">
+                      {addr.location}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Liên kết web */}
+          {/* Cột 3 - Thương hiệu thành viên */}
+          <div className="lg:col-span-3">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-1 h-5 bg-primary rounded-full"></div>
+              <h4 className="text-base font-bold">Thương hiệu thành viên</h4>
+            </div>
+            <nav className="grid grid-cols-1 gap-x-4 gap-y-2.5 text-sm">
+              {(footerData?.member_brands ?? []).map((brand, idx) => {
+                const content = (
+                  <>
+                    {brand.logo ? (
+                      <Image
+                        src={brand.logo}
+                        alt={brand.name || ""}
+                        width={16}
+                        height={16}
+                        className="object-contain"
+                      />
+                    ) : (
+                      <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
+                    )}
+                    <span>{brand.name}</span>
+                  </>
+                );
+                return brand.link ? (
+                  <a
+                    key={idx}
+                    href={brand.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <span
+                    key={idx}
+                    className="flex items-center gap-2 text-muted-foreground group"
+                  >
+                    {content}
+                  </span>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* Cột 4 - Liên kết web */}
           <div className="lg:col-span-3">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-1 h-5 bg-primary rounded-full"></div>
@@ -307,7 +377,10 @@ const Footer = () => {
               )}
             </nav>
 
-            {/* Statistics */}
+            {/**
+            // Statistics block hidden per request (2026-09-04)
+            // NOTE: when un-commenting, re-enable the useGetApiV10AnalyticsActiveUsers
+            // import, the analyticsData hook, and the formatViews helper above.
             <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 space-y-3">
               <div className="text-center pb-2.5 border-b border-primary/10">
                 <div className="text-xs text-muted-foreground mb-1.5 uppercase tracking-wider">
@@ -326,6 +399,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
+            */}
           </div>
         </div>
       </div>
