@@ -97,7 +97,7 @@ export default function LegalLayout({ data }: { data: LegalPageData }) {
                       transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                       className="block rounded-lg px-3 py-2 text-sm text-gray-600 transition-colors hover:bg-primary/5 hover:text-primary"
                     >
-                      {String(index + 1).padStart(2, "0")}. {section.title}
+                      {section.title}
                     </motion.a>
                   ))}
                 </nav>
