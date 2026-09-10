@@ -1,7 +1,7 @@
 export const PAGE_IDS = {
   // ========== TRANG CHỦ ==========
   /** Vị trí dự án ở trang chủ */
-  HOME_PROJECTS: "52c42fba-3451-4801-a961-64a6c0db0dd1",
+  HOME_PROJECTS: "8aad1996-6c31-4446-ab33-823653338313",
   /** Vị trí case study ở trang chủ */
   HOME_CASE_STUDY: "089305bb-3b3d-46b8-85ec-883dda1c8258",
   /** Vị trí tin tức ở trang chủ */

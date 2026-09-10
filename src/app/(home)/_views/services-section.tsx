@@ -1,9 +1,8 @@
 "use client";
 
-import { useGetApiV10Category } from "@/api/endpoints/category";
 import { useGetApiV10Post } from "@/api/endpoints/post";
-import { CategoryWithChildren } from "@/api/models/categoryWithChildren";
 import ServiceCard from "@/components/common/components/service-card";
+import { PAGE_IDS } from "@/constants/page-ids";
 import { getThumbnailSrc } from "@/lib/responsive-image";
 import { slugify } from "@/lib/slugify";
 import { PostExtended } from "@/types/post";
@@ -55,34 +54,17 @@ export default function ServicesSection() {
     }
   `;
 
-  const { i18n, t } = useTranslation("pages/home");
-  const currentLang = (i18n.language || "vi").startsWith("en") ? "en" : "vi";
+  const { t } = useTranslation("pages/home");
+  const projectsPageId = PAGE_IDS.HOME_PROJECTS;
 
-  const { data: categoriesData } = useGetApiV10Category({ language: currentLang });
-
-  const projectCategoryId = React.useMemo(() => {
-    const allCats = (categoriesData?.responseData as CategoryWithChildren[]) || [];
-    for (const root of allCats) {
-      if (root.link === "/du-an") return root.id || "";
-      if (root.categories) {
-        const found = root.categories.find((sub) => sub.link === "/du-an");
-        if (found) return found.id || "";
-      }
-    }
-    return "";
-  }, [categoriesData]);
-
-  const { data, isLoading } = useGetApiV10Post(
-    {
-      category_id: projectCategoryId,
-      filters: "is_hidden==false",
-      pageSize: 8,
-      sortField: "created_at",
-      sortOrder: "desc",
-      filterBy: "CLIENT",
-    },
-    { query: { enabled: !!projectCategoryId } },
-  );
+  const { data, isLoading } = useGetApiV10Post({
+    page_id: projectsPageId,
+    filters: "is_hidden==false",
+    pageSize: 8,
+    position: "true",
+    sortOrderPosition: "ASC",
+    filterBy: "CLIENT",
+  });
 
   const services = React.useMemo(() => {
     const posts = (data?.responseData?.rows as PostExtended[]) || [];
