@@ -119,11 +119,11 @@ export default function Header({ navItems = [], className }: HeaderProps) {
   const { data: categoriesData } = useGetApiV10Category(
     { language: currentLang },
     {
-    query: {
-      staleTime: 1000 * 60 * 5,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    },
+      query: {
+        staleTime: 1000 * 60 * 5,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+      },
     },
   );
 
@@ -423,15 +423,15 @@ export default function Header({ navItems = [], className }: HeaderProps) {
   const baseNavigation: HeaderMenuItem[] = useMemo(() => {
     const apiData = categoriesData?.responseData?.length
       ? withCategoryQueryMode(
-          (categoriesData.responseData as unknown as HeaderMenuItem[]).map((item) => ({
+        (categoriesData.responseData as unknown as HeaderMenuItem[]).map((item) => ({
 
-            ...item,
-            sequence: ((item as Record<string, unknown>).position as number) || 99,
-            display: true,
-            parent_id: ((item as Record<string, unknown>).parent_category_id as string | null) ?? null,
-          })) as HeaderMenuItem[],
-          false,
-        )
+          ...item,
+          sequence: ((item as Record<string, unknown>).position as number) || 99,
+          display: true,
+          parent_id: ((item as Record<string, unknown>).parent_category_id as string | null) ?? null,
+        })) as HeaderMenuItem[],
+        false,
+      )
       : null;
     if (apiData) return apiData;
     return withCategoryQueryMode(
@@ -534,402 +534,402 @@ export default function Header({ navItems = [], className }: HeaderProps) {
         onMouseLeave={() => setIsHeaderHovered(false)}
       >
         <div className="header-inner">
-        {/* === TOP BAR (đỏ) — Hotline + Quick links + Search + Language + Auth === */}
-        <div
-          className="header-topbar bg-[#DC2626] text-white"
-        >
-          <div className="max-w-screen-2xl mx-auto px-3 sm:px-6 lg:px-24">
-            <div className="flex items-center justify-between h-11 md:h-12 lg:h-12">
-              {/* Left side */}
-              <a
-                href="tel:18001105"
-                className="flex md:hidden items-center gap-1.5 text-[12px] hover:text-red-200 transition-colors whitespace-nowrap"
-              >
-                <Headphones className="w-3.5 h-3.5 flex-shrink-0" />
-                <span className="font-semibold tracking-wide">
-                  {t("hotline")}: 1800 1105
-                </span>
-              </a>
-              <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs lg:text-sm min-w-0">
+          {/* === TOP BAR (đỏ) — Hotline + Quick links + Search + Language + Auth === */}
+          <div
+            className="header-topbar bg-[#DC2626] text-white"
+          >
+            <div className="max-w-screen-2xl mx-auto px-3 sm:px-6 lg:px-24">
+              <div className="flex items-center justify-between h-11 md:h-12 lg:h-12">
+                {/* Left side */}
                 <a
                   href="tel:18001105"
-                  className="flex items-center gap-1.5 lg:gap-2 hover:text-red-200 transition-colors whitespace-nowrap"
+                  className="flex md:hidden items-center gap-1.5 text-[12px] hover:text-red-200 transition-colors whitespace-nowrap"
                 >
-                  <Headphones className="w-3.5 h-3.5 lg:w-4 lg:h-4 flex-shrink-0" />
-                  <span className="font-semibold">{t("hotline")}: 1800 1105</span>
+                  <Headphones className="w-3.5 h-3.5 flex-shrink-0" />
+                  <span className="font-semibold tracking-wide">
+                    {t("hotline")}: 1800 1105
+                  </span>
                 </a>
-                <div className="hidden lg:block h-4 w-px bg-white/30"></div>
-                <Link
-                  href="/news"
-                  className="hidden lg:flex items-center gap-1.5 hover:text-red-200 transition-colors whitespace-nowrap"
-                >
-                  <span>{t("newsAndEvents")}</span>
-                </Link>
-              </div>
+                <div className="hidden md:flex items-center gap-2 lg:gap-3 text-xs lg:text-sm min-w-0">
+                  <a
+                    href="tel:18001105"
+                    className="flex items-center gap-1.5 lg:gap-2 hover:text-red-200 transition-colors whitespace-nowrap"
+                  >
+                    <Headphones className="w-3.5 h-3.5 lg:w-4 lg:h-4 flex-shrink-0" />
+                    <span className="font-semibold">{t("hotline")}: 1800 1105</span>
+                  </a>
+                  <div className="hidden lg:block h-4 w-px bg-white/30"></div>
+                  <Link
+                    href="/news"
+                    className="hidden lg:flex items-center gap-1.5 hover:text-red-200 transition-colors whitespace-nowrap"
+                  >
+                    <span>{t("newsAndEvents")}</span>
+                  </Link>
+                </div>
 
-              {/* Right side - Search, Language, Auth */}
-              <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 md:ml-0 min-w-0">
-                {/* Search */}
-                <form onSubmit={handleSearch} className="hidden lg:block">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder={t("search")}
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-48 xl:w-64 pl-4 pr-10 py-1.5 text-sm bg-white/20 rounded-full text-white placeholder:text-white/80 focus:outline-none focus:bg-white/30 focus:border-white/50 transition-all"
-                    />
-                    <button
-                      type="submit"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all shadow-sm"
-                    >
-                      <Search className="w-3.5 h-3.5 text-white" />
-                    </button>
-                  </div>
-                </form>
-
-                {/* Separator */}
-                <div className="hidden md:block h-4 w-px bg-white/30"></div>
-
-                {/* Auth Section */}
-                {!isMounted ? (
-                  <div className="flex items-center gap-1.5 md:gap-2">
-                    <Skeleton className="h-7 w-20 md:h-8 md:w-28 bg-white/20 rounded-full" />
-                  </div>
-                ) : isAuthenticated ? (
-                  <div className="flex items-center gap-2">
-                    <span className="md:hidden text-xs font-medium">
-                      {t("hi")}{" "}
-                      <span className="font-semibold">
-                        {first_name || t("user")}!
-                      </span>
-                    </span>
-                    {/* Quotation Button */}
-                    <Link
-                      href="/quotation"
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-full transition-all"
-                    >
-                      <FileText className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                      <span className="text-xs md:text-sm font-medium">
-                        {t("quotation")}
-                      </span>
-                    </Link>
-                    {/* Avatar */}
-                    <div className="scale-[0.85] md:scale-90">
-                      <UserNav
-                        user={{
-                          name:
-                            `${first_name || ""} ${last_name || ""}`.trim() ||
-                            email ||
-                            t("user"),
-                          email: email || "",
-                        }}
+                {/* Right side - Search, Language, Auth */}
+                <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 md:ml-0 min-w-0">
+                  {/* Search */}
+                  <form onSubmit={handleSearch} className="hidden lg:block">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder={t("search")}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-48 xl:w-64 pl-4 pr-10 py-1.5 text-sm bg-white/20 rounded-full text-white placeholder:text-white/80 focus:outline-none focus:bg-white/30 focus:border-white/50 transition-all"
                       />
+                      <button
+                        type="submit"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all shadow-sm"
+                      >
+                        <Search className="w-3.5 h-3.5 text-white" />
+                      </button>
                     </div>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-1.5 md:gap-2">
-                    <button
+                  </form>
+
+                  {/* Separator */}
+                  <div className="hidden md:block h-4 w-px bg-white/30"></div>
+
+                  {/* Auth Section */}
+                  {!isMounted ? (
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      <Skeleton className="h-7 w-20 md:h-8 md:w-28 bg-white/20 rounded-full" />
+                    </div>
+                  ) : isAuthenticated ? (
+                    <div className="flex items-center gap-2">
+                      <span className="md:hidden text-xs font-medium">
+                        {t("hi")}{" "}
+                        <span className="font-semibold">
+                          {first_name || t("user")}!
+                        </span>
+                      </span>
+                      {/* Quotation Button */}
+                      <Link
+                        href="/quotation"
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-full transition-all"
+                      >
+                        <FileText className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                        <span className="text-xs md:text-sm font-medium">
+                          {t("quotation")}
+                        </span>
+                      </Link>
+                      {/* Avatar */}
+                      <div className="scale-[0.85] md:scale-90">
+                        <UserNav
+                          user={{
+                            name:
+                              `${first_name || ""} ${last_name || ""}`.trim() ||
+                              email ||
+                              t("user"),
+                            email: email || "",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      {/* <button
                       onClick={() => setQuotationPopupOpen(true)}
                       className="hidden md:flex items-center gap-1.5 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-all text-xs md:text-sm font-medium"
                     >
                       <FileText className="w-3 h-3 md:w-3.5 md:h-3.5" />
                       <span>{t("quotation")}</span>
-                    </button>
-                    <Link
-                      href="/login"
-                      className="flex items-center gap-1.5 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full border border-white/40 hover:border-white/70 hover:bg-white/10 transition-all text-xs md:text-sm font-medium"
-                    >
-                      <User className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      <span>{t("login")}</span>
-                    </Link>
-                    <Link
-                      href="/register"
-                      className="flex items-center gap-1.5 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full bg-white text-[#DC2626] hover:bg-white/90 hover:shadow-md transition-all text-xs md:text-sm font-semibold"
-                    >
-                      <UserPen className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      <span>{t("register")}</span>
-                    </Link>
-                  </div>
-                )}
+                    </button> */}
+                      <Link
+                        href="/login"
+                        className="flex items-center gap-1.5 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full border border-white/40 hover:border-white/70 hover:bg-white/10 transition-all text-xs md:text-sm font-medium"
+                      >
+                        <User className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                        <span>{t("login")}</span>
+                      </Link>
+                      <Link
+                        href="/register"
+                        className="flex items-center gap-1.5 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full bg-white text-[#DC2626] hover:bg-white/90 hover:shadow-md transition-all text-xs md:text-sm font-semibold"
+                      >
+                        <UserPen className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                        <span>{t("register")}</span>
+                      </Link>
+                    </div>
+                  )}
 
-                {/* Separator */}
-                <div className="hidden lg:block h-4 w-px bg-white/30"></div>
+                  {/* Separator */}
+                  <div className="hidden lg:block h-4 w-px bg-white/30"></div>
 
-                {/* Liên hệ Kepler */}
-                <Link
-                  href="/contact"
-                  className="hidden lg:flex items-center gap-1.5 hover:text-red-200 transition-colors text-xs lg:text-sm whitespace-nowrap"
-                >
-                  <span>{t("contactKepler")}</span>
-                </Link>
+                  {/* Liên hệ Kepler */}
+                  <Link
+                    href="/contact"
+                    className="hidden lg:flex items-center gap-1.5 hover:text-red-200 transition-colors text-xs lg:text-sm whitespace-nowrap"
+                  >
+                    <span>{t("contactKepler")}</span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* === MAIN BAR (trắng) — Logo + Nav + Mobile menu === */}
-        <div
-          className="header-mainbar bg-white border-b border-gray-200 py-2 md:py-3 lg:py-3 shadow-sm"
-        >
-          <div className="w-full px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24">
-            <div
-              ref={parentRef}
-              className="relative flex flex-row justify-between items-stretch"
-            >
-              {/* Logo */}
-              <div ref={logoRef} className="flex-shrink-0 z-10 flex items-center self-stretch">
-                <Link href="/" className="flex items-center justify-center h-full overflow-visible py-1">
-                  <div
-                    className="header-logo relative w-28 sm:w-32 md:w-36 lg:w-40 h-full origin-left"
-                  >
-                    <Image
-                      src={logoUrl}
-                      alt={logoInfo?.name || "Logo"}
-                      fill
-                      className="object-contain object-left"
-                      priority
-                    />
-                  </div>
-                </Link>
-              </div>
-
-              {/* Navigation Menu - Desktop with dynamic 1/2 row layout */}
+          {/* === MAIN BAR (trắng) — Logo + Nav + Mobile menu === */}
+          <div
+            className="header-mainbar bg-white border-b border-gray-200 py-2 md:py-3 lg:py-3 shadow-sm"
+          >
+            <div className="w-full px-3 sm:px-6 md:px-10 lg:px-16 xl:px-24">
               <div
-                ref={navContainerRef}
-                className="hidden lg:flex flex-1 min-w-0 flex-col justify-center ml-4"
+                ref={parentRef}
+                className="relative flex flex-row justify-between items-stretch"
               >
-                {/* Hidden measurement container — measures real item widths */}
-                <div
-                  aria-hidden="true"
-                  className="absolute pointer-events-none invisible"
-                  style={{ whiteSpace: "nowrap" }}
-                >
-                  {finalNav.map((item, idx) => (
-                    <span
-                      key={`measure-${item.id}`}
-                      ref={(el) => {
-                        if (itemRefs.current) {
-                          itemRefs.current[idx] = el;
-                        }
-                      }}
-                      className="inline-flex items-center gap-1.5 px-3 py-2 text-base font-semibold"
-                      style={{ visibility: "hidden" }}
+                {/* Logo */}
+                <div ref={logoRef} className="flex-shrink-0 z-10 flex items-center self-stretch">
+                  <Link href="/" className="flex items-center justify-center h-full overflow-visible py-1">
+                    <div
+                      className="header-logo relative w-28 sm:w-32 md:w-36 lg:w-40 h-full origin-left"
                     >
-                      <span>{item.name}</span>
-                      {item.children && item.children.length > 0 && (
-                        <span style={{ display: "inline-block", width: 14, height: 14 }} />
-                      )}
-                    </span>
-                  ))}
+                      <Image
+                        src={logoUrl}
+                        alt={logoInfo?.name || "Logo"}
+                        fill
+                        className="object-contain object-left"
+                        priority
+                      />
+                    </div>
+                  </Link>
                 </div>
 
-                {/* Actual navigation */}
-                {isReady ? (
-                  <nav className="flex flex-col gap-0 w-full">
-                    {rows.map((rowItems, rowIdx) => (
-                      <Fragment key={`row-${rowIdx}`}>
-                        {rowIdx > 0 && (
-                          <div className="h-px bg-gray-200 my-0.5" />
+                {/* Navigation Menu - Desktop with dynamic 1/2 row layout */}
+                <div
+                  ref={navContainerRef}
+                  className="hidden lg:flex flex-1 min-w-0 flex-col justify-center ml-4"
+                >
+                  {/* Hidden measurement container — measures real item widths */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute pointer-events-none invisible"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    {finalNav.map((item, idx) => (
+                      <span
+                        key={`measure-${item.id}`}
+                        ref={(el) => {
+                          if (itemRefs.current) {
+                            itemRefs.current[idx] = el;
+                          }
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3 py-2 text-base font-semibold"
+                        style={{ visibility: "hidden" }}
+                      >
+                        <span>{item.name}</span>
+                        {item.children && item.children.length > 0 && (
+                          <span style={{ display: "inline-block", width: 14, height: 14 }} />
                         )}
-                        <div
-                          className="flex items-center w-full"
-                          style={{ gap: `${rowGaps[rowIdx]}px` }}
-                        >
-                          {rowItems.map((item) => (
-                            <MenuItem
-                              variant="main"
-                              key={item.id}
-                              menu={item}
-                              active={pathname === item.link}
-                            />
-                          ))}
-                        </div>
-                      </Fragment>
-                    ))}
-                  </nav>
-                ) : (
-                  <div className="flex items-center gap-4 py-2">
-                    {finalNav.map((item) => (
-                      <Skeleton
-                        key={`skeleton-${item.id}`}
-                        className="h-6 w-20 rounded-md"
-                      />
+                      </span>
                     ))}
                   </div>
-                )}
-              </div>
 
-              {/* Right actions placeholder (desktop) */}
-              <div ref={rightActionsRef} className="hidden lg:flex items-center" />
+                  {/* Actual navigation */}
+                  {isReady ? (
+                    <nav className="flex flex-col gap-0 w-full">
+                      {rows.map((rowItems, rowIdx) => (
+                        <Fragment key={`row-${rowIdx}`}>
+                          {rowIdx > 0 && (
+                            <div className="h-px bg-gray-200 my-0.5" />
+                          )}
+                          <div
+                            className="flex items-center w-full"
+                            style={{ gap: `${rowGaps[rowIdx]}px` }}
+                          >
+                            {rowItems.map((item) => (
+                              <MenuItem
+                                variant="main"
+                                key={item.id}
+                                menu={item}
+                                active={pathname === item.link}
+                              />
+                            ))}
+                          </div>
+                        </Fragment>
+                      ))}
+                    </nav>
+                  ) : (
+                    <div className="flex items-center gap-4 py-2">
+                      {finalNav.map((item) => (
+                        <Skeleton
+                          key={`skeleton-${item.id}`}
+                          className="h-6 w-20 rounded-md"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
 
-              {/* Mobile & Tablet menu button */}
-              <div className="lg:hidden flex items-center gap-2">
-                <button
-                  onClick={() => setIsMobileMenuOpen(true)}
-                  className="p-2 text-gray-600 hover:text-red-600 transition-colors"
-                  aria-label="Menu"
-                >
-                  <Menu className="w-6 h-6" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+                {/* Right actions placeholder (desktop) */}
+                <div ref={rightActionsRef} className="hidden lg:flex items-center" />
 
-        {/* === MOBILE DRAWER (moved outside header to avoid transform stacking context) === */}
-        </div>
-      </header>
-        {isMobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <div
-              className="lg:hidden fixed inset-0 z-[55] bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-            {/* Drawer */}
-            <div className="lg:hidden fixed top-0 right-0 bottom-0 z-[56] w-[85%] max-w-sm bg-white shadow-2xl animate-in slide-in-from-right duration-300 overflow-y-auto">
-              {/* Drawer header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
-                <span className="text-lg font-semibold text-gray-900">Menu</span>
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Mobile Search */}
-              <form
-                onSubmit={handleSearch}
-                className="px-5 py-4 border-b border-gray-200"
-              >
-                <div className="flex items-center gap-2 rounded-lg border border-gray-300 overflow-hidden bg-white">
-                  <input
-                    type="text"
-                    placeholder={t("searchPlaceholder")}
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-1 px-4 py-2.5 text-sm focus:outline-none"
-                  />
+                {/* Mobile & Tablet menu button */}
+                <div className="lg:hidden flex items-center gap-2">
                   <button
-                    type="submit"
-                    className="px-3 py-2.5 hover:bg-gray-50 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(true)}
+                    className="p-2 text-gray-600 hover:text-red-600 transition-colors"
+                    aria-label="Menu"
                   >
-                    <Search className="w-5 h-5 text-gray-500" />
+                    <Menu className="w-6 h-6" />
                   </button>
                 </div>
-              </form>
-
-              {/* Mobile Navigation */}
-              <div className="px-3 pt-2 pb-3 space-y-0.5">
-                {finalNav.map((item) => {
-                  const hasChildren = item.children && item.children.length > 0;
-                  const isExpanded = expandedMenuId === item.id;
-                  return (
-                    <div key={item.id}>
-                      {hasChildren ? (
-                        <button
-                          onClick={() => setExpandedMenuId(isExpanded ? null : item.id)}
-                          className="w-full flex items-center justify-between px-3 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg text-base font-medium transition-colors"
-                        >
-                          <span>{item.name}</span>
-                          <ChevronDown
-                            className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
-                          />
-                        </button>
-                      ) : (
-                        <Link
-                          href={item.link}
-                          className="block px-3 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg text-base font-medium transition-colors"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      )}
-                      {hasChildren && isExpanded && (
-                        <div className="ml-3 pl-3 border-l border-gray-200 space-y-0.5 mt-0.5 mb-1">
-                          <Link
-                            href={item.link}
-                            className="block px-3 py-2 text-sm text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            Xem tất cả
-                          </Link>
-                          {item.children!.map((child) => (
-                            <Link
-                              key={child.id}
-                              href={child.link}
-                              className="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              {child.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Mobile Auth Section */}
-              <div className="border-t border-gray-200 px-5 pt-4 pb-6 space-y-2">
-                {!isMounted ? (
-                  <>
-                    <Skeleton className="h-14 w-full rounded-md" />
-                    <Skeleton className="h-10 w-full rounded-lg" />
-                    <Skeleton className="h-10 w-full rounded-md" />
-                  </>
-                ) : isAuthenticated ? (
-                  <>
-                    <div className="px-3 py-3 bg-gray-50 rounded-lg">
-                      <p className="text-sm font-semibold text-gray-900">
-                        {`${first_name || ""} ${last_name || ""}`.trim() ||
-                          email ||
-                          t("user")}
-                      </p>
-                      <p className="text-xs text-gray-500 mt-0.5">{email}</p>
-                    </div>
-                    <Link
-                      href="/quotation"
-                      className="flex items-center justify-center gap-2 px-3 py-2.5 text-white bg-red-600 rounded-lg font-semibold shadow-md hover:bg-red-700 transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <FileText className="w-4 h-4" />
-                      {t("quotation")}
-                    </Link>
-                    <Link
-                      href="/user"
-                      className="block px-3 py-2 text-center text-gray-700 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {t("profile")}
-                    </Link>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      href="/login"
-                      className="block px-3 py-2.5 text-center text-red-600 border border-red-600 rounded-lg font-medium hover:bg-red-50 transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {t("login")}
-                    </Link>
-                    <Link
-                      href="/register"
-                      className="block px-3 py-2.5 text-center text-white bg-red-600 rounded-lg font-medium hover:bg-red-700 transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {t("register")}
-                    </Link>
-                  </>
-                )}
               </div>
             </div>
-          </>
-        )}
+          </div>
+
+          {/* === MOBILE DRAWER (moved outside header to avoid transform stacking context) === */}
+        </div>
+      </header>
+      {isMobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="lg:hidden fixed inset-0 z-[55] bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          {/* Drawer */}
+          <div className="lg:hidden fixed top-0 right-0 bottom-0 z-[56] w-[85%] max-w-sm bg-white shadow-2xl animate-in slide-in-from-right duration-300 overflow-y-auto">
+            {/* Drawer header */}
+            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
+              <span className="text-lg font-semibold text-gray-900">Menu</span>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Mobile Search */}
+            <form
+              onSubmit={handleSearch}
+              className="px-5 py-4 border-b border-gray-200"
+            >
+              <div className="flex items-center gap-2 rounded-lg border border-gray-300 overflow-hidden bg-white">
+                <input
+                  type="text"
+                  placeholder={t("searchPlaceholder")}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="flex-1 px-4 py-2.5 text-sm focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  className="px-3 py-2.5 hover:bg-gray-50 transition-colors"
+                >
+                  <Search className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+            </form>
+
+            {/* Mobile Navigation */}
+            <div className="px-3 pt-2 pb-3 space-y-0.5">
+              {finalNav.map((item) => {
+                const hasChildren = item.children && item.children.length > 0;
+                const isExpanded = expandedMenuId === item.id;
+                return (
+                  <div key={item.id}>
+                    {hasChildren ? (
+                      <button
+                        onClick={() => setExpandedMenuId(isExpanded ? null : item.id)}
+                        className="w-full flex items-center justify-between px-3 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg text-base font-medium transition-colors"
+                      >
+                        <span>{item.name}</span>
+                        <ChevronDown
+                          className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.link}
+                        className="block px-3 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg text-base font-medium transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                    {hasChildren && isExpanded && (
+                      <div className="ml-3 pl-3 border-l border-gray-200 space-y-0.5 mt-0.5 mb-1">
+                        <Link
+                          href={item.link}
+                          className="block px-3 py-2 text-sm text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          Xem tất cả
+                        </Link>
+                        {item.children!.map((child) => (
+                          <Link
+                            key={child.id}
+                            href={child.link}
+                            className="block px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Mobile Auth Section */}
+            <div className="border-t border-gray-200 px-5 pt-4 pb-6 space-y-2">
+              {!isMounted ? (
+                <>
+                  <Skeleton className="h-14 w-full rounded-md" />
+                  <Skeleton className="h-10 w-full rounded-lg" />
+                  <Skeleton className="h-10 w-full rounded-md" />
+                </>
+              ) : isAuthenticated ? (
+                <>
+                  <div className="px-3 py-3 bg-gray-50 rounded-lg">
+                    <p className="text-sm font-semibold text-gray-900">
+                      {`${first_name || ""} ${last_name || ""}`.trim() ||
+                        email ||
+                        t("user")}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-0.5">{email}</p>
+                  </div>
+                  <Link
+                    href="/quotation"
+                    className="flex items-center justify-center gap-2 px-3 py-2.5 text-white bg-red-600 rounded-lg font-semibold shadow-md hover:bg-red-700 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <FileText className="w-4 h-4" />
+                    {t("quotation")}
+                  </Link>
+                  <Link
+                    href="/user"
+                    className="block px-3 py-2 text-center text-gray-700 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {t("profile")}
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="block px-3 py-2.5 text-center text-red-600 border border-red-600 rounded-lg font-medium hover:bg-red-50 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {t("login")}
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="block px-3 py-2.5 text-center text-white bg-red-600 rounded-lg font-medium hover:bg-red-700 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {t("register")}
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        </>
+      )}
       {isMounted && !isAuthenticated && (
         <QuotationPopupDialog
           open={quotationPopupOpen}
