@@ -95,7 +95,7 @@ export default function CustomersSection() {
               slideShadows: false,
             }}
             pagination={{ clickable: true }}
-            loop
+            loop={customers.length > 1}
             speed={4000}
             autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true }}
             allowTouchMove

@@ -95,7 +95,7 @@ export default function ProjectsSection() {
             }}
             pagination={{ clickable: true }}
             autoplay={{ delay: 5000, disableOnInteraction: true }}
-            loop
+            loop={PROJECTS.length > 4}
             className="!pb-12"
           >
             {PROJECTS.map((project) => (
