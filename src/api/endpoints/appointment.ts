@@ -22,6 +22,7 @@ import type {
   AppointmentMutate,
   GetApiV10AppointmentParams,
   PostApiV10Appointment200,
+  PostApiV10AppointmentPublic200,
   ResponseGetAllData
 } from '../models';
 
@@ -404,6 +405,71 @@ export const usePostApiV10Appointment = <TError = unknown,
       > => {
 
       const mutationOptions = getPostApiV10AppointmentMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * Create a new appointment request without authentication
+ * @summary Create appointment booking publicly
+ */
+export const postApiV10AppointmentPublic = (
+    appointmentMutate: AppointmentMutate,
+ signal?: AbortSignal
+) => {
+      
+      
+      return mainInstance<PostApiV10AppointmentPublic200>(
+      {url: `/api/v1.0/appointment/public`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: appointmentMutate, signal
+    },
+      );
+    }
+  
+
+
+export const getPostApiV10AppointmentPublicMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV10AppointmentPublic>>, TError,{data: AppointmentMutate}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postApiV10AppointmentPublic>>, TError,{data: AppointmentMutate}, TContext> => {
+
+const mutationKey = ['postApiV10AppointmentPublic'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postApiV10AppointmentPublic>>, {data: AppointmentMutate}> = (props) => {
+          const {data} = props ?? {};
+
+          return  postApiV10AppointmentPublic(data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PostApiV10AppointmentPublicMutationResult = NonNullable<Awaited<ReturnType<typeof postApiV10AppointmentPublic>>>
+    export type PostApiV10AppointmentPublicMutationBody = AppointmentMutate
+    export type PostApiV10AppointmentPublicMutationError = unknown
+
+    /**
+ * @summary Create appointment booking publicly
+ */
+export const usePostApiV10AppointmentPublic = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postApiV10AppointmentPublic>>, TError,{data: AppointmentMutate}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof postApiV10AppointmentPublic>>,
+        TError,
+        {data: AppointmentMutate},
+        TContext
+      > => {
+
+      const mutationOptions = getPostApiV10AppointmentPublicMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

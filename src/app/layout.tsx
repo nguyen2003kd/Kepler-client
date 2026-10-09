@@ -1,9 +1,9 @@
+import "./globals.css";
 import Footer from "@/components/common/footer";
 import Header from "@/components/common/header";
 import Providers from "@/components/providers";
 import { AbilityProvider } from "@/components/providers/ability-provider";
-import dynamic from "next/dynamic";
-const QuotationPopup = dynamic(() => import("@/components/quotation-popup"), { ssr: false });
+import QuotationPopup from "@/components/quotation-popup-client";
 import baseConfig from "@/configs/base";
 import { getQueryClient } from "@/lib/get-query-client";
 import { prefetchLayoutData } from "@/lib/prefetch-helpers";
@@ -16,7 +16,6 @@ import Script from "next/script";
 
 // import AnalyticsTracker from "@/components/analytics-tracker";
 
-import "./globals.css";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

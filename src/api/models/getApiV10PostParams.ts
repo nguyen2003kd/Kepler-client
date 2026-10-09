@@ -32,7 +32,7 @@ page?: PageParameter;
  */
 pageSize?: PageSizeParameter;
 /**
- * Filter posts by category ID
+ * Filter posts by category ID (single UUID or comma-separated UUIDs)
  */
 category_id?: string;
 /**

@@ -159,7 +159,7 @@ export default function ServicesSection() {
                 modules={[Autoplay, Pagination]}
                 spaceBetween={24}
                 slidesPerView={1}
-                loop={true}
+                loop={services.length > 4}
                 speed={1000}
                 autoplay={{
                   delay: 3500,

@@ -25,7 +25,7 @@ export default function ProjectCarousel({ projects }: Props) {
       }}
       pagination={{ clickable: true }}
       autoplay={{ delay: 5000, disableOnInteraction: true }}
-      loop
+      loop={projects.length > 4}
       className="!pb-12"
     >
       {projects.map((p) => (

@@ -131,35 +131,31 @@ export default function EcosystemSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.06 }}
-                  className={`group cursor-pointer border-l-2 px-6 py-5 transition-all duration-300 ${
-                    active === index
+                  className={`group cursor-pointer border-l-2 px-6 py-5 transition-all duration-300 ${active === index
                       ? "border-primary bg-white shadow-md"
                       : "border-gray-200 hover:border-gray-400 bg-transparent"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <h3
-                        className={`text-lg font-bold transition-colors ${
-                          active === index ? "text-gray-900" : "text-gray-500"
-                        }`}
+                        className={`text-lg font-bold transition-colors ${active === index ? "text-gray-900" : "text-gray-500"
+                          }`}
                       >
                         {item.name}
                       </h3>
                       <p
-                        className={`text-sm mt-1 transition-all ${
-                          active === index
+                        className={`text-sm mt-1 transition-all ${active === index
                             ? "text-gray-600 opacity-100 max-h-20"
                             : "text-gray-400 opacity-0 max-h-0 overflow-hidden"
-                        }`}
+                          }`}
                       >
                         {item.description}
                       </p>
                     </div>
                     <div
-                      className={`w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                        active === index ? "scale-100 opacity-100" : "scale-75 opacity-40"
-                      }`}
+                      className={`w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 transition-all duration-300 ${active === index ? "scale-100 opacity-100" : "scale-75 opacity-40"
+                        }`}
                     >
                       <ArrowRight className="w-4 h-4 text-white" />
                     </div>
@@ -172,7 +168,7 @@ export default function EcosystemSection() {
           {/* Right: Visual preview */}
           <div className="lg:col-span-5">
             <motion.div
-              className="sticky top-6 rounded-2xl overflow-hidden shadow-xl aspect-[4/5]"
+              className="relative sticky top-6 rounded-2xl overflow-hidden shadow-xl aspect-[4/5]"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}

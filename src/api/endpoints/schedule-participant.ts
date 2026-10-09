@@ -157,7 +157,7 @@ export const usePostApiV10ScheduleParticipantBulk = <TError = unknown,
       return useMutation(mutationOptions, queryClient);
     }
     /**
- * Retrieve participant assignments with pagination, filtering and sorting
+ * Retrieve participant assignments with pagination, filtering and sorting. Public endpoint.
  * @summary Get all schedule participants
  */
 export const getApiV10ScheduleParticipant = (

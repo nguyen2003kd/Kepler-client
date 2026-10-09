@@ -61,6 +61,7 @@ export default function SafeImage({ src, alt, onError, ...props }: ImageProps) {
       {...props}
       src={currentSrc}
       alt={alt}
+      sizes={props.sizes ?? (props.fill ? "100vw" : undefined)}
       unoptimized={hasErrored || shouldSkipOptimizer}
       onError={(event) => {
         onError?.(event);

@@ -1,10 +1,15 @@
 /* eslint-disable */
+import type { FooterMutateLanguage } from './footerMutateLanguage';
 import type { FooterMutateAddressItem } from './footerMutateAddressItem';
 import type { FooterMutateSocialLinks } from './footerMutateSocialLinks';
 import type { FooterMutateLinksItem } from './footerMutateLinksItem';
+import type { FooterMutateInternalLinksItem } from './footerMutateInternalLinksItem';
+import type { FooterMutateMemberBrandsItem } from './footerMutateMemberBrandsItem';
 import type { FooterMutateTotalViews } from './footerMutateTotalViews';
 
 export interface FooterMutate {
+  /** Language of the footer */
+  language: FooterMutateLanguage;
   /**
    * Footer description
    * @nullable
@@ -40,6 +45,16 @@ export interface FooterMutate {
    * @nullable
    */
   links?: FooterMutateLinksItem[] | null;
+  /**
+   * Internal navigation links (e.g. About, News, Contact) for the footer menu
+   * @nullable
+   */
+  internal_links?: FooterMutateInternalLinksItem[] | null;
+  /**
+   * Member brand entries for the Thương hiệu thành viên column (link and logo are optional)
+   * @nullable
+   */
+  member_brands?: FooterMutateMemberBrandsItem[] | null;
   /**
    * Current number of online visitors
    * @minimum 0

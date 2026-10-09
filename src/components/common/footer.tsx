@@ -57,12 +57,12 @@ const Footer = () => {
     footerData?.address && footerData.address.length > 0
       ? footerData.address
       : [
-          {
-            title: "Trụ sở chính",
-            location:
-              "Số 2 Nguyễn Văn Thủ, Phường Tân Định, Thành phố Hồ Chí Minh",
-          },
-        ];
+        {
+          title: "Trụ sở chính",
+          location:
+            "Số 2 Nguyễn Văn Thủ, Phường Tân Định, Thành phố Hồ Chí Minh",
+        },
+      ];
 
   const socialLinks =
     (footerData?.social_links as Record<string, string> | null | undefined) ||
@@ -344,7 +344,7 @@ const Footer = () => {
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
                   >
                     <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
-                    Trung tâm nghiên cứu xxx
+                    Trung tâm nghiên cứu và phát triển nhà ở
                   </a>
                   <a
                     href="#"
@@ -353,7 +353,7 @@ const Footer = () => {
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
                   >
                     <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
-                    Viện đào tạo xxx bất động sản
+                    Viện nghiên cứu và đào tạo tài năng ITH
                   </a>
                   <a
                     href="#"
@@ -362,7 +362,16 @@ const Footer = () => {
                     className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
                   >
                     <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
-                    Cục quản lý giá – Bộ Tài Chính
+                    Realhub platform
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
+                    CLB Tư vấn Hoca
                   </a>
                   <a
                     href="#"
@@ -372,6 +381,15 @@ const Footer = () => {
                   >
                     <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
                     Liên đoàn lao động TPHCM
+                  </a>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:bg-primary group-hover:scale-125 transition-all"></span>
+                    Cục quản lý giá - Bộ tài chính
                   </a>
                 </>
               )}
