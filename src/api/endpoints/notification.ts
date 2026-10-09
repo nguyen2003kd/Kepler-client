@@ -32,98 +32,6 @@ import { mainInstance } from '../mutator/custom-instance';
 
 
 /**
- * @summary Subscribe to notification stream (SSE)
- */
-export const getApiV10NotificationsStream = (
-    
- signal?: AbortSignal
-) => {
-      
-      
-      return mainInstance<string>(
-      {url: `/api/v1.0/notifications/stream`, method: 'GET', signal
-    },
-      );
-    }
-  
-
-
-
-export const getGetApiV10NotificationsStreamQueryKey = () => {
-    return [
-    `/api/v1.0/notifications/stream`
-    ] as const;
-    }
-
-    
-export const getGetApiV10NotificationsStreamQueryOptions = <TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
-) => {
-
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetApiV10NotificationsStreamQueryKey();
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV10NotificationsStream>>> = ({ signal }) => getApiV10NotificationsStream(signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetApiV10NotificationsStreamQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV10NotificationsStream>>>
-export type GetApiV10NotificationsStreamQueryError = unknown
-
-
-export function useGetApiV10NotificationsStream<TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>(
-  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getApiV10NotificationsStream>>,
-          TError,
-          Awaited<ReturnType<typeof getApiV10NotificationsStream>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiV10NotificationsStream<TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>> & Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getApiV10NotificationsStream>>,
-          TError,
-          Awaited<ReturnType<typeof getApiV10NotificationsStream>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiV10NotificationsStream<TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary Subscribe to notification stream (SSE)
- */
-
-export function useGetApiV10NotificationsStream<TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-
-  const queryOptions = getGetApiV10NotificationsStreamQueryOptions(options)
-
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-
-/**
  * @summary Get notifications of current user
  */
 export const getApiV10Notifications = (
@@ -403,4 +311,95 @@ export const usePutApiV10NotificationsMarkAsRead = <TError = unknown,
 
       return useMutation(mutationOptions, queryClient);
     }
+    /**
+ * @summary Subscribe to notification stream (SSE)
+ */
+export const getApiV10NotificationsStream = (
     
+ signal?: AbortSignal
+) => {
+      
+      
+      return mainInstance<string>(
+      {url: `/api/v1.0/notifications/stream`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getGetApiV10NotificationsStreamQueryKey = () => {
+    return [
+    `/api/v1.0/notifications/stream`
+    ] as const;
+    }
+
+    
+export const getGetApiV10NotificationsStreamQueryOptions = <TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiV10NotificationsStreamQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiV10NotificationsStream>>> = ({ signal }) => getApiV10NotificationsStream(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetApiV10NotificationsStreamQueryResult = NonNullable<Awaited<ReturnType<typeof getApiV10NotificationsStream>>>
+export type GetApiV10NotificationsStreamQueryError = unknown
+
+
+export function useGetApiV10NotificationsStream<TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV10NotificationsStream>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV10NotificationsStream>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetApiV10NotificationsStream<TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiV10NotificationsStream>>,
+          TError,
+          Awaited<ReturnType<typeof getApiV10NotificationsStream>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetApiV10NotificationsStream<TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Subscribe to notification stream (SSE)
+ */
+
+export function useGetApiV10NotificationsStream<TData = Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiV10NotificationsStream>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetApiV10NotificationsStreamQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+

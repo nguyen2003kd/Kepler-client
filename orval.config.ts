@@ -1,8 +1,11 @@
 import axios from 'axios'
+import { config as loadEnv } from 'dotenv'
 import { defineConfig } from 'orval'
-import baseConfig from './src/configs/base'
+
+loadEnv()
 
 const orvalConfig = async () => {
+  const { default: baseConfig } = await import('./src/configs/base')
   const { backendDomain, frontendDomain } = baseConfig
 
   const [keplerPropertyBESwagger] = await Promise.all([

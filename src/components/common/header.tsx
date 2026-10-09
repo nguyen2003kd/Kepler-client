@@ -733,7 +733,7 @@ export default function Header({ navItems = [], className }: HeaderProps) {
                             <div className="h-px bg-gray-200 my-0.5" />
                           )}
                           <div
-                            className="flex items-center w-full"
+                            className="flex items-center justify-end w-full"
                             style={{ gap: `${rowGaps[rowIdx]}px` }}
                           >
                             {rowItems.map((item) => (

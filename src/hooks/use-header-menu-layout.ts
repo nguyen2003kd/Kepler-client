@@ -23,6 +23,7 @@ const GAP_MEDIUM = 24;
 const GAP_SMALL = 18;
 const GAP_LEVELS = [GAP_LARGE, GAP_MEDIUM, GAP_SMALL];
 const SAFETY_GAP = 16;
+const MAX_ITEMS_PER_ROW = 6;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useHeaderMenuLayout<T extends Record<string, any>>(
@@ -83,7 +84,8 @@ export function useHeaderMenuLayout<T extends Record<string, any>>(
       }
 
       // Find the largest k (top row count) that fits; n means all fit in 1 row
-      for (let k = n; k >= 1; k--) {
+      // Cap the top row at MAX_ITEMS_PER_ROW items
+      for (let k = Math.min(n, MAX_ITEMS_PER_ROW); k >= 1; k--) {
         const row1Width = prefix[k] + gap * (k - 1);
         if (row1Width > availableWidth) continue;
 
@@ -135,9 +137,9 @@ export function useHeaderMenuLayout<T extends Record<string, any>>(
         }
       }
 
-      // Fallback: split at midpoint using the smallest fixed gap
-      const mid = Math.floor(n / 2);
-      setRows([menus.slice(0, mid), menus.slice(mid)]);
+      // Fallback: top row capped at MAX_ITEMS_PER_ROW, rest on row 2
+      const split = Math.min(n, MAX_ITEMS_PER_ROW);
+      setRows([menus.slice(0, split), menus.slice(split)]);
       setCurrentGap(GAP_SMALL);
       setRowGaps([GAP_SMALL, GAP_SMALL]);
       setIsReady(true);
