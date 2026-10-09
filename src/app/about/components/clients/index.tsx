@@ -19,7 +19,8 @@ interface Partner {
   is_active: boolean;
 }
 
-const CUSTOMERS_PARTNERS_CONFIG_KEY = "Customers_partners_config";
+const CUSTOMERS_CONFIG_KEY = "Customers_config";
+const LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY = "Customers_partners_config";
 
 function getImageUrl(logo: string | undefined): string {
   if (!logo || logo.trim() === "") return "/seo.png";
@@ -42,7 +43,21 @@ export default function Clients() {
   const { t } = useTranslation("pages/about");
   const { data, isLoading } = useGetApiV10PageConfig(
     {
-      filters: `key==${CUSTOMERS_PARTNERS_CONFIG_KEY}`,
+      filters: `key==${CUSTOMERS_CONFIG_KEY}`,
+      pageSize: 1,
+    },
+    {
+      query: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+      },
+    }
+  );
+  // Fallback: nếu key mới chưa có dữ liệu thì đọc key cũ (gộp chung)
+  const { data: legacyData } = useGetApiV10PageConfig(
+    {
+      filters: `key==${LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY}`,
       pageSize: 1,
     },
     {
@@ -56,10 +71,18 @@ export default function Clients() {
 
   // Parse partners from config
   const partners: Partner[] = (() => {
-    if (!data?.responseData?.rows) return [];
-    const rows = data.responseData.rows as PageConfig[];
-    const config = rows.find((item) => item.key === CUSTOMERS_PARTNERS_CONFIG_KEY);
-    return parsePartners(config?.value || "");
+    const rows = (data?.responseData?.rows || []) as PageConfig[];
+    const config = rows.find((item) => item.key === CUSTOMERS_CONFIG_KEY);
+    if (config?.value) {
+      const parsed = parsePartners(config.value);
+      if (parsed.length > 0) return parsed;
+    }
+    // Fallback key cũ
+    const legacyRows = (legacyData?.responseData?.rows || []) as PageConfig[];
+    const legacyConfig = legacyRows.find(
+      (item) => item.key === LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY
+    );
+    return parsePartners(legacyConfig?.value || "");
   })();
 
   // Filter only active partners for display

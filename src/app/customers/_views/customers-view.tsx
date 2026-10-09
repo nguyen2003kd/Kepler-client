@@ -10,17 +10,36 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { PageConfig } from "@/api/models";
+import baseConfig from "@/configs/base";
 
-// 1. Logo khách hàng
-const CUSTOMER_LOGOS = [
-  { name: "Ngân hàng A", image: "/images/client-1.png", sector: "Ngân hàng" },
-  { name: "Doanh nghiệp B", image: "/images/client-2.png", sector: "Doanh nghiệp" },
-  { name: "Chủ đầu tư C", image: "/images/client-3.png", sector: "Chủ đầu tư" },
-  { name: "Quỹ đầu tư D", image: "/images/logo-case.png", sector: "Quỹ đầu tư" },
-  { name: "Đơn vị sản xuất E", image: "/images/logo-kepler.jpg", sector: "Sản xuất" },
-  { name: "Đơn vị thương mại F", image: "/images/logo-no-bg.png", sector: "Thương mại" },
-];
+const CUSTOMERS_CONFIG_KEY = "Customers_config";
+const LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY = "Customers_partners_config";
+
+interface Customer {
+  id: string;
+  name: string;
+  logo?: string;
+  website?: string;
+  is_active: boolean;
+}
+
+function getImageUrl(logo: string | undefined): string {
+  if (!logo || logo.trim() === "") return "/seo.png";
+  return logo.startsWith("http") ? logo : `${baseConfig.imgEndpointDomain}${logo}`;
+}
+
+function parseCustomers(value: string | null | undefined): Customer[] {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
 
 // 2. Case Study
 const CASE_STUDIES = [
@@ -110,6 +129,49 @@ const STORIES = [
 export default function KhachHangView() {
   const [activeVideo, setActiveVideo] = useState(0);
 
+  const { data, isLoading } = useGetApiV10PageConfig(
+    {
+      filters: `key==${CUSTOMERS_CONFIG_KEY}`,
+      pageSize: 1,
+    },
+    {
+      query: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+      },
+    }
+  );
+  // Fallback: nếu key mới chưa có dữ liệu thì đọc key cũ (gộp chung)
+  const { data: legacyData } = useGetApiV10PageConfig(
+    {
+      filters: `key==${LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY}`,
+      pageSize: 1,
+    },
+    {
+      query: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+      },
+    }
+  );
+
+  const customers = useMemo(() => {
+    const rows = (data?.responseData?.rows || []) as PageConfig[];
+    const config = rows.find((item) => item.key === CUSTOMERS_CONFIG_KEY);
+    if (config?.value) {
+      const parsed = parseCustomers(config.value);
+      if (parsed.length > 0) return parsed.filter((c) => c.is_active);
+    }
+    // Fallback key cũ
+    const legacyRows = (legacyData?.responseData?.rows || []) as PageConfig[];
+    const legacyConfig = legacyRows.find(
+      (item) => item.key === LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY
+    );
+    return parseCustomers(legacyConfig?.value).filter((c) => c.is_active);
+  }, [data, legacyData]);
+
   return (
     <div className="bg-white">
       {/* === HERO === */}
@@ -172,32 +234,43 @@ export default function KhachHangView() {
             <div className="mt-4 h-1 w-20 rounded-full bg-red-500" />
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
-            {CUSTOMER_LOGOS.map((c, idx) => (
-              <motion.div
-                key={c.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="group bg-white rounded-2xl border border-gray-200 p-6 flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-red-200 transition-all duration-300 min-h-[160px] relative overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative w-16 h-16 mb-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={c.image}
-                    alt={c.name}
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-                <h3 className="text-sm font-bold text-gray-900 leading-tight">{c.name}</h3>
-                <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-red-600">
-                  {c.sector}
-                </span>
-              </motion.div>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="flex items-center justify-center h-40">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+            </div>
+          ) : customers.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-40 text-gray-400">
+              <Users className="h-10 w-10 mb-3 opacity-50" />
+              <p className="text-sm">Chưa có khách hàng nào được cấu hình</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
+              {customers.map((c, idx) => (
+                <motion.a
+                  key={c.id}
+                  href={c.website || "#"}
+                  target={c.website && c.website !== "#" ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.05 }}
+                  className="group bg-white rounded-2xl border border-gray-200 p-6 flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-red-200 transition-all duration-300 min-h-[160px] relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative w-16 h-16 mb-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={getImageUrl(c.logo)}
+                      alt={c.name}
+                      className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                  <h3 className="text-sm font-bold text-gray-900 leading-tight">{c.name}</h3>
+                </motion.a>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -360,11 +433,10 @@ export default function KhachHangView() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.06 }}
-                  className={`group cursor-pointer border-l-2 px-6 py-5 transition-all duration-300 ${
-                    activeVideo === index
+                  className={`group cursor-pointer border-l-2 px-6 py-5 transition-all duration-300 ${activeVideo === index
                       ? "border-red-500 bg-white shadow-md"
                       : "border-gray-200 hover:border-gray-400 bg-transparent"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
