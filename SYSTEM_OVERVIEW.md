@@ -5,7 +5,7 @@
 ```
 kepler/
 ├── kepler-backend/          → Backend API (Node.js + Express + Sequelize + PostgreSQL)
-├── kepler-frontend-2/       → Frontend Client (Next.js App Router)
+├── kepler-frontend-client/       → Frontend Client (Next.js App Router)
 └── kepler-frontend-admin/   → Admin Panel (Next.js App Router)
 ```
 
@@ -108,7 +108,7 @@ Mỗi Post có:
 
 ---
 
-## 2. Frontend Client (`kepler-frontend-2/`)
+## 2. Frontend Client (`kepler-frontend-client/`)
 
 ### Tech Stack
 - **Framework:** Next.js 14+ App Router
@@ -397,7 +397,7 @@ User xem trang
 ## 5. Environment & Deployment
 
 ### Environment Variables
-**Frontend Client (`kepler-frontend-2/`):**
+**Frontend Client (`kepler-frontend-client/`):**
 - `NEXT_PUBLIC_BACKEND_DOMAIN` — Backend API URL
 - `NEXT_PUBLIC_FRONTEND_DOMAIN` — Frontend URL
 
