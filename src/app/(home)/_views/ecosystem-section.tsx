@@ -26,6 +26,7 @@ const FALLBACK_MEMBERS: EcosystemMember[] = [
   { slug: "kac-advisory", name: "Kepler M&A – KMAC", description: "Tư vấn đầu tư, M&A, tái cấu trúc, tài chính và gọi vốn.", image: FALLBACK_IMAGE, link: "/he-sinh-thai/kac-advisory" },
   { slug: "k-homes", name: "Kepler Construction – KCC", description: "Thiết kế kiến trúc, nội thất, thi công và cải tạo công trình.", image: FALLBACK_IMAGE, link: "/he-sinh-thai/k-homes" },
   { slug: "kepler-land", name: "Kepler Land – Sàn giao dịch BĐS", description: "Sàn giao dịch bất động sản.", image: FALLBACK_IMAGE, link: "/he-sinh-thai/kepler-land" },
+  { slug: "bizoffice", name: "BizOffice", description: "Hệ thống quản lý và khai thác mặt bằng, bất động sản thương mại.", image: FALLBACK_IMAGE, link: "/he-sinh-thai/bizoffice" },
 ];
 
 export default function EcosystemSection() {
@@ -84,7 +85,7 @@ export default function EcosystemSection() {
         return {
           slug,
           name: child.name || "",
-          description: child.description || "",
+          description: child.description || FALLBACK_MEMBERS.find((member) => member.slug === slug)?.description || "",
           image: imageMap[slug] || FALLBACK_IMAGE,
           link: child.link || `/he-sinh-thai/${slug}`,
         };
@@ -125,6 +126,8 @@ export default function EcosystemSection() {
                 key={item.slug || index}
                 href={item.link}
                 onMouseEnter={() => setActive(index)}
+                onFocus={() => setActive(index)}
+                className="block rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
               >
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -174,32 +177,34 @@ export default function EcosystemSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <SafeImage
-                src={members[active]?.image || FALLBACK_MEMBERS[0].image}
-                alt={members[active]?.name || ""}
-                fill
-                className="object-cover transition-all duration-500"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                <div className="text-white/80 text-sm font-medium tracking-wider uppercase mb-2">
-                  0{active + 1} / {String(members.length).padStart(2, "0")}
+              <Link
+                href={members[active]?.link || "/he-sinh-thai"}
+                className="group/link relative block h-full w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white"
+              >
+                <SafeImage
+                  src={members[active]?.image || FALLBACK_MEMBERS[0].image}
+                  alt={members[active]?.name || ""}
+                  fill
+                  className="object-cover transition-all duration-500"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute inset-0 p-10 flex flex-col justify-end">
+                  <div className="text-white/80 text-sm font-medium tracking-wider uppercase mb-2">
+                    0{active + 1} / {String(members.length).padStart(2, "0")}
+                  </div>
+                  <h3 className="text-3xl font-extrabold text-white mb-3">
+                    {members[active]?.name}
+                  </h3>
+                  <p className="text-white/80 text-sm leading-relaxed max-w-[40ch]">
+                    {members[active]?.description}
+                  </p>
+                  <span className="inline-flex items-center gap-2 mt-6 text-white text-sm font-medium">
+                    Khám phá hệ sinh thái
+                    <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                  </span>
                 </div>
-                <h3 className="text-3xl font-extrabold text-white mb-3">
-                  {members[active]?.name}
-                </h3>
-                <p className="text-white/80 text-sm leading-relaxed max-w-[40ch]">
-                  {members[active]?.description}
-                </p>
-                <Link
-                  href={members[active]?.link || "/he-sinh-thai"}
-                  className="inline-flex items-center gap-2 mt-6 text-white text-sm font-medium group/link"
-                >
-                  Khám phá hệ sinh thái
-                  <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                </Link>
-              </div>
+              </Link>
             </motion.div>
           </div>
         </div>

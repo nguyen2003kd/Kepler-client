@@ -8,6 +8,7 @@ export interface EcosystemUnit {
   products: string[];
   clients: string;
   image?: string;
+  serviceContents?: Record<string, import("./service-content").EcosystemServiceContent>;
 }
 
 export const units: Record<string, EcosystemUnit> = {

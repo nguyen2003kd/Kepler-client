@@ -12,16 +12,17 @@ export function generateStaticParams() {
 export default async function ExpertProfilePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const expert = getExpertBySlug(params.slug);
+  const { slug } = await params;
+  const expert = getExpertBySlug(slug);
 
   if (expert) {
     return <ExpertProfileContent expert={expert} />;
   }
 
   // Try category page (e.g. /chuyen-gia/gioi-thieu)
-  const fullSlug = `chuyen-gia/${params.slug}`;
+  const fullSlug = `chuyen-gia/${slug}`;
   const category = await getCategoryByLink(fullSlug, "vi");
   const categoryEn = await getCategoryByLink(fullSlug, "en");
 

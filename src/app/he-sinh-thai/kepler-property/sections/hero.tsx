@@ -4,6 +4,7 @@ import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEcosystemUnits } from "../../use-ecosystem-units";
+import { getEcosystemServiceLink } from "../../service-content";
 
 export default function KeplerPropertyHero() {
   const units = useEcosystemUnits();
@@ -42,12 +43,13 @@ export default function KeplerPropertyHero() {
             className="mt-8 flex flex-wrap gap-2"
           >
             {unit.items.map((item) => (
-              <span
+              <Link
                 key={item}
-                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/70 backdrop-blur-sm"
+                href={getEcosystemServiceLink("kepler-property", item, unit)}
+                className="inline-flex min-h-11 items-center rounded-full border border-white/30 bg-white/5 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:border-white hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
                 {item}
-              </span>
+              </Link>
             ))}
           </motion.div>
           <div className="mt-10 flex flex-wrap gap-4">
