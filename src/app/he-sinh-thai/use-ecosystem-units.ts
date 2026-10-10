@@ -17,6 +17,7 @@ interface ApiMember {
   industries?: string[];
   products?: string[];
   clients?: string;
+  service_contents?: EcosystemUnit["serviceContents"];
 }
 
 export function useEcosystemUnits(): Record<string, EcosystemUnit> {
@@ -55,6 +56,7 @@ export function useEcosystemUnits(): Record<string, EcosystemUnit> {
                 products: member.products || fallbackUnits[member.slug]?.products || [],
                 clients: member.clients || fallbackUnits[member.slug]?.clients || "",
                 image: member.image || fallbackUnits[member.slug]?.image || "",
+                serviceContents: member.service_contents || {},
               };
             }
             return { ...fallbackUnits, ...apiUnits };

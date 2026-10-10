@@ -31,7 +31,7 @@ const FALLBACK_MEMBERS: EcosystemMember[] = [
   { slug: "kac-advisory", name: "Kepler M&A – KMAC", description: "Tư vấn M&A, tái cấu trúc doanh nghiệp và tư vấn tài chính đầu tư.", link: "/he-sinh-thai/kac-advisory", icon: TrendingUp },
   { slug: "k-homes", name: "Kepler Construction – KCC", description: "Thiết kế kiến trúc, nội thất, thi công xây dựng mới và cải tạo công trình.", link: "/he-sinh-thai/k-homes", icon: Layers },
   { slug: "kepler-land", name: "Kepler Land – Sàn giao dịch BĐS", description: "Môi giới và phân phối bất động sản cá nhân hoặc dự án bất động sản.", link: "/he-sinh-thai/kepler-land", icon: Store },
-  { slug: "real-hub", name: "Real Hub Platform", description: "Giải pháp số bất động sản. Nền tảng công nghệ kết nối dữ liệu, tài sản, nhà đầu tư và hệ sinh thái dịch vụ.", link: "/he-sinh-thai/real-hub", icon: Cpu },
+  { slug: "real-hub", name: "Real Hub Platform", description: "Giải pháp số bất động sản. Nền tảng công nghệ kết nối dữ liệu, tài sản, nhà đầu tư và hệ sinh thái dịch vụ.", link: "/realhub", icon: Cpu },
   { slug: "bizoffice", name: "BizOffice", description: "Hệ thống quản lý và khai thác mặt bằng, bất động sản thương mại.", link: "/he-sinh-thai/bizoffice", icon: Network },
 ];
 

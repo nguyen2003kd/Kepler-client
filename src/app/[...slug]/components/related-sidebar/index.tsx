@@ -9,6 +9,7 @@ import { Newspaper } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { isIntroductionPath } from "@/lib/introduction-profile";
 
 interface RelatedSidebarProps {
   categoryId: string;
@@ -114,7 +115,7 @@ export default function RelatedSidebar({
                   </h4>
 
                   {/* Date */}
-                  <p className="text-xs text-gray-500">
+                  {!isIntroductionPath(categoryCode || news.category?.link) && <p className="text-xs text-gray-500">
                     {new Date(news.created_at || "").toLocaleDateString(
                       locale,
                       {
@@ -123,7 +124,7 @@ export default function RelatedSidebar({
                         year: "numeric",
                       },
                     )}
-                  </p>
+                  </p>}
                 </div>
               </a>
             );

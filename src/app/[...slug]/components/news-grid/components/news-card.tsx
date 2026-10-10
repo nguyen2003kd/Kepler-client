@@ -8,6 +8,7 @@ import { PostExtended } from "@/types/post";
 import parse from "html-react-parser";
 import { ArrowRight, Calendar } from "lucide-react";
 import Image from "@/components/common/safe-image";
+import { isIntroductionPath } from "@/lib/introduction-profile";
 interface NewsCardProps {
   post: PostExtended;
   viewMode: "grid" | "list";
@@ -21,6 +22,7 @@ export default function NewsCard({
   categoryCode,
   categoryName,
 }: NewsCardProps) {
+  const hideDate = isIntroductionPath(categoryCode || post.category?.link);
   const postUrl = `/${
     categoryCode || post.category?.link?.replace(/^\//, "") || "post"
   }/${post.slug || ""}`;
@@ -65,10 +67,10 @@ export default function NewsCard({
             <Separator className="bg-gray-100" />
             <div className="flex items-center justify-between">
               {/* Date */}
-              <p className="text-gray-500 text-xs flex items-center gap-1.5">
+              {!hideDate && <p className="text-gray-500 text-xs flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5" />
                 {new Date(post.created_at || "").toLocaleDateString("vi-VN")}
-              </p>
+              </p>}
 
               {/* Link */}
               <a
@@ -116,10 +118,10 @@ export default function NewsCard({
         <Separator className="bg-gray-100" />
         <div className="w-full flex items-center justify-between">
           {/* Date */}
-          <p className="text-gray-500 text-xs flex items-center gap-1.5">
+          {!hideDate && <p className="text-gray-500 text-xs flex items-center gap-1.5">
             <Calendar className="w-3.5 h-3.5" />
             {new Date(post.created_at || "").toLocaleDateString("vi-VN")}
-          </p>
+          </p>}
 
           {/* Link */}
           <a

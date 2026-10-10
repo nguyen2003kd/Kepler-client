@@ -6,9 +6,10 @@ import { notFound } from "next/navigation";
 import ServiceDetailView from "./views/service-detail-view";
 import StaticServiceDetail, { staticServices } from "./views/static-service-detail";
 import DynamicCategoryPage from "@/app/[...slug]/views/category-page";
+import { resolveActivityPage } from "@/app/linh-vuc-hoat-dong/activity-page";
 
 interface ServiceDetailPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 async function getPost(slug: string): Promise<PostExtended | null> {
@@ -86,10 +87,11 @@ async function getPostsForCategory(categoryId: string) {
 export async function generateMetadata({
   params,
 }: ServiceDetailPageProps): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
-    const category = await getCategoryByLink(`services/${params.slug}`, "vi");
+    const category = await getCategoryByLink(`services/${slug}`, "vi");
     if (category) {
       return {
         title: `${category.name} | Kepler Property`,
@@ -109,7 +111,7 @@ export async function generateMetadata({
         ? `${baseConfig.backendDomain}${post.thumbnail_path}`
         : undefined;
 
-  const pageUrl = `${baseConfig.frontendDomain}/services/${params.slug}`;
+  const pageUrl = `${baseConfig.frontendDomain}/services/${slug}`;
   const description = post.summary?.replace(/<[^>]*>/g, "").slice(0, 160) || "Dịch vụ Kepler Group";
 
   return {
@@ -139,17 +141,20 @@ export async function generateMetadata({
 }
 
 export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
-  if (staticServices[params.slug]) {
-    return <StaticServiceDetail slug={params.slug} basePath="/services" />;
+  const { slug } = await params;
+  const activityPage = await resolveActivityPage(`services/${slug}`);
+  if (activityPage) return activityPage;
+  if (staticServices[slug]) {
+    return <StaticServiceDetail slug={slug} basePath="/services" />;
   }
 
-  const post = await getPost(params.slug);
+  const post = await getPost(slug);
 
   if (post) {
-    return <ServiceDetailView slug={params.slug} initialPost={post} />;
+    return <ServiceDetailView slug={slug} initialPost={post} />;
   }
 
-  const fullSlug = `services/${params.slug}`;
+  const fullSlug = `services/${slug}`;
   const [{ category, siblings }, categoryEn] = await Promise.all([
     getCategoryWithSiblings(fullSlug, "vi"),
     getCategoryByLink(fullSlug, "en"),

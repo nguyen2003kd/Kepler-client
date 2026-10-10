@@ -6,9 +6,13 @@ import { notFound } from "next/navigation";
 import DynamicCategoryPage from "./views/category-page";
 import DynamicPostDetailPage from "./views/post-detail-page";
 import type { PostExtended } from "@/types/post";
+import { isIntroductionPath } from "@/lib/introduction-profile";
+import { resolveActivityPage } from "@/app/linh-vuc-hoat-dong/activity-page";
+import { resolveMarketplacePage } from "@/app/san-giao-dich/marketplace-page";
+import { getApiV10PropertyId } from "@/api/endpoints/property";
 interface DynamicPageProps {
   params: Promise<{ slug: string[] }>;
-  searchParams: Promise<{ date?: string }>;
+  searchParams: Promise<{ date?: string; page?:string }>;
 }
 interface NewsDetailPageProps {
   params: Promise<{ slug: string[] }>;
@@ -122,6 +126,13 @@ export async function generateMetadata({
   params,
 }: NewsDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
+  if(slug.length===3 && slug[0]==='san-giao-dich' && slug[1]==='san-pham'){
+    try{
+      const {responseData:property}=await getApiV10PropertyId(slug[2]);
+      if(property)return {title:property.title || 'Sản phẩm | Kepler',description:(property.description || property.location || '').slice(0,160)};
+    }catch{}
+    return {title:'Không tìm thấy sản phẩm | Kepler'};
+  }
   const lastSlug = slug.at(-1);
   const post = await getPost(lastSlug ?? '');
   if (!post) {
@@ -157,7 +168,7 @@ export async function generateMetadata({
       description,
       url: pageUrl,
       type: "article",
-      publishedTime: post.created_at || undefined,
+      ...(!isIntroductionPath(slug.join("/")) && { publishedTime: post.created_at || undefined }),
       siteName: "KEPLER",
       ...(thumbnailUrl && {
         images: [{ url: thumbnailUrl, width: 1200, height: 630, alt: post.title || "" }],
@@ -183,6 +194,10 @@ export default async function DynamicPage({
     searchParams,
   ]);
   const [firstSlug, secondSlug] = slug;
+  const marketplacePage = await resolveMarketplacePage(slug.join("/"),resolvedSearchParams.page);
+  if (marketplacePage) return marketplacePage;
+  const activityPage = await resolveActivityPage(slug.join("/"));
+  if (activityPage) return activityPage;
 
   if (slug.length === 1) {
     const post = await getPost(firstSlug);
