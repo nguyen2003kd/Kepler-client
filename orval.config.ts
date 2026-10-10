@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { config as loadEnv } from 'dotenv'
 import { defineConfig } from 'orval'
+import { config as loadEnv } from 'dotenv'
 
 loadEnv()
 
@@ -8,14 +8,14 @@ const orvalConfig = async () => {
   const { default: baseConfig } = await import('./src/configs/base')
   const { backendDomain, frontendDomain } = baseConfig
 
-  const [keplerPropertyBESwagger] = await Promise.all([
+  const [keplerProperty] = await Promise.all([
     axios.get(`${backendDomain}/swagger-output.json`, {
       headers: { Origin: frontendDomain }
     })
   ])
 
   return defineConfig({
-    'kepler-property-be': {
+    'kepler': {
       output: {
         mode: 'tags',
         target: 'src/api/endpoints',
@@ -23,36 +23,18 @@ const orvalConfig = async () => {
         client: 'react-query',
         override: {
           query: {
+            version: 5,
             useQuery: true,
-            useInfinite: false // ❌ tắt global infinite
+            useInfinite: true
           },
           mutator: {
             path: 'src/api/mutator/custom-instance.ts',
             name: 'mainInstance'
           },
-          header: () => '/* eslint-disable */\r\n',
-
-          // ✅ chỉ bật infinite cho API cần page
-          operations: {
-            getPosts: {
-              query: {
-                useInfinite: true,
-                useInfiniteQueryParam: 'page'
-              }
-            },
-
-            // giữ nguyên cái cũ của bạn
-            postSystemBackup: {
-              mutator: {
-                path: 'src/api/mutator/fetch-instance.ts',
-                name: 'fetchInstance'
-              }
-            }
-          }
         }
       },
       input: {
-        target: keplerPropertyBESwagger.data,
+        target: keplerProperty.data,
         filters: {
           tags: ['Authentication', /(((Library)|(Module)) - )?/]
         }
