@@ -1,192 +1,34 @@
 "use client";
 
-import SafeImage from "@/components/common/safe-image";
+import ProfileLayout from "@/app/about/components/profile-layout";
 import Link from "next/link";
-import { ArrowUpRight, ArrowLeft, Award, Briefcase, FileText } from "lucide-react";
+import { ArrowUpRight, Briefcase, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Expert } from "../expert-data";
 
 export default function ExpertProfileContent({ expert }: { expert: Expert }) {
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <SafeImage
-            src={expert.avatar}
-            alt={expert.name}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-        </div>
-        <div className="relative mx-auto flex min-h-[80vh] max-w-[1400px] flex-col justify-center px-6 py-24 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-4xl"
-          >
-            <Link
-              href="/chuyen-gia"
-              className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-primary"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Danh sách chuyên gia
-            </Link>
-
-            <div className="mt-8 flex items-center gap-5">
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-white/20 bg-white/10 backdrop-blur-sm">
-                <span className="text-3xl font-bold text-white">
-                  {expert.name.replace(/^(Tiến sỹ|Thạc sỹ|Luật sư|Kỹ sư|KTS|Thẩm định viên)\s+/, "").charAt(0).toUpperCase()}
-                </span>
-              </div>
-              <div>
-                <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
-                  {expert.prefix}
-                </span>
-                <div className="mt-3 flex items-center gap-3">
-                  <div className="h-px w-12 bg-primary" />
-                  <span className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
-                    {expert.field}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <h1 className="mt-6 text-5xl font-bold leading-[1.05] text-white sm:text-6xl lg:text-7xl">
-              {expert.name}
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-              {expert.role}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Bio + Experience */}
-      <section className="mx-auto max-w-[1400px] px-6 py-24 lg:px-12 lg:py-32">
-        <div className="grid gap-12 lg:grid-cols-[.6fr_1.4fr] lg:items-start">
-          {/* Left — sticky info */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:sticky lg:top-24"
-          >
-            <div className="rounded-3xl border border-gray-200 p-8">
-              <h3 className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
-                Thông tin
-              </h3>
-              <dl className="mt-6 space-y-5">
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wider text-gray-400">Chức danh</dt>
-                  <dd className="mt-1 text-sm font-bold text-gray-900">{expert.prefix}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wider text-gray-400">Lĩnh vực</dt>
-                  <dd className="mt-1 text-sm font-bold text-gray-900">{expert.field}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wider text-gray-400">Vai trò</dt>
-                  <dd className="mt-1 text-sm leading-relaxed text-gray-600">{expert.role}</dd>
-                </div>
-              </dl>
-            </div>
-          </motion.div>
-
-          {/* Right — bio, experience, current */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-12"
-          >
-            {/* Bio */}
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Kinh nghiệm
-              </h2>
-              <ul className="mt-8 space-y-4">
-                {expert.bio.map((b, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-4 text-base leading-relaxed text-gray-600"
-                  >
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Experience */}
-            {expert.experience && (
-              <div className="rounded-3xl bg-gray-50 p-8">
-                <h3 className="text-lg font-bold text-gray-900">Kinh nghiệm chuyên môn</h3>
-                <p className="mt-4 text-base leading-relaxed text-gray-600">
-                  {expert.experience}
-                </p>
-              </div>
-            )}
-
-            {/* Current */}
-            {expert.current && (
-              <div className="rounded-3xl bg-gray-900 p-8">
-                <h3 className="text-lg font-bold text-white">Hiện tại</h3>
-                <p className="mt-4 text-base leading-relaxed text-white/60">
-                  {expert.current}
-                </p>
-              </div>
-            )}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Certifications */}
-      {expert.certifications.length > 0 && (
-        <section className="bg-gray-900 py-24 lg:py-32">
-          <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="mb-16 max-w-2xl"
-            >
-              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                Bằng cấp &amp; Chứng chỉ
-              </h2>
-              <p className="mt-4 text-lg text-white/50">
-                Các văn bằng, chứng chỉ hành nghề và giấy tờ chuyên môn.
-              </p>
-            </motion.div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {expert.certifications.map((cert, index) => (
-                <motion.div
-                  key={cert}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:bg-white/10"
-                >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-white">
-                    <Award className="h-6 w-6" />
-                  </div>
-                  <p className="text-sm font-medium leading-relaxed text-white">
-                    {cert}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+    <div className="min-h-screen bg-white">
+      <ProfileLayout
+        name={expert.name}
+        groupName="Chuyên gia"
+        backHref="/chuyen-gia"
+        imageSrc={expert.avatar}
+        imageAlt="Ảnh minh họa hiện có trong dự án"
+        imageCaption="Ảnh minh họa hiện có"
+        subtitle={<><p className="font-medium text-gray-900">{expert.prefix} · {expert.field}</p><p className="mt-1">{expert.role}</p></>}
+        panels={{
+          introduction: <div className="space-y-4">
+            {expert.bio.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {expert.current && <div className="rounded-lg bg-gray-50 p-4"><h3 className="mb-2 font-semibold text-gray-900">Hiện tại</h3><p>{expert.current}</p></div>}
+          </div>,
+          experience: expert.experience ? <p>{expert.experience}</p> : undefined,
+          achievements: expert.certifications.length ? <div>
+            <h3 className="mb-3 font-semibold text-gray-900">Bằng cấp &amp; Chứng chỉ</h3>
+            <ul className="list-disc space-y-3 pl-5 marker:text-primary">{expert.certifications.map((cert) => <li key={cert}>{cert}</li>)}</ul>
+          </div> : undefined,
+        }}
+      />
 
       {/* Projects & Articles */}
       {(expert.projects.length > 0 || expert.articles.length > 0) && (
@@ -300,7 +142,7 @@ export default function ExpertProfileContent({ expert }: { expert: Expert }) {
           </motion.div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

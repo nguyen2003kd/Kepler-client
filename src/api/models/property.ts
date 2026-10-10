@@ -1,6 +1,37 @@
 /* eslint-disable */
+import type { PropertyTransactionGroup } from './propertyTransactionGroup';
+import type { PropertyPriceUnit } from './propertyPriceUnit';
+import type { PropertyStatus } from './propertyStatus';
+import type { File } from './file';
 
 export interface Property {
+  /**
+   * Tên sản phẩm
+   * @maxLength 255
+   * @nullable
+   */
+  title?: string | null;
+  /**
+   * Nhóm giao dịch
+   * @nullable
+   */
+  transaction_group?: PropertyTransactionGroup;
+  /**
+   * Vị trí
+   * @maxLength 500
+   * @nullable
+   */
+  location?: string | null;
+  /**
+   * Kiến trúc và tiện ích
+   * @nullable
+   */
+  architecture?: string | null;
+  price_unit?: PropertyPriceUnit;
+  status?: PropertyStatus;
+  /** @maxItems 20 */
+  media_file_ids?: string[];
+  media?: File[];
   /** Property ID */
   id?: string;
   /**

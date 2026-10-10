@@ -61,7 +61,7 @@ const ecosystemMembers = [
     slug: "real-hub",
     name: "Real Hub Platform",
     description: "Giải pháp số bất động sản. Nền tảng công nghệ kết nối dữ liệu, tài sản, nhà đầu tư và hệ sinh thái dịch vụ.",
-    link: "/he-sinh-thai/real-hub",
+    link: "/realhub",
     icon: Cpu,
   },
   {

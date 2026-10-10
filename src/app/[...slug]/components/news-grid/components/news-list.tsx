@@ -13,6 +13,7 @@ import Image from "@/components/common/safe-image";
 import EmptyState from "../../empty-state";
 import NewsCard from "./news-card";
 import { useTranslation } from "react-i18next";
+import { isIntroductionPath } from "@/lib/introduction-profile";
 interface NewsListProps {
   posts: PostExtended[];
   isLoading: boolean;
@@ -46,6 +47,7 @@ export default function NewsList({
 }: NewsListProps) {
   const { t, i18n } = useTranslation("pages/post-detail");
   const locale = i18n.language?.startsWith("en") ? "en-US" : "vi-VN";
+  const hideDate = isIntroductionPath(categoryCode || posts[0]?.category?.link);
   if (isLoading) {
     return viewMode === "grid" ? (
       <GridCardSkeleton count={9} />
@@ -134,7 +136,7 @@ export default function NewsList({
 
                   {/* Footer - Compact */}
                   <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 text-white/90">
+                    {!hideDate && <div className="flex items-center gap-2 text-white/90">
                       <Calendar className="w-4 h-4" />
                       <p className="text-xs md:text-sm font-medium">
                         {new Date(posts[0].created_at || "").toLocaleDateString(
@@ -146,7 +148,7 @@ export default function NewsList({
                           }
                         )}
                       </p>
-                    </div>
+                    </div>}
 
                     <span className="inline-flex items-center text-white font-bold text-xs md:text-sm gap-2 group-hover:gap-3 transition-all">
                       {t("viewDetails")}

@@ -46,6 +46,8 @@ import {
 import { QRCodeCanvas } from "qrcode.react";
 import baseConfig from "@/configs/base";
 import { toast } from "sonner";
+import { isIntroductionPath, isMemberProfilePath } from "@/lib/introduction-profile";
+import CmsMemberProfile from "@/app/about/components/cms-member-profile";
 interface DynamicPostDetailPageProps {
   post: PostExtended;
   categoryName: string;
@@ -60,6 +62,9 @@ export default function DynamicPostDetailPage({
   urlCategoryId,
 }: DynamicPostDetailPageProps) {
   const { t } = useTranslation("pages/post-detail");
+  const pageCategoryPath = categorySlug || post.category?.link;
+  const hideDate = isIntroductionPath(pageCategoryPath);
+  const isMemberProfile = isMemberProfilePath(pageCategoryPath);
   // Check if current post is mock data
   const isMockPost = typeof post.id === "string" && post.id.startsWith("mock-");
 
@@ -74,7 +79,7 @@ export default function DynamicPostDetailPage({
     },
     {
       query: {
-        enabled: !isMockPost,
+        enabled: !isMockPost && !isMemberProfile,
       },
     },
   );
@@ -90,7 +95,7 @@ export default function DynamicPostDetailPage({
     },
     {
       query: {
-        enabled: !isMockPost,
+        enabled: !isMockPost && !isMemberProfile,
       },
     },
   );
@@ -136,7 +141,7 @@ export default function DynamicPostDetailPage({
     },
     {
       query: {
-        enabled: !isMockPost,
+        enabled: !isMockPost && !isMemberProfile,
       },
     },
   );
@@ -212,6 +217,10 @@ export default function DynamicPostDetailPage({
     link.click();
   };
 
+  if (isMemberProfile) {
+    return <CmsMemberProfile post={post} categoryName={categoryName} categorySlug={categorySlug} />;
+  }
+
   return (
     <>
       {/* Navbar Section */}
@@ -272,7 +281,7 @@ export default function DynamicPostDetailPage({
                 </h1>
 
                 <div className="flex flex-wrap items-center gap-4 md:gap-6 text-sm text-gray-600 mb-6">
-                  <div className="flex items-center gap-2">
+                  {!hideDate && <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
                     <span>
                       {(() => {
@@ -282,7 +291,7 @@ export default function DynamicPostDetailPage({
                         return `${date} - ${time}`;
                       })()}
                     </span>
-                  </div>
+                  </div>}
                   <div className="flex items-center gap-2">
                     <User className="w-4 h-4" />
                     <span>{post.author || "Admin"}</span>
