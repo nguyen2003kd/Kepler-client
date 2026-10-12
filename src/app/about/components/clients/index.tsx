@@ -20,6 +20,7 @@ interface Partner {
 }
 
 const CUSTOMERS_CONFIG_KEY = "Customers_config";
+const PARTNERS_CONFIG_KEY = "Partners_config";
 const LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY = "Customers_partners_config";
 
 function getImageUrl(logo: string | undefined): string {
@@ -29,7 +30,7 @@ function getImageUrl(logo: string | undefined): string {
     : `${baseConfig.imgEndpointDomain}${logo}`;
 }
 
-function parsePartners(value: string): Partner[] {
+function parsePartners(value: string | null | undefined): Partner[] {
   if (!value) return [];
   try {
     const parsed = JSON.parse(value);
@@ -39,55 +40,65 @@ function parsePartners(value: string): Partner[] {
   }
 }
 
+function usePageConfigPartners(key: string) {
+  return useGetApiV10PageConfig(
+    {
+      filters: `key==${key}`,
+      pageSize: 1,
+    },
+    {
+      query: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+      },
+    }
+  );
+}
+
+function extractPartners(
+  data: { responseData?: { rows?: unknown[] } } | undefined,
+  key: string
+): Partner[] {
+  const rows = (data?.responseData?.rows || []) as PageConfig[];
+  const config = rows.find((item) => item.key === key);
+  return parsePartners(config?.value);
+}
+
 export default function Clients() {
   const { t } = useTranslation("pages/about");
-  const { data, isLoading } = useGetApiV10PageConfig(
-    {
-      filters: `key==${CUSTOMERS_CONFIG_KEY}`,
-      pageSize: 1,
-    },
-    {
-      query: {
-        staleTime: 1000 * 60 * 5, // 5 minutes
-        refetchOnMount: false,
-        refetchOnWindowFocus: false,
-      },
-    }
-  );
-  // Fallback: nếu key mới chưa có dữ liệu thì đọc key cũ (gộp chung)
-  const { data: legacyData } = useGetApiV10PageConfig(
-    {
-      filters: `key==${LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY}`,
-      pageSize: 1,
-    },
-    {
-      query: {
-        staleTime: 1000 * 60 * 5, // 5 minutes
-        refetchOnMount: false,
-        refetchOnWindowFocus: false,
-      },
-    }
+  const { data: customersData, isLoading: isCustomersLoading } =
+    usePageConfigPartners(CUSTOMERS_CONFIG_KEY);
+  const { data: partnersData, isLoading: isPartnersLoading } =
+    usePageConfigPartners(PARTNERS_CONFIG_KEY);
+  // Fallback: nếu 2 key mới chưa có dữ liệu thì đọc key cũ (gộp chung)
+  const { data: legacyData } = usePageConfigPartners(
+    LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY
   );
 
-  // Parse partners from config
-  const partners: Partner[] = (() => {
-    const rows = (data?.responseData?.rows || []) as PageConfig[];
-    const config = rows.find((item) => item.key === CUSTOMERS_CONFIG_KEY);
-    if (config?.value) {
-      const parsed = parsePartners(config.value);
-      if (parsed.length > 0) return parsed;
-    }
-    // Fallback key cũ
-    const legacyRows = (legacyData?.responseData?.rows || []) as PageConfig[];
-    const legacyConfig = legacyRows.find(
-      (item) => item.key === LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY
+  const isLoading = isCustomersLoading || isPartnersLoading;
+
+  const customers: Partner[] = (() => {
+    const active = extractPartners(customersData, CUSTOMERS_CONFIG_KEY).filter(
+      (p) => p.is_active
     );
-    return parsePartners(legacyConfig?.value || "");
+    if (active.length > 0) return active;
+    // Fallback key cũ (gộp chung khách hàng + đối tác)
+    return extractPartners(
+      legacyData,
+      LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY
+    ).filter((p) => p.is_active);
   })();
 
-  // Filter only active partners for display
-  const activePartners = partners.filter((p) => p.is_active);
-  const clients = activePartners;
+  const partners: Partner[] = extractPartners(
+    partnersData,
+    PARTNERS_CONFIG_KEY
+  ).filter((p) => p.is_active);
+
+  const sections = [
+    { label: t("clients"), items: customers },
+    { label: t("partners"), items: partners },
+  ].filter((section) => section.items.length > 0);
 
   if (isLoading) {
     return (
@@ -104,9 +115,59 @@ export default function Clients() {
     );
   }
 
-  if (activePartners.length === 0) {
+  if (sections.length === 0) {
     return null;
   }
+
+  const renderCarousel = (items: Partner[]) => (
+    <Swiper
+      modules={[Autoplay]}
+      spaceBetween={20}
+      slidesPerView={2}
+      loop={items.length > 6}
+      speed={800}
+      autoplay={{
+        delay: 2000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      }}
+      breakpoints={{
+        640: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 30,
+        },
+        1024: {
+          slidesPerView: 6,
+          spaceBetween: 40,
+        },
+      }}
+      className="w-full"
+    >
+      {items.map((item, index) => (
+        <SwiperSlide key={`item-${item.id}-${index}`}>
+          <div className="flex items-center justify-center p-2 h-40">
+            <a
+              href={item.website || "#"}
+              target={item.website ? "_blank" : "_self"}
+              rel="noopener noreferrer"
+              className={`relative w-full h-full ${item.website ? "cursor-pointer" : "cursor-default"}`}
+            >
+              <Image
+                src={getImageUrl(item.logo)}
+                alt={item.name}
+                fill
+                className="object-contain"
+              />
+            </a>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
 
   return (
     <section className="py-16 bg-white">
@@ -114,53 +175,16 @@ export default function Clients() {
         <div className="mx-4 md:mx-8 lg:mx-10">
           <h2 className="text-4xl font-bold mb-12">{t("clientsPartners")}</h2>
 
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={20}
-            slidesPerView={2}
-            loop={true}
-            speed={800}
-            autoplay={{
-              delay: 2000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 4,
-                spaceBetween: 30,
-              },
-              1024: {
-                slidesPerView: 6,
-                spaceBetween: 40,
-              },
-            }}
-            className="w-full"
-          >
-            {clients.map((client, index) => (
-              <SwiperSlide key={`client-${client.id}-${index}`}>
-                <div className="flex items-center justify-center p-2 h-40">
-                  <a
-                    href={client.website || "#"}
-                    target={client.website ? "_blank" : "_self"}
-                    rel="noopener noreferrer"
-                    className={`relative w-full h-full ${client.website ? "cursor-pointer" : "cursor-default"}`}
-                  >
-                    <Image
-                      src={getImageUrl(client.logo)}
-                      alt={client.name}
-                      fill
-                      className="object-contain"
-                    />
-                  </a>
-                </div>
-              </SwiperSlide>
+          <div className="space-y-14">
+            {sections.map((section) => (
+              <div key={section.label}>
+                <h3 className="text-xl font-semibold text-gray-700 mb-6">
+                  {section.label}
+                </h3>
+                {renderCarousel(section.items)}
+              </div>
             ))}
-          </Swiper>
+          </div>
         </div>
       </div>
     </section>
