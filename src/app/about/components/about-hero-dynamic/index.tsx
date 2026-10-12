@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 import { useTranslation } from "react-i18next";
 import AboutHero from "../about-hero";
 
@@ -41,7 +41,7 @@ export default function AboutHeroDynamic({
   const isEn = currentLang === "en";
   const configKey = isEn ? configKeyEn : configKeyVi;
 
-  const { data } = useGetApiV10PageConfig(
+  const { data } = useGetApiV10BaseConfig(
     { filters: `key==${configKey}`, pageSize: 1 },
     {
       query: {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 import { useGetApiV10Category } from "@/api/endpoints/category";
 import { Category } from "@/api/models/category";
 
@@ -30,7 +30,7 @@ interface CertificationConfig {
   data: CertificationDataItem[];
 }
 
-const PAGE_CONFIG_KEY = "certification-config";
+const BASE_CONFIG_KEY = "certification-config";
 const PARENT_CATEGORY_SLUG = "nang-luc";
 
 const getImageUrl = (path: string) => {
@@ -44,8 +44,8 @@ export default function CertificationPage() {
   const [config, setConfig] = useState<CertificationConfig | null>(null);
   const [ready, setReady] = useState(false);
 
-  const { data, isLoading } = useGetApiV10PageConfig({
-    filters: `key==${PAGE_CONFIG_KEY}`,
+  const { data, isLoading } = useGetApiV10BaseConfig({
+    filters: `key==${BASE_CONFIG_KEY}`,
     pageSize: 1,
   });
 

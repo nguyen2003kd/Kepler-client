@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Download, Award } from "lucide-react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 import { FadeIn } from "@/components/ui/fade-in";
 import baseConfig from "@/configs/base";
 
@@ -41,12 +41,12 @@ export default function AboutCertificationsSection() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const { data: certResp } = useGetApiV10PageConfig(
+  const { data: certResp } = useGetApiV10BaseConfig(
     { filters: "key==certification-config", pageSize: 1 },
     { query: { staleTime: 1000 * 60 * 5, refetchOnMount: false, refetchOnWindowFocus: false } },
   );
 
-  const { data: capabilityResp } = useGetApiV10PageConfig(
+  const { data: capabilityResp } = useGetApiV10BaseConfig(
     { filters: "key==ABOUT_CAPABILITY_PROFILE", pageSize: 1 },
     { query: { staleTime: 1000 * 60 * 5, refetchOnMount: false, refetchOnWindowFocus: false } },
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 import { units as fallbackUnits, EcosystemUnit } from "./unit-data";
 
 interface ApiMember {
@@ -21,7 +21,7 @@ interface ApiMember {
 }
 
 export function useEcosystemUnits(): Record<string, EcosystemUnit> {
-  const { data } = useGetApiV10PageConfig(
+  const { data } = useGetApiV10BaseConfig(
     { filters: "key==ECOSYSTEM_MEMBERS" },
     {
       query: {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 import { useTranslation } from "react-i18next";
 import { FadeIn } from "@/components/ui/fade-in";
 
@@ -100,7 +100,7 @@ export default function AboutStatsSection() {
   const configKey = isEn ? "STATS_NUMBERS_EN" : "STATS_NUMBERS";
   const fallback = isEn ? FALLBACK_STATS_EN : FALLBACK_STATS_VI;
 
-  const { data } = useGetApiV10PageConfig(
+  const { data } = useGetApiV10BaseConfig(
     { filters: `key==${configKey}` },
     {
       query: {

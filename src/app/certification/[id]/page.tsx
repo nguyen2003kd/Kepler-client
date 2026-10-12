@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 // import baseConfig from "@/configs/base";
 import { ArrowLeft, Loader2 } from "lucide-react";
 // import Image from "@/components/common/safe-image";
@@ -21,7 +21,7 @@ interface CertificationConfig {
   data: CertificationDataItem[];
 }
 
-const PAGE_CONFIG_KEY = "certification-config";
+const BASE_CONFIG_KEY = "certification-config";
 
 export default function CertificationDetailPage({
   params,
@@ -32,8 +32,8 @@ export default function CertificationDetailPage({
   const [ready, setReady] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
-  const { data, isLoading } = useGetApiV10PageConfig({
-    filters: `key==${PAGE_CONFIG_KEY}`,
+  const { data, isLoading } = useGetApiV10BaseConfig({
+    filters: `key==${BASE_CONFIG_KEY}`,
     pageSize: 1,
   });
 

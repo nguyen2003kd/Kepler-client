@@ -20,12 +20,12 @@ export interface CapabilityConfig {
   imageUrl?: string;
 }
 
-export async function fetchPageConfig<T>(
+export async function fetchBaseConfig<T>(
   key: string
 ): Promise<T | null> {
   try {
     const res = await fetch(
-      `${baseConfig.backendDomain}/api/v1.0/pageConfig?filters=key==${key}&pageSize=1`,
+      `${baseConfig.backendDomain}/api/v1.0/baseConfig?filters=key==${key}&pageSize=1`,
       { cache: "no-store" }
     );
     if (!res.ok) return null;

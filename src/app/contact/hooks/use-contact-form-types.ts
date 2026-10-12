@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 
 export interface ContactFormTypeConfig {
   slug: string;
@@ -94,7 +94,7 @@ interface ApiFormType {
 }
 
 export function useContactFormTypes(): Record<string, ContactFormTypeConfig> {
-  const { data } = useGetApiV10PageConfig(
+  const { data } = useGetApiV10BaseConfig(
     { filters: "key==CONTACT_FORM_TYPES" },
     {
       query: {

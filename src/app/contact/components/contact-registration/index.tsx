@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toaster";
-import { usePageConfigByKey } from "@/lib/page-config-helpers";
+import { useBaseConfigByKey } from "@/lib/base-config-helpers";
 import {
   Headphones,
   Mail,
@@ -33,9 +33,9 @@ export default function ContactRegistrationSection() {
   const { t, ready, i18n } = useTranslation("pages/contact");
   const [mounted, setMounted] = useState(false);
 
-  // Fetch contact addresses from pageConfig API - language-specific key
+  // Fetch contact addresses from baseConfig API - language-specific key
   const contactKey = i18n.language?.startsWith("en") ? "CONTACT_EN" : "CONTACT";
-  const { data: pageConfigData } = usePageConfigByKey(contactKey);
+  const { data: baseConfigData } = useBaseConfigByKey(contactKey);
 
   useEffect(() => {
     setMounted(true);
@@ -72,7 +72,7 @@ export default function ContactRegistrationSection() {
     },
   ];
 
-  const configValue = pageConfigData?.responseData?.rows?.[0]?.value;
+  const configValue = baseConfigData?.responseData?.rows?.[0]?.value;
 
   let addresses: AddressItem[] = fallbackAddresses;
 

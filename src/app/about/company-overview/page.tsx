@@ -86,10 +86,10 @@ export default async function CompanyOverviewPage() {
     <div className="bg-white">
       <AboutBanner />
 
-      {/* Stats — from PageConfig STATS_NUMBERS */}
+      {/* Stats — from BaseConfig STATS_NUMBERS */}
       <AboutStatsSection />
 
-      {/* Section 1: Giới thiệu Kepler Group — from PageConfig about-company-overview */}
+      {/* Section 1: Giới thiệu Kepler Group — from BaseConfig about-company-overview */}
       <AboutPageContent
         pageKeyVi="about-company-overview"
         pageKeyEn="about-company-overview_en"

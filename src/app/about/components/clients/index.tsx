@@ -6,8 +6,8 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
-import { PageConfig } from "@/api/models";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
+import { BaseConfig } from "@/api/models";
 import baseConfig from "@/configs/base";
 import { useTranslation } from "react-i18next";
 
@@ -40,8 +40,8 @@ function parsePartners(value: string | null | undefined): Partner[] {
   }
 }
 
-function usePageConfigPartners(key: string) {
-  return useGetApiV10PageConfig(
+function useBaseConfigPartners(key: string) {
+  return useGetApiV10BaseConfig(
     {
       filters: `key==${key}`,
       pageSize: 1,
@@ -60,7 +60,7 @@ function extractPartners(
   data: { responseData?: { rows?: unknown[] } } | undefined,
   key: string
 ): Partner[] {
-  const rows = (data?.responseData?.rows || []) as PageConfig[];
+  const rows = (data?.responseData?.rows || []) as BaseConfig[];
   const config = rows.find((item) => item.key === key);
   return parsePartners(config?.value);
 }
@@ -68,11 +68,11 @@ function extractPartners(
 export default function Clients() {
   const { t } = useTranslation("pages/about");
   const { data: customersData, isLoading: isCustomersLoading } =
-    usePageConfigPartners(CUSTOMERS_CONFIG_KEY);
+    useBaseConfigPartners(CUSTOMERS_CONFIG_KEY);
   const { data: partnersData, isLoading: isPartnersLoading } =
-    usePageConfigPartners(PARTNERS_CONFIG_KEY);
+    useBaseConfigPartners(PARTNERS_CONFIG_KEY);
   // Fallback: nếu 2 key mới chưa có dữ liệu thì đọc key cũ (gộp chung)
-  const { data: legacyData } = usePageConfigPartners(
+  const { data: legacyData } = useBaseConfigPartners(
     LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY
   );
 

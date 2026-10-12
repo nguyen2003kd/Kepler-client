@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import AboutHero from "../components/about-hero";
 import AboutPageContent from "../components/about-page-content";
-import { fetchPageConfig, getImageUrl, type CapabilityConfig } from "../lib/fetch-page-config";
+import { fetchBaseConfig, getImageUrl, type CapabilityConfig } from "../lib/fetch-base-config";
 
 export const metadata = constructMetadata({
   title: "Hồ sơ năng lực",
@@ -13,7 +13,7 @@ export const metadata = constructMetadata({
 });
 
 export default async function CapabilityProfilePage() {
-  const config = await fetchPageConfig<CapabilityConfig>("ABOUT_CAPABILITY_PROFILE");
+  const config = await fetchBaseConfig<CapabilityConfig>("ABOUT_CAPABILITY_PROFILE");
 
   const title = config?.title || "";
   const description = config?.description || "";

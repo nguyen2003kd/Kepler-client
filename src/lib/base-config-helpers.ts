@@ -1,13 +1,13 @@
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
-import { PageConfig } from "@/api/models";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
+import { BaseConfig } from "@/api/models";
 
 /**
  * Custom hook to fetch page config by key prefix
  * @param keyPrefix - The key prefix to filter (e.g., "CONTACT", "BANNER")
  * @returns Query result with helper function to get value by key
  */
-export function usePageConfigByKey(keyPrefix: string) {
-  const query = useGetApiV10PageConfig(
+export function useBaseConfigByKey(keyPrefix: string) {
+  const query = useGetApiV10BaseConfig(
     {
       filters: `key==${keyPrefix}`,
     },
@@ -22,13 +22,13 @@ export function usePageConfigByKey(keyPrefix: string) {
 
   const getConfigValue = (key: string): string => {
     if (!query.data?.responseData?.rows) return "";
-    const rows = query.data.responseData.rows as PageConfig[];
+    const rows = query.data.responseData.rows as BaseConfig[];
     const config = rows.find((item) => item.key === key);
     return config?.value ?? "";
   };
 
-  const getAllConfigs = (): PageConfig[] => {
-    return (query.data?.responseData?.rows as PageConfig[]) || [];
+  const getAllConfigs = (): BaseConfig[] => {
+    return (query.data?.responseData?.rows as BaseConfig[]) || [];
   };
 
   return {

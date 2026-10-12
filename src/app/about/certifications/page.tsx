@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import AboutHero from "../components/about-hero";
 import AboutPageContent from "../components/about-page-content";
-import { fetchPageConfig, getImageUrl, type CertConfig, type CertDataItem } from "../lib/fetch-page-config";
+import { fetchBaseConfig, getImageUrl, type CertConfig, type CertDataItem } from "../lib/fetch-base-config";
 
 export const metadata = constructMetadata({
   title: "Chứng chỉ - Giấy phép",
@@ -13,8 +13,8 @@ export const metadata = constructMetadata({
 });
 
 export default async function CertificationsPage() {
-  const certConfig = await fetchPageConfig<CertConfig>("certification-config");
-  const licenseConfig = await fetchPageConfig<CertConfig>("license-config");
+  const certConfig = await fetchBaseConfig<CertConfig>("certification-config");
+  const licenseConfig = await fetchBaseConfig<CertConfig>("license-config");
 
   const certs: CertDataItem[] = certConfig?.data || [];
   const licenses: CertDataItem[] = licenseConfig?.data || [];

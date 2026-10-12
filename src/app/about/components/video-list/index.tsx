@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
-import { PageConfig } from "@/api/models";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
+import { BaseConfig } from "@/api/models";
 import { Play } from "lucide-react";
 import {
   Dialog,
@@ -88,12 +88,12 @@ export default function VideoList() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [thumbnails, setThumbnails] = useState<Record<number, string>>({});
 
-  const { data, isLoading } = useGetApiV10PageConfig({
+  const { data, isLoading } = useGetApiV10BaseConfig({
     filters: `key==list_video`,
     pageSize: 1,
   });
 
-  const rows = (data?.responseData?.rows ?? []) as PageConfig[];
+  const rows = (data?.responseData?.rows ?? []) as BaseConfig[];
   const rawValue: string = rows[0]?.value ?? "";
 
   let videos: VideoItem[] = [];

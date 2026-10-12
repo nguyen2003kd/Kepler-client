@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toaster";
-import { usePageConfigByKey } from "@/lib/page-config-helpers";
+import { useBaseConfigByKey } from "@/lib/base-config-helpers";
 import { useContactFormTypes } from "../../hooks/use-contact-form-types";
 import {
   Calendar,
@@ -40,7 +40,7 @@ export default function DynamicContactForm({ formType }: DynamicContactFormProps
   const [mounted, setMounted] = useState(false);
 
   const contactKey = i18n.language?.startsWith("en") ? "CONTACT_EN" : "CONTACT";
-  const { data: pageConfigData } = usePageConfigByKey(contactKey);
+  const { data: baseConfigData } = useBaseConfigByKey(contactKey);
   const formTypes = useContactFormTypes();
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function DynamicContactForm({ formType }: DynamicContactFormProps
     },
   ];
 
-  const configValue = pageConfigData?.responseData?.rows?.[0]?.value;
+  const configValue = baseConfigData?.responseData?.rows?.[0]?.value;
   let addresses: AddressItem[] = fallbackAddresses;
   if (configValue && typeof configValue === "string") {
     try {

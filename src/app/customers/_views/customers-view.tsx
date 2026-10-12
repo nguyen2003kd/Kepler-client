@@ -11,8 +11,8 @@ import {
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
-import { PageConfig } from "@/api/models";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
+import { BaseConfig } from "@/api/models";
 import baseConfig from "@/configs/base";
 
 const CUSTOMERS_CONFIG_KEY = "Customers_config";
@@ -129,7 +129,7 @@ const STORIES = [
 export default function KhachHangView() {
   const [activeVideo, setActiveVideo] = useState(0);
 
-  const { data, isLoading } = useGetApiV10PageConfig(
+  const { data, isLoading } = useGetApiV10BaseConfig(
     {
       filters: `key==${CUSTOMERS_CONFIG_KEY}`,
       pageSize: 1,
@@ -143,7 +143,7 @@ export default function KhachHangView() {
     }
   );
   // Fallback: nếu key mới chưa có dữ liệu thì đọc key cũ (gộp chung)
-  const { data: legacyData } = useGetApiV10PageConfig(
+  const { data: legacyData } = useGetApiV10BaseConfig(
     {
       filters: `key==${LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY}`,
       pageSize: 1,
@@ -158,14 +158,14 @@ export default function KhachHangView() {
   );
 
   const customers = useMemo(() => {
-    const rows = (data?.responseData?.rows || []) as PageConfig[];
+    const rows = (data?.responseData?.rows || []) as BaseConfig[];
     const config = rows.find((item) => item.key === CUSTOMERS_CONFIG_KEY);
     if (config?.value) {
       const parsed = parseCustomers(config.value);
       if (parsed.length > 0) return parsed.filter((c) => c.is_active);
     }
     // Fallback key cũ
-    const legacyRows = (legacyData?.responseData?.rows || []) as PageConfig[];
+    const legacyRows = (legacyData?.responseData?.rows || []) as BaseConfig[];
     const legacyConfig = legacyRows.find(
       (item) => item.key === LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY
     );

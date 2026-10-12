@@ -13,8 +13,8 @@ import {
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useMemo } from "react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
-import { PageConfig } from "@/api/models";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
+import { BaseConfig } from "@/api/models";
 import baseConfig from "@/configs/base";
 
 const PARTNERS_CONFIG_KEY = "Partners_config";
@@ -43,7 +43,7 @@ function parsePartners(value: string | null | undefined): Partner[] {
 }
 
 export default function DoiTacView() {
-  const { data, isLoading } = useGetApiV10PageConfig(
+  const { data, isLoading } = useGetApiV10BaseConfig(
     {
       filters: `key==${PARTNERS_CONFIG_KEY}`,
       pageSize: 1,
@@ -58,7 +58,7 @@ export default function DoiTacView() {
   );
 
   const partners = useMemo(() => {
-    const rows = (data?.responseData?.rows || []) as PageConfig[];
+    const rows = (data?.responseData?.rows || []) as BaseConfig[];
     const config = rows.find((item) => item.key === PARTNERS_CONFIG_KEY);
     return parsePartners(config?.value).filter((p) => p.is_active);
   }, [data]);

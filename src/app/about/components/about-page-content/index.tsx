@@ -1,7 +1,7 @@
 "use client";
 
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
-import { PageConfig } from "@/api/models";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
+import { BaseConfig } from "@/api/models";
 import parse from "html-react-parser";
 import { useTranslation } from "react-i18next";
 import { ReactNode } from "react";
@@ -21,7 +21,7 @@ export default function AboutPageContent({
   const lang = i18n.language || "vi";
   const configKey = lang === "en" ? pageKeyEn : pageKeyVi;
 
-  const { data, isLoading } = useGetApiV10PageConfig(
+  const { data, isLoading } = useGetApiV10BaseConfig(
     { filters: `key==${configKey}`, pageSize: 1 },
     {
       query: {
@@ -33,7 +33,7 @@ export default function AboutPageContent({
 
   if (isLoading) return <>{fallback}</>;
 
-  const rows = (data?.responseData?.rows as PageConfig[]) ?? [];
+  const rows = (data?.responseData?.rows as BaseConfig[]) ?? [];
   const row = rows.find((r) => r.key === configKey);
 
   if (!row?.value) return <>{fallback}</>;

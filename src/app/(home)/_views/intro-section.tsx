@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { DestinationCard } from "@/components/ui/card-21";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 import { useMemo } from "react";
 
 interface IntroConfig {
@@ -38,7 +38,7 @@ const defaultConfig: IntroConfig = {
 };
 
 export default function IntroSection() {
-  const { data } = useGetApiV10PageConfig(
+  const { data } = useGetApiV10BaseConfig(
     { filters: "key==HOME_INTRO" },
     { query: { staleTime: 1000 * 60 * 5, refetchOnMount: false, refetchOnWindowFocus: false } },
   );

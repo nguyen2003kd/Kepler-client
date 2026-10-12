@@ -1,7 +1,7 @@
 "use client";
 
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
-import { PageConfig } from "@/api/models";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
+import { BaseConfig } from "@/api/models";
 import baseConfig from "@/configs/base";
 import { DynamicIcon } from "@/utils/dynamic-icon";
 import parse from "html-react-parser";
@@ -217,7 +217,7 @@ const FALLBACK_BLOCKS: PageBlock[] = [
 
 // ── Helper ────────────────────────────────────────────────────────────────────
 
-function parseBlocks(rows: PageConfig[], key: string): PageBlock[] {
+function parseBlocks(rows: BaseConfig[], key: string): PageBlock[] {
   const row = rows.find((r) => r.key === key);
   if (!row?.value) return FALLBACK_BLOCKS;
   try {
@@ -407,7 +407,7 @@ export default function Introduction() {
   const lang = i18n.language || "vi";
   const configKey = lang === "en" ? "introduction-page_en" : "introduction-page";
 
-  const { data, isLoading } = useGetApiV10PageConfig(
+  const { data, isLoading } = useGetApiV10BaseConfig(
     { filters: `key==${configKey}`, pageSize: 1 },
     {
       query: {
@@ -419,7 +419,7 @@ export default function Introduction() {
 
   const blocks = isLoading
     ? FALLBACK_BLOCKS
-    : parseBlocks((data?.responseData?.rows as PageConfig[]) ?? [], configKey);
+    : parseBlocks((data?.responseData?.rows as BaseConfig[]) ?? [], configKey);
 
   return (
     <section className="bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] py-16">
