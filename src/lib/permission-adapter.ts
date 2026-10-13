@@ -97,7 +97,7 @@ export function getActionLabel(action: string): string {
 export const MODULE_DEFINITIONS = [
   { id: 'dashboard', name: 'Dashboard', description: 'Trang tổng quan' },
   { id: 'news', name: 'Tin tức', description: 'Quản lý bài viết và tin tức' },
-  { id: 'category', name: 'Danh mục', description: 'Quản lý danh mục sản phẩm' },
+  { id: 'category', name: 'Danh mục', description: 'Quản lý danh mục Header' },
   { id: 'gallery', name: 'Kho ảnh', description: 'Quản lý hình ảnh' },
   { id: 'gallery_video', name: 'Kho video', description: 'Quản lý video' },
   { id: 'gallery_document', name: 'Kho tài liệu', description: 'Quản lý tài liệu' },
@@ -196,8 +196,8 @@ export function rolePermissionsToModulePermissions(
     .map(
       (rp) =>
         (rp as Record<string, unknown>)?.permission as
-          | BackendPermission
-          | undefined
+        | BackendPermission
+        | undefined
     )
     .filter((p): p is BackendPermission => !!p);
 
