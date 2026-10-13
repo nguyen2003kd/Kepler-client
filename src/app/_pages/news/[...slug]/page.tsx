@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: NewsSubPageProps): Promise<Me
   if (post) {
     return { title: `${post.title} | Kepler Property`, description: post.summary?.replace(/<[^>]*>/g, "").slice(0, 160) || "" };
   }
-  return { title: "KhÃ´ng tÃ¬m tháº¥y trang" };
+  return { title: "Không tìm thấy trang" };
 }
 
 export default async function NewsSubPage({ params, searchParams }: NewsSubPageProps) {
@@ -44,7 +44,7 @@ export default async function NewsSubPage({ params, searchParams }: NewsSubPageP
     return (
       <DynamicPostDetailPage
         post={post}
-        categoryName={parentCategory?.name || "Tin tá»©c"}
+        categoryName={parentCategory?.name || "Tin tức"}
         categorySlug={parentFullSlug}
         urlCategoryId={parentCategory?.id}
       />

@@ -1,4 +1,10 @@
 export const PAGE_IDS = {
+  /** Trang Ban điều hành (path /board-of-directors) */
+  BOARD_OF_DIRECTORS: "94ab73a6-176c-45f2-ac3a-4fa1297cc97e",
+
+  /** Trang Hội đồng cố vấn (path /expert-council) */
+  EXPERT_COUNCIL: "4b5857ad-8a95-40f2-bbb7-30a9a1c65921",
+
   // ========== TRANG CHỦ ==========
   /** Vị trí dự án ở trang chủ */
   HOME_PROJECTS: "8aad1996-6c31-4446-ab33-823653338313",

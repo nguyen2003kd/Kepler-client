@@ -14,7 +14,7 @@ export default function EcosystemPageRedirect() {
 // import Link from "next/link";
 // import { ArrowUpRight } from "lucide-react";
 // import { motion } from "framer-motion";
-// import { units, EcosystemUnit } from "./unit-data";
+// import { units, EcosystemUnit } from "@/app/_pages/lib/ecosystem/unit-data";
 //
 // const ecosystemImages: Record<string, string> = {
 //   "kepler-property": "/images/category-banner-investment.png",

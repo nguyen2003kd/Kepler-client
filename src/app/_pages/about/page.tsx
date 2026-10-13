@@ -1,4 +1,4 @@
-﻿import { constructMetadata } from "@/lib/seo";
+import { constructMetadata } from "@/lib/seo";
 import {
   Building2,
   Target,
@@ -11,10 +11,10 @@ import {
 } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import Link from "next/link";
-import Banner from "./components/banner";
-import Clients from "./components/clients";
-import Introduction from "./components/introduction";
-import VideoList from "./components/video-list";
+import Banner from "@/app/_pages/components/about/banner";
+import Clients from "@/app/_pages/components/about/clients";
+import Introduction from "@/app/_pages/components/about/introduction";
+import VideoList from "@/app/_pages/components/about/video-list";
 
 export const metadata = constructMetadata({
   title: "Giới thiệu",

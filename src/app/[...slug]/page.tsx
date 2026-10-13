@@ -24,6 +24,7 @@ import { DESIGNED_PAGE_COMPONENTS } from "@/app/_pages/registry";
 import EcosystemServiceSubPage from "@/app/_pages/he-sinh-thai/[unitKey]/[serviceSlug]/page";
 import ContactSubPage from "@/app/_pages/contact/[...slug]/page";
 import ProductDetailSubPage from "@/app/_pages/products/[id]/page";
+import KienThucGalleryPage from "@/app/_pages/kien-thuc/page";
 
 interface DynamicPageProps {
   params: Promise<{ slug: string[] }>;
@@ -35,14 +36,14 @@ interface NewsDetailPageProps {
 
 const createMockCategory = (slug: string): CategoryWithChildren => {
   const displayName =
-    slug === "post" ? "BÃ i viáº¿t" : slug.charAt(0).toUpperCase() + slug.slice(1);
+    slug === "post" ? "Bài viết" : slug.charAt(0).toUpperCase() + slug.slice(1);
 
   return {
     id: `mock-category-${slug}`,
     name: displayName,
     code: `mock-category-${slug}`,
     link: `/${slug}`,
-    description: `Danh má»¥c ${displayName}`,
+    description: `Danh mục ${displayName}`,
     categories: [],
   } as CategoryWithChildren;
 };
@@ -83,7 +84,7 @@ async function resolveDesignedOrNewsPage(
     const category =
       slug.length === 1
         ? (await getCategoryByLink(lastSlug, "vi")) ||
-          createPageCategory(pageRecord, lastSlug)
+        createPageCategory(pageRecord, lastSlug)
         : createPageCategory(pageRecord, lastSlug);
     const categoryEn =
       slug.length === 1 ? await getCategoryByLink(lastSlug, "en") : null;
@@ -94,10 +95,10 @@ async function resolveDesignedOrNewsPage(
       apiPosts.length > 0
         ? apiPosts
         : getMockPostsForCategory(
-            category.id || `page-${lastSlug}`,
-            category.name || lastSlug,
-            category.link || `/${lastSlug}`,
-          );
+          category.id || `page-${lastSlug}`,
+          category.name || lastSlug,
+          category.link || `/${lastSlug}`,
+        );
 
     return (
       <DynamicCategoryPage
@@ -127,14 +128,14 @@ export async function generateMetadata({
       const { responseData: property } = await getApiV10PropertyId(slug[2]);
       if (property)
         return {
-          title: property.title || "Sáº£n pháº©m | Kepler",
+          title: property.title || "Sản phẩm | Kepler",
           description: (property.description || property.location || "").slice(
             0,
             160,
           ),
         };
-    } catch {}
-    return { title: "KhÃ´ng tÃ¬m tháº¥y sáº£n pháº©m | Kepler" };
+    } catch { }
+    return { title: "Không tìm thấy sản phẩm | Kepler" };
   }
 
   // Page API truoc: DESIGNED/NEWS co ten mo ta rieng trong CMS.
@@ -160,8 +161,8 @@ export async function generateMetadata({
       };
     }
     return {
-      title: "KhÃ´ng tÃ¬m tháº¥y tin tá»©c",
-      description: ` khÃ´ng tá»“n táº¡i hoáº·c Ä‘Ã£ bá»‹ xÃ³a.`,
+      title: "Không tìm thấy tin tức",
+      description: ` không tồn tại hoặc đã bị xóa.`,
     };
   }
 
@@ -174,13 +175,13 @@ export async function generateMetadata({
 
   const pageUrl = `${baseConfig.frontendDomain}/${slug.join("/")}`;
   const description =
-    post.summary?.replace(/<[^>]*>/g, "").slice(0, 160) || "Tin tá»©c má»›i nháº¥t";
+    post.summary?.replace(/<[^>]*>/g, "").slice(0, 160) || "Tin tức mới nhất";
 
   return {
-    title: post.title || "Tin tá»©c",
+    title: post.title || "Tin tức",
     description,
     openGraph: {
-      title: post.title || "Tin tá»©c",
+      title: post.title || "Tin tức",
       description,
       url: pageUrl,
       type: "article",
@@ -196,7 +197,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title || "Tin tá»©c",
+      title: post.title || "Tin tức",
       description,
       ...(thumbnailUrl && { images: [thumbnailUrl] }),
     },
@@ -222,6 +223,11 @@ export default async function DynamicPage({
   if (marketplacePage) return marketplacePage;
   const activityPage = await resolveActivityPage(slug.join("/"));
   if (activityPage) return activityPage;
+
+  // Trang kien-thuc dung layout gallery/library rieng, khong dungDynamicCategoryPage.
+  if (slug.length === 1 && firstSlug === "kien-thuc") {
+    return <KienThucGalleryPage />;
+  }
 
   // Sub-route cua trang lien he (form theo loai).
   if (firstSlug === "contact" && slug.length === 2) {
@@ -261,7 +267,7 @@ export default async function DynamicPage({
       return (
         <DynamicPostDetailPage
           post={post}
-          categoryName={post.category?.name || "BÃ i viáº¿t"}
+          categoryName={post.category?.name || "Bài viết"}
           categorySlug={post.category?.link?.replace(/^\//, "") || ""}
           urlCategoryId={post.category?.id}
         />
@@ -278,10 +284,10 @@ export default async function DynamicPage({
       apiPosts.length > 0
         ? apiPosts
         : getMockPostsForCategory(
-            finalCategory.id!,
-            finalCategory.name!,
-            finalCategory.link!,
-          );
+          finalCategory.id!,
+          finalCategory.name!,
+          finalCategory.link!,
+        );
 
     return (
       <DynamicCategoryPage
@@ -333,10 +339,10 @@ export default async function DynamicPage({
         apiPosts.length > 0
           ? apiPosts
           : getMockPostsForCategory(
-              category.id!,
-              category.name!,
-              category.link!,
-            );
+            category.id!,
+            category.name!,
+            category.link!,
+          );
 
       return (
         <DynamicCategoryPage
@@ -400,10 +406,10 @@ export default async function DynamicPage({
         apiPosts.length > 0
           ? apiPosts
           : getMockPostsForCategory(
-              category.id!,
-              category.name!,
-              category.link!,
-            );
+            category.id!,
+            category.name!,
+            category.link!,
+          );
 
       return (
         <DynamicCategoryPage

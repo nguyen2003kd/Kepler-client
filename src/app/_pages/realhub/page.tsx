@@ -18,12 +18,12 @@ import {
   Lightbulb,
   Target,
 } from "lucide-react";
-import UnitHero from "@/app/_pages/he-sinh-thai/shared-sections/unit-hero";
-import UnitStory from "@/app/_pages/he-sinh-thai/shared-sections/unit-story";
-import UnitCapabilities from "@/app/_pages/he-sinh-thai/shared-sections/unit-capabilities";
-import UnitIndustries from "@/app/_pages/he-sinh-thai/shared-sections/unit-industries";
-import UnitProducts from "@/app/_pages/he-sinh-thai/shared-sections/unit-products";
-import UnitCta from "@/app/_pages/he-sinh-thai/shared-sections/unit-cta";
+import UnitHero from "@/app/_pages/components/ecosystem/unit-hero";
+import UnitStory from "@/app/_pages/components/ecosystem/unit-story";
+import UnitCapabilities from "@/app/_pages/components/ecosystem/unit-capabilities";
+import UnitIndustries from "@/app/_pages/components/ecosystem/unit-industries";
+import UnitProducts from "@/app/_pages/components/ecosystem/unit-products";
+import UnitCta from "@/app/_pages/components/ecosystem/unit-cta";
 
 /* ── Data (RealHub-specific custom sections) ────────── */
 
