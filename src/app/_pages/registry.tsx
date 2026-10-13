@@ -2,16 +2,15 @@ import { Suspense, type ComponentType } from "react";
 import { redirect } from "next/navigation";
 
 import AboutPage from "./about/page";
-import AboutBoardOfDirectorsPage from "./about/board-of-directors/page";
-import AboutCapabilityProfilePage from "./about/capability-profile/page";
-import AboutCapabilitiesPage from "./about/capabilities/page";
-import AboutCertificationsPage from "./about/certifications/page";
-import AboutCompanyOverviewPage from "./about/company-overview/page";
-import AboutExpertCouncilPage from "./about/expert-council/page";
-import AboutHistoryPage from "./about/history/page";
-import AboutMainServicesPage from "./about/main-services/page";
-import AboutOrganizationalChartPage from "./about/organizational-chart/page";
-import AboutVisionMissionPage from "./about/vision-mission/page";
+import AboutBoardOfDirectorsPage from "./board-of-directors/page";
+import AboutCapabilityProfilePage from "./capability-profile/page";
+import AboutCapabilitiesPage from "./capabilities/page";
+import AboutCertificationsPage from "./certifications/page";
+import AboutCompanyOverviewPage from "./company-overview/page";
+import AboutExpertCouncilPage from "./expert-council/page";
+import AboutHistoryPage from "./history/page";
+import AboutOrganizationalChartPage from "./organizational-chart/page";
+import AboutVisionMissionPage from "./vision-mission/page";
 import AppraisalRequestPage from "./appraisal-request/page";
 import BookingPage from "./booking/page";
 import WhoCanJoinPage from "./ai-co-the-tham-gia/page";
@@ -24,13 +23,13 @@ import ContactPage from "./contact/page";
 import CustomersPage from "./customers/page";
 import CustomersPartnersPage from "./customers-partners/page";
 import EcosystemIntroPage from "./gioi-thieu-he-sinh-thai-bat-dong-san/page";
-import BizOfficePage from "./he-sinh-thai/bizoffice/page";
-import KHomesPage from "./he-sinh-thai/k-homes/page";
-import KacAdvisoryPage from "./he-sinh-thai/kac-advisory/page";
-import KeplerLandPage from "./he-sinh-thai/kepler-land/page";
-import KeplerPropertyPage from "./he-sinh-thai/kepler-property/page";
-import KmcManagementPage from "./he-sinh-thai/kmc-management/page";
-import KpcAppraisalPage from "./he-sinh-thai/kpc-appraisal/page";
+import BizOfficePage from "./bizoffice/page";
+import KHomesPage from "./k-homes/page";
+import KacAdvisoryPage from "./kac-advisory/page";
+import KeplerLandPage from "./kepler-land/page";
+import KeplerPropertyPage from "./kepler-property/page";
+import KmcManagementPage from "./kmc-management/page";
+import KpcAppraisalPage from "./kpc-appraisal/page";
 import MaConsultingPage from "./ma-consulting/page";
 import NewsPage from "./news/page";
 import PartnersPage from "./partners/page";
@@ -85,7 +84,6 @@ export const DESIGNED_PAGE_COMPONENTS: Record<string, ComponentType> = {
   faq: FAQPage,
   history: AboutHistoryPage,
   "ma-consulting": MaConsultingPage,
-  "main-services": AboutMainServicesPage,
   news: NewsPage,
   "organizational-chart": AboutOrganizationalChartPage,
   "vision-mission": AboutVisionMissionPage,

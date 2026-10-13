@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileLayout from "@/app/_pages/about/components/profile-layout";
+import ProfileLayout from "@/app/_pages/components/about/profile-layout";
 import Link from "next/link";
 import { ArrowUpRight, Briefcase, FileText } from "lucide-react";
 import { motion } from "framer-motion";

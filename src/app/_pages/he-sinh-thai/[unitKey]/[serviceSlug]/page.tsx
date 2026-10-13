@@ -4,7 +4,7 @@ import { cache } from "react";
 import { notFound } from "next/navigation";
 import { getApiV10BaseConfig } from "@/api/endpoints/base-config";
 import { slugify } from "@/lib/slugify";
-import { units, type EcosystemUnit } from "../../unit-data";
+import { units, type EcosystemUnit } from "@/app/_pages/lib/ecosystem/unit-data";
 
 interface PageProps {
   params: Promise<{ unitKey: string; serviceSlug: string }>;

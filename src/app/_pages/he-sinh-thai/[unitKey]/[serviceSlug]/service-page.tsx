@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { slugify } from "@/lib/slugify";
-import type { EcosystemUnit } from "../../unit-data";
-import { getEcosystemServiceLink } from "../../service-content";
+import type { EcosystemUnit } from "@/app/_pages/lib/ecosystem/unit-data";
+import { getEcosystemServiceLink } from "@/app/_pages/lib/ecosystem/service-content";
 
 export default function EcosystemServicePage({ unitKey, serviceSlug, unit }: { unitKey: string; serviceSlug: string; unit: EcosystemUnit }) {
   const item = unit?.items.find(label => slugify(label) === serviceSlug);

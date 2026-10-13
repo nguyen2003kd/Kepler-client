@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import DynamicCategoryPage from "@/app/[...slug]/views/category-page";
+import { Suspense } from "react";
 import { getMockPostsForCategory } from "@/utils/mock-data";
 import { getCategoryByLink, getPostsByCategory } from "@/app/_pages/api-helpers";
+import GalleryView from "./views/gallery-view";
 
 export async function generateMetadata(): Promise<Metadata> {
   const category = await getCategoryByLink("kien-thuc", "vi");
@@ -15,10 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function KienThucPage() {
-  const [category, categoryEn] = await Promise.all([
-    getCategoryByLink("kien-thuc", "vi"),
-    getCategoryByLink("kien-thuc", "en"),
-  ]);
+  const category = await getCategoryByLink("kien-thuc", "vi");
 
   if (!category) {
     return (
@@ -35,12 +33,8 @@ export default async function KienThucPage() {
       : getMockPostsForCategory(category.id!, category.name!, category.link!);
 
   return (
-    <DynamicCategoryPage
-      category={category}
-      categoryEn={categoryEn}
-      initialPosts={posts}
-      siblingCategories={category.categories || []}
-      parentLink="/kien-thuc"
-    />
+    <Suspense>
+      <GalleryView category={category} initialPosts={posts} />
+    </Suspense>
   );
 }
