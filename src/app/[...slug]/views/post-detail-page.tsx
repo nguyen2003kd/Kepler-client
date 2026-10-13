@@ -47,7 +47,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import baseConfig from "@/configs/base";
 import { toast } from "sonner";
 import { isIntroductionPath, isMemberProfilePath } from "@/lib/introduction-profile";
-import CmsMemberProfile from "@/app/about/components/cms-member-profile";
+import CmsMemberProfile from "@/app/_pages/about/components/cms-member-profile";
 interface DynamicPostDetailPageProps {
   post: PostExtended;
   categoryName: string;

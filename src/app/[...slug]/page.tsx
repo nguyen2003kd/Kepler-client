@@ -1,18 +1,33 @@
-import { CategoryWithChildren } from "@/api/models/categoryWithChildren";
+﻿import { CategoryWithChildren } from "@/api/models/categoryWithChildren";
 import baseConfig from "@/configs/base";
 import { getMockPostsForCategory } from "@/utils/mock-data";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import DynamicCategoryPage from "./views/category-page";
 import DynamicPostDetailPage from "./views/post-detail-page";
-import type { PostExtended } from "@/types/post";
 import { isIntroductionPath } from "@/lib/introduction-profile";
-import { resolveActivityPage } from "@/app/linh-vuc-hoat-dong/activity-page";
-import { resolveMarketplacePage } from "@/app/san-giao-dich/marketplace-page";
+import { resolveActivityPage } from "@/app/_pages/linh-vuc-hoat-dong/activity-page";
+import { resolveMarketplacePage } from "@/app/_pages/san-giao-dich/marketplace-page";
 import { getApiV10PropertyId } from "@/api/endpoints/property";
+import {
+  getCategoryByLink,
+  getCategoryWithSiblings,
+  getPostsByCategory,
+  getPostBySlug,
+} from "@/app/_pages/api-helpers";
+import {
+  getPageByPath,
+  normalizePagePath,
+  type PageRecord,
+} from "@/app/_pages/page-lookup";
+import { DESIGNED_PAGE_COMPONENTS } from "@/app/_pages/registry";
+import EcosystemServiceSubPage from "@/app/_pages/he-sinh-thai/[unitKey]/[serviceSlug]/page";
+import ContactSubPage from "@/app/_pages/contact/[...slug]/page";
+import ProductDetailSubPage from "@/app/_pages/products/[id]/page";
+
 interface DynamicPageProps {
   params: Promise<{ slug: string[] }>;
-  searchParams: Promise<{ date?: string; page?:string }>;
+  searchParams: Promise<{ date?: string; page?: string }>;
 }
 interface NewsDetailPageProps {
   params: Promise<{ slug: string[] }>;
@@ -20,124 +35,124 @@ interface NewsDetailPageProps {
 
 const createMockCategory = (slug: string): CategoryWithChildren => {
   const displayName =
-    slug === "post" ? "Bài viết" : slug.charAt(0).toUpperCase() + slug.slice(1);
+    slug === "post" ? "BÃ i viáº¿t" : slug.charAt(0).toUpperCase() + slug.slice(1);
 
   return {
     id: `mock-category-${slug}`,
     name: displayName,
     code: `mock-category-${slug}`,
     link: `/${slug}`,
-    description: `Danh mục ${displayName}`,
+    description: `Danh má»¥c ${displayName}`,
     categories: [],
   } as CategoryWithChildren;
 };
 
-function flattenCategories(cats: CategoryWithChildren[], result: CategoryWithChildren[] = []): CategoryWithChildren[] {
-  for (const c of cats) {
-    result.push(c);
-    if (c.categories) flattenCategories(c.categories, result);
+const createPageCategory = (
+  page: PageRecord,
+  lastSlug: string,
+): CategoryWithChildren =>
+  ({
+    id: page.id,
+    name: page.name,
+    code: page.path?.replace(/^\//, "") || lastSlug,
+    link: page.path || `/${lastSlug}`,
+    description: page.description,
+    categories: [],
+  }) as CategoryWithChildren;
+
+// Resolve theo page API: DESIGNED -> component tinh, NEWS -> ui tin tuc + posts.
+async function resolveDesignedOrNewsPage(
+  slug: string[],
+  searchParams?: { date?: string; page?: string },
+  siblingCategories?: CategoryWithChildren[],
+  parentLink?: string,
+) {
+  const lastSlug = slug.at(-1);
+  if (!lastSlug) return null;
+
+  const pageRecord = await getPageByPath(normalizePagePath(lastSlug));
+  if (!pageRecord?.type) return null;
+
+  if (pageRecord.type === "DESIGNED") {
+    const DesignedComponent = DESIGNED_PAGE_COMPONENTS[lastSlug];
+    if (DesignedComponent) return <DesignedComponent />;
+    return null;
   }
-  return result;
-}
 
-async function getCategory(slug: string, language?: "vi" | "en") {
-  try {
-    const url = new URL(`${baseConfig.backendDomain}/api/v1.0/category`);
-    if (language) url.searchParams.set("language", language);
-    const res = await fetch(url.toString(), {
-      cache: "no-store",
-    });
-    if (!res.ok) return null;
+  if (pageRecord.type === "NEWS") {
+    const category =
+      slug.length === 1
+        ? (await getCategoryByLink(lastSlug, "vi")) ||
+          createPageCategory(pageRecord, lastSlug)
+        : createPageCategory(pageRecord, lastSlug);
+    const categoryEn =
+      slug.length === 1 ? await getCategoryByLink(lastSlug, "en") : null;
 
-    const data = await res.json();
-    const allCategories = (data?.responseData || []) as CategoryWithChildren[];
-    const flat = flattenCategories(allCategories);
+    const categoryId = category.id;
+    const apiPosts = categoryId ? await getPostsByCategory(categoryId) : [];
+    const posts =
+      apiPosts.length > 0
+        ? apiPosts
+        : getMockPostsForCategory(
+            category.id || `page-${lastSlug}`,
+            category.name || lastSlug,
+            category.link || `/${lastSlug}`,
+          );
 
     return (
-      flat.find((cat) => cat.link === `/${slug}`) ||
-      flat.find((cat) => cat.link === slug) ||
-      null
+      <DynamicCategoryPage
+        category={category}
+        categoryEn={categoryEn}
+        initialPosts={posts}
+        date={searchParams?.date}
+        siblingCategories={siblingCategories}
+        parentLink={parentLink}
+      />
     );
-  } catch {
-    return null;
   }
-}
 
-async function getCategoryWithSiblings(slug: string, language?: "vi" | "en") {
-  try {
-    const url = new URL(`${baseConfig.backendDomain}/api/v1.0/category`);
-    if (language) url.searchParams.set("language", language);
-    const res = await fetch(url.toString(), {
-      cache: "no-store",
-    });
-    if (!res.ok) return { category: null, siblings: [] as CategoryWithChildren[] };
-
-    const data = await res.json();
-    const allCategories = (data?.responseData || []) as CategoryWithChildren[];
-    const flat = flattenCategories(allCategories);
-
-    const category =
-      flat.find((cat) => cat.link === `/${slug}`) ||
-      flat.find((cat) => cat.link === slug) ||
-      null;
-
-    let siblings: CategoryWithChildren[] = [];
-    if (category?.parent_category_id) {
-      const parent = flat.find((cat) => cat.id === category.parent_category_id);
-      siblings = parent?.categories || [];
-    }
-
-    return { category, siblings };
-  } catch {
-    return { category: null, siblings: [] as CategoryWithChildren[] };
-  }
-}
-
-async function getPostsForCategory(categoryId: string) {
-  try {
-    const res = await fetch(
-      `${baseConfig.backendDomain}/api/v1.0/post?category_id=${categoryId}&filters=is_hidden==false&sortField=created_at&sortOrder=desc&pageSize=999`,
-      { cache: "no-store" },
-    );
-    if (!res.ok) return [];
-
-    const data = await res.json();
-    return data?.responseData?.rows || [];
-  } catch {
-    return [];
-  }
-}
-
-async function getPost(slug: string): Promise<PostExtended | null> {
-  try {
-    const res = await fetch(
-      `${baseConfig.backendDomain}/api/v1.0/post/slug/${slug}`,
-      { cache: "no-store" },
-    );
-    if (!res.ok) return null;
-    const data = await res.json();
-    return (data?.responseData as PostExtended) || null;
-  } catch {
-    return null;
-  }
+  return null;
 }
 
 export async function generateMetadata({
   params,
 }: NewsDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  if(slug.length===3 && slug[0]==='san-giao-dich' && slug[1]==='san-pham'){
-    try{
-      const {responseData:property}=await getApiV10PropertyId(slug[2]);
-      if(property)return {title:property.title || 'Sản phẩm | Kepler',description:(property.description || property.location || '').slice(0,160)};
-    }catch{}
-    return {title:'Không tìm thấy sản phẩm | Kepler'};
+  if (
+    slug.length === 3 &&
+    slug[0] === "san-giao-dich" &&
+    slug[1] === "san-pham"
+  ) {
+    try {
+      const { responseData: property } = await getApiV10PropertyId(slug[2]);
+      if (property)
+        return {
+          title: property.title || "Sáº£n pháº©m | Kepler",
+          description: (property.description || property.location || "").slice(
+            0,
+            160,
+          ),
+        };
+    } catch {}
+    return { title: "KhÃ´ng tÃ¬m tháº¥y sáº£n pháº©m | Kepler" };
   }
+
+  // Page API truoc: DESIGNED/NEWS co ten mo ta rieng trong CMS.
   const lastSlug = slug.at(-1);
-  const post = await getPost(lastSlug ?? '');
+  if (lastSlug) {
+    const pageRecord = await getPageByPath(normalizePagePath(lastSlug));
+    if (pageRecord?.type === "DESIGNED" || pageRecord?.type === "NEWS") {
+      return {
+        title: `${pageRecord.name || lastSlug} | Kepler Property`,
+        description: pageRecord.description || pageRecord.name || lastSlug,
+      };
+    }
+  }
+
+  const post = await getPostBySlug(lastSlug ?? "");
   if (!post) {
-    const fullSlug = slug.join('/');
-    const category = await getCategory(fullSlug, 'vi');
+    const fullSlug = slug.join("/");
+    const category = await getCategoryByLink(fullSlug, "vi");
     if (category) {
       return {
         title: `${category.name} | Kepler Property`,
@@ -145,8 +160,8 @@ export async function generateMetadata({
       };
     }
     return {
-      title: "Không tìm thấy tin tức",
-      description: ` không tồn tại hoặc đã bị xóa.`,
+      title: "KhÃ´ng tÃ¬m tháº¥y tin tá»©c",
+      description: ` khÃ´ng tá»“n táº¡i hoáº·c Ä‘Ã£ bá»‹ xÃ³a.`,
     };
   }
 
@@ -158,25 +173,30 @@ export async function generateMetadata({
         : undefined;
 
   const pageUrl = `${baseConfig.frontendDomain}/${slug.join("/")}`;
-  const description = post.summary?.replace(/<[^>]*>/g, "").slice(0, 160) || "Tin tức mới nhất";
+  const description =
+    post.summary?.replace(/<[^>]*>/g, "").slice(0, 160) || "Tin tá»©c má»›i nháº¥t";
 
   return {
-    title: post.title || "Tin tức",
+    title: post.title || "Tin tá»©c",
     description,
     openGraph: {
-      title: post.title || "Tin tức",
+      title: post.title || "Tin tá»©c",
       description,
       url: pageUrl,
       type: "article",
-      ...(!isIntroductionPath(slug.join("/")) && { publishedTime: post.created_at || undefined }),
+      ...(!isIntroductionPath(slug.join("/")) && {
+        publishedTime: post.created_at || undefined,
+      }),
       siteName: "KEPLER",
       ...(thumbnailUrl && {
-        images: [{ url: thumbnailUrl, width: 1200, height: 630, alt: post.title || "" }],
+        images: [
+          { url: thumbnailUrl, width: 1200, height: 630, alt: post.title || "" },
+        ],
       }),
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title || "Tin tức",
+      title: post.title || "Tin tá»©c",
       description,
       ...(thumbnailUrl && { images: [thumbnailUrl] }),
     },
@@ -185,6 +205,7 @@ export async function generateMetadata({
     },
   };
 }
+
 export default async function DynamicPage({
   params,
   searchParams,
@@ -194,19 +215,53 @@ export default async function DynamicPage({
     searchParams,
   ]);
   const [firstSlug, secondSlug] = slug;
-  const marketplacePage = await resolveMarketplacePage(slug.join("/"),resolvedSearchParams.page);
+  const marketplacePage = await resolveMarketplacePage(
+    slug.join("/"),
+    resolvedSearchParams.page,
+  );
   if (marketplacePage) return marketplacePage;
   const activityPage = await resolveActivityPage(slug.join("/"));
   if (activityPage) return activityPage;
 
+  // Sub-route cua trang lien he (form theo loai).
+  if (firstSlug === "contact" && slug.length === 2) {
+    return <ContactSubPage params={{ slug: [secondSlug!] }} />;
+  }
+
+  // Trang dich vu cua don vi he sinh thai: /he-sinh-thai/{unitKey}/{serviceSlug}
+  if (firstSlug === "he-sinh-thai" && slug.length === 3) {
+    return (
+      <EcosystemServiceSubPage
+        params={
+          Promise.resolve({
+            unitKey: slug[1]!,
+            serviceSlug: slug[2]!,
+          }) as never
+        }
+      />
+    );
+  }
+
+  // Trang chi tiet san pham (mock data hien tai, giu nguyen behavior cu).
+  if (firstSlug === "products" && slug.length === 2) {
+    return <ProductDetailSubPage params={{ id: secondSlug! }} />;
+  }
+
   if (slug.length === 1) {
-    const post = await getPost(firstSlug);
+    // Page API quyet dinh DESIGNED/NEWS truoc, vi path page la canonical.
+    const pageResult = await resolveDesignedOrNewsPage(
+      slug,
+      resolvedSearchParams,
+    );
+    if (pageResult) return pageResult;
+
+    const post = await getPostBySlug(firstSlug);
 
     if (post) {
       return (
         <DynamicPostDetailPage
           post={post}
-          categoryName={post.category?.name || "Bài viết"}
+          categoryName={post.category?.name || "BÃ i viáº¿t"}
           categorySlug={post.category?.link?.replace(/^\//, "") || ""}
           urlCategoryId={post.category?.id}
         />
@@ -214,15 +269,19 @@ export default async function DynamicPage({
     }
 
     const [category, categoryEn] = await Promise.all([
-      getCategory(firstSlug, "vi"),
-      getCategory(firstSlug, "en"),
+      getCategoryByLink(firstSlug, "vi"),
+      getCategoryByLink(firstSlug, "en"),
     ]);
     const finalCategory = category ?? createMockCategory(firstSlug);
-    const apiPosts = await getPostsForCategory(finalCategory.id!);
+    const apiPosts = await getPostsByCategory(finalCategory.id!);
     const posts =
       apiPosts.length > 0
         ? apiPosts
-        : getMockPostsForCategory(finalCategory.id!, finalCategory.name!, finalCategory.link!);
+        : getMockPostsForCategory(
+            finalCategory.id!,
+            finalCategory.name!,
+            finalCategory.link!,
+          );
 
     return (
       <DynamicCategoryPage
@@ -236,10 +295,10 @@ export default async function DynamicPage({
 
   if (slug.length === 2) {
     const fullSlug = slug.join("/");
-    const post = await getPost(secondSlug);
+    const post = await getPostBySlug(secondSlug);
 
     if (post) {
-      const urlCategory = await getCategory(firstSlug);
+      const urlCategory = await getCategoryByLink(firstSlug);
       const displayCategory = urlCategory ?? createMockCategory(firstSlug);
 
       return (
@@ -252,18 +311,32 @@ export default async function DynamicPage({
       );
     }
 
+    // Page API theo segment cuoi (pages.path chi luu segment cuoi).
+    const parent = await getCategoryByLink(firstSlug, "vi");
+    const pageResult = await resolveDesignedOrNewsPage(
+      slug,
+      resolvedSearchParams,
+      parent?.categories || [],
+      `/${firstSlug}`,
+    );
+    if (pageResult) return pageResult;
+
     // Try category page (e.g. /cong-dong-bds/luat, /du-an/mua-ban-nha-le)
     const [{ category, siblings }, categoryEn] = await Promise.all([
       getCategoryWithSiblings(fullSlug, "vi"),
-      getCategory(fullSlug, "en"),
+      getCategoryByLink(fullSlug, "en"),
     ]);
 
     if (category) {
-      const apiPosts = await getPostsForCategory(category.id!);
+      const apiPosts = await getPostsByCategory(category.id!);
       const posts =
         apiPosts.length > 0
           ? apiPosts
-          : getMockPostsForCategory(category.id!, category.name!, category.link!);
+          : getMockPostsForCategory(
+              category.id!,
+              category.name!,
+              category.link!,
+            );
 
       return (
         <DynamicCategoryPage
@@ -285,10 +358,10 @@ export default async function DynamicPage({
     const lastSlug = slug.at(-1)!;
 
     // Try post first
-    const post = await getPost(lastSlug);
+    const post = await getPostBySlug(lastSlug);
     if (post) {
       const parentSlug = slug.slice(0, -1).join("/");
-      const urlCategory = await getCategory(parentSlug);
+      const urlCategory = await getCategoryByLink(parentSlug);
       const displayCategory = urlCategory ?? createMockCategory(parentSlug);
 
       return (
@@ -301,20 +374,36 @@ export default async function DynamicPage({
       );
     }
 
+    // Page API theo segment cuoi.
+    const grandParent = await getCategoryByLink(
+      slug.slice(0, -1).join("/"),
+      "vi",
+    );
+    const parentSlug = slug.slice(0, -1).join("/");
+    const pageResult = await resolveDesignedOrNewsPage(
+      slug,
+      resolvedSearchParams,
+      grandParent?.categories || [],
+      `/${parentSlug}`,
+    );
+    if (pageResult) return pageResult;
+
     // Try category page
     const [{ category, siblings }, categoryEn] = await Promise.all([
       getCategoryWithSiblings(fullSlug, "vi"),
-      getCategory(fullSlug, "en"),
+      getCategoryByLink(fullSlug, "en"),
     ]);
 
     if (category) {
-      const apiPosts = await getPostsForCategory(category.id!);
+      const apiPosts = await getPostsByCategory(category.id!);
       const posts =
         apiPosts.length > 0
           ? apiPosts
-          : getMockPostsForCategory(category.id!, category.name!, category.link!);
-
-      const parentSlug = slug.slice(0, -1).join("/");
+          : getMockPostsForCategory(
+              category.id!,
+              category.name!,
+              category.link!,
+            );
 
       return (
         <DynamicCategoryPage
