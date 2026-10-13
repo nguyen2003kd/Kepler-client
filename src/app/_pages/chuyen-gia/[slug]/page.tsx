@@ -1,0 +1,47 @@
+import { notFound } from "next/navigation";
+import { experts, getExpertBySlug } from "../expert-data";
+import ExpertProfileContent from "./expert-profile-content";
+import { getCategoryByLink, getPostsByCategory } from "@/app/_pages/api-helpers";
+import DynamicCategoryPage from "@/app/[...slug]/views/category-page";
+import { getMockPostsForCategory } from "@/utils/mock-data";
+
+export function generateStaticParams() {
+  return experts.map((expert) => ({ slug: expert.slug }));
+}
+
+export default async function ExpertProfilePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const expert = getExpertBySlug(slug);
+
+  if (expert) {
+    return <ExpertProfileContent expert={expert} />;
+  }
+
+  // Try category page (e.g. /chuyen-gia/gioi-thieu)
+  const fullSlug = `chuyen-gia/${slug}`;
+  const category = await getCategoryByLink(fullSlug, "vi");
+  const categoryEn = await getCategoryByLink(fullSlug, "en");
+
+  if (category) {
+    const apiPosts = await getPostsByCategory(category.id!);
+    const posts =
+      apiPosts.length > 0
+        ? apiPosts
+        : getMockPostsForCategory(category.id!, category.name!, category.link!);
+
+    return (
+      <DynamicCategoryPage
+        category={category}
+        categoryEn={categoryEn}
+        initialPosts={posts}
+      />
+    );
+  }
+
+  notFound();
+}
+

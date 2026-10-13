@@ -1,12 +1,12 @@
 "use client";
 
-import { useGetApiV10Post } from "@/api/endpoints/post";
+import { useGetApiV10Property } from "@/api/endpoints/property";
 import ServiceCard from "@/components/common/components/service-card";
-import { PAGE_IDS } from "@/constants/page-ids";
-import { getThumbnailSrc } from "@/lib/responsive-image";
-import { slugify } from "@/lib/slugify";
-import { PostExtended } from "@/types/post";
-import { mockPosts } from "@/utils/mock-data";
+import {
+  getThumbnailSrc,
+} from "@/lib/responsive-image";
+import type { Property } from "@/api/models/property";
+import { propertyPrice } from "@/lib/property-display";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -55,38 +55,32 @@ export default function ServicesSection() {
   `;
 
   const { t } = useTranslation("pages/home");
-  const projectsPageId = PAGE_IDS.HOME_PROJECTS;
 
-  const { data, isLoading } = useGetApiV10Post({
-    page_id: projectsPageId,
-    filters: "is_hidden==false",
+  const { data, isLoading } = useGetApiV10Property({
+    filters: "transaction_group==INVESTMENT|DISTRIBUTION|MA,status==PUBLISHED",
     pageSize: 8,
-    position: "true",
-    sortOrderPosition: "ASC",
-    filterBy: "CLIENT",
+    sortField: "created_at",
+    sortOrder: "desc",
   });
 
   const services = React.useMemo(() => {
-    const posts = (data?.responseData?.rows as PostExtended[]) || [];
-    // Nếu không có dữ liệu từ API, sử dụng mock-data
-    const dataToUse = posts.length > 0 ? posts : mockPosts.slice(0, 8);
+    const rows = (data?.responseData?.rows as Property[]) || [];
 
-    return dataToUse.map((post) => {
-      const imageUrl = getThumbnailSrc(
-        post.thumbnail_compress_info,
-        post.thumbnail_path,
-        "/seo.png",
-      );
+    return rows.map((property) => {
+      const imageUrl =
+        property.media?.find((file) => file.mime?.startsWith("image/"))?.path ||
+        "/seo.png";
 
       return {
-        id: post.id || "",
+        id: property.id || "",
         image: imageUrl,
-        title: post.title || "",
-        description: post.summary || "",
-        link: `/du-an/${post.slug || slugify(post.title || "")}`,
-        date: post.created_at
-          ? new Date(post.created_at).toLocaleDateString("vi-VN")
+        title: property.title || "",
+        description: property.location || "",
+        link: `/san-giao-dich/san-pham/${property.id}`,
+        date: property.created_at
+          ? new Date(property.created_at).toLocaleDateString("vi-VN")
           : undefined,
+        price: propertyPrice(property),
       };
     });
   }, [data?.responseData?.rows]);
@@ -195,6 +189,7 @@ export default function ServicesSection() {
                         description={service.description}
                         link={service.link}
                         date={service.date}
+                        price={service.price}
                         className="h-full"
                       />
                     </div>

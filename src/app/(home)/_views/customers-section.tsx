@@ -4,8 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import SafeImage from "@/components/common/safe-image";
 import { FadeIn } from "@/components/ui/fade-in";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
-import { PageConfig } from "@/api/models";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
+import { BaseConfig } from "@/api/models";
 import baseConfig from "@/configs/base";
 import { useMemo } from "react";
 
@@ -40,7 +40,7 @@ function parsePartners(value: string | null | undefined): Partner[] {
 }
 
 export default function CustomersSection() {
-  const { data, isLoading } = useGetApiV10PageConfig(
+  const { data, isLoading } = useGetApiV10BaseConfig(
     {
       filters: `key==${CUSTOMERS_CONFIG_KEY}`,
       pageSize: 1,
@@ -54,7 +54,7 @@ export default function CustomersSection() {
     }
   );
   // Fallback: nếu key mới chưa có dữ liệu thì đọc key cũ (gộp chung)
-  const { data: legacyData } = useGetApiV10PageConfig(
+  const { data: legacyData } = useGetApiV10BaseConfig(
     {
       filters: `key==${LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY}`,
       pageSize: 1,
@@ -69,14 +69,14 @@ export default function CustomersSection() {
   );
 
   const customers = useMemo(() => {
-    const rows = (data?.responseData?.rows || []) as PageConfig[];
+    const rows = (data?.responseData?.rows || []) as BaseConfig[];
     const config = rows.find((item) => item.key === CUSTOMERS_CONFIG_KEY);
     if (config?.value) {
       const parsed = parsePartners(config.value);
       if (parsed.length > 0) return parsed.filter((p) => p.is_active);
     }
     // Fallback key cũ
-    const legacyRows = (legacyData?.responseData?.rows || []) as PageConfig[];
+    const legacyRows = (legacyData?.responseData?.rows || []) as BaseConfig[];
     const legacyConfig = legacyRows.find(
       (item) => item.key === LEGACY_CUSTOMERS_PARTNERS_CONFIG_KEY
     );

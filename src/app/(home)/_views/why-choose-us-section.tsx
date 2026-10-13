@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import SafeImage from "@/components/common/safe-image";
 import { useMemo, useState, useEffect } from "react";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 
 const FALLBACK = {
   eyebrow: "Lợi thế cạnh tranh",
@@ -25,7 +25,7 @@ export default function WhyChooseUsSection() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const { data } = useGetApiV10PageConfig(
+  const { data } = useGetApiV10BaseConfig(
     { filters: "key==WHY_CHOOSE_US" },
     { query: { staleTime: 1000 * 60 * 5, refetchOnMount: false, refetchOnWindowFocus: false } },
   );

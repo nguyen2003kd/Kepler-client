@@ -10,6 +10,7 @@ interface ServiceCardProps {
   description: string;
   link: string;
   date?: string;
+  price?: string;
   imageAlt?: string;
   className?: string;
 }
@@ -20,6 +21,7 @@ export default function ServiceCard({
   description,
   link,
   date,
+  price,
   imageAlt = title,
   className,
 }: ServiceCardProps) {
@@ -73,7 +75,13 @@ export default function ServiceCard({
         </div>
 
         <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-          <span className="text-gray-400 text-xs">Dịch vụ</span>
+          {price ? (
+            <span className="text-red-600 text-sm font-semibold">
+              {price}
+            </span>
+          ) : (
+            <span className="text-gray-400 text-xs">Dịch vụ</span>
+          )}
           <span className="inline-flex items-center gap-2 text-red-600 text-sm font-semibold group-hover:gap-3 transition-all">
             Xem chi tiết
             <ArrowRight className="w-4 h-4" />

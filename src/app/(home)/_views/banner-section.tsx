@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetApiV10Banner } from "@/api/endpoints/banner";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 import { Banner } from "@/api/models/banner";
 import { File } from "@/api/models/file";
 import { getThumbnailSrc } from "@/lib/responsive-image";
@@ -50,7 +50,7 @@ export default function HeroBanner() {
     sortOrder: "asc",
   });
 
-  const { data: heroConfigData } = useGetApiV10PageConfig({
+  const { data: heroConfigData } = useGetApiV10BaseConfig({
     filters: "key==HOME_HERO",
   });
 

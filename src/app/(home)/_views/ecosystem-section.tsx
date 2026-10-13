@@ -6,7 +6,7 @@ import SafeImage from "@/components/common/safe-image";
 import Link from "next/link";
 import { useState, useMemo, useEffect } from "react";
 import { useGetApiV10Category } from "@/api/endpoints/category";
-import { useGetApiV10PageConfig } from "@/api/endpoints/page-config";
+import { useGetApiV10BaseConfig } from "@/api/endpoints/base-config";
 import type { CategoryWithChildren } from "@/api/models/categoryWithChildren";
 
 interface EcosystemMember {
@@ -39,7 +39,7 @@ export default function EcosystemSection() {
     { query: { staleTime: 1000 * 60 * 5, refetchOnMount: false, refetchOnWindowFocus: false } },
   );
 
-  const { data: imgConfigData } = useGetApiV10PageConfig(
+  const { data: imgConfigData } = useGetApiV10BaseConfig(
     { filters: "key==ECOSYSTEM_IMAGES" },
     { query: { staleTime: 1000 * 60 * 5, refetchOnMount: false, refetchOnWindowFocus: false } },
   );
