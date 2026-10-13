@@ -79,7 +79,16 @@ export default function GalleryView({ category, initialPosts }: GalleryViewProps
 
   if (subcategoryCode === "podcast-video") {
     return (
-      <VideoGrid categoryName={activeSubcategory?.name || category.name} categoryCode="kien-thuc" />
+      <div className="min-h-screen bg-gray-50">
+        <section className="py-12 md:py-16">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <VideoGrid
+              categoryName={activeSubcategory?.name || category.name}
+              categoryCode="kien-thuc"
+            />
+          </div>
+        </section>
+      </div>
     );
   }
 
