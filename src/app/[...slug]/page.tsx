@@ -3,28 +3,19 @@ import baseConfig from "@/configs/base";
 import { getMockPostsForCategory } from "@/utils/mock-data";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import DynamicCategoryPage from "./views/category-page";
-import DynamicPostDetailPage from "./views/post-detail-page";
+import DynamicCategoryPage from "./_templates/category-page";
+import DynamicPostDetailPage from "./_templates/post-detail-page";
 import { isIntroductionPath } from "@/lib/introduction-profile";
-import { resolveActivityPage } from "@/app/_pages/linh-vuc-hoat-dong/activity-page";
-import { resolveMarketplacePage } from "@/app/_pages/san-giao-dich/marketplace-page";
+import { resolveActivityPage } from "./_designed-pages/linh-vuc-hoat-dong/activity-page";
+import { resolveMarketplacePage } from "./_designed-pages/san-giao-dich/marketplace-page";
 import { getApiV10PropertyId } from "@/api/endpoints/property";
-import {
-  getCategoryByLink,
-  getCategoryWithSiblings,
-  getPostsByCategory,
-  getPostBySlug,
-} from "@/app/_pages/api-helpers";
-import {
-  getPageByPath,
-  normalizePagePath,
-  type PageRecord,
-} from "@/app/_pages/page-lookup";
-import { DESIGNED_PAGE_COMPONENTS } from "@/app/_pages/registry";
-import EcosystemServiceSubPage from "@/app/_pages/he-sinh-thai/[unitKey]/[serviceSlug]/page";
-import ContactSubPage from "@/app/_pages/contact/[...slug]/page";
-import ProductDetailSubPage from "@/app/_pages/products/[id]/page";
-import KienThucGalleryPage from "@/app/_pages/kien-thuc/page";
+import { getCategoryByLink, getCategoryWithSiblings, getPostsByCategory, getPostBySlug } from "./_designed-pages/api-helpers";
+import { getPageByPath, normalizePagePath, type PageRecord } from "./_designed-pages/page-lookup";
+import { DESIGNED_PAGE_COMPONENTS } from "./_designed-pages/registry";
+import EcosystemServiceSubPage from "./_designed-pages/he-sinh-thai/[unitKey]/[serviceSlug]/page";
+import ContactSubPage from "./_designed-pages/contact/[...slug]/page";
+import ProductDetailSubPage from "./_designed-pages/products/[id]/page";
+import KienThucGalleryPage from "./_designed-pages/kien-thuc/page";
 
 interface DynamicPageProps {
   params: Promise<{ slug: string[] }>;

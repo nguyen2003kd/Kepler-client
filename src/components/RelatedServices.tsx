@@ -3,7 +3,7 @@
 import { useGetApiV10Category } from "@/api/endpoints/category";
 import { useGetApiV10Post } from "@/api/endpoints/post";
 import { CategoryWithChildren } from "@/api/models";
-import CategoryTab from "@/app/_pages/services/components/service-grid/components/category-tab";
+import CategoryTab from "@/app/[...slug]/_designed-pages/services/components/service-grid/components/category-tab";
 import DatePicker from "@/components/common/components/date-picker";
 import ServiceCard from "@/components/common/components/service-card";
 import { Loading } from "@/components/common/loading";
